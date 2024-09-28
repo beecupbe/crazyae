@@ -1,0 +1,6 @@
+{
+    "parent": "block/cube_all",
+    "textures": {
+        "all": "crazyae:block/advanced_energy_cell0"
+    }
+}

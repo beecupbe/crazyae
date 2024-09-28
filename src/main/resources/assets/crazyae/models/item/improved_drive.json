@@ -1,0 +1,6 @@
+{
+    "parent": "crazyae:block/driveimp_base",
+    "textures": {
+        "front": "appliedenergistics2:blocks/drive_front_flat"
+    }
+}

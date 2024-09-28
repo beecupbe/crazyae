@@ -1,0 +1,45 @@
+{
+    "conditions": [
+        {
+            "type": "forge:and",
+            "values": [
+                {
+                    "type": "minecraft:item_exists",
+                    "item": "crazyae:improved_io_port"
+                },
+                {
+                    "type": "minecraft:item_exists",
+                    "item": "appliedenergistics2:io_port"
+                },
+                {
+                    "type": "appliedenergistics2:material_exists",
+                    "material": "material.logic_processor"
+                }
+            ]
+        }
+    ],
+    "result": {
+        "item": "crazyae:improved_io_port"
+    },
+    "type": "forge:ore_shaped",
+    "pattern": [
+        "aaa",
+        "bbb",
+        "ded"
+    ],
+    "key": {
+        "a": {
+            "item": "minecraft:glass_pane"
+        },
+        "d": {
+            "item": "crazyae:fluixilized_block"
+        },
+        "b": {
+            "item": "appliedenergistics2:io_port"
+        },
+        "e": {
+            "item": "crazyae:material",
+            "data": 16
+        }
+    }
+}

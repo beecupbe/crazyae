@@ -1,0 +1,133 @@
+itemGroup.crazyae=CrazyAE
+item.crazyae.invalid.name=Invalid or Disabled Item
+
+# Cells
+item.crazyae.storage_cell_256k.name=§c256k§r ME Storage Cell
+item.crazyae.storage_cell_1mb.name=§61MB§r ME Storage Cell
+item.crazyae.storage_cell_4mb.name=§e4MB§r ME Storage Cell
+item.crazyae.storage_cell_16mb.name=§a16MB§r ME Storage Cell
+item.crazyae.storage_cell_64mb.name=§a64MB§r ME Storage Cell
+item.crazyae.storage_cell_256mb.name=§a256MB§r ME Storage Cell
+item.crazyae.storage_cell_1gb.name=§a1GB§r ME Storage Cell
+item.crazyae.storage_cell_2gb.name=§a2GB§r ME Storage Cell
+
+item.crazyae.fluid_storage_cell_256k.name=§c256k§r ME Fluid Storage Cell
+item.crazyae.fluid_storage_cell_1mb.name=§61MB§r ME Fluid Storage Cell
+item.crazyae.fluid_storage_cell_4mb.name=§e4MB§r ME Fluid Storage Cell
+item.crazyae.fluid_storage_cell_16mb.name=§a16MB§r ME Fluid Storage Cell
+item.crazyae.fluid_storage_cell_64mb.name=§c64MB§r ME Fluid Storage Cell
+item.crazyae.fluid_storage_cell_256mb.name=§6256MB§r ME Fluid Storage Cell
+item.crazyae.fluid_storage_cell_1gb.name=§e1GB§r ME Fluid Storage Cell
+item.crazyae.fluid_storage_cell_2gb.name=§a2GB§r ME Fluid Storage Cell
+
+item.crazyae.improved_portable_cell.name=1MB Portable Cell
+item.crazyae.advanced_portable_cell.name=4MB Portable Cell
+item.crazyae.perfect_portable_cell.name=16MB Portable Cell
+
+# Materials
+item.crazyae.material.cell_part_256k.name=§c256k§r ME Storage Component
+item.crazyae.material.cell_part_1mb.name=§61MB§r ME Storage Component
+item.crazyae.material.cell_part_4mb.name=§e4MB§r ME Storage Component
+item.crazyae.material.cell_part_16mb.name=§a16MB§r ME Storage Component
+item.crazyae.material.cell_part_64mb.name=§a64MB§r ME Storage Component
+item.crazyae.material.cell_part_256mb.name=§a256MB§r ME Storage Component
+item.crazyae.material.cell_part_1gb.name=§a1GB§r ME Storage Component
+item.crazyae.material.cell_part_2gb.name=§a2GB§r ME Storage Component
+
+item.crazyae.material.cell_part_fluid_256k.name=§c256k§r ME Fluid Storage Component
+item.crazyae.material.cell_part_fluid_1mb.name=§61MB§r ME Fluid Storage Component
+item.crazyae.material.cell_part_fluid_4mb.name=§e4MB§r ME Fluid Storage Component
+item.crazyae.material.cell_part_fluid_16mb.name=§a16MB§r ME Fluid Storage Component
+item.crazyae.material.cell_part_fluid_64mb.name=§c64MB§r ME Fluid Storage Component
+item.crazyae.material.cell_part_fluid_256mb.name=§6256MB§r ME Fluid Storage Component
+item.crazyae.material.cell_part_fluid_1gb.name=§e1GB§r ME Fluid Storage Component
+item.crazyae.material.cell_part_fluid_2gb.name=§a2GB§r ME Fluid Storage Component
+
+item.crazyae.material.quantum_processor.name=Quantum Processor
+
+#Items
+item.crazyae.quantum_wireless_booster.name=Quantum Wireless Booster
+tooltip.crazyae.quantum_wireless_booster_desc.name=This item is under development.
+
+
+# Parts
+item.crazyae.part.improved_import_bus.name=Improved ME Import Bus
+item.crazyae.part.improved_export_bus.name=Improved ME Export Bus
+
+item.crazyae.part.improved_export_fluid_bus.name=Improved ME Fluid Export Bus
+item.crazyae.part.improved_import_fluid_bus.name=Improved ME Fluid Import Bus
+
+
+# Upgrades
+item.crazyae.upgrade.stacks.name=Stacks Card
+item.crazyae.upgrade.improved_speed.name=Improved Speed Card
+item.crazyae.upgrade.advanced_speed.name=Advanced Speed Card
+
+# Tiles
+tile.crazyae.crafting_accelerator_4x.name=§b4x§r Crafting Co-Processing Unit
+tile.crazyae.crafting_accelerator_16x.name=§d16x§r Crafting Co-Processing Unit
+tile.crazyae.crafting_accelerator_64x.name=§964x§r Crafting Co-Processing Unit
+tile.crazyae.crafting_accelerator_256x.name=§b256x§r Crafting Co-Processing Unit
+tile.crazyae.crafting_accelerator_1024x.name=§d1024x§r Crafting Co-Processing Unit
+tile.crazyae.crafting_accelerator_4096x.name=§94096x§r Crafting Co-Processing Unit
+tile.crazyae.crafting_accelerator_16384x.name=§b16384x§r Crafting Co-Processing Unit
+tile.crazyae.crafting_accelerator_65536x.name=§d65536x§r Crafting Co-Processing Unit
+
+tile.crazyae.crafting_storage_256k.name=§c256k§r Crafting Storage
+tile.crazyae.crafting_storage_1mb.name=§61MB§r Crafting Storage
+tile.crazyae.crafting_storage_4mb.name=§e4MB§r Crafting Storage
+tile.crazyae.crafting_storage_16mb.name=§a16MB§r Crafting Storage
+tile.crazyae.crafting_storage_64mb.name=§c64MB§r Crafting Storage
+tile.crazyae.crafting_storage_256mb.name=§6256MB§r Crafting Storage
+tile.crazyae.crafting_storage_1gb.name=§e1GB§r Crafting Storage
+tile.crazyae.crafting_storage_2gb.name=§a2GB§r Crafting Storage
+
+tile.crazyae.improved_energy_cell.name=Improved Energy Cell
+tile.crazyae.advanced_energy_cell.name=Advanced Energy Cell
+tile.crazyae.perfect_energy_cell.name=Perfect Energy Cell
+
+tile.crazyae.improved_molecular_assembler.name=Improved Molecular Assembler
+tile.crazyae.improved_drive.name=Improved ME Drive
+tile.crazyae.improved_io_port.name=Improved ME IO Port
+tile.crazyae.improved_crank.name=Improved Wooden Crank
+tile.crazyae.crafting_units_combiner.name=ME Crafting Units Combiner
+tile.crazyae.big_crystal_charger.name=ME Improved Crystal Charger
+
+tile.crazyae.basic_solar_panel.name=§3ME Basic Solar Panel§r
+tile.crazyae.improved_solar_panel.name=§5ME Improved Solar Panel§r
+tile.crazyae.advanced_solar_panel.name=§dME Advanced Solar Panel§r
+tile.crazyae.perfect_solar_panel.name=§cME Perfect Solar Panel§r
+
+#Resource
+
+tile.crazyae.fluixilized_block.name=Fluixilized Block
+
+# GUI's Title
+
+gui.crazyae.big_crystal_charger.name=ME Improved Crystal Charger
+gui.crazyae.improved_mac_gui.name=Improved Molecular Assembler
+gui.crazyae.improved_drive_gui.name=Improved ME Drive
+
+gui.crazyae.imp_import_bus.name=Improved ME Import Bus
+gui.crazyae.imp_export_bus.name=Improved ME Export Bus
+
+gui.crazyae.imp_fluid_import_bus.name=Improved ME Fluid Import Bus
+gui.crazyae.imp_fluid_export_bus.name=Improved ME Fluid Export Bus
+
+
+# GUI's Tooltip
+
+gui.tooltip.crazyae.cu_place_all_accelerators_here.name=Slots for accelerators
+gui.tooltip.crazyae.cu_place_all_crafting_storages_here.name=Slots for crafting storages
+
+gui.tooltip.crazyae.progress.name=Progress:
+
+#Tooltips
+
+tooltip.crazyae.shift_for_details.name=Hold Shift for details
+
+tooltip.crazyae.passive_generation_day.name=Generation at day:
+tooltip.crazyae.passive_generation_night.name=Generation at night:
+tooltip.crazyae.max_solar_capacity.name=Capacity
+
+

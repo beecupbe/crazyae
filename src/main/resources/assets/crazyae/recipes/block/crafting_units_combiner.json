@@ -1,0 +1,42 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:crafting_units_combiner"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:crafting_accelerator_4x"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "appliedenergistics2:crafting_accelerator"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "item": "crazyae:crafting_units_combiner"
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "dbd",
+    "bab",
+    "dbd"
+  ],
+  "key": {
+    "b": {
+      "item": "crazyae:crafting_accelerator_4x"
+    },
+    "d": {
+      "item": "crazyae:upgrade",
+      "data": 1
+    },
+    "a": {
+      "item": "crazyae:crafting_storage_256k"
+    }
+  }
+}

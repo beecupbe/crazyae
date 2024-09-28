@@ -1,0 +1,10 @@
+{
+    "variants": {
+        "powered=false": {
+            "model": "crazyae:io_portimp"
+        },
+        "powered=true": {
+            "model": "crazyae:io_portimp_on"
+        }
+    }
+}

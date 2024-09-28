@@ -1,0 +1,35 @@
+//file:noinspection DependencyNotationArgument
+// TODO remove when fixed in RFG ^
+/*
+ * Add your dependencies here. Common configurations:
+ *  - implementation("group:name:version:classifier"): if you need this for internal implementation details of the mod.
+ *       Available at compiletime and runtime for your environment.
+ *
+ *  - compileOnlyApi("g:n:v:c"): if you need this for internal implementation details of the mod.
+ *       Available at compiletime but not runtime for your environment.
+ *
+ *  - annotationProcessor("g:n:v:c"): mostly for java compiler plugins, if you know you need this, use it, otherwise don't worry
+ *
+ *  - testCONFIG("g:n:v:c"): replace CONFIG by one of the above, same as above but for the test sources instead of main
+ *
+ * You can exclude transitive dependencies (dependencies of the chosen dependency) by appending { transitive = false } if needed.
+ *
+ * To add a mod with CurseMaven, replace '("g:n:v:c")' in the above with 'rfg.deobf("curse.maven:project_slug-project_id:file_id")'
+ * Example: implementation rfg.deobf("curse.maven:gregtech-ce-unofficial-557242:4527757")
+ *
+ * To shadow a dependency, use 'shadowImplementation'. For more info, see https://github.com/GregTechCEu/Buildscripts/blob/master/docs/shadow.md
+ *
+ * For more details, see https://docs.gradle.org/8.0.1/userguide/java_library_plugin.html#sec:java_library_configurations_graph
+ */
+dependencies {
+    implementation rfg.deobf("curse.maven:ae2-extended-life-570458:5411078")
+    implementation rfg.deobf("curse.maven:ae2-fluid-crafting-rework-623955:4804730")
+    compileOnlyApi rfg.deobf("curse.maven:baubles-227083:2518667")
+    compileOnlyApi rfg.deobf("curse.maven:jei-238222:4538010")
+    implementation rfg.deobf("curse.maven:gregtechceu-557242:4951281")
+    implementation rfg.deobf("curse.maven:actually-additions-228404:3117927")
+    implementation rfg.deobf("curse.maven:codechicken-lib-1-8-242818:2779848")
+    implementation rfg.deobf("curse.maven:mekanism-energistics-1027681:5408319")
+    implementation rfg.deobf("curse.maven:mekanism-ce-399904:5351260")
+    implementation fileTree('lib')
+}

@@ -1,0 +1,42 @@
+{
+    "conditions": [
+        {
+            "type": "forge:and",
+            "values": [
+                {
+                    "type": "minecraft:item_exists",
+                    "item": "appliedenergistics2:drive"
+                },
+                {
+                    "type": "minecraft:item_exists",
+                    "item": "crazyae:improved_drive"
+                },
+                {
+                    "type": "appliedenergistics2:material_exists",
+                    "material": "material.engineering_processor"
+                }
+            ]
+        }
+    ],
+    "result": {
+        "item": "crazyae:improved_drive"
+    },
+    "type": "forge:ore_shaped",
+    "pattern": [
+        "aba",
+        "c c",
+        "aba"
+    ],
+    "key": {
+        "b": {
+            "item": "crazyae:material",
+            "data": 16
+        },
+        "a": {
+            "item": "crazyae:fluixilized_block"
+        },
+        "c": {
+            "item": "appliedenergistics2:drive"
+        }
+    }
+}

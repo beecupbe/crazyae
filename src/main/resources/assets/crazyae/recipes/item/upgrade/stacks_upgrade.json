@@ -1,0 +1,41 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "appliedenergistics2:material_exists",
+          "material": "material.card_crafting"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "item": "crazyae:upgrade",
+    "data": 0,
+    "count": 1
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "gcg",
+    "asa",
+    "gag"
+  ],
+  "key": {
+    "a": {
+      "item": "crazyae:upgrade",
+      "data": 1
+    },
+    "g": {
+      "item": "crazyae:fluixilized_block"
+    },
+    "c": {
+      "item": "crazyae:material",
+      "data": 16
+    },
+    "s": {
+      "type": "appliedenergistics2:part",
+      "part": "material.singularity"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "crazyae:block/crafting/accelerator_65536x"
+  }
+}

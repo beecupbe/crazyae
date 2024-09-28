@@ -1,0 +1,61 @@
+{
+    "conditions": [
+        {
+            "type": "forge:and",
+            "values": [
+                {
+                    "type": "minecraft:item_exists",
+                    "item": "crazyae:basic_solar_panel"
+                },
+                {
+                    "type": "minecraft:item_exists",
+                    "item": "crazyae:improved_solar_panel"
+                },
+                {
+                    "type": "appliedenergistics2:part_exists",
+                    "part": "lumen_paint_ball.white"
+                },
+                {
+                    "type": "appliedenergistics2:material_exists",
+                    "material": "material.engineering_processor"
+                },
+                {
+                    "type": "minecraft:item_exists",
+                    "item": "appliedenergistics2:sky_stone_block"
+                }
+            ]
+        }
+    ],
+    "result": {
+        "item": "crazyae:improved_solar_panel"
+    },
+    "type": "forge:ore_shaped",
+    "pattern": [
+        "apa",
+        "qlq",
+        "sbs"
+    ],
+    "key": {
+        "b": {
+            "type": "appliedenergistics2:part",
+            "part": "lumen_paint_ball.white"
+        },
+        "a": {
+            "item": "minecraft:glass_pane"
+        },
+        "s": {
+            "item": "appliedenergistics2:sky_stone_block"
+        },
+        "p": {
+            "type": "appliedenergistics2:part",
+            "part": "material.fluix_pearl"
+        },
+        "l": {
+            "item": "crazyae:basic_solar_panel"
+        },
+        "q": {
+            "item": "crazyae:material",
+            "data": 16
+        }
+    }
+}

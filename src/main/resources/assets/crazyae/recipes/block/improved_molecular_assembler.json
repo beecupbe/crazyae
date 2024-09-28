@@ -1,0 +1,42 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:improved_molecular_assembler"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "appliedenergistics2:molecular_assembler"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "appliedenergistics2:crank"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "item": "crazyae:improved_molecular_assembler"
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "cbc",
+    "bab",
+    "cbc"
+  ],
+  "key": {
+    "b": {
+      "item": "crazyae:crafting_storage_256k"
+    },
+    "c": {
+      "item": "crazyae:upgrade",
+      "data": 1
+    },
+    "a": {
+      "item": "appliedenergistics2:molecular_assembler"
+    }
+  }
+}

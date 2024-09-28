@@ -1,0 +1,14 @@
+[
+    {
+    "modid": "${modid}",
+    "name": "${modname}",
+    "description": "Crazy addon for AE2",
+    "version": "${version}",
+    "mcversion": "${mcversion}",
+    "logoFile": "assets/crazyae/meta/logo.png",
+    "url": "",
+    "authorList": ["beecube31"],
+    "credits": "",
+    "dependencies": []
+    }
+]

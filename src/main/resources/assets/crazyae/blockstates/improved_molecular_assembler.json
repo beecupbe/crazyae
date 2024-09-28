@@ -1,0 +1,11 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "crazyae:molecular_assemblerimp"
+    },
+    "variants": {
+        "normal": {
+            "submodel": "appliedenergistics2:molecular_assembler_lights"
+        }
+    }
+}

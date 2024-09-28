@@ -1,0 +1,35 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:improved_crank"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "appliedenergistics2:crank"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "item": "crazyae:improved_crank"
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " b ",
+    "bab",
+    " b "
+  ],
+  "key": {
+    "b": {
+      "type": "forge:ore_dict",
+      "ore": "logWood"
+    },
+    "a": {
+      "item": "appliedenergistics2:crank"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"textures": {
+		"front": "appliedenergistics2:blocks/drive_cell_states"
+	},
+	"elements": [
+		{
+			"name": "Cell Backdrop",
+			"from": [14, 13, 1],
+			"to": [15, 15, 2],
+			"shade": false,
+			"faces": {
+				"north": {"uv": [1, 0, 2, 2], "texture": "#front"},
+				"up": {"uv": [0, 0, 6, 1], "texture": "#front"},
+				"down": {"uv": [6, 0, 0, 2], "texture": "#front"}
+			}
+		}
+	]
+}

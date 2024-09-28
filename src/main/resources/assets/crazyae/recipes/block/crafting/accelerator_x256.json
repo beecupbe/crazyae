@@ -1,0 +1,51 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "minecraft:item_exists",
+          "item": "appliedenergistics2:crafting_accelerator"
+        },
+        {
+          "type": "appliedenergistics2:material_exists",
+          "material": "material.logic_processor"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:crafting_accelerator_64x"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:crafting_accelerator_256x"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "appliedenergistics2:crafting_accelerator"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "item": "crazyae:crafting_accelerator_256x"
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "cbc",
+    "cdc",
+    "cbc"
+  ],
+  "key": {
+    "b": {
+      "item": "crazyae:crafting_accelerator_64x"
+    },
+    "c": {
+      "type": "appliedenergistics2:part",
+      "part": "material.fluix_pearl"
+    },
+    "d": {
+      "item": "crazyae:material",
+      "data": 16
+    }
+  }
+}

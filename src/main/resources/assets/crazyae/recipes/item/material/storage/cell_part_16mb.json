@@ -1,0 +1,52 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "minecraft:item_exists",
+          "item": "appliedenergistics2:quartz_glass"
+        },
+        {
+          "type": "appliedenergistics2:material_exists",
+          "material": "material.engineering_processor"
+        },
+        {
+          "type": "crazyae:material_exists",
+          "name": "cell_part_16mb"
+        },
+        {
+          "type": "crazyae:material_exists",
+          "name": "cell_part_4mb"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "type": "material",
+    "name": "cell_part_16mb"
+  },
+  "type": "crazyae:shaped_recipe",
+  "pattern": [
+    "aba",
+    "cdc",
+    "aca"
+  ],
+  "key": {
+    "b": {
+      "item": "crazyae:material",
+      "data": 16
+    },
+    "c": {
+      "type": "crazyae:material",
+      "name": "cell_part_4mb"
+    },
+    "d": {
+      "item": "appliedenergistics2:quartz_glass"
+    },
+    "a": {
+      "type": "forge:ore_dict",
+      "ore": "dustFluix"
+    }
+  }
+}

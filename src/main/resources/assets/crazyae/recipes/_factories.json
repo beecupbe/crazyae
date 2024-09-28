@@ -1,0 +1,13 @@
+{
+  "conditions": {
+    "part_exists": "dev.beecube31.crazyae2.common.recipes.factories.conditions.PartExists",
+    "material_exists": "dev.beecube31.crazyae2.common.recipes.factories.conditions.MaterialExists"
+  },
+  "ingredients": {
+    "part": "dev.beecube31.crazyae2.common.recipes.factories.ingredients.PartFactory",
+    "material": "dev.beecube31.crazyae2.common.recipes.factories.ingredients.MaterialFactory"
+  },
+  "recipes": {
+    "shaped_recipe": "dev.beecube31.crazyae2.common.recipes.factories.recipes.ShapedRecipeFactory"
+  }
+}

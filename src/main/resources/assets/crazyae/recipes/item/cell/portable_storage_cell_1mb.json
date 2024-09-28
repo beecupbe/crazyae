@@ -1,0 +1,33 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "appliedenergistics2:material_exists",
+          "material": "material.empty_storage_cell"
+        },
+        {
+          "type": "crazyae:material_exists",
+          "name": "cell_part_1mb"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "item": "crazyae:improved_portable_cell"
+  },
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "item": "appliedenergistics2:chest"
+    },
+    {
+      "item": "appliedenergistics2:dense_energy_cell"
+    },
+    {
+      "type": "crazyae:material",
+      "name": "cell_part_1mb"
+    }
+  ]
+}

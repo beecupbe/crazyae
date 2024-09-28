@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "crazyae:item/material/cell_part_fluid_64mb"
+  }
+}

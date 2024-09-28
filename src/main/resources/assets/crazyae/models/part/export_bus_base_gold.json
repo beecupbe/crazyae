@@ -1,0 +1,136 @@
+{
+    "textures": {
+        "sides": "crazyae:part/gold/export_bus_sides",
+        "sidesStatus": "crazyae:part/gold/monitor_sides_status",
+        "back": "crazyae:part/gold/monitor_back",
+        "front": "crazyae:item/part/gold/export_bus_gold",
+        "particle": "crazyae:part/gold/monitor_back"
+    },
+    "elements": [
+        {
+            "from": [
+                4,
+                4,
+                2
+            ],
+            "to": [
+                12,
+                12,
+                4
+            ],
+            "faces": {
+                "down": {
+                    "texture": "#sides"
+                },
+                "up": {
+                    "texture": "#sides"
+                },
+                "south": {
+                    "texture": "#back"
+                },
+                "east": {
+                    "texture": "#sides"
+                },
+                "north": {
+                    "texture": "#front"
+                },
+                "west": {
+                    "texture": "#sides"
+                }
+            }
+        },
+        {
+            "from": [
+                5,
+                5,
+                1
+            ],
+            "to": [
+                11,
+                11,
+                2
+            ],
+            "faces": {
+                "down": {
+                    "texture": "#sides"
+                },
+                "up": {
+                    "texture": "#sides"
+                },
+                "south": {
+                    "texture": "#back"
+                },
+                "east": {
+                    "texture": "#sides"
+                },
+                "north": {
+                    "texture": "#front"
+                },
+                "west": {
+                    "texture": "#sides"
+                }
+            }
+        },
+        {
+            "from": [
+                6,
+                6,
+                0
+            ],
+            "to": [
+                10,
+                10,
+                1
+            ],
+            "faces": {
+                "down": {
+                    "texture": "#sides"
+                },
+                "up": {
+                    "texture": "#sides"
+                },
+                "south": {
+                    "texture": "#back"
+                },
+                "east": {
+                    "texture": "#sides"
+                },
+                "north": {
+                    "texture": "#front"
+                },
+                "west": {
+                    "texture": "#sides"
+                }
+            }
+        },
+        {
+            "from": [
+                6,
+                6,
+                4
+            ],
+            "to": [
+                10,
+                10,
+                5
+            ],
+            "faces": {
+                "down": {
+                    "texture": "#sidesStatus"
+                },
+                "up": {
+                    "texture": "#sidesStatus"
+                },
+                "south": {
+                    "texture": "#back"
+                },
+                "east": {
+                    "texture": "#sidesStatus"
+                },
+                "west": {
+                    "texture": "#sidesStatus"
+                }
+            }
+        }
+    ]
+}

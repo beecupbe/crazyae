@@ -1,0 +1,38 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "appliedenergistics2:material_exists",
+          "material": "material.card_crafting"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "item": "crazyae:upgrade",
+    "data": 2,
+    "count": 1
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "gag",
+    "aca",
+    "gag"
+  ],
+  "key": {
+    "a": {
+      "item": "crazyae:upgrade",
+      "data": 1
+    },
+    "g": {
+      "type": "crazyae:material",
+      "name": "cell_part_1mb"
+    },
+    "c": {
+      "item": "crazyae:material",
+      "data": 16
+    }
+  }
+}

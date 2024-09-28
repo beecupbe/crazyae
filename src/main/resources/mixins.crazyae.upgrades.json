@@ -1,0 +1,19 @@
+{
+  "package": "dev.beecube31.crazyae2.mixins",
+  "required": true,
+  "refmap": "mixins.crazyae.refmap.json",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "features.upgrades.MixinNetworkToolViewer",
+    "features.upgrades.MixinSlotRestrictedInput",
+    "features.upgrades.MixinUpgradeInventory",
+    "features.upgrades.MixinUpgradeInvFilter",
+    "features.upgrades.machine.MixinBlockUpgradeInventory",
+    "features.upgrades.machine.MixinStackUpgradeInventory",
+    "features.upgrades.machine.MixinDefinitionUpgradeInventory"
+  ],
+  "client": [],
+  "server": []
+}

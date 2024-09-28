@@ -1,0 +1,8 @@
+{
+  "parent": "appliedenergistics2:block/cube/cube_ae_bottom_top",
+  "textures": {
+    "bottom": "crazyae:block/solars/basic_solar_main",
+    "side": "crazyae:block/solars/basic_solar_main",
+    "top": "crazyae:block/solars/imp_solar_top"
+  }
+}

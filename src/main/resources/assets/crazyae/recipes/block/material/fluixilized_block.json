@@ -1,0 +1,24 @@
+{
+  "result": {
+    "item": "crazyae:fluixilized_block"
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "dbd",
+    "bab",
+    "dbd"
+  ],
+  "key": {
+    "b": {
+      "type": "forge:ore_dict",
+      "ore": "dustCertusQuartz"
+    },
+    "d": {
+      "type": "appliedenergistics2:part",
+      "part": "material.fluix_pearl"
+    },
+    "a": {
+      "item": "appliedenergistics2:fluix_block"
+    }
+  }
+}

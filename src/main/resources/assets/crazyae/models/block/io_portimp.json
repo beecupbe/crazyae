@@ -1,0 +1,8 @@
+{
+    "parent": "appliedenergistics2:block/cube/cube_ae_bottom_top",
+    "textures": {
+        "bottom": "crazyae:block/io_port_bottom",
+        "side": "crazyae:block/io_portimp_side_off",
+        "top": "crazyae:block/io_portimp_off"
+    }
+}

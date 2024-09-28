@@ -1,0 +1,42 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:big_crystal_charger"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:crafting_accelerator_4x"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "appliedenergistics2:crafting_accelerator"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "item": "crazyae:big_crystal_charger"
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "dbd",
+    "bab",
+    "dbd"
+  ],
+  "key": {
+    "b": {
+      "item": "crazyae:crafting_accelerator_4x"
+    },
+    "d": {
+      "item": "crazyae:upgrade",
+      "data": 1
+    },
+    "a": {
+      "item": "appliedenergistics2:charger"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "appliedenergistics2:material_exists",
+          "material": "material.card_crafting"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "item": "crazyae:upgrade",
+    "data": 1,
+    "count": 1
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "gag",
+    "aca",
+    "gag"
+  ],
+  "key": {
+    "a": {
+      "type": "appliedenergistics2:part",
+      "part": "material.card_speed"
+    },
+    "g": {
+      "item": "crazyae:material",
+      "data": 16
+    },
+    "c": {
+      "type": "crazyae:material",
+      "part": "quantum_processor"
+    }
+  }
+}
