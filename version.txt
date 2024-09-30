@@ -1,0 +1,2 @@
+version:0.1.1
+link:https://www.curseforge.com/minecraft/mc-mods/crazyae/files/all?showAlphaFiles=show
