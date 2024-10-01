@@ -16,6 +16,7 @@ import dev.beecube31.crazyae2.common.blocks.energycells.BlockPerfectEnergyCell;
 import dev.beecube31.crazyae2.common.blocks.grindstone.BlockImprovedCrank;
 import dev.beecube31.crazyae2.client.rendering.ImprovedCrankRendering;
 import dev.beecube31.crazyae2.common.blocks.materials.BlockFluxilized;
+import dev.beecube31.crazyae2.common.blocks.misc.BlockImprovedCondenser;
 import dev.beecube31.crazyae2.common.blocks.networking.BlockBigCrystalCharger;
 import dev.beecube31.crazyae2.common.blocks.networking.BlockCraftingUnitsCombiner;
 import dev.beecube31.crazyae2.common.blocks.networking.BlockIOPortImp;
@@ -36,6 +37,7 @@ import dev.beecube31.crazyae2.common.tile.energycells.TileAdvancedEnergyCell;
 import dev.beecube31.crazyae2.common.tile.energycells.TileImprovedEnergyCell;
 import dev.beecube31.crazyae2.common.tile.energycells.TilePerfectEnergyCell;
 import dev.beecube31.crazyae2.common.tile.grindstone.TileImprovedCrank;
+import dev.beecube31.crazyae2.common.tile.misc.TileImprovedCondenser;
 import dev.beecube31.crazyae2.common.tile.networking.TileBigCrystalCharger;
 import dev.beecube31.crazyae2.common.tile.networking.TileCraftingUnitsCombiner;
 import dev.beecube31.crazyae2.common.tile.networking.TileImprovedIOPort;
@@ -46,6 +48,7 @@ import dev.beecube31.crazyae2.common.tile.solars.TileEnergyPanelPerfect;
 import dev.beecube31.crazyae2.common.tile.storage.TileImprovedDrive;
 import net.minecraft.util.ResourceLocation;
 
+@SuppressWarnings("unused")
 public class Blocks {
 	private final ITileDefinition craftingStorage256k;
 	private final ITileDefinition craftingStorage1mb;
@@ -76,11 +79,13 @@ public class Blocks {
 	private final ITileDefinition crankImp;
 	private final ITileDefinition craftingUnitsCombiner;
 	private final ITileDefinition bigCrystalCharger;
+	private final ITileDefinition energyPanelPerfect;
 
 	private final ITileDefinition energyPanelBasic;
 	private final ITileDefinition energyPanelImproved;
 	private final ITileDefinition energyPanelAdvanced;
-	private final ITileDefinition energyPanelPerfect;
+
+//	private final ITileDefinition improvedCondenser;
 
 	private final IBlockDefinition fluixilizedBlock;
 
@@ -278,6 +283,11 @@ public class Blocks {
 				.features(Features.SOLAR_PANELS)
 				.tileEntity(new TileEntityDefinition(TileEnergyPanelPerfect.class))
 				.build();
+
+//		this.improvedCondenser = registry.block("improved_condenser", BlockImprovedCondenser::new)
+//				.features(Features.STUB)
+//				.tileEntity(new TileEntityDefinition(TileImprovedCondenser.class))
+//				.build();
 
 		this.fluixilizedBlock = registry.block("fluixilized_block", BlockFluxilized::new)
 				.aeFeatures(AEFeature.FLUIX)

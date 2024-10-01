@@ -18,13 +18,18 @@ import appeng.items.contents.CellUpgrades;
 import appeng.items.contents.PortableCellViewer;
 import appeng.items.tools.powered.powersink.AEBasePoweredItem;
 import appeng.util.Platform;
+import dev.beecube31.crazyae2.common.sync.CrazyAEGuiText;
+import dev.beecube31.crazyae2.common.sync.CrazyAEGuiTooltip;
+import dev.beecube31.crazyae2.common.sync.CrazyAETooltip;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -47,6 +52,18 @@ public class DensePortableCell extends AEBasePoweredItem implements IStorageCell
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(final World w, final EntityPlayer player, final EnumHand hand) {
+        if (player.isSneaking()) {
+            ItemStack item = player.getHeldItem(hand);
+            NBTTagCompound itemNBT = item.getTagCompound();
+            if (itemNBT != null) {
+                final boolean isEnabled = itemNBT.getBoolean("autoPickup");
+                itemNBT.setBoolean("autoPickup", !isEnabled);
+
+                player.sendStatusMessage(new TextComponentString(CrazyAETooltip.AUTO_PICKUP.getLocalWithSpaceAtEnd() + this.getAutoPickupState(!isEnabled)), true);
+                return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
+            }
+        }
+
         Platform.openGUI(player, null, AEPartLocation.INTERNAL, GuiBridge.GUI_PORTABLE_CELL);
         return new ActionResult<>(EnumActionResult.SUCCESS, player.getHeldItem(hand));
     }
@@ -67,6 +84,12 @@ public class DensePortableCell extends AEBasePoweredItem implements IStorageCell
                 .cell()
                 .getCellInventory(stack, null,
                         AEApi.instance().storage().getStorageChannel(IItemStorageChannel.class));
+
+        NBTTagCompound nbt = stack.getTagCompound();
+        boolean isAutoPickupEnabled = nbt != null && nbt.getBoolean("autoPickup");
+
+        lines.add(CrazyAETooltip.AUTO_PICKUP.getLocalWithSpaceAtEnd() + this.getAutoPickupState(isAutoPickupEnabled));
+        lines.add(CrazyAETooltip.AUTO_PICKUP_TIP.getLocal());
 
         AEApi.instance().client().addCellInformation(cdi, lines);
     }
@@ -154,5 +177,9 @@ public class DensePortableCell extends AEBasePoweredItem implements IStorageCell
     @Override
     public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
         return slotChanged;
+    }
+
+    private String getAutoPickupState(boolean isEnabled) {
+        return isEnabled ? CrazyAETooltip.ENABLED_LOWERCASE.getLocal() : CrazyAETooltip.DISABLED_LOWERCASE.getLocal();
     }
 }

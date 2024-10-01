@@ -54,6 +54,10 @@ public final class CrazyAEConfig {
     @Config.RangeDouble(min = 0.0D)
     public static double perfectSolarPanelCapacity = 64000000;
 
+    @Config.Name("disableUpdatesCheck")
+    @Config.Comment("Disables updates checking.")
+    public static boolean disableUpdatesCheck = false;
+
     static {
         ConfigManager.sync("crazyae", Config.Type.INSTANCE);
     }

@@ -6,42 +6,42 @@ item.crazyae.storage_cell_256k.name=§c256k§r ME Storage Cell
 item.crazyae.storage_cell_1mb.name=§61MB§r ME Storage Cell
 item.crazyae.storage_cell_4mb.name=§e4MB§r ME Storage Cell
 item.crazyae.storage_cell_16mb.name=§a16MB§r ME Storage Cell
-item.crazyae.storage_cell_64mb.name=§a64MB§r ME Storage Cell
-item.crazyae.storage_cell_256mb.name=§a256MB§r ME Storage Cell
-item.crazyae.storage_cell_1gb.name=§a1GB§r ME Storage Cell
-item.crazyae.storage_cell_2gb.name=§a2GB§r ME Storage Cell
+item.crazyae.storage_cell_64mb.name=§264MB§r ME Storage Cell
+item.crazyae.storage_cell_256mb.name=§b256MB§r ME Storage Cell
+item.crazyae.storage_cell_1gb.name=§11GB§r ME Storage Cell
+item.crazyae.storage_cell_2gb.name=§d2GB§r ME Storage Cell
 
 item.crazyae.fluid_storage_cell_256k.name=§c256k§r ME Fluid Storage Cell
 item.crazyae.fluid_storage_cell_1mb.name=§61MB§r ME Fluid Storage Cell
 item.crazyae.fluid_storage_cell_4mb.name=§e4MB§r ME Fluid Storage Cell
 item.crazyae.fluid_storage_cell_16mb.name=§a16MB§r ME Fluid Storage Cell
-item.crazyae.fluid_storage_cell_64mb.name=§c64MB§r ME Fluid Storage Cell
-item.crazyae.fluid_storage_cell_256mb.name=§6256MB§r ME Fluid Storage Cell
-item.crazyae.fluid_storage_cell_1gb.name=§e1GB§r ME Fluid Storage Cell
-item.crazyae.fluid_storage_cell_2gb.name=§a2GB§r ME Fluid Storage Cell
+item.crazyae.fluid_storage_cell_64mb.name=§264MB§r ME Fluid Storage Cell
+item.crazyae.fluid_storage_cell_256mb.name=§b256MB§r ME Fluid Storage Cell
+item.crazyae.fluid_storage_cell_1gb.name=§11GB§r ME Fluid Storage Cell
+item.crazyae.fluid_storage_cell_2gb.name=§d2GB§r ME Fluid Storage Cell
 
-item.crazyae.improved_portable_cell.name=1MB Portable Cell
-item.crazyae.advanced_portable_cell.name=4MB Portable Cell
-item.crazyae.perfect_portable_cell.name=16MB Portable Cell
+item.crazyae.improved_portable_cell.name=§61MB§r Portable Cell
+item.crazyae.advanced_portable_cell.name=§e4MB§r Portable Cell
+item.crazyae.perfect_portable_cell.name=§a16MB§r Portable Cell
 
 # Materials
 item.crazyae.material.cell_part_256k.name=§c256k§r ME Storage Component
 item.crazyae.material.cell_part_1mb.name=§61MB§r ME Storage Component
 item.crazyae.material.cell_part_4mb.name=§e4MB§r ME Storage Component
 item.crazyae.material.cell_part_16mb.name=§a16MB§r ME Storage Component
-item.crazyae.material.cell_part_64mb.name=§a64MB§r ME Storage Component
-item.crazyae.material.cell_part_256mb.name=§a256MB§r ME Storage Component
-item.crazyae.material.cell_part_1gb.name=§a1GB§r ME Storage Component
-item.crazyae.material.cell_part_2gb.name=§a2GB§r ME Storage Component
+item.crazyae.material.cell_part_64mb.name=§264MB§r ME Storage Component
+item.crazyae.material.cell_part_256mb.name=§b256MB§r ME Storage Component
+item.crazyae.material.cell_part_1gb.name=§11GB§r ME Storage Component
+item.crazyae.material.cell_part_2gb.name=§d2GB§r ME Storage Component
 
 item.crazyae.material.cell_part_fluid_256k.name=§c256k§r ME Fluid Storage Component
 item.crazyae.material.cell_part_fluid_1mb.name=§61MB§r ME Fluid Storage Component
 item.crazyae.material.cell_part_fluid_4mb.name=§e4MB§r ME Fluid Storage Component
 item.crazyae.material.cell_part_fluid_16mb.name=§a16MB§r ME Fluid Storage Component
-item.crazyae.material.cell_part_fluid_64mb.name=§c64MB§r ME Fluid Storage Component
-item.crazyae.material.cell_part_fluid_256mb.name=§6256MB§r ME Fluid Storage Component
-item.crazyae.material.cell_part_fluid_1gb.name=§e1GB§r ME Fluid Storage Component
-item.crazyae.material.cell_part_fluid_2gb.name=§a2GB§r ME Fluid Storage Component
+item.crazyae.material.cell_part_fluid_64mb.name=§264MB§r ME Fluid Storage Component
+item.crazyae.material.cell_part_fluid_256mb.name=§b256MB§r ME Fluid Storage Component
+item.crazyae.material.cell_part_fluid_1gb.name=§11GB§r ME Fluid Storage Component
+item.crazyae.material.cell_part_fluid_2gb.name=§d2GB§r ME Fluid Storage Component
 
 item.crazyae.material.quantum_processor.name=Quantum Processor
 
@@ -64,27 +64,27 @@ item.crazyae.upgrade.improved_speed.name=Improved Speed Card
 item.crazyae.upgrade.advanced_speed.name=Advanced Speed Card
 
 # Tiles
-tile.crazyae.crafting_accelerator_4x.name=§b4x§r Crafting Co-Processing Unit
-tile.crazyae.crafting_accelerator_16x.name=§d16x§r Crafting Co-Processing Unit
-tile.crazyae.crafting_accelerator_64x.name=§964x§r Crafting Co-Processing Unit
-tile.crazyae.crafting_accelerator_256x.name=§b256x§r Crafting Co-Processing Unit
-tile.crazyae.crafting_accelerator_1024x.name=§d1024x§r Crafting Co-Processing Unit
-tile.crazyae.crafting_accelerator_4096x.name=§94096x§r Crafting Co-Processing Unit
-tile.crazyae.crafting_accelerator_16384x.name=§b16384x§r Crafting Co-Processing Unit
-tile.crazyae.crafting_accelerator_65536x.name=§d65536x§r Crafting Co-Processing Unit
+tile.crazyae.crafting_accelerator_4x.name=§d4x§r Crafting Co-Processing Unit
+tile.crazyae.crafting_accelerator_16x.name=§516x§r Crafting Co-Processing Unit
+tile.crazyae.crafting_accelerator_64x.name=§164x§r Crafting Co-Processing Unit
+tile.crazyae.crafting_accelerator_256x.name=§d256x§r Crafting Co-Processing Unit
+tile.crazyae.crafting_accelerator_1024x.name=§c1024x§r Crafting Co-Processing Unit
+tile.crazyae.crafting_accelerator_4096x.name=§44096x§r Crafting Co-Processing Unit
+tile.crazyae.crafting_accelerator_16384x.name=§416384x§r Crafting Co-Processing Unit
+tile.crazyae.crafting_accelerator_65536x.name=§465536x§r Crafting Co-Processing Unit
 
 tile.crazyae.crafting_storage_256k.name=§c256k§r Crafting Storage
 tile.crazyae.crafting_storage_1mb.name=§61MB§r Crafting Storage
 tile.crazyae.crafting_storage_4mb.name=§e4MB§r Crafting Storage
 tile.crazyae.crafting_storage_16mb.name=§a16MB§r Crafting Storage
-tile.crazyae.crafting_storage_64mb.name=§c64MB§r Crafting Storage
-tile.crazyae.crafting_storage_256mb.name=§6256MB§r Crafting Storage
-tile.crazyae.crafting_storage_1gb.name=§e1GB§r Crafting Storage
-tile.crazyae.crafting_storage_2gb.name=§a2GB§r Crafting Storage
+tile.crazyae.crafting_storage_64mb.name=§264MB§r Crafting Storage
+tile.crazyae.crafting_storage_256mb.name=§b256MB§r Crafting Storage
+tile.crazyae.crafting_storage_1gb.name=§11GB§r Crafting Storage
+tile.crazyae.crafting_storage_2gb.name=§d2GB§r Crafting Storage
 
-tile.crazyae.improved_energy_cell.name=Improved Energy Cell
-tile.crazyae.advanced_energy_cell.name=Advanced Energy Cell
-tile.crazyae.perfect_energy_cell.name=Perfect Energy Cell
+tile.crazyae.improved_energy_cell.name=§cImproved Energy Cell§r
+tile.crazyae.advanced_energy_cell.name=§aAdvanced Energy Cell§r
+tile.crazyae.perfect_energy_cell.name=§9Perfect Energy Cell§r
 
 tile.crazyae.improved_molecular_assembler.name=Improved Molecular Assembler
 tile.crazyae.improved_drive.name=Improved ME Drive
@@ -100,7 +100,7 @@ tile.crazyae.perfect_solar_panel.name=§cME Perfect Solar Panel§r
 
 #Resource
 
-tile.crazyae.fluixilized_block.name=Fluixilized Block
+tile.crazyae.fluixilized_block.name=§5Fluixilized Block§r
 
 # GUI's Title
 
@@ -130,4 +130,17 @@ tooltip.crazyae.passive_generation_day.name=Generation at day:
 tooltip.crazyae.passive_generation_night.name=Generation at night:
 tooltip.crazyae.max_solar_capacity.name=Capacity
 
+tooltip.crazyae.auto_pickup.name=Auto pickup is
+tooltip.crazyae.auto_pickup_tip.name=Configuration made in the Cell Workbench will be used as filter
 
+
+tooltip.crazyae.enabled_lowercase.name=enabled
+tooltip.crazyae.disabled_lowercase.name=disabled
+tooltip.crazyae.enabled.name=Enabled
+tooltip.crazyae.disabled.name=Disabled
+
+#Misc
+
+gui.crazyae.update_found.name=[CrazyAE] §lNew version found :§r
+gui.crazyae.download_link.name=[CrazyAE] Click here to open download page.
+gui.crazyae.disable_updates_tip.name=[CrazyAE] Also, you can disable updates checking in the CrazyAE config.

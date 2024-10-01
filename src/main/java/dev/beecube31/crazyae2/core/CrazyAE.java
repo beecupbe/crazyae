@@ -1,19 +1,26 @@
 package dev.beecube31.crazyae2.core;
 
+import appeng.container.implementations.ContainerMEPortableCell;
 import dev.beecube31.crazyae2.Tags;
 import dev.beecube31.crazyae2.common.features.Features;
+import dev.beecube31.crazyae2.common.items.cells.ImprovedPortableCell;
 import dev.beecube31.crazyae2.common.networking.CrazyAENetworkHandler;
 import dev.beecube31.crazyae2.common.networking.network.NetworkHandler;
 import dev.beecube31.crazyae2.common.registration.Registration;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiHandler;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
+import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import net.minecraftforge.fml.relauncher.Side;
@@ -74,12 +81,18 @@ public class CrazyAE {
 		CrazyAE.instance = this;
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, this.crazyAEGuiHandler = new CrazyAEGuiHandler());
 
+		MinecraftForge.EVENT_BUS.register(instance);
+
 		this.registration.preInit(event);
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		this.registration.init(event);
+
+		if (!CrazyAEConfig.disableUpdatesCheck) {
+			MinecraftForge.EVENT_BUS.register(new UpdateChecker());
+		}
 	}
 
 	@EventHandler
@@ -124,5 +137,22 @@ public class CrazyAE {
 		}
 	}
 
+	@SubscribeEvent
+	public void handleEntityItemPickup(EntityItemPickupEvent event) {
 
+		EntityPlayer player = event.getEntityPlayer();
+
+		if (player.openContainer instanceof ContainerMEPortableCell) {
+			return;
+		}
+
+		InventoryPlayer inventory = event.getEntityPlayer().inventory;
+		for (int i = 0; i < inventory.getSizeInventory(); i++) {
+			ItemStack stack = inventory.getStackInSlot(i);
+			if (stack.getItem() instanceof ImprovedPortableCell cell) {
+				event.setCanceled(cell.isAutoPickupEnabled(stack) && cell.onItemPickup(event, stack));
+				return;
+			}
+		}
+	}
 }

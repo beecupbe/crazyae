@@ -6,6 +6,10 @@ import net.minecraft.util.text.translation.I18n;
 public enum CrazyAEGuiText {
     NOT_DEFINED,
 
+    UPDATE_FOUND,
+    DOWNLOAD_LINK,
+    DISABLE_UPDATES_TIP,
+
     IMPROVED_DRIVE_GUI,
     IMPROVED_MAC_GUI,
     BIG_CRYSTAL_CHARGER,

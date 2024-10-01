@@ -12,6 +12,7 @@ import appeng.me.cluster.IAECluster;
 import appeng.me.cluster.implementations.CraftingCPUCluster;
 import appeng.me.helpers.MachineSource;
 import com.llamalad7.mixinextras.sugar.Local;
+import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.*;
@@ -45,12 +46,12 @@ public abstract class MixinCraftingCPUCluster implements IAECluster, ICraftingCP
             method = "executeCrafting",
             at = @At(value = "INVOKE", target = "Lappeng/api/networking/crafting/ICraftingPatternDetails;isValidItemForSlot(ILnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;)Z")
     )
-    private boolean injectItemValidation(ICraftingPatternDetails instance, @Local boolean found, @Local IAEItemStack fuzz) {
+    private boolean injectItemValidation(ICraftingPatternDetails instance, int i, ItemStack itemStack, World world, @Local LocalRef<Boolean> found, @Local IAEItemStack fuzz) {
         final IAEItemStack ais = this.inventory.extractItems(fuzz, Actionable.MODULATE, this.machineSrc);
         this.postChange(ais, this.machineSrc);
         this.items.add(ais);
 
-        found = true;
+        found.set(true);
         return false;
     }
 

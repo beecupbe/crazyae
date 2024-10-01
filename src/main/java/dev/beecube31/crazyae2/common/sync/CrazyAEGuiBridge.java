@@ -4,6 +4,7 @@ import appeng.api.AEApi;
 import appeng.api.config.SecurityPermissions;
 import appeng.api.exceptions.AppEngException;
 import appeng.api.implementations.IUpgradeableHost;
+import appeng.api.implementations.items.IStorageCell;
 import appeng.api.networking.security.IActionHost;
 import appeng.api.networking.security.ISecurityGrid;
 import appeng.api.parts.IPartHost;
@@ -19,6 +20,7 @@ import dev.beecube31.crazyae2.common.interfaces.IChangeablePriorityHost;
 import dev.beecube31.crazyae2.common.interfaces.ICrazyAEGuiItem;
 import dev.beecube31.crazyae2.common.parts.implementations.fluid.CrazyAEPartSharedFluidBus;
 import dev.beecube31.crazyae2.common.tile.crafting.TileImprovedMAC;
+import dev.beecube31.crazyae2.common.tile.misc.TileImprovedCondenser;
 import dev.beecube31.crazyae2.common.tile.networking.TileBigCrystalCharger;
 import dev.beecube31.crazyae2.common.tile.networking.TileCraftingUnitsCombiner;
 import dev.beecube31.crazyae2.common.tile.networking.TileImprovedIOPort;
@@ -47,7 +49,8 @@ public enum CrazyAEGuiBridge {
 	CRAFTING_UNITS_COMBINER(TileCraftingUnitsCombiner.class, ContainerCraftingUnitsCombiner.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
 	BIG_CRYSTAL_CHARGER(TileBigCrystalCharger.class, ContainerBigCrystalCharger.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
 	IMPROVED_BUS(IUpgradeableHost.class, ContainerCrazyAEUpgradeable.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
-	IMPROVED_FLUID_BUSES(CrazyAEPartSharedFluidBus.class, ContainerImprovedFluidBuses.class, GuiHostType.WORLD, SecurityPermissions.BUILD);
+	IMPROVED_FLUID_BUSES(CrazyAEPartSharedFluidBus.class, ContainerImprovedFluidBuses.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
+	IMPROVED_CONDENSER(TileImprovedCondenser.class, ContainerImprovedCondenser.class, GuiHostType.WORLD, SecurityPermissions.BUILD);
 
 	private static CrazyAEGuiBridge[] cachedValues;
 	private final Class<?> clazz;
