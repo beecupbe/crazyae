@@ -1,0 +1,149 @@
+# Corresponding Version: CrazyAE-v0.1.1-3b00d41
+# 対応バージョン: CrazyAE-v0.1.1-3b00d41
+
+itemGroup.crazyae=CrazyAE
+item.crazyae.invalid.name=無効または利用不可のアイテム
+
+# Cells
+item.crazyae.storage_cell_256k.name=§c256k§r MEストレージセル
+item.crazyae.storage_cell_1mb.name=§61MB§r MEストレージセル
+item.crazyae.storage_cell_4mb.name=§e4MB§r MEストレージセル
+item.crazyae.storage_cell_16mb.name=§a16MB§r MEストレージセル
+item.crazyae.storage_cell_64mb.name=§264MB§r MEストレージセル
+item.crazyae.storage_cell_256mb.name=§b256MB§r MEストレージセル
+item.crazyae.storage_cell_1gb.name=§11GB§r MEストレージセル
+item.crazyae.storage_cell_2gb.name=§d2GB§r MEストレージセル
+
+item.crazyae.fluid_storage_cell_256k.name=§c256k§r ME液体セル
+item.crazyae.fluid_storage_cell_1mb.name=§61MB§r ME液体セル
+item.crazyae.fluid_storage_cell_4mb.name=§e4MB§r ME液体セル
+item.crazyae.fluid_storage_cell_16mb.name=§a16MB§r ME液体セル
+item.crazyae.fluid_storage_cell_64mb.name=§264MB§r ME液体セル
+item.crazyae.fluid_storage_cell_256mb.name=§b256MB§r ME液体セル
+item.crazyae.fluid_storage_cell_1gb.name=§11GB§r ME液体セル
+item.crazyae.fluid_storage_cell_2gb.name=§d2GB§r ME液体セル
+
+item.crazyae.improved_portable_cell.name=§61MB§r ポータブルセル
+item.crazyae.advanced_portable_cell.name=§e4MB§r ポータブルセル
+item.crazyae.perfect_portable_cell.name=§a16MB§r ポータブルセル
+
+# Materials
+item.crazyae.material.cell_part_256k.name=§c256k§r MEストレージコンポーネント
+item.crazyae.material.cell_part_1mb.name=§61MB§r MEストレージコンポーネント
+item.crazyae.material.cell_part_4mb.name=§e4MB§r MEストレージコンポーネント
+item.crazyae.material.cell_part_16mb.name=§a16MB§r MEストレージコンポーネント
+item.crazyae.material.cell_part_64mb.name=§264MB§r MEストレージコンポーネント
+item.crazyae.material.cell_part_256mb.name=§b256MB§r MEストレージコンポーネント
+item.crazyae.material.cell_part_1gb.name=§11GB§r MEストレージコンポーネント
+item.crazyae.material.cell_part_2gb.name=§d2GB§r MEストレージコンポーネント
+
+item.crazyae.material.cell_part_fluid_256k.name=§c256k§r ME液体コンポーネント
+item.crazyae.material.cell_part_fluid_1mb.name=§61MB§r ME液体コンポーネント
+item.crazyae.material.cell_part_fluid_4mb.name=§e4MB§r ME液体コンポーネント
+item.crazyae.material.cell_part_fluid_16mb.name=§a16MB§r ME液体コンポーネント
+item.crazyae.material.cell_part_fluid_64mb.name=§264MB§r ME液体コンポーネント
+item.crazyae.material.cell_part_fluid_256mb.name=§b256MB§r ME液体コンポーネント
+item.crazyae.material.cell_part_fluid_1gb.name=§11GB§r ME液体コンポーネント
+item.crazyae.material.cell_part_fluid_2gb.name=§d2GB§r ME液体コンポーネント
+
+item.crazyae.material.quantum_processor.name=量子プロセッサ
+
+#Items
+item.crazyae.quantum_wireless_booster.name=量子無線ブースター
+tooltip.crazyae.quantum_wireless_booster_desc.name=このアイテムは現在開発中です
+
+
+# Parts
+item.crazyae.part.improved_import_bus.name=ME発展型入力バス
+item.crazyae.part.improved_export_bus.name=ME発展型出力バス
+
+item.crazyae.part.improved_export_fluid_bus.name=ME発展型液体出力バス
+item.crazyae.part.improved_import_fluid_bus.name=ME発展型液体入力バス
+
+
+# Upgrades
+item.crazyae.upgrade.stacks.name=スタックカード
+item.crazyae.upgrade.improved_speed.name=発展型加速カード
+item.crazyae.upgrade.advanced_speed.name=精鋭型加速カード
+
+# Tiles
+tile.crazyae.crafting_accelerator_4x.name=§d4x§r クラフティング並列処理ユニット
+tile.crazyae.crafting_accelerator_16x.name=§516x§r クラフティング並列処理ユニット
+tile.crazyae.crafting_accelerator_64x.name=§164x§r クラフティング並列処理ユニット
+tile.crazyae.crafting_accelerator_256x.name=§d256x§r クラフティング並列処理ユニット
+tile.crazyae.crafting_accelerator_1024x.name=§c1024x§r クラフティング並列処理ユニット
+tile.crazyae.crafting_accelerator_4096x.name=§44096x§r クラフティング並列処理ユニット
+tile.crazyae.crafting_accelerator_16384x.name=§416384x§r クラフティング並列処理ユニット
+tile.crazyae.crafting_accelerator_65536x.name=§465536x§r クラフティング並列処理ユニット
+
+tile.crazyae.crafting_storage_256k.name=§c256k§r クラフティングストレージ
+tile.crazyae.crafting_storage_1mb.name=§61MB§r クラフティングストレージ
+tile.crazyae.crafting_storage_4mb.name=§e4MB§r クラフティングストレージ
+tile.crazyae.crafting_storage_16mb.name=§a16MB§r クラフティングストレージ
+tile.crazyae.crafting_storage_64mb.name=§264MB§r クラフティングストレージ
+tile.crazyae.crafting_storage_256mb.name=§b256MB§r クラフティングストレージ
+tile.crazyae.crafting_storage_1gb.name=§11GB§r クラフティングストレージ
+tile.crazyae.crafting_storage_2gb.name=§d2GB§r クラフティングストレージ
+
+tile.crazyae.improved_energy_cell.name=§c発展型エネルギーセル
+tile.crazyae.advanced_energy_cell.name=§a精鋭型エネルギーセル
+tile.crazyae.perfect_energy_cell.name=§9究極型エネルギーセル
+
+tile.crazyae.improved_molecular_assembler.name=発展型分子組立機
+tile.crazyae.improved_drive.name=ME発展型ドライブ
+tile.crazyae.improved_io_port.name=ME発展型入出力ポート
+tile.crazyae.improved_crank.name=発展型木製クランク
+tile.crazyae.crafting_units_combiner.name=MEクラフティング量子ユニット
+tile.crazyae.big_crystal_charger.name=発展型チャージ機
+
+tile.crazyae.basic_solar_panel.name=§3MEソーラーパネル§r
+tile.crazyae.improved_solar_panel.name=§5ME発展型ソーラーパネル§r
+tile.crazyae.advanced_solar_panel.name=§dME精鋭型ソーラーパネル§r
+tile.crazyae.perfect_solar_panel.name=§cME究極型ソーラーパネル§r
+
+#Resource
+
+tile.crazyae.fluixilized_block.name=§5チャージドフルーシュブロック§r
+
+# GUI's Title
+
+gui.crazyae.big_crystal_charger.name=発展型チャージ機
+gui.crazyae.improved_mac_gui.name=発展型分子組立機
+gui.crazyae.improved_drive_gui.name=ME発展型ドライブ
+
+gui.crazyae.imp_import_bus.name=ME発展型入力バス
+gui.crazyae.imp_export_bus.name=ME発展型出力バス
+
+gui.crazyae.imp_fluid_import_bus.name=ME発展型液体入力バス
+gui.crazyae.imp_fluid_export_bus.name=ME発展型液体出力バス
+
+
+# GUI's Tooltip
+
+gui.tooltip.crazyae.cu_place_all_accelerators_here.name=クラフティング並列処理ユニット用のスロット
+gui.tooltip.crazyae.cu_place_all_crafting_storages_here.name=クラフティングストレージ用のスロット
+
+gui.tooltip.crazyae.progress.name=進捗:
+
+#Tooltips
+
+tooltip.crazyae.shift_for_details.name=シフトキー長押しで詳細を確認
+
+tooltip.crazyae.passive_generation_day.name=昼の発電量:
+tooltip.crazyae.passive_generation_night.name=夜の発電量:
+tooltip.crazyae.max_solar_capacity.name=容量
+
+tooltip.crazyae.auto_pickup.name=自動回収は
+tooltip.crazyae.auto_pickup_tip.name=セルワークベンチで指定した設定はフィルターとして使用されます。
+
+
+tooltip.crazyae.enabled_lowercase.name=有効
+tooltip.crazyae.disabled_lowercase.name=無効
+tooltip.crazyae.enabled.name=有効
+tooltip.crazyae.disabled.name=無効
+
+#Misc
+
+gui.crazyae.update_found.name=[CrazyAE] §l新バージョンリリース :§r
+gui.crazyae.download_link.name=[CrazyAE] クリックでダウンロードページが開きます
+gui.crazyae.disable_updates_tip.name=[CrazyAE] また、CrazyAEの設定でアップデートチェックを無効にすることもできます
