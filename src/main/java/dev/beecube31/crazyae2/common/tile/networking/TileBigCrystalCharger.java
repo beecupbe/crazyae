@@ -2,8 +2,6 @@ package dev.beecube31.crazyae2.common.tile.networking;
 
 import appeng.api.AEApi;
 import appeng.api.config.*;
-import appeng.api.definitions.ITileDefinition;
-import appeng.api.implementations.IPowerChannelState;
 import appeng.api.implementations.IUpgradeableHost;
 import appeng.api.networking.GridFlags;
 import appeng.api.networking.IGridNode;
@@ -22,11 +20,9 @@ import appeng.api.util.AECableType;
 import appeng.api.util.AEPartLocation;
 import appeng.api.util.DimensionalCoord;
 import appeng.api.util.IConfigManager;
-import appeng.core.AELog;
 import appeng.me.GridAccessException;
 import appeng.me.helpers.MachineSource;
 import appeng.parts.automation.BlockUpgradeInventory;
-import appeng.parts.automation.DefinitionUpgradeInventory;
 import appeng.parts.automation.UpgradeInventory;
 import appeng.tile.grid.AENetworkTile;
 import appeng.tile.inventory.AppEngInternalInventory;
@@ -49,12 +45,10 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
-import org.apache.logging.log4j.Level;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.io.IOException;
-import java.util.EnumSet;
 import java.util.List;
 
 public class TileBigCrystalCharger extends AENetworkTile implements IConfigManagerHost, IUpgradeableHost, IAEAppEngInventory, IGridTickable {
@@ -250,7 +244,7 @@ public class TileBigCrystalCharger extends AENetworkTile implements IConfigManag
                                 continue;
                             }
 
-                            int amt = Math.min(itemsLeft, 64 - this.outputInv.getStackInSlot(j).getCount());
+                            int amt = Math.min(Math.min(itemsLeft, 64 - this.outputInv.getStackInSlot(j).getCount()), this.inputInv.getStackInSlot(j).getCount());
                             this.outputInv.insertItem(j, AEApi.instance().definitions().materials().certusQuartzCrystalCharged().maybeStack(amt).orElse(ItemStack.EMPTY), false);
                             this.inputInv.extractItem(j, amt, false);
                             itemsLeft -= amt;
@@ -367,9 +361,8 @@ public class TileBigCrystalCharger extends AENetworkTile implements IConfigManag
     @Override
     @SuppressWarnings("unchecked")
     public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
-        T result = (T) this.inputInv;
-        if (result != null) {
-            return result;
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            return (T) this.inputInv;
         }
         return super.getCapability(capability, facing);
     }

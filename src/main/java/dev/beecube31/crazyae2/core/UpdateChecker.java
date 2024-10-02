@@ -4,7 +4,6 @@ import dev.beecube31.crazyae2.common.sync.CrazyAEGuiText;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.text.TextComponentBase;
 import net.minecraft.util.text.TextComponentString;
-import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.event.ClickEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.FMLCommonHandler;

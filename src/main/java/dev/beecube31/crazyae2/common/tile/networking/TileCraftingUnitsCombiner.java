@@ -16,14 +16,19 @@ import appeng.util.IConfigManagerHost;
 import appeng.util.Platform;
 import appeng.util.inv.IAEAppEngInventory;
 import appeng.util.inv.InvOperation;
+import appeng.util.inv.WrapperChainedItemHandler;
 import dev.beecube31.crazyae2.core.CrazyAE;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
+import javax.annotation.Nullable;
 import java.io.IOException;
 import java.util.*;
 
@@ -36,6 +41,8 @@ public class TileCraftingUnitsCombiner extends TileCraftingTile implements IConf
             AppEngInternalInventory(this, 12, 64);
     private final AppEngInternalInventory storageInv = new
             AppEngInternalInventory(this, 12, 64);
+
+    private final IItemHandler combinedInv = new WrapperChainedItemHandler(this.acceleratorsInv, this.storageInv);
 
     private long storageAmt = 0;
     private int acceleratorAmt = 0;
@@ -332,5 +339,19 @@ public class TileCraftingUnitsCombiner extends TileCraftingTile implements IConf
     @Override
     public IConfigManager getConfigManager() {
         return null;
+    }
+
+    @Override
+    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+        return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
+    }
+
+    @Override
+    @SuppressWarnings("unchecked")
+    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+        if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            return (T) this.combinedInv;
+        }
+        return super.getCapability(capability, facing);
     }
 }
