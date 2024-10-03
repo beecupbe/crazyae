@@ -47,7 +47,6 @@ public class UpdateChecker {
             if (FMLCommonHandler.instance().getEffectiveSide().isClient()) {
                 TextComponentBase updateString = new TextComponentString(CrazyAEGuiText.DOWNLOAD_LINK.getLocalWithSpaceAtEnd());
                 updateString.getStyle().setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, this.thread.getDownload()));
-                updateString.getStyle().setItalic(true);
 
                 Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new TextComponentString(CrazyAEGuiText.UPDATE_FOUND.getLocalWithSpaceAtEnd() + this.thread.getVersion()));
                 Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(updateString);

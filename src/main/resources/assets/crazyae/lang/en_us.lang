@@ -142,5 +142,5 @@ tooltip.crazyae.disabled.name=Disabled
 #Misc
 
 gui.crazyae.update_found.name=[CrazyAE] §lNew version found :§r
-gui.crazyae.download_link.name=[CrazyAE] Click here to open download page.
+gui.crazyae.download_link.name=[CrazyAE] §oClick here to open download page.§r
 gui.crazyae.disable_updates_tip.name=[CrazyAE] Also, you can disable updates checking in the CrazyAE config.

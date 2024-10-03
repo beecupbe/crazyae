@@ -19,6 +19,8 @@ import appeng.util.item.AEItemStack;
 import dev.beecube31.crazyae2.common.sync.CrazyAETooltip;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidUtil;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.oredict.OreDictionary;
 import org.lwjgl.input.Keyboard;
@@ -31,6 +33,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.Collection;
 import java.util.List;
 
+@SideOnly(Side.CLIENT)
 @Mixin(value = ApiClientHelper.class, remap = false)
 public abstract class MixinApiClientHelper implements IClientHelper {
     @Shadow protected abstract String fluidStackSize(long size);
