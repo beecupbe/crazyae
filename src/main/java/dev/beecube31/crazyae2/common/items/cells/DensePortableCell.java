@@ -18,8 +18,6 @@ import appeng.items.contents.CellUpgrades;
 import appeng.items.contents.PortableCellViewer;
 import appeng.items.tools.powered.powersink.AEBasePoweredItem;
 import appeng.util.Platform;
-import dev.beecube31.crazyae2.common.sync.CrazyAEGuiText;
-import dev.beecube31.crazyae2.common.sync.CrazyAEGuiTooltip;
 import dev.beecube31.crazyae2.common.sync.CrazyAETooltip;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
@@ -89,6 +87,7 @@ public class DensePortableCell extends AEBasePoweredItem implements IStorageCell
         boolean isAutoPickupEnabled = nbt != null && nbt.getBoolean("autoPickup");
 
         lines.add(CrazyAETooltip.AUTO_PICKUP.getLocalWithSpaceAtEnd() + this.getAutoPickupState(isAutoPickupEnabled));
+        lines.add(CrazyAETooltip.AUTO_PICKUP_HOW_TO_ENABLE.getLocal());
         lines.add(CrazyAETooltip.AUTO_PICKUP_TIP.getLocal());
 
         AEApi.instance().client().addCellInformation(cdi, lines);

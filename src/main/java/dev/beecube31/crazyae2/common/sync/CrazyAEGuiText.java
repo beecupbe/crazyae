@@ -6,6 +6,8 @@ import net.minecraft.util.text.translation.I18n;
 public enum CrazyAEGuiText {
     NOT_DEFINED,
 
+    MANA_CELLS,
+
     UPDATE_FOUND,
     DOWNLOAD_LINK,
     DISABLE_UPDATES_TIP,
@@ -17,7 +19,8 @@ public enum CrazyAEGuiText {
     IMP_IMPORT_BUS,
     IMP_EXPORT_BUS,
     IMP_FLUID_IMPORT_BUS,
-    IMP_FLUID_EXPORT_BUS;
+    IMP_FLUID_EXPORT_BUS,
+    PATTERN_INTERFACE;
 
 
     private final String root;

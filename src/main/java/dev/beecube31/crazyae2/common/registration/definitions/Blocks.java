@@ -16,10 +16,10 @@ import dev.beecube31.crazyae2.common.blocks.energycells.BlockPerfectEnergyCell;
 import dev.beecube31.crazyae2.common.blocks.grindstone.BlockImprovedCrank;
 import dev.beecube31.crazyae2.client.rendering.ImprovedCrankRendering;
 import dev.beecube31.crazyae2.common.blocks.materials.BlockFluxilized;
-import dev.beecube31.crazyae2.common.blocks.misc.BlockImprovedCondenser;
 import dev.beecube31.crazyae2.common.blocks.networking.BlockBigCrystalCharger;
 import dev.beecube31.crazyae2.common.blocks.networking.BlockCraftingUnitsCombiner;
 import dev.beecube31.crazyae2.common.blocks.networking.BlockIOPortImp;
+import dev.beecube31.crazyae2.common.blocks.networking.BlockInterfacePatterns;
 import dev.beecube31.crazyae2.common.blocks.solars.BlockPanelAdvanced;
 import dev.beecube31.crazyae2.common.blocks.solars.BlockPanelBasic;
 import dev.beecube31.crazyae2.common.blocks.solars.BlockPanelImproved;
@@ -37,10 +37,10 @@ import dev.beecube31.crazyae2.common.tile.energycells.TileAdvancedEnergyCell;
 import dev.beecube31.crazyae2.common.tile.energycells.TileImprovedEnergyCell;
 import dev.beecube31.crazyae2.common.tile.energycells.TilePerfectEnergyCell;
 import dev.beecube31.crazyae2.common.tile.grindstone.TileImprovedCrank;
-import dev.beecube31.crazyae2.common.tile.misc.TileImprovedCondenser;
 import dev.beecube31.crazyae2.common.tile.networking.TileBigCrystalCharger;
 import dev.beecube31.crazyae2.common.tile.networking.TileCraftingUnitsCombiner;
 import dev.beecube31.crazyae2.common.tile.networking.TileImprovedIOPort;
+import dev.beecube31.crazyae2.common.tile.networking.TilePatternsInterface;
 import dev.beecube31.crazyae2.common.tile.solars.TileEnergyPanelAdvanced;
 import dev.beecube31.crazyae2.common.tile.solars.TileEnergyPanelBasic;
 import dev.beecube31.crazyae2.common.tile.solars.TileEnergyPanelImproved;
@@ -88,6 +88,8 @@ public class Blocks {
 //	private final ITileDefinition improvedCondenser;
 
 	private final IBlockDefinition fluixilizedBlock;
+
+	private final ITileDefinition patternsInterface;
 
 	public Blocks(Registry registry) {
 		this.craftingStorage256k = registry.block("crafting_storage_256k", () -> new BlockDenseCraftingUnit(BlockDenseCraftingUnit.DenseCraftingUnitType.STORAGE_256K))
@@ -284,6 +286,11 @@ public class Blocks {
 				.tileEntity(new TileEntityDefinition(TileEnergyPanelPerfect.class))
 				.build();
 
+		this.patternsInterface = registry.block("patterns_interface", BlockInterfacePatterns::new)
+				.features(Features.STUB)
+				.tileEntity(new TileEntityDefinition(TilePatternsInterface.class))
+				.build();
+
 //		this.improvedCondenser = registry.block("improved_condenser", BlockImprovedCondenser::new)
 //				.features(Features.STUB)
 //				.tileEntity(new TileEntityDefinition(TileImprovedCondenser.class))
@@ -380,11 +387,41 @@ public class Blocks {
 		return this.iOPortImp;
 	}
 
+	public ITileDefinition crankImp() {
+		return this.crankImp;
+	}
+
 	public ITileDefinition bigCrystalCharger() {
 		return this.bigCrystalCharger;
 	}
 
+	public ITileDefinition energyPanelPerfect() {
+		return this.energyPanelPerfect;
+	}
+
+	public ITileDefinition energyPanelBasic() {
+		return this.energyPanelBasic;
+	}
+
+	public ITileDefinition energyPanelImproved() {
+		return this.energyPanelImproved;
+	}
+
+	public ITileDefinition energyPanelAdvanced() {
+		return this.energyPanelAdvanced;
+	}
+
+
 	public ITileDefinition craftingUnitsCombiner() {
 		return this.craftingUnitsCombiner;
 	}
+
+	public ITileDefinition patternsInterface() {
+		return this.patternsInterface;
+	}
+
+	public IBlockDefinition fluixilizedBlock() {
+		return this.fluixilizedBlock;
+	}
+
 }

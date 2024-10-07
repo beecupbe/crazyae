@@ -35,7 +35,7 @@ import java.io.File;
 		version = Tags.VERSION,
 		name = Tags.MODNAME,
 		acceptedMinecraftVersions = "[1.12.2]",
-		dependencies = "required-after:appliedenergistics2;required-after:mixinbooter@[8.3,);after:codechickenlib;after:lumenized"
+		dependencies = "required-after:appliedenergistics2;required-after:mixinbooter@[8.3,);after:codechickenlib;after:lumenized;after:botania"
 )
 public class CrazyAE {
 	public static CrazyAE instance;
@@ -112,6 +112,11 @@ public class CrazyAE {
 			var config = new Configuration(file);
 
 			for (var feature : Features.values()) {
+				if (feature.name().equals("STUB")) {
+					feature.setEnabled(true);
+					continue;
+				}
+
 				var lowerCase = feature.name().toLowerCase();
 
 				var featureCategory = config.getCategory(lowerCase);

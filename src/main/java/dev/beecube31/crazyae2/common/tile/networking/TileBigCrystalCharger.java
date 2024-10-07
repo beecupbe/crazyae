@@ -33,6 +33,7 @@ import appeng.util.helpers.ItemHandlerUtil;
 import appeng.util.inv.IAEAppEngInventory;
 import appeng.util.inv.InvOperation;
 import appeng.util.item.AEItemStack;
+import com.google.common.base.Preconditions;
 import dev.beecube31.crazyae2.common.interfaces.ICrazyAEUpgradeInventory;
 import dev.beecube31.crazyae2.core.CrazyAE;
 import io.netty.buffer.ByteBuf;
@@ -72,7 +73,9 @@ public class TileBigCrystalCharger extends AENetworkTile implements IConfigManag
 
 
     public TileBigCrystalCharger() {
-        final Block charger = CrazyAE.definitions().blocks().bigCrystalCharger().maybeBlock().get();
+        final Block charger = CrazyAE.definitions().blocks().bigCrystalCharger().maybeBlock().orElse(null);
+        Preconditions.checkNotNull(charger);
+
         this.getProxy().setIdlePowerUsage(16.0);
         this.getProxy().setFlags(GridFlags.REQUIRE_CHANNEL);
         this.getProxy().setVisualRepresentation(CrazyAE.definitions().blocks()
@@ -84,7 +87,7 @@ public class TileBigCrystalCharger extends AENetworkTile implements IConfigManag
         this.manager.registerSetting(Settings.REDSTONE_CONTROLLED, RedstoneMode.IGNORE);
         this.manager.registerSetting(Settings.FULLNESS_MODE, FullnessMode.EMPTY);
         this.manager.registerSetting(Settings.OPERATION_MODE, OperationMode.EMPTY);
-        
+
         this.upgrades = new BlockUpgradeInventory(charger, this, NUMBER_OF_UPGRADE_SLOTS);
     }
 

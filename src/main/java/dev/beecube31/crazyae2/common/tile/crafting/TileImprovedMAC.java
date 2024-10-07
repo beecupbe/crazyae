@@ -33,6 +33,7 @@ import appeng.util.IConfigManagerHost;
 import appeng.util.Platform;
 import appeng.util.inv.InvOperation;
 import appeng.util.item.AEItemStack;
+import com.google.common.base.Preconditions;
 import dev.beecube31.crazyae2.common.interfaces.ICrazyAEUpgradeInventory;
 import dev.beecube31.crazyae2.core.CrazyAE;
 import io.netty.buffer.ByteBuf;
@@ -65,7 +66,8 @@ public class TileImprovedMAC extends AENetworkInvTile implements IUpgradeableHos
     private List<IAEItemStack> itemsToSend = new ArrayList<>();
 
     public TileImprovedMAC() {
-        final Block assembler = CrazyAE.definitions().blocks().improvedMolecularAssembler().maybeBlock().get();
+        final Block assembler = CrazyAE.definitions().blocks().improvedMolecularAssembler().maybeBlock().orElse(null);
+        Preconditions.checkNotNull(assembler);
 
         this.settings = new ConfigManager(this);
         this.settings.registerSetting(Settings.REDSTONE_CONTROLLED, RedstoneMode.IGNORE);

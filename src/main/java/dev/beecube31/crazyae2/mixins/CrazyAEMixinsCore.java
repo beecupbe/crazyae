@@ -53,13 +53,12 @@ public class CrazyAEMixinsCore implements IFMLLoadingPlugin, ILateMixinLoader {
 
 		mixins.add("mixins.crazyae.json");
 		mixins.add(String.format(MIXIN_PATH, "core"));
-
-		mixins.add(String.format(MIXIN_PATH, "priority.host"));
 		mixins.add(String.format(MIXIN_PATH, "cu.combiner"));
 
 
 
 		for (var feature : Features.values()) {
+			if (feature.name().equals("STUB")) continue;
 			if (!feature.isEnabled()) continue;
 
 			var featureMixins = feature.getMixins();

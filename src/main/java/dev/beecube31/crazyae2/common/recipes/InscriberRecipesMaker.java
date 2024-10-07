@@ -37,10 +37,10 @@ public class InscriberRecipesMaker {
 
     public static void init() {
         make(
-                AEApi.instance().definitions().materials().matterBall().maybeStack(1).get(),
-                AEApi.instance().definitions().materials().logicProcessor().maybeStack(1).get(),
-                AEApi.instance().definitions().materials().engProcessor().maybeStack(1).get(),
-                CrazyAE.definitions().materials().quantumProcessor().maybeStack(1).get(),
+                AEApi.instance().definitions().materials().matterBall().maybeStack(1).orElse(ItemStack.EMPTY),
+                AEApi.instance().definitions().materials().logicProcessor().maybeStack(1).orElse(ItemStack.EMPTY),
+                AEApi.instance().definitions().materials().engProcessor().maybeStack(1).orElse(ItemStack.EMPTY),
+                CrazyAE.definitions().materials().quantumProcessor().maybeStack(1).orElse(ItemStack.EMPTY),
                 InscriberProcessType.PRESS
         );
     }

@@ -87,8 +87,8 @@ tile.crazyae.advanced_energy_cell.name=§aAdvanced Energy Cell§r
 tile.crazyae.perfect_energy_cell.name=§9Perfect Energy Cell§r
 
 tile.crazyae.improved_molecular_assembler.name=Improved Molecular Assembler
-tile.crazyae.improved_drive.name=Improved ME Drive
-tile.crazyae.improved_io_port.name=Improved ME IO Port
+tile.crazyae.improved_drive.name=ME Improved Drive
+tile.crazyae.improved_io_port.name=ME Improved IO Port
 tile.crazyae.improved_crank.name=Improved Wooden Crank
 tile.crazyae.crafting_units_combiner.name=ME Crafting Units Combiner
 tile.crazyae.big_crystal_charger.name=ME Improved Crystal Charger
@@ -97,6 +97,8 @@ tile.crazyae.basic_solar_panel.name=§3ME Basic Solar Panel§r
 tile.crazyae.improved_solar_panel.name=§5ME Improved Solar Panel§r
 tile.crazyae.advanced_solar_panel.name=§dME Advanced Solar Panel§r
 tile.crazyae.perfect_solar_panel.name=§cME Perfect Solar Panel§r
+
+tile.crazyae.patterns_interface.name=§8ME Patterns Interface§r
 
 #Resource
 
@@ -113,6 +115,8 @@ gui.crazyae.imp_export_bus.name=Improved ME Export Bus
 
 gui.crazyae.imp_fluid_import_bus.name=Improved ME Fluid Import Bus
 gui.crazyae.imp_fluid_export_bus.name=Improved ME Fluid Export Bus
+
+gui.crazyae.pattern_interface.name=§8ME Patterns Interface§r
 
 
 # GUI's Tooltip
@@ -131,7 +135,8 @@ tooltip.crazyae.passive_generation_night.name=Generation at night:
 tooltip.crazyae.max_solar_capacity.name=Capacity
 
 tooltip.crazyae.auto_pickup.name=Auto pickup is
-tooltip.crazyae.auto_pickup_tip.name=Configuration made in the Cell Workbench will be used as filter
+tooltip.crazyae.auto_pickup_how_to_enable.name=Press SHIFT+RMB to toggle auto pickup.
+tooltip.crazyae.auto_pickup_tip.name=Configuration made in the Cell Workbench will be used as filter.
 
 
 tooltip.crazyae.enabled_lowercase.name=enabled

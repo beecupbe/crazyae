@@ -103,6 +103,29 @@ public abstract class CrazyAEPartSharedBus extends CrazyAEPartUpgradeable implem
 
         return items;
     }
+
+    protected int manaToSend() {
+        int mana = 32;
+        switch (this.getInstalledUpgrades(Upgrades.SPEED)) {
+            case 1 -> mana += 256;
+            case 2 -> mana += 512;
+            case 3 -> mana += 1024;
+            case 4 -> mana += 1536;
+        }
+
+        switch (this.getInstalledUpgrades(dev.beecube31.crazyae2.common.registration.definitions.Upgrades.UpgradeType.STACKS)) {
+            case 1 -> mana += 256 * 256;
+            case 2 -> mana += 256 * 1024;
+            case 3 -> mana += 256 * 4096;
+            case 4 -> mana += 256 * 8192;
+        }
+
+        if (this.getInstalledUpgrades(dev.beecube31.crazyae2.common.registration.definitions.Upgrades.UpgradeType.ADVANCED_SPEED) > 0) {
+            mana += 65536;
+        }
+
+        return mana;
+    }
     /**
      * Checks if the bus can actually do something.
      * <p>

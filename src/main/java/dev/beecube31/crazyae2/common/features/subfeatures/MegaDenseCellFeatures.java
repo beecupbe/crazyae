@@ -3,7 +3,7 @@ package dev.beecube31.crazyae2.common.features.subfeatures;
 import org.jetbrains.annotations.Nullable;
 
 public enum MegaDenseCellFeatures implements ISubFeature {
-	MEGA_DENSE_CPU_STORAGE_UNITS("Add biggest CPU storage counterparts");
+	MEGA_DENSE_CPU_STORAGE_UNITS("Add biggest CPU storage counterparts (64MB-2GB)");
 
 	private final String description;
 	private boolean enabled;

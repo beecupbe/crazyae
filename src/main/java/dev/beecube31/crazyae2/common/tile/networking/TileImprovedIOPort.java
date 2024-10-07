@@ -38,6 +38,7 @@ import appeng.util.inv.InvOperation;
 import appeng.util.inv.WrapperChainedItemHandler;
 import appeng.util.inv.WrapperFilteredItemHandler;
 import appeng.util.inv.filter.AEItemFilters;
+import com.google.common.base.Preconditions;
 import dev.beecube31.crazyae2.common.interfaces.ICrazyAEUpgradeInventory;
 import dev.beecube31.crazyae2.core.CrazyAE;
 import io.netty.buffer.ByteBuf;
@@ -83,7 +84,8 @@ public class TileImprovedIOPort extends AENetworkInvTile implements IUpgradeable
         this.mySrc = new MachineSource(this);
         this.lastRedstoneState = YesNo.UNDECIDED;
 
-        final Block ioPortBlock = CrazyAE.definitions().blocks().ioPortImp().maybeBlock().get();
+        final Block ioPortBlock = CrazyAE.definitions().blocks().ioPortImp().maybeBlock().orElse(null);
+        Preconditions.checkNotNull(ioPortBlock);
         this.upgrades = new BlockUpgradeInventory(ioPortBlock, this, NUMBER_OF_UPGRADE_SLOTS);
     }
 

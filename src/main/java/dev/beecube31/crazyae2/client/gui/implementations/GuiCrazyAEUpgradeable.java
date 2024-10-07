@@ -22,6 +22,7 @@ import dev.beecube31.crazyae2.common.containers.ContainerCrazyAEUpgradeable;
 import dev.beecube31.crazyae2.common.parts.implementations.PartExportBusImp;
 import dev.beecube31.crazyae2.common.parts.implementations.PartImportBusImp;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiText;
+import dev.beecube31.crazyae2.common.tile.networking.TilePatternsInterface;
 import mezz.jei.api.gui.IGhostIngredientHandler.Target;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -56,7 +57,7 @@ public class GuiCrazyAEUpgradeable extends AEBaseGui implements IJEIGhostIngredi
         this.cvb = te;
 
         this.bc = (IUpgradeableHost) te.getTarget();
-        this.xSize = this.hasToolbox() ? 246 : 211;
+        this.xSize = this.hasToolbox() || this.drawPatternsInterfaceOutputSlots() ? 246 : 211;
         this.ySize = 184;
     }
 
@@ -129,6 +130,9 @@ public class GuiCrazyAEUpgradeable extends AEBaseGui implements IJEIGhostIngredi
         if (this.hasToolbox()) {
             this.drawTexturedModalRect(offsetX + 178, offsetY + this.ySize - 90, 178, this.ySize - 90, 68, 68);
         }
+        if (this.drawPatternsInterfaceOutputSlots()) {
+            this.drawTexturedModalRect(offsetX + 178, offsetY + this.ySize - 172, 178, this.ySize - 90, 68, 68);
+        }
     }
 
     public void bindTexture(String file) {
@@ -159,9 +163,14 @@ public class GuiCrazyAEUpgradeable extends AEBaseGui implements IJEIGhostIngredi
         return true;
     }
 
+    protected boolean drawPatternsInterfaceOutputSlots() {
+        return this.bc instanceof TilePatternsInterface;
+    }
+
     protected CrazyAEGuiText getName() {
-        return this.bc instanceof PartImportBusImp ? CrazyAEGuiText.IMP_EXPORT_BUS
-                : this.bc instanceof PartExportBusImp ? CrazyAEGuiText.IMP_IMPORT_BUS
+        return this.bc instanceof PartImportBusImp ? CrazyAEGuiText.IMP_IMPORT_BUS
+                : this.bc instanceof PartExportBusImp ? CrazyAEGuiText.IMP_EXPORT_BUS
+                : this.bc instanceof TilePatternsInterface ? CrazyAEGuiText.PATTERN_INTERFACE
                 : CrazyAEGuiText.NOT_DEFINED;
     }
 

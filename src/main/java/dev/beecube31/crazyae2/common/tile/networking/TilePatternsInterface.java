@@ -1,0 +1,338 @@
+package dev.beecube31.crazyae2.common.tile.networking;
+
+import appeng.api.AEApi;
+import appeng.api.config.Upgrades;
+import appeng.api.definitions.IMaterials;
+import appeng.api.networking.IGridNode;
+import appeng.api.networking.crafting.ICraftingPatternDetails;
+import appeng.api.networking.crafting.ICraftingProviderHelper;
+import appeng.api.networking.events.MENetworkChannelsChanged;
+import appeng.api.networking.events.MENetworkEventSubscribe;
+import appeng.api.networking.events.MENetworkPowerStatusChange;
+import appeng.api.networking.ticking.IGridTickable;
+import appeng.api.networking.ticking.TickRateModulation;
+import appeng.api.networking.ticking.TickingRequest;
+import appeng.api.util.AECableType;
+import appeng.api.util.AEPartLocation;
+import appeng.api.util.DimensionalCoord;
+import appeng.api.util.IConfigManager;
+import appeng.core.localization.PlayerMessages;
+import appeng.items.misc.ItemEncodedPattern;
+import appeng.tile.grid.AENetworkInvTile;
+import appeng.tile.inventory.AppEngInternalInventory;
+import appeng.util.Platform;
+import appeng.util.SettingsFrom;
+import appeng.util.inv.IInventoryDestination;
+import appeng.util.inv.InvOperation;
+import dev.beecube31.crazyae2.common.duality.PatternsInterfaceDuality;
+import dev.beecube31.crazyae2.common.interfaces.IChangeablePriorityHost;
+import dev.beecube31.crazyae2.common.interfaces.ICrazyAEPatternsInterface;
+import dev.beecube31.crazyae2.common.sync.CrazyAEGuiBridge;
+import dev.beecube31.crazyae2.core.CrazyAE;
+import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.wrapper.PlayerMainInvWrapper;
+
+import javax.annotation.Nullable;
+import java.io.IOException;
+import java.util.EnumSet;
+import java.util.List;
+
+public class TilePatternsInterface extends AENetworkInvTile implements IGridTickable, IInventoryDestination, ICrazyAEPatternsInterface, IChangeablePriorityHost {
+
+    private final PatternsInterfaceDuality duality = new PatternsInterfaceDuality(this.getProxy(), this);
+
+
+    // Indicates that this interface has no specific direction set
+    private boolean omniDirectional = true;
+
+    @MENetworkEventSubscribe
+    public void stateChange(final MENetworkChannelsChanged c) {
+        this.duality.notifyNeighbors();
+    }
+
+    @MENetworkEventSubscribe
+    public void stateChange(final MENetworkPowerStatusChange c) {
+        this.duality.notifyNeighbors();
+    }
+
+    public void setSide(final EnumFacing facing) {
+        if (Platform.isClient()) {
+            return;
+        }
+
+        EnumFacing newForward = facing;
+
+        if (!this.omniDirectional && this.getForward() == facing.getOpposite()) {
+            newForward = facing;
+        } else if (!this.omniDirectional && (this.getForward() == facing || this.getForward() == facing.getOpposite())) {
+            this.omniDirectional = true;
+        } else if (this.omniDirectional) {
+            newForward = facing.getOpposite();
+            this.omniDirectional = false;
+        } else {
+            newForward = Platform.rotateAround(this.getForward(), facing);
+        }
+
+        if (this.omniDirectional) {
+            this.setOrientation(EnumFacing.NORTH, EnumFacing.UP);
+        } else {
+            EnumFacing newUp = EnumFacing.UP;
+            if (newForward == EnumFacing.UP || newForward == EnumFacing.DOWN) {
+                newUp = EnumFacing.NORTH;
+            }
+            this.setOrientation(newForward, newUp);
+        }
+
+        this.configureNodeSides();
+        this.markForUpdate();
+        this.saveChanges();
+    }
+
+    private void configureNodeSides() {
+        if (this.omniDirectional) {
+            this.getProxy().setValidSides(EnumSet.allOf(EnumFacing.class));
+        } else {
+            this.getProxy().setValidSides(EnumSet.complementOf(EnumSet.of(this.getForward())));
+        }
+    }
+
+    @Override
+    public void getDrops(final World w, final BlockPos pos, final List<ItemStack> drops) {
+        this.duality.addDrops(drops);
+    }
+
+    @Override
+    public void gridChanged() {
+        this.duality.gridChanged();
+    }
+
+    @Override
+    public void onReady() {
+        this.configureNodeSides();
+
+        super.onReady();
+        this.duality.initialize();
+        this.getProxy().setIdlePowerUsage(Math.pow(4, (this.getInstalledUpgrades(Upgrades.PATTERN_EXPANSION))));
+    }
+
+    @Override
+    public NBTTagCompound writeToNBT(final NBTTagCompound data) {
+        super.writeToNBT(data);
+        data.setBoolean("omniDirectional", this.omniDirectional);
+        this.duality.writeToNBT(data);
+        return data;
+    }
+
+    @Override
+    public void readFromNBT(final NBTTagCompound data) {
+        super.readFromNBT(data);
+        this.omniDirectional = data.getBoolean("omniDirectional");
+
+        this.duality.readFromNBT(data);
+    }
+
+    @Override
+    protected boolean readFromStream(final ByteBuf data) throws IOException {
+        final boolean c = super.readFromStream(data);
+        boolean oldOmniDirectional = this.omniDirectional;
+        this.omniDirectional = data.readBoolean();
+        return oldOmniDirectional != this.omniDirectional || c;
+    }
+
+    @Override
+    protected void writeToStream(final ByteBuf data) throws IOException {
+        super.writeToStream(data);
+        data.writeBoolean(this.omniDirectional);
+    }
+
+    @Override
+    public AECableType getCableConnectionType(final AEPartLocation dir) {
+        return this.duality.getCableConnectionType(dir);
+    }
+
+    @Override
+    public DimensionalCoord getLocation() {
+        return this.duality.getLocation();
+    }
+
+    @Override
+    public boolean canInsert(final ItemStack stack) {
+        return this.duality.canInsert(stack);
+    }
+
+    @Override
+    public IItemHandler getInventoryByName(final String name) {
+        return this.duality.getInventoryByName(name);
+    }
+
+    @Override
+    public TickingRequest getTickingRequest(final IGridNode node) {
+        return this.duality.getTickingRequest(node);
+    }
+
+    @Override
+    public TickRateModulation tickingRequest(final IGridNode node, final int ticksSinceLastCall) {
+        return this.duality.tickingRequest(node, ticksSinceLastCall);
+    }
+
+    @Override
+    public IItemHandler getInternalInventory() {
+        return this.duality.getInternalInventory();
+    }
+
+    @Override
+    public void onChangeInventory(final IItemHandler inv, final int slot, final InvOperation mc, final ItemStack removed, final ItemStack added) {
+        this.duality.onChangeInventory(inv, slot, mc, removed, added);
+    }
+
+    @Override
+    public PatternsInterfaceDuality getInterfaceDuality() {
+        return this.duality;
+    }
+
+    @Override
+    public EnumSet<EnumFacing> getTargets() {
+        if (this.omniDirectional) {
+            return EnumSet.allOf(EnumFacing.class);
+        }
+        return EnumSet.of(this.getForward());
+    }
+
+    @Override
+    public TileEntity getTileEntity() {
+        return this;
+    }
+
+    @Override
+    public IConfigManager getConfigManager() {
+        return this.duality.getConfigManager();
+    }
+
+    @Override
+    public boolean pushPattern(final ICraftingPatternDetails patternDetails, final InventoryCrafting table) {
+        return this.duality.pushPattern(patternDetails, table);
+    }
+
+    @Override
+    public boolean isBusy() {
+        return this.duality.isBusy();
+    }
+
+    @Override
+    public void provideCrafting(final ICraftingProviderHelper craftingTracker) {
+        this.duality.provideCrafting(craftingTracker);
+    }
+
+    @Override
+    public int getInstalledUpgrades(final Upgrades u) {
+        return this.duality.getInstalledUpgrades(u);
+    }
+
+    @Override
+    public int getPriority() {
+        return this.duality.getPriority();
+    }
+
+    @Override
+    public void setPriority(final int newValue) {
+        this.duality.setPriority(newValue);
+    }
+
+    /**
+     * @return True if this interface is omni-directional.
+     */
+    public boolean isOmniDirectional() {
+        return this.omniDirectional;
+    }
+
+    @Override
+    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+        return this.duality.hasCapability(capability, facing) || super.hasCapability(capability, facing);
+    }
+
+    @Override
+    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+        T result = this.duality.getCapability(capability, facing);
+        if (result != null) {
+            return result;
+        }
+        return super.getCapability(capability, facing);
+    }
+
+    @Override
+    public ItemStack getItemStackRepresentation() {
+        return CrazyAE.definitions().blocks().patternsInterface().maybeStack(1).orElse(ItemStack.EMPTY);
+    }
+
+    @Override
+    public CrazyAEGuiBridge getGuiBridge() {
+        return CrazyAEGuiBridge.PATTERN_INTERFACE;
+    }
+
+    @Override
+    public NBTTagCompound downloadSettings(SettingsFrom from) {
+        NBTTagCompound output = super.downloadSettings(from);
+        if (from == SettingsFrom.MEMORY_CARD) {
+            final IItemHandler inv = this.getInventoryByName("patterns");
+            if (inv instanceof AppEngInternalInventory) {
+                ((AppEngInternalInventory) inv).writeToNBT(output, "patterns");
+            }
+        }
+        return output;
+    }
+
+    @Override
+    public void uploadSettings(SettingsFrom from, NBTTagCompound compound, EntityPlayer player) {
+        super.uploadSettings(from, compound, player);
+        final IItemHandler inv = this.getInventoryByName("patterns");
+        if (inv instanceof final AppEngInternalInventory target) {
+            AppEngInternalInventory tmp = new AppEngInternalInventory(null, target.getSlots());
+            tmp.readFromNBT(compound, "patterns");
+            PlayerMainInvWrapper playerInv = new PlayerMainInvWrapper(player.inventory);
+            final IMaterials materials = AEApi.instance().definitions().materials();
+            int missingPatternsToEncode = 0;
+            int amountPatternSlots = 72;
+
+            for (int i = 0; i < inv.getSlots(); i++) {
+                if (target.getStackInSlot(i).getItem() instanceof ItemEncodedPattern) {
+                    ItemStack blank = materials.blankPattern().maybeStack(target.getStackInSlot(i).getCount()).get();
+                    if (!player.addItemStackToInventory(blank)) {
+                        player.dropItem(blank, true);
+                    }
+                    target.setStackInSlot(i, ItemStack.EMPTY);
+                }
+            }
+
+            for (int x = 0; x < amountPatternSlots; x++) {
+                if (!tmp.getStackInSlot(x).isEmpty()) {
+                    boolean found = false;
+                    for (int i = 0; i < playerInv.getSlots(); i++) {
+                        if (materials.blankPattern().isSameAs(playerInv.getStackInSlot(i))) {
+                            target.setStackInSlot(x, tmp.getStackInSlot(x));
+                            playerInv.getStackInSlot(i).shrink(1);
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        missingPatternsToEncode++;
+                    }
+                }
+            }
+
+            if (Platform.isServer() && missingPatternsToEncode > 0) {
+                player.sendMessage(PlayerMessages.MissingPatternsToEncode.get());
+            }
+        }
+    }
+}
