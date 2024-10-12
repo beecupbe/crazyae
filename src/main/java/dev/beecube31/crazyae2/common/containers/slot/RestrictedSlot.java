@@ -1,6 +1,7 @@
 package dev.beecube31.crazyae2.common.containers.slot;
 
 import appeng.api.AEApi;
+import appeng.api.implementations.items.IStorageComponent;
 import appeng.api.implementations.items.IUpgradeModule;
 import appeng.block.crafting.ItemCraftingStorage;
 import appeng.container.slot.AppEngSlot;
@@ -10,6 +11,7 @@ import dev.beecube31.crazyae2.core.CrazyAE;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 
@@ -25,6 +27,11 @@ public class RestrictedSlot extends AppEngSlot {
         this.which = valid;
         this.setIIcon(valid.IIcon);
         this.p = p;
+    }
+
+    public Slot setStackLimit(int i) {
+        this.stackLimit = i;
+        return this;
     }
 
     @Override
@@ -78,6 +85,9 @@ public class RestrictedSlot extends AppEngSlot {
             case UPGRADES ->
                     i.getItem() instanceof IUpgradeModule && ((IUpgradeModule) i.getItem()).getType(i) != null
                     || i.getItem() instanceof CrazyAEUpgradeModule;
+
+            case STORAGE_COMPONENT ->
+                i.getItem() instanceof IStorageComponent && ((IStorageComponent)i.getItem()).isStorageComponent(i);
         };
 
     }
@@ -97,6 +107,9 @@ public class RestrictedSlot extends AppEngSlot {
     }
 
     public enum PlacableItemType {
+        STORAGE_COMPONENT(63),
+
+
         CRAFTING_ACCELERATORS(5 * 16 + 14),
         CRAFTING_STORAGES(6 * 16 + 14),
         CRAFTING_UNITS(7 * 16 + 14),

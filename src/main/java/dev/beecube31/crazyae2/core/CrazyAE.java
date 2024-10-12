@@ -1,6 +1,9 @@
 package dev.beecube31.crazyae2.core;
 
+import appeng.api.features.IRegistryContainer;
+import appeng.api.networking.IGridCacheRegistry;
 import appeng.container.implementations.ContainerMEPortableCell;
+import appeng.core.Api;
 import dev.beecube31.crazyae2.Tags;
 import dev.beecube31.crazyae2.common.features.Features;
 import dev.beecube31.crazyae2.common.items.cells.ImprovedPortableCell;
@@ -8,6 +11,8 @@ import dev.beecube31.crazyae2.common.networking.CrazyAENetworkHandler;
 import dev.beecube31.crazyae2.common.networking.network.NetworkHandler;
 import dev.beecube31.crazyae2.common.registration.Registration;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiHandler;
+import dev.beecube31.crazyae2.common.util.GridChannelBoostersCache;
+import dev.beecube31.crazyae2.common.util.IGridChannelBoostersCache;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
@@ -92,6 +97,13 @@ public class CrazyAE {
 
 		if (!CrazyAEConfig.disableUpdatesCheck) {
 			MinecraftForge.EVENT_BUS.register(new UpdateChecker());
+		}
+
+		if (Features.QUANTUM_CHANNELS_MULTIPLIER.isEnabled()) {
+			final Api api = Api.INSTANCE;
+			final IRegistryContainer registries = api.registries();
+			final IGridCacheRegistry gcr = registries.gridCache();
+			gcr.registerGridCache(IGridChannelBoostersCache.class, GridChannelBoostersCache.class);
 		}
 	}
 

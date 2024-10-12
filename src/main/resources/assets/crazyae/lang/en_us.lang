@@ -100,6 +100,10 @@ tile.crazyae.perfect_solar_panel.name=§cME Perfect Solar Panel§r
 
 tile.crazyae.patterns_interface.name=§8ME Patterns Interface§r
 
+tile.crazyae.improved_condenser.name=§6Improved Condenser§r
+
+tile.crazyae.quantum_channels_multiplier.name=Quantum Channels Multiplier
+
 #Resource
 
 tile.crazyae.fluixilized_block.name=§5Fluixilized Block§r
@@ -133,6 +137,10 @@ tooltip.crazyae.shift_for_details.name=Hold Shift for details
 tooltip.crazyae.passive_generation_day.name=Generation at day:
 tooltip.crazyae.passive_generation_night.name=Generation at night:
 tooltip.crazyae.max_solar_capacity.name=Capacity
+
+tooltip.crazyae.qcm_desc.name=Allows you to increase cable capacity. Example:
+tooltip.crazyae.qcm_desc1.name=Each Quantum Multiplier will give %s channels for a normal cables
+tooltip.crazyae.qcm_desc2.name=and %s channels for a dense cables, at a cost of %s AE/t.
 
 tooltip.crazyae.auto_pickup.name=Auto pickup is
 tooltip.crazyae.auto_pickup_how_to_enable.name=Press SHIFT+RMB to toggle auto pickup.

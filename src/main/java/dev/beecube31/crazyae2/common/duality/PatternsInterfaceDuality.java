@@ -130,6 +130,13 @@ public class PatternsInterfaceDuality implements IGridTickable, IStorageMonitora
 
             final boolean now = this.hasWorkToDo();
 
+            for (int i = 0; i < this.storage.getSlots(); i++) {
+                if (!this.storage.getStackInSlot(i).isEmpty()) {
+                    this.pushOutStoredItems();
+                    break;
+                }
+            }
+
             if (had != now) {
                 try {
                     if (now) {
@@ -312,11 +319,10 @@ public class PatternsInterfaceDuality implements IGridTickable, IStorageMonitora
 
     private boolean hasWorkToDo() {
 
-        this.pushOutStoredItems();
-
         if (hasItemsToSend()) {
             return true;
         }
+
 
         return hasItemsToSendFacing();
     }
@@ -430,13 +436,12 @@ public class PatternsInterfaceDuality implements IGridTickable, IStorageMonitora
             }
         }
 
-        this.pushOutStoredItems();
-
-        return this.hasWorkToDo() ? TickRateModulation.FASTER : TickRateModulation.SLOWER;
+        return this.hasWorkToDo() || this.pushOutStoredItems() ? TickRateModulation.URGENT : TickRateModulation.SLOWER;
     }
 
-    private void pushOutStoredItems() {
+    private boolean pushOutStoredItems() {
         IMEMonitor<IAEItemStack> storage = this.iHost.getActionableNode().getGrid().<IStorageGrid>getCache(IStorageGrid.class).getInventory(AEApi.instance().storage().getStorageChannel(IItemStorageChannel.class));
+        boolean hasChanged = false;
         for (int i = 0; i < this.storage.getSlots(); i++) {
             ItemStack item = this.storage.getStackInSlot(i);
             if (!item.isEmpty()) {
@@ -447,9 +452,12 @@ public class PatternsInterfaceDuality implements IGridTickable, IStorageMonitora
                 if (overflow == null) {
                     storage.injectItems(iaeItemStack, Actionable.MODULATE, this.actionSource);
                     this.storage.setStackInSlot(i, ItemStack.EMPTY);
+                    hasChanged = true;
                 }
             }
         }
+
+        return hasChanged;
 
     }
 

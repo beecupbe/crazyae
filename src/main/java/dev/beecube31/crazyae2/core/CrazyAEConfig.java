@@ -24,6 +24,21 @@ public final class CrazyAEConfig {
     @Config.RangeDouble(min = 0)
     public static double perEnergyCellCap = 262144 * 3072;
 
+    @Config.Comment("Quantum Channels Multiplier will give extra channels by this value. (For small cables this value will be divided by 4)")
+    @Config.Name("QCMBoostAmt")
+    @Config.RangeInt(min = 1)
+    public static int QCMBoostAmt = 8;
+
+    @Config.Comment("Amount of types for Items Cells")
+    @Config.Name("cellItemsTypesAmt")
+    @Config.RangeInt(min = 1)
+    public static int cellItemsTypesAmt = 63;
+
+    @Config.Comment("Amount of types for Fluid Cells")
+    @Config.Name("cellFluidTypesAmt")
+    @Config.RangeInt(min = 1)
+    public static int cellFluidTypesAmt = 15;
+
 
     //SolarPanels
     @Config.RangeDouble(min = 0.0D)

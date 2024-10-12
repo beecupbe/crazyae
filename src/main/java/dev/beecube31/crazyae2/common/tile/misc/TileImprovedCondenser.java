@@ -105,7 +105,14 @@ public class TileImprovedCondenser extends AEBaseInvTile implements IConfigManag
     }
 
     private boolean canAddOutput(final ItemStack output) {
-        return this.outputSlot.insertItem(0, output, true).isEmpty();
+        boolean can = false;
+        for (int i = 0; i < this.outputSlot.getSlots(); i++) {
+            if (this.outputSlot.getStackInSlot(i).getCount() < 64) {
+                return true;
+            }
+        }
+
+        return can;
     }
 
     /**
@@ -114,7 +121,12 @@ public class TileImprovedCondenser extends AEBaseInvTile implements IConfigManag
      * @param output to be added output
      */
     private void addOutput(final ItemStack output) {
-        this.outputSlot.insertItem(0, output, false);
+        for (int i = 0; i < this.outputSlot.getSlots(); i++) {
+            if (this.outputSlot.getStackInSlot(i).getCount() < 64) {
+                this.outputSlot.insertItem(i, output, false);
+                return;
+            }
+        }
     }
 
     IItemHandler getOutputSlot() {
@@ -124,17 +136,11 @@ public class TileImprovedCondenser extends AEBaseInvTile implements IConfigManag
     private ItemStack getOutput() {
         final IMaterials materials = AEApi.instance().definitions().materials();
 
-        switch ((CondenserOutput) this.cm.getSetting(Settings.CONDENSER_OUTPUT)) {
-            case MATTER_BALLS:
-                return materials.matterBall().maybeStack(1).orElse(ItemStack.EMPTY);
-
-            case SINGULARITY:
-                return materials.singularity().maybeStack(1).orElse(ItemStack.EMPTY);
-
-            case TRASH:
-            default:
-                return ItemStack.EMPTY;
-        }
+        return switch ((CondenserOutput) this.cm.getSetting(Settings.CONDENSER_OUTPUT)) {
+            case MATTER_BALLS -> materials.matterBall().maybeStack(1).orElse(ItemStack.EMPTY);
+            case SINGULARITY -> materials.singularity().maybeStack(1).orElse(ItemStack.EMPTY);
+            default -> ItemStack.EMPTY;
+        };
     }
 
     public double getRequiredPower() {
@@ -223,9 +229,6 @@ public class TileImprovedCondenser extends AEBaseInvTile implements IConfigManag
 
         @Override
         public ItemStack insertItem(int slot, ItemStack stack, boolean simulate) {
-            if (slot != 0) {
-                return stack;
-            }
             if (!simulate && !stack.isEmpty()) {
                 TileImprovedCondenser.this.addPower(stack.getCount());
             }

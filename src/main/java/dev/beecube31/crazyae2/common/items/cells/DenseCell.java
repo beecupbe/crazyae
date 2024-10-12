@@ -17,6 +17,7 @@ import appeng.items.contents.CellUpgrades;
 import appeng.util.InventoryAdaptor;
 import appeng.util.Platform;
 import dev.beecube31.crazyae2.common.registration.definitions.Materials;
+import dev.beecube31.crazyae2.core.CrazyAEConfig;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -71,7 +72,7 @@ public abstract class DenseCell<T extends IAEStack<T>> extends AEBaseItem implem
 	}
 
 	public int getTotalTypes(@NotNull ItemStack cellItem) {
-		return 63;
+		return CrazyAEConfig.cellItemsTypesAmt;
 	}
 
 	public boolean isBlackListed(@NotNull ItemStack cellItem, @NotNull T requestedAddition) {

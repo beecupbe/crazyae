@@ -37,6 +37,8 @@ public class UpdateChecker {
         if (!this.playerNotified && this.thread.isComplete()) {
             this.playerNotified = true;
             MinecraftForge.EVENT_BUS.unregister(this);
+            CrazyAE.logger().info(this.thread.getVersion());
+            CrazyAE.logger().info(ModVersion.get());
             if (this.thread.getVersion().equals(ModVersion.get())) {
                 CrazyAE.logger().info("[Update Checker] - Mod is up to date");
                 return;

@@ -8,6 +8,7 @@ import java.util.EnumSet;
 
 public enum Features implements IFeature {
 	STUB,
+
 	UPGRADES(EnumSet.allOf(UpgradeFeatures.class), "upgrades"),
 	DENSE_CELLS(EnumSet.allOf(DenseCellFeatures.class)),
 	MEGA_DENSE_CELLS(EnumSet.allOf(MegaDenseCellFeatures.class)),
@@ -19,6 +20,8 @@ public enum Features implements IFeature {
 	MANA_BUSES,
 	IMPROVED_ENERGY_CELLS,
 	SOLAR_PANELS,
+	QUANTUM_CHANNELS_MULTIPLIER("qcm"),
+	PATTERNS_INTERFACE,
 
 
 	DENSE_CPU_COPROCESSORS("dense.coprocessor"),

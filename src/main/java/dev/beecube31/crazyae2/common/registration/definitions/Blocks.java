@@ -8,6 +8,7 @@ import appeng.core.features.AEFeature;
 import dev.beecube31.crazyae2.Tags;
 import dev.beecube31.crazyae2.client.rendering.BlockBigEnergyCellRendering;
 import dev.beecube31.crazyae2.client.rendering.ImprovedDriveRendering;
+import dev.beecube31.crazyae2.client.rendering.QCMRendering;
 import dev.beecube31.crazyae2.common.blocks.BlockDenseCraftingUnit;
 import dev.beecube31.crazyae2.common.blocks.crafting.BlockImprovedMAC;
 import dev.beecube31.crazyae2.common.blocks.energycells.BlockAdvancedEnergyCell;
@@ -16,10 +17,8 @@ import dev.beecube31.crazyae2.common.blocks.energycells.BlockPerfectEnergyCell;
 import dev.beecube31.crazyae2.common.blocks.grindstone.BlockImprovedCrank;
 import dev.beecube31.crazyae2.client.rendering.ImprovedCrankRendering;
 import dev.beecube31.crazyae2.common.blocks.materials.BlockFluxilized;
-import dev.beecube31.crazyae2.common.blocks.networking.BlockBigCrystalCharger;
-import dev.beecube31.crazyae2.common.blocks.networking.BlockCraftingUnitsCombiner;
-import dev.beecube31.crazyae2.common.blocks.networking.BlockIOPortImp;
-import dev.beecube31.crazyae2.common.blocks.networking.BlockInterfacePatterns;
+import dev.beecube31.crazyae2.common.blocks.misc.BlockImprovedCondenser;
+import dev.beecube31.crazyae2.common.blocks.networking.*;
 import dev.beecube31.crazyae2.common.blocks.solars.BlockPanelAdvanced;
 import dev.beecube31.crazyae2.common.blocks.solars.BlockPanelBasic;
 import dev.beecube31.crazyae2.common.blocks.solars.BlockPanelImproved;
@@ -37,10 +36,8 @@ import dev.beecube31.crazyae2.common.tile.energycells.TileAdvancedEnergyCell;
 import dev.beecube31.crazyae2.common.tile.energycells.TileImprovedEnergyCell;
 import dev.beecube31.crazyae2.common.tile.energycells.TilePerfectEnergyCell;
 import dev.beecube31.crazyae2.common.tile.grindstone.TileImprovedCrank;
-import dev.beecube31.crazyae2.common.tile.networking.TileBigCrystalCharger;
-import dev.beecube31.crazyae2.common.tile.networking.TileCraftingUnitsCombiner;
-import dev.beecube31.crazyae2.common.tile.networking.TileImprovedIOPort;
-import dev.beecube31.crazyae2.common.tile.networking.TilePatternsInterface;
+import dev.beecube31.crazyae2.common.tile.misc.TileImprovedCondenser;
+import dev.beecube31.crazyae2.common.tile.networking.*;
 import dev.beecube31.crazyae2.common.tile.solars.TileEnergyPanelAdvanced;
 import dev.beecube31.crazyae2.common.tile.solars.TileEnergyPanelBasic;
 import dev.beecube31.crazyae2.common.tile.solars.TileEnergyPanelImproved;
@@ -85,11 +82,12 @@ public class Blocks {
 	private final ITileDefinition energyPanelImproved;
 	private final ITileDefinition energyPanelAdvanced;
 
-//	private final ITileDefinition improvedCondenser;
+	private final ITileDefinition improvedCondenser;
 
 	private final IBlockDefinition fluixilizedBlock;
 
 	private final ITileDefinition patternsInterface;
+	private final ITileDefinition quantumChannelMultiplier;
 
 	public Blocks(Registry registry) {
 		this.craftingStorage256k = registry.block("crafting_storage_256k", () -> new BlockDenseCraftingUnit(BlockDenseCraftingUnit.DenseCraftingUnitType.STORAGE_256K))
@@ -287,14 +285,20 @@ public class Blocks {
 				.build();
 
 		this.patternsInterface = registry.block("patterns_interface", BlockInterfacePatterns::new)
-				.features(Features.STUB)
+				.features(Features.PATTERNS_INTERFACE)
 				.tileEntity(new TileEntityDefinition(TilePatternsInterface.class))
 				.build();
 
-//		this.improvedCondenser = registry.block("improved_condenser", BlockImprovedCondenser::new)
-//				.features(Features.STUB)
-//				.tileEntity(new TileEntityDefinition(TileImprovedCondenser.class))
-//				.build();
+		this.quantumChannelMultiplier = registry.block("quantum_channels_multiplier", BlockQuantumChannelsMultiplier::new)
+				.features(Features.QUANTUM_CHANNELS_MULTIPLIER)
+				.tileEntity(new TileEntityDefinition(TileQuantumChannelsBooster.class))
+				.rendering(new QCMRendering())
+				.build();
+
+		this.improvedCondenser = registry.block("improved_condenser", BlockImprovedCondenser::new)
+				.features(Features.STUB)
+				.tileEntity(new TileEntityDefinition(TileImprovedCondenser.class))
+				.build();
 
 		this.fluixilizedBlock = registry.block("fluixilized_block", BlockFluxilized::new)
 				.aeFeatures(AEFeature.FLUIX)

@@ -1,0 +1,35 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:improved_condenser"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "appliedenergistics2:condenser"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "item": "crazyae:improved_condenser"
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "aba",
+    "bab",
+    "aba"
+  ],
+  "key": {
+    "b": {
+      "item": "crazyae:material",
+      "data": 16
+    },
+    "a": {
+      "item": "appliedenergistics2:condenser"
+    }
+  }
+}

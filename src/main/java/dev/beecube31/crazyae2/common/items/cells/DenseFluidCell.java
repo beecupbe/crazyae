@@ -4,6 +4,7 @@ import appeng.api.storage.channels.IFluidStorageChannel;
 import appeng.api.storage.data.IAEFluidStack;
 import appeng.core.Api;
 import dev.beecube31.crazyae2.common.registration.definitions.Materials;
+import dev.beecube31.crazyae2.core.CrazyAEConfig;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
@@ -29,6 +30,6 @@ public class DenseFluidCell extends DenseCell<IAEFluidStack> {
 
 	@Override
 	public int getTotalTypes(@NotNull ItemStack cellItem) {
-		return 15;
+		return CrazyAEConfig.cellFluidTypesAmt;
 	}
 }

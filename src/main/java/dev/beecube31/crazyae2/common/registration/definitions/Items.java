@@ -242,6 +242,18 @@ public class Items implements Definitions<IItemDefinition> {
 		return this.storageCell2gb;
 	}
 
+	public IItemDefinition improvedPortableCell() {
+		return this.improvedPortableCell;
+	}
+
+	public IItemDefinition advancedPortableCell() {
+		return this.advancedPortableCell;
+	}
+
+	public IItemDefinition perfectPortableCell() {
+		return this.perfectPortableCell;
+	}
+
 	public IItemDefinition fluidStorageCell256K() {
 		return this.fluidCell256k;
 	}

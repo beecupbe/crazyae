@@ -3,13 +3,9 @@ package dev.beecube31.crazyae2.client.gui.implementations;
 import appeng.api.config.Settings;
 import appeng.client.gui.AEBaseGui;
 import appeng.client.gui.widgets.GuiImgButton;
-import appeng.client.gui.widgets.GuiProgressBar;
-import appeng.client.gui.widgets.GuiProgressBar.Direction;
-import appeng.container.implementations.ContainerCondenser;
 import appeng.core.localization.GuiText;
 import appeng.core.sync.network.NetworkHandler;
 import appeng.core.sync.packets.PacketConfigButton;
-import appeng.tile.misc.TileCondenser;
 import dev.beecube31.crazyae2.client.gui.widgets.ProgressBar;
 import dev.beecube31.crazyae2.common.containers.ContainerImprovedCondenser;
 import dev.beecube31.crazyae2.common.tile.misc.TileImprovedCondenser;
@@ -47,10 +43,10 @@ public class GuiImprovedCondenser extends AEBaseGui {
     public void initGui() {
         super.initGui();
 
-        this.pb = new ProgressBar(this.cvc, "guis/condenser.png", 120 + this.guiLeft, 25 + this.guiTop, 178, 25, 6, 18, ProgressBar.Direction.VERTICAL, GuiText.StoredEnergy
+        this.pb = new ProgressBar(this.cvc, "guis/improved_condenser.png", 152 + this.guiLeft, 12 + this.guiTop, 177, 25, 6, 18, ProgressBar.Direction.VERTICAL, GuiText.StoredEnergy
                 .getLocal());
 
-        this.mode = new GuiImgButton(128 + this.guiLeft, 52 + this.guiTop, Settings.CONDENSER_OUTPUT, this.cvc.getOutput());
+        this.mode = new GuiImgButton(114 + this.guiLeft, 13 + this.guiTop, Settings.CONDENSER_OUTPUT, this.cvc.getOutput());
 
         this.buttonList.add(this.pb);
         this.buttonList.add(this.mode);
@@ -58,7 +54,7 @@ public class GuiImprovedCondenser extends AEBaseGui {
 
     @Override
     public void drawFG(final int offsetX, final int offsetY, final int mouseX, final int mouseY) {
-        this.fontRenderer.drawString(this.getGuiDisplayName(GuiText.Condenser.getLocal()), 8, 6, 4210752);
+        this.fontRenderer.drawString(this.getGuiDisplayName(GuiText.Condenser.getLocal()), 8, 4, 4210752);
         this.fontRenderer.drawString(GuiText.inventory.getLocal(), 8, this.ySize - 96 + 3, 4210752);
 
         this.mode.set(this.cvc.getOutput());
@@ -67,7 +63,7 @@ public class GuiImprovedCondenser extends AEBaseGui {
 
     @Override
     public void drawBG(final int offsetX, final int offsetY, final int mouseX, final int mouseY) {
-        this.bindTexture("guis/condenser.png");
+        this.bindTexture("guis/improved_condenser.png");
 
         this.drawTexturedModalRect(offsetX, offsetY, 0, 0, this.xSize, this.ySize);
     }

@@ -22,7 +22,12 @@ public enum CrazyAETooltip {
     MAX_SOLAR_CAPACITY,
     USE_NET_TOOL_TO_CONTROL_SOLARS,
 
-    QUANTUM_WIRELESS_BOOSTER_DESC;
+    QUANTUM_WIRELESS_BOOSTER_DESC,
+
+    QCM_DESC,
+    QCM_DESC1,
+    QCM_DESC2;
+
 
     private final String root;
 

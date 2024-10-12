@@ -1,0 +1,41 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "crazyae:quantum_channels_multiplier_chassis",
+        "y": 180
+    },
+    "variants": {
+        "state": {
+            "off": {
+                "submodel": {
+                    "state": {
+                        "model": "crazyae:quantum_channels_multiplier_status_off"
+                    },
+                    "torch": {
+                        "model": "crazyae:quantum_channels_multiplier_off"
+                    }
+                }
+            },
+            "on": {
+                "submodel": {
+                    "state": {
+                        "model": "crazyae:quantum_channels_multiplier_status_on"
+                    },
+                    "torch": {
+                        "model": "crazyae:quantum_channels_multiplier_off"
+                    }
+                }
+            },
+            "has_channel": {
+                "submodel": {
+                    "state": {
+                        "model": "crazyae:quantum_channels_multiplier_status_has_channel"
+                    },
+                    "torch": {
+                        "model": "crazyae:quantum_channels_multiplier_on"
+                    }
+                }
+            }
+        }
+    }
+}

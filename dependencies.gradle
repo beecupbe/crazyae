@@ -32,4 +32,6 @@ dependencies {
     implementation rfg.deobf("curse.maven:nae2-884359:5380800")
     implementation rfg.deobf("curse.maven:botania-225643:3330934")
     implementation fileTree('lib')
+    implementation rfg.deobf('curse.maven:hwyla-253449:2568751')
+    implementation rfg.deobf('mcjty.theoneprobe:TheOneProbe-1.12:1.12-1.4.28-17')
 }

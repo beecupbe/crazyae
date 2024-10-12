@@ -1,21 +1,3 @@
-/*
- * This file is part of Applied Energistics 2.
- * Copyright (c) 2013 - 2014, AlgorithmX2, All rights reserved.
- *
- * Applied Energistics 2 is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Applied Energistics 2 is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Applied Energistics 2.  If not, see <http://www.gnu.org/licenses/lgpl>.
- */
-
 package dev.beecube31.crazyae2.common.tile.misc;
 
 
@@ -32,7 +14,6 @@ import appeng.api.storage.data.IAEItemStack;
 import appeng.api.storage.data.IItemList;
 import appeng.me.helpers.BaseActionSource;
 import appeng.me.storage.ITickingMonitor;
-import appeng.tile.misc.TileCondenser;
 import appeng.util.item.AEItemStack;
 import appeng.util.item.ItemList;
 import net.minecraft.item.ItemStack;
@@ -65,19 +46,32 @@ class CondenserItemInventory implements IMEMonitor<IAEItemStack>, ITickingMonito
     @Override
     public IAEItemStack extractItems(final IAEItemStack request, final Actionable mode, final IActionSource src) {
         AEItemStack ret = null;
-        ItemStack slotItem = this.target.getOutputSlot().getStackInSlot(0);
-        if (!slotItem.isEmpty() && request.isSameType(slotItem)) {
-            int count = (int) Math.min(request.getStackSize(), Integer.MAX_VALUE);
-            ret = AEItemStack.fromItemStack(this.target.getOutputSlot().extractItem(0, count, mode == Actionable.SIMULATE));
+
+        for (int i = 0; i < 4; i++) {
+            ItemStack slotItem = this.target.getOutputSlot().getStackInSlot(i);
+            if (!slotItem.isEmpty() && request.isSameType(slotItem)) {
+                int count = (int) Math.min(request.getStackSize(), Integer.MAX_VALUE);
+                ret = AEItemStack.fromItemStack(this.target.getOutputSlot().extractItem(i, count, mode == Actionable.SIMULATE));
+
+                if (ret != null && !(ret.getStackSize() > 0)) {
+                    break;
+                }
+            }
         }
+
         return ret;
     }
 
     @Override
     public IItemList<IAEItemStack> getAvailableItems(final IItemList<IAEItemStack> out) {
-        if (!this.target.getOutputSlot().getStackInSlot(0).isEmpty()) {
-            out.add(AEItemStack.fromItemStack(this.target.getOutputSlot().getStackInSlot(0)));
+        for (int i = 0; i < 4; i++) {
+            ItemStack slotItem = this.target.getOutputSlot().getStackInSlot(i);
+
+            if (!slotItem.isEmpty()) {
+                out.add(AEItemStack.fromItemStack(slotItem));
+            }
         }
+
         return out;
     }
 

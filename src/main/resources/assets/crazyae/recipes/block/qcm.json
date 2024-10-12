@@ -1,0 +1,42 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:quantum_channels_multiplier"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "appliedenergistics2:wireless_access_point"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "item": "crazyae:quantum_channels_multiplier"
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "ada",
+    "bcb",
+    "ada"
+  ],
+  "key": {
+    "b": {
+      "item": "crazyae:crafting_storage_16mb"
+    },
+    "a": {
+      "item": "crazyae:upgrade",
+      "data": 2,
+      "count": 1
+    },
+    "c": {
+      "item": "appliedenergistics2:wireless_access_point"
+    },
+    "d": {
+      "item": "crazyae:crafting_accelerator_256x"
+    }
+  }
+}
