@@ -1,6 +1,5 @@
 package dev.beecube31.crazyae2.common.networking;
 
-import appeng.core.AELog;
 import appeng.core.sync.network.INetworkInfo;
 import dev.beecube31.crazyae2.common.networking.network.NetworkHandler;
 import io.netty.buffer.ByteBuf;
@@ -9,7 +8,6 @@ import net.minecraft.network.INetHandler;
 import net.minecraft.network.Packet;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
-import org.apache.logging.log4j.Level;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -24,7 +22,6 @@ public abstract class CrazyAEPacket implements Packet {
     }
 
     public final int getPacketID() {
-        AELog.log(Level.INFO, String.valueOf(CrazyAEPacketHandler.PacketTypes.getID(this.getClass()).ordinal()));
         return CrazyAEPacketHandler.PacketTypes.getID(this.getClass()).ordinal();
     }
 

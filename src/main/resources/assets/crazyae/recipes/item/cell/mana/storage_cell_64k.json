@@ -1,0 +1,35 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:mana_cell_64k"
+        },
+        {
+          "type": "appliedenergistics2:material_exists",
+          "material": "material.empty_storage_cell"
+        },
+        {
+          "type": "crazyae:material_exists",
+          "name": "mana_part_64k"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "item": "crazyae:mana_cell_64k"
+  },
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "type": "appliedenergistics2:part",
+      "part": "material.empty_storage_cell"
+    },
+    {
+      "type": "crazyae:material",
+      "name": "mana_part_64k"
+    }
+  ]
+}

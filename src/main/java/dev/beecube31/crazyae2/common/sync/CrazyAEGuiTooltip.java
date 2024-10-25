@@ -9,6 +9,9 @@ public enum CrazyAEGuiTooltip {
     CU_PLACE_ALL_ACCELERATORS_HERE,
     CU_PLACE_ALL_CRAFTING_STORAGES_HERE,
 
+    MANA,
+    STORED_MANA,
+
     PROGRESS;
 
     private final String root;

@@ -9,7 +9,7 @@ import java.util.HashMap;
 
 public class GridChannelBoostersCache implements IGridCache, IGridChannelBoostersCache {
 
-    private static HashMap<TileQuantumChannelsBooster, Integer> boosters = new HashMap<>();
+    private static final HashMap<TileQuantumChannelsBooster, Integer> boosters = new HashMap<>();
     private int channels = 0;
 
     public GridChannelBoostersCache(final IGrid grid) {}

@@ -1,0 +1,53 @@
+{
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "crazyae:material_exists",
+          "name": "mana_part_1k"
+        },
+        {
+          "type": "crazyae:material_exists",
+          "name": "mana_part_256k"
+        },
+        {
+          "type": "crazyae:material_exists",
+          "name": "mana_part_16mb"
+        }
+      ]
+    },
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "minecraft:item_exists",
+          "item": "botania:manaresource"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "type": "part",
+    "name": "mana_import_bus"
+  },
+  "type": "crazyae:shaped_recipe",
+  "pattern": [
+    "   ",
+    "iqi",
+    "qfq"
+  ],
+  "key": {
+    "i": {
+      "type": "appliedenergistics2:part",
+      "part": "part.import_bus"
+    },
+    "q": {
+      "item": "crazyae:material",
+      "data": 17
+    },
+    "f": {
+      "item": "crazyae:fluixilized_block"
+    }
+  }
+}

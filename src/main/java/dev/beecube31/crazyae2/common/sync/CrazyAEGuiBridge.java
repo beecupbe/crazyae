@@ -7,6 +7,7 @@ import appeng.api.implementations.IUpgradeableHost;
 import appeng.api.networking.security.IActionHost;
 import appeng.api.networking.security.ISecurityGrid;
 import appeng.api.parts.IPartHost;
+import appeng.api.storage.ITerminalHost;
 import appeng.api.util.AEPartLocation;
 import appeng.api.util.DimensionalCoord;
 import appeng.client.gui.AEBaseGui;
@@ -51,7 +52,8 @@ public enum CrazyAEGuiBridge {
 	IMPROVED_BUS(IUpgradeableHost.class, ContainerCrazyAEUpgradeable.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
 	IMPROVED_FLUID_BUSES(CrazyAEPartSharedFluidBus.class, ContainerImprovedFluidBuses.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
 	IMPROVED_CONDENSER(TileImprovedCondenser.class, ContainerImprovedCondenser.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
-	PATTERN_INTERFACE(TilePatternsInterface.class, ContainerPatternsInterface.class, GuiHostType.WORLD, SecurityPermissions.BUILD);
+	PATTERN_INTERFACE(TilePatternsInterface.class, ContainerPatternsInterface.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
+	GUI_MANA_TERMINAL(ITerminalHost.class, ContainerManaTerminal.class, GuiHostType.WORLD, SecurityPermissions.BUILD);
 
 	private static CrazyAEGuiBridge[] cachedValues;
 	private final Class<?> clazz;

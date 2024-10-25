@@ -2,6 +2,7 @@ package dev.beecube31.crazyae2.common.parts.implementations;
 
 import appeng.api.config.RedstoneMode;
 import appeng.api.config.Upgrades;
+import appeng.api.networking.GridFlags;
 import appeng.api.networking.ticking.IGridTickable;
 import appeng.api.networking.ticking.TickRateModulation;
 import appeng.me.GridAccessException;
@@ -21,6 +22,7 @@ public abstract class CrazyAEPartSharedBus extends CrazyAEPartUpgradeable implem
 
     public CrazyAEPartSharedBus(final ItemStack is) {
         super(is);
+        this.getProxy().setFlags(GridFlags.REQUIRE_CHANNEL);
     }
 
     @Override
@@ -104,7 +106,23 @@ public abstract class CrazyAEPartSharedBus extends CrazyAEPartUpgradeable implem
         return items;
     }
 
-    protected int manaToSend() {
+    protected int calculateManaIterations() {
+        int mana = 1;
+        switch (this.getInstalledUpgrades(dev.beecube31.crazyae2.common.registration.definitions.Upgrades.UpgradeType.STACKS)) {
+            case 1 -> mana += 1;
+            case 2 -> mana += 2;
+            case 3 -> mana += 4;
+            case 4 -> mana += 6;
+        }
+
+        if (this.getInstalledUpgrades(dev.beecube31.crazyae2.common.registration.definitions.Upgrades.UpgradeType.ADVANCED_SPEED) > 0) {
+            mana += 1;
+        }
+
+        return mana;
+    }
+
+    protected int calculateManaToSend() {
         int mana = 32;
         switch (this.getInstalledUpgrades(Upgrades.SPEED)) {
             case 1 -> mana += 256;

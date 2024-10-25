@@ -7,6 +7,7 @@ import appeng.bootstrap.components.IPostInitComponent;
 import appeng.core.features.ItemDefinition;
 import appeng.util.Platform;
 import dev.beecube31.crazyae2.Tags;
+import dev.beecube31.crazyae2.common.features.Features;
 import dev.beecube31.crazyae2.common.features.IFeature;
 import dev.beecube31.crazyae2.common.registration.definitions.CreativeTab;
 import dev.beecube31.crazyae2.common.registration.registry.Registry;
@@ -15,6 +16,7 @@ import net.minecraft.block.BlockDispenser;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.dispenser.IBehaviorDispenseItem;
 import net.minecraft.item.Item;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -34,13 +36,17 @@ public class CrazyAEItemDefinitionBuilder implements ICrazyAEItemBuilder {
 	private final Supplier<Item> itemSupplier;
 	private final List<Function<Item, IBootstrapComponent>> boostrapComponents = new ArrayList<>();
 	@Nullable
-	private IFeature[] features = null;
+	private Features[] features = null;
 	private Supplier<IBehaviorDispenseItem> dispenserBehaviorSupplier;
 
 	@SideOnly(Side.CLIENT)
 	private CrazyAEItemRendering itemRendering;
 
 	private CreativeTabs creativeTab = CreativeTab.instance;
+
+	private String requiredMod;
+	private String bannedMod;
+
 
 	private boolean hidden;
 
@@ -59,8 +65,21 @@ public class CrazyAEItemDefinitionBuilder implements ICrazyAEItemBuilder {
 		return this;
 	}
 
-	public ICrazyAEItemBuilder features(IFeature... features) {
+	@Override
+	public ICrazyAEItemBuilder features(Features... features) {
 		this.features = features;
+		return this;
+	}
+
+	@Override
+	public ICrazyAEItemBuilder ifModPresent(String modid) {
+		this.requiredMod = modid;
+		return this;
+	}
+
+	@Override
+	public ICrazyAEItemBuilder disableIfModPresent(String modid) {
+		this.bannedMod = modid;
 		return this;
 	}
 
@@ -102,6 +121,28 @@ public class CrazyAEItemDefinitionBuilder implements ICrazyAEItemBuilder {
 			return new ItemDefinition(this.registryName, null);
 		}
 
+		if (this.requiredMod != null) {
+			if (Loader.isModLoaded(this.requiredMod)) {
+				if (this.bannedMod == null || !Loader.isModLoaded(this.bannedMod)) {
+					return this.buildItem();
+				}
+			}
+
+			return new ItemDefinition(this.registryName, null);
+		}
+
+		if (this.bannedMod != null) {
+			if (Loader.isModLoaded(this.bannedMod)) {
+				return new ItemDefinition(this.registryName, null);
+			}
+
+			return this.buildItem();
+		}
+
+		return this.buildItem();
+	}
+
+	private ItemDefinition buildItem() {
 		var item = this.itemSupplier.get();
 		item.setRegistryName(Tags.MODID, this.registryName);
 

@@ -11,6 +11,19 @@ item.crazyae.storage_cell_256mb.name=§b256MB§r ME Storage Cell
 item.crazyae.storage_cell_1gb.name=§11GB§r ME Storage Cell
 item.crazyae.storage_cell_2gb.name=§d2GB§r ME Storage Cell
 
+item.crazyae.mana_cell_1k.name=§61k§r ME Mana Cell
+item.crazyae.mana_cell_4k.name=§e4k§r ME Mana Cell
+item.crazyae.mana_cell_16k.name=§a16k§r ME Mana Cell
+item.crazyae.mana_cell_64k.name=§b64k§r ME Mana Cell
+item.crazyae.mana_cell_256k.name=§c256k§r ME Mana Cell
+item.crazyae.mana_cell_1mb.name=§61MB§r ME Mana Cell
+item.crazyae.mana_cell_4mb.name=§e4MB§r ME Mana Cell
+item.crazyae.mana_cell_16mb.name=§a16MB§r ME Mana Cell
+item.crazyae.mana_cell_64mb.name=§264MB§r ME Mana Cell
+item.crazyae.mana_cell_256mb.name=§b256MB§r ME Mana Cell
+item.crazyae.mana_cell_1gb.name=§11GB§r ME Mana Cell
+item.crazyae.mana_cell_2gb.name=§d2GB§r ME Mana Cell
+
 item.crazyae.fluid_storage_cell_256k.name=§c256k§r ME Fluid Storage Cell
 item.crazyae.fluid_storage_cell_1mb.name=§61MB§r ME Fluid Storage Cell
 item.crazyae.fluid_storage_cell_4mb.name=§e4MB§r ME Fluid Storage Cell
@@ -34,6 +47,19 @@ item.crazyae.material.cell_part_256mb.name=§b256MB§r ME Storage Component
 item.crazyae.material.cell_part_1gb.name=§11GB§r ME Storage Component
 item.crazyae.material.cell_part_2gb.name=§d2GB§r ME Storage Component
 
+item.crazyae.material.mana_part_1k.name=§61k§r ME Mana Component
+item.crazyae.material.mana_part_4k.name=§e4k§r ME Mana Component
+item.crazyae.material.mana_part_16k.name=§a16k§r ME Mana Component
+item.crazyae.material.mana_part_64k.name=§b64k§r ME Mana Component
+item.crazyae.material.mana_part_256k.name=§c256k§r ME Mana Component
+item.crazyae.material.mana_part_1mb.name=§61MB§r ME Mana Component
+item.crazyae.material.mana_part_4mb.name=§e4MB§r ME Mana Component
+item.crazyae.material.mana_part_16mb.name=§a16MB§r ME Mana Component
+item.crazyae.material.mana_part_64mb.name=§264MB§r ME Mana Component
+item.crazyae.material.mana_part_256mb.name=§b256MB§r ME Mana Component
+item.crazyae.material.mana_part_1gb.name=§11GB§r ME Mana Component
+item.crazyae.material.mana_part_2gb.name=§d2GB§r ME Mana Component
+
 item.crazyae.material.cell_part_fluid_256k.name=§c256k§r ME Fluid Storage Component
 item.crazyae.material.cell_part_fluid_1mb.name=§61MB§r ME Fluid Storage Component
 item.crazyae.material.cell_part_fluid_4mb.name=§e4MB§r ME Fluid Storage Component
@@ -43,19 +69,29 @@ item.crazyae.material.cell_part_fluid_256mb.name=§b256MB§r ME Fluid Storage Co
 item.crazyae.material.cell_part_fluid_1gb.name=§11GB§r ME Fluid Storage Component
 item.crazyae.material.cell_part_fluid_2gb.name=§d2GB§r ME Fluid Storage Component
 
-item.crazyae.material.quantum_processor.name=Quantum Processor
 
 #Items
 item.crazyae.quantum_wireless_booster.name=Quantum Wireless Booster
+item.crazyae.material.quantum_processor.name=Quantum Processor
+item.crazyae.material.mana_processor.name=Mana Processor
+item.crazyae.mana_connector.name=Mana Connector
 tooltip.crazyae.quantum_wireless_booster_desc.name=This item is under development.
+tooltip.crazyae.mana_connector_desc.name=Links the mana pool to the mana import/export bus.
+tooltip.crazyae.linked_with_mana_pool_at_pos.name=Linked with mana pool at x=%s, y=%s, z=%s.
+tooltip.crazyae.mana_connector_lets_connect_to_bus.name=Click mana import/export bus to connect them.
+
 
 
 # Parts
-item.crazyae.part.improved_import_bus.name=Improved ME Import Bus
-item.crazyae.part.improved_export_bus.name=Improved ME Export Bus
+item.crazyae.part.improved_import_bus.name=ME Improved Import Bus
+item.crazyae.part.improved_export_bus.name=ME Improved Export Bus
 
-item.crazyae.part.improved_export_fluid_bus.name=Improved ME Fluid Export Bus
-item.crazyae.part.improved_import_fluid_bus.name=Improved ME Fluid Import Bus
+item.crazyae.part.improved_export_fluid_bus.name=ME Improved Fluid Export Bus
+item.crazyae.part.improved_import_fluid_bus.name=ME Improved Fluid Import Bus
+
+item.crazyae.part.mana_import_bus.name=ME Mana Import Bus
+item.crazyae.part.mana_export_bus.name=ME Mana Export Bus
+item.crazyae.part.mana_term.name=ME Mana Terminal
 
 
 # Upgrades
@@ -122,6 +158,14 @@ gui.crazyae.imp_fluid_export_bus.name=Improved ME Fluid Export Bus
 
 gui.crazyae.pattern_interface.name=§8ME Patterns Interface§r
 
+gui.crazyae.mana_terminal.name=ME Mana Terminal
+gui.crazyae.mana_import_bus.name=ME Mana Import Bus
+gui.crazyae.mana_export_bus.name=ME Mana Export Bus
+
+gui.crazyae.link_with_mana_connector.name=This bus needs to be linked
+gui.crazyae.link_with_mana_connector2.name=to the mana pool with the
+gui.crazyae.link_with_mana_connector3.name="Mana Connector".
+gui.crazyae.linked_with_mana_pool.name=Linked with х=%s y=%s z=%s
 
 # GUI's Tooltip
 
@@ -151,6 +195,16 @@ tooltip.crazyae.enabled_lowercase.name=enabled
 tooltip.crazyae.disabled_lowercase.name=disabled
 tooltip.crazyae.enabled.name=Enabled
 tooltip.crazyae.disabled.name=Disabled
+
+tooltip.crazyae.mana_connector_block_linked.name=The binding was successful.
+tooltip.crazyae.mana_connector_block_saved.name=Mana Pool was successfully saved.
+tooltip.crazyae.mana_connector_clear.name=Mana Connector has been cleared.
+
+#Internal
+
+item.crazyae.mana_as_aestack.name=Mana
+gui.tooltip.crazyae.mana.name=Mana
+gui.tooltip.crazyae.stored_mana.name=Mana stored: %s
 
 #Misc
 

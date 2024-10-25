@@ -2,7 +2,6 @@ package dev.beecube31.crazyae2.common.parts.implementations;
 
 import appeng.api.AEApi;
 import appeng.api.config.*;
-import appeng.api.networking.GridFlags;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.crafting.ICraftingGrid;
 import appeng.api.networking.crafting.ICraftingLink;
@@ -63,8 +62,6 @@ public class PartExportBusImp extends CrazyAEPartSharedBus implements ICraftingR
     @Reflected
     public PartExportBusImp(final ItemStack is) {
         super(is);
-
-        this.getProxy().setFlags(GridFlags.REQUIRE_CHANNEL);
 
         this.getConfigManager().registerSetting(Settings.REDSTONE_CONTROLLED, RedstoneMode.IGNORE);
         this.getConfigManager().registerSetting(Settings.FUZZY_MODE, FuzzyMode.IGNORE_ALL);

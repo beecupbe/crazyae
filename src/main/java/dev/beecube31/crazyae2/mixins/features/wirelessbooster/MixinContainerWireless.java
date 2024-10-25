@@ -44,8 +44,6 @@ public abstract class MixinContainerWireless extends AEBaseContainer {
         final boolean quantumBooster = CrazyAE.definitions().items().quantumWirelessBooster()
                 .isSameAs(this.boosterSlot.getStack());
 
-        CrazyAE.logger().warn(quantumBooster);
-
         boosters = quantumBooster ? Math.pow(2, count)
                 : this.boosterSlot.getStack().isEmpty() ? 0 : count;
 

@@ -13,7 +13,7 @@
         },
         {
           "type": "crazyae:material_exists",
-          "name": "cell_part_64mb"
+          "name": "cell_part_256mb"
         }
       ]
     }

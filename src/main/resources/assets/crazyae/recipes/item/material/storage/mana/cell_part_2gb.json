@@ -1,0 +1,52 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "minecraft:item_exists",
+          "item": "appliedenergistics2:quartz_glass"
+        },
+        {
+          "type": "appliedenergistics2:material_exists",
+          "material": "material.calculation_processor"
+        },
+        {
+          "type": "crazyae:material_exists",
+          "name": "mana_part_2gb"
+        },
+        {
+          "type": "crazyae:material_exists",
+          "name": "mana_part_1gb"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "type": "material",
+    "name": "mana_part_2gb"
+  },
+  "type": "crazyae:shaped_recipe",
+  "pattern": [
+    "aba",
+    "cdc",
+    "aaa"
+  ],
+  "key": {
+    "b": {
+      "item": "botania:manaresource",
+      "data": 7
+    },
+    "c": {
+      "type": "crazyae:material",
+      "name": "mana_part_1gb"
+    },
+    "d": {
+      "item": "botania:managlass"
+    },
+    "a": {
+      "item": "botania:manaresource",
+      "data": 8
+    }
+  }
+}

@@ -15,7 +15,7 @@ public abstract class MixinGridNode {
 
     /**
      * @author Beecube31
-     * @reason Patch for Quantum Wireless Booster
+     * @reason Patch for Quantum Channels Multiplier
      */
     @Overwrite
     private int getMaxChannels() {

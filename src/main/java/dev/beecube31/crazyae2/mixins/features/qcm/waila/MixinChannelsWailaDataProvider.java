@@ -25,7 +25,7 @@ public abstract class MixinChannelsWailaDataProvider {
 
     /**
      * @author Beecube31
-     * @reason Patch for Quantum Wireless Booster
+     * @reason Patch for Quantum Channels Multiplier
      */
     @Overwrite
     public List<String> getWailaBody(final IPart part, final List<String> currentToolTip, final IWailaDataAccessor accessor, final IWailaConfigHandler config) {

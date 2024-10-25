@@ -1,11 +1,7 @@
 package dev.beecube31.crazyae2.common.registration.definitions;
 
-import appeng.api.definitions.IBlocks;
 import appeng.api.definitions.IItemDefinition;
-import appeng.api.definitions.IItems;
-import appeng.api.definitions.IParts;
 import appeng.bootstrap.components.IPostInitComponent;
-import appeng.core.Api;
 import appeng.core.features.DamagedItemDefinition;
 import appeng.core.features.IStackSrc;
 import com.google.common.base.Preconditions;
@@ -56,6 +52,8 @@ public class Upgrades implements DamagedDefinitions<DamagedItemDefinition, Upgra
 				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().improvedExportFluidBus(), 4);
 				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().improvedMolecularAssembler(), 5);
 				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().bigCrystalCharger(), 5);
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().manaImportBus(), 4);
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().manaExportBus(), 4);
 			});
 		}
 
@@ -67,6 +65,8 @@ public class Upgrades implements DamagedDefinitions<DamagedItemDefinition, Upgra
 				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().parts().improvedImportFluidBus(), 4);
 				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().parts().improvedExportFluidBus(), 4);
 				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().blocks().bigCrystalCharger(), 4);
+				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().parts().manaImportBus(), 4);
+				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().parts().manaExportBus(), 4);
 			});
 		}
 
@@ -78,6 +78,8 @@ public class Upgrades implements DamagedDefinitions<DamagedItemDefinition, Upgra
 				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().parts().improvedImportFluidBus(), 1);
 				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().parts().improvedExportFluidBus(), 1);
 				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().blocks().bigCrystalCharger(), 1);
+				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().parts().manaImportBus(), 1);
+				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().parts().manaExportBus(), 1);
 			});
 		}
 
@@ -88,6 +90,8 @@ public class Upgrades implements DamagedDefinitions<DamagedItemDefinition, Upgra
 			appeng.api.config.Upgrades.REDSTONE.registerItem(CrazyAE.definitions().parts().improvedImportBus(), 1);
 			appeng.api.config.Upgrades.REDSTONE.registerItem(CrazyAE.definitions().parts().improvedExportFluidBus(), 1);
 			appeng.api.config.Upgrades.REDSTONE.registerItem(CrazyAE.definitions().parts().improvedImportFluidBus(), 1);
+			appeng.api.config.Upgrades.REDSTONE.registerItem(CrazyAE.definitions().parts().manaImportBus(), 1);
+			appeng.api.config.Upgrades.REDSTONE.registerItem(CrazyAE.definitions().parts().manaExportBus(), 1);
 
 			appeng.api.config.Upgrades.CAPACITY.registerItem(CrazyAE.definitions().parts().improvedExportBus(), 2);
 			appeng.api.config.Upgrades.CAPACITY.registerItem(CrazyAE.definitions().parts().improvedImportBus(), 2);
@@ -230,7 +234,9 @@ public class Upgrades implements DamagedDefinitions<DamagedItemDefinition, Upgra
 		}
 
 		public void registerItem(IItemDefinition item, int maxSupported) {
-			item.maybeStack(1).ifPresent((is) -> this.registerItem(is, maxSupported));
+			if (item != null) {
+				item.maybeStack(1).ifPresent((is) -> this.registerItem(is, maxSupported));
+			}
 		}
 
 		public void registerItem(ItemStack stack, int maxSupported) {

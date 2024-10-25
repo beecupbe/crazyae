@@ -23,7 +23,7 @@ public abstract class MixinChannelsTOPDataProvider {
 
     /**
      * @author Beecube31
-     * @reason Patch for Quantum Wireless Booster
+     * @reason Patch for Quantum Channels Multiplier
      */
     @Overwrite
     public void addProbeInfo(IPart part, ProbeMode mode, IProbeInfo probeInfo, EntityPlayer player, World world, IBlockState blockState, IProbeHitData data) {

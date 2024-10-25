@@ -415,6 +415,13 @@ public class Blocks {
 		return this.energyPanelAdvanced;
 	}
 
+	public ITileDefinition improvedCondenser() {
+		return this.improvedCondenser;
+	}
+
+	public ITileDefinition quantumChannelMultiplier() {
+		return this.quantumChannelMultiplier;
+	}
 
 	public ITileDefinition craftingUnitsCombiner() {
 		return this.craftingUnitsCombiner;

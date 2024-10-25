@@ -3,7 +3,6 @@ package dev.beecube31.crazyae2.common.registration.definitions;
 import appeng.api.definitions.IItemDefinition;
 import appeng.core.features.DamagedItemDefinition;
 import appeng.core.features.IStackSrc;
-import appeng.items.materials.MaterialType;
 import com.google.common.base.Preconditions;
 import dev.beecube31.crazyae2.Tags;
 import dev.beecube31.crazyae2.common.features.Features;
@@ -18,7 +17,7 @@ import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
+import net.minecraftforge.fml.common.Loader;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
@@ -27,6 +26,7 @@ import java.util.Optional;
 
 public class Materials implements DamagedDefinitions<DamagedItemDefinition, Materials.MaterialType> {
 	private final Object2ObjectOpenHashMap<String, DamagedItemDefinition> byId = new Object2ObjectOpenHashMap<>();
+
 	private final IItemDefinition cellPart256k;
 	private final IItemDefinition cellPart1mb;
 	private final IItemDefinition cellPart4mb;
@@ -46,6 +46,20 @@ public class Materials implements DamagedDefinitions<DamagedItemDefinition, Mate
 	private final IItemDefinition fluidCellPart2gb;
 
 	private final IItemDefinition quantumProcessor;
+	private final IItemDefinition manaProcessor;
+
+	private final IItemDefinition manaPart1k;
+	private final IItemDefinition manaPart4k;
+	private final IItemDefinition manaPart16k;
+	private final IItemDefinition manaPart64k;
+	private final IItemDefinition manaPart256k;
+	private final IItemDefinition manaPart1mb;
+	private final IItemDefinition manaPart4mb;
+	private final IItemDefinition manaPart16mb;
+	private final IItemDefinition manaPart64mb;
+	private final IItemDefinition manaPart256mb;
+	private final IItemDefinition manaPart1gb;
+	private final IItemDefinition manaPart2gb;
 
 
 
@@ -76,13 +90,26 @@ public class Materials implements DamagedDefinitions<DamagedItemDefinition, Mate
 		this.fluidCellPart2gb = this.createMaterial(this.material, MaterialType.CELL_FLUID_PART_2GB);
 
 		this.quantumProcessor = this.createMaterial(this.material, MaterialType.QUANTUM_PROCESSOR);
+		this.manaProcessor = this.createMaterial(this.material, MaterialType.MANA_PROCESSOR);
+
+		this.manaPart1k = this.createMaterial(this.material, MaterialType.MANA_PART_1K);
+		this.manaPart4k = this.createMaterial(this.material, MaterialType.MANA_PART_4K);
+		this.manaPart16k = this.createMaterial(this.material, MaterialType.MANA_PART_16K);
+		this.manaPart64k = this.createMaterial(this.material, MaterialType.MANA_PART_64K);
+		this.manaPart256k = this.createMaterial(this.material, MaterialType.MANA_PART_256K);
+		this.manaPart1mb = this.createMaterial(this.material, MaterialType.MANA_PART_1MB);
+		this.manaPart4mb = this.createMaterial(this.material, MaterialType.MANA_PART_4MB);
+		this.manaPart16mb = this.createMaterial(this.material, MaterialType.MANA_PART_16MB);
+		this.manaPart64mb = this.createMaterial(this.material, MaterialType.MANA_PART_64MB);
+		this.manaPart256mb = this.createMaterial(this.material, MaterialType.MANA_PART_256MB);
+		this.manaPart1gb = this.createMaterial(this.material, MaterialType.MANA_PART_1GB);
+		this.manaPart2gb = this.createMaterial(this.material, MaterialType.MANA_PART_2GB);
 	}
 
 
-	@NotNull
 	private DamagedItemDefinition createMaterial(CrazyAEMaterial material, MaterialType materialType) {
 		var def = new DamagedItemDefinition(materialType.getId(),
-			material.createMaterial(materialType));
+				material.createMaterial(materialType));
 
 		this.byId.put(materialType.getId(), def);
 		return def;
@@ -105,6 +132,62 @@ public class Materials implements DamagedDefinitions<DamagedItemDefinition, Mate
 	@Override
 	public MaterialType getType(ItemStack is) {
 		return this.material.getTypeByStack(is);
+	}
+
+	public IItemDefinition manaPart1k() {
+		return this.manaPart1k;
+	}
+
+	public IItemDefinition manaPart4k() {
+		return this.manaPart4k;
+	}
+
+	public IItemDefinition manaPart16k() {
+		return this.manaPart16k;
+	}
+
+	public IItemDefinition manaPart64k() {
+		return this.manaPart64k;
+	}
+
+	public IItemDefinition manaPart256k() {
+		return this.manaPart256k;
+	}
+
+	public IItemDefinition manaPart1mb() {
+		return this.manaPart1mb;
+	}
+
+	public IItemDefinition manaPart4mb() {
+		return this.manaPart4mb;
+	}
+
+	public IItemDefinition manaPart16mb() {
+		return this.manaPart16mb;
+	}
+
+	public IItemDefinition manaPart64mb() {
+		return this.manaPart64mb;
+	}
+
+	public IItemDefinition manaPart256mb() {
+		return this.manaPart256mb;
+	}
+
+	public IItemDefinition manaPart1gb() {
+		return this.manaPart1gb;
+	}
+
+	public IItemDefinition manaPart2gb() {
+		return this.manaPart2gb;
+	}
+
+	public IItemDefinition quantumProcessor() {
+		return this.quantumProcessor;
+	}
+
+	public IItemDefinition manaProcessor() {
+		return this.manaProcessor;
 	}
 
 	public IItemDefinition cellPart256K() {
@@ -171,10 +254,6 @@ public class Materials implements DamagedDefinitions<DamagedItemDefinition, Mate
 		return this.fluidCellPart2gb;
 	}
 
-	public IItemDefinition quantumProcessor() {
-		return this.quantumProcessor;
-	}
-
 
 	public enum MaterialType implements CrazyAEIModelProvider {
 		CELL_PART_256K("cell_part_256k", Features.DENSE_CELLS),
@@ -195,25 +274,49 @@ public class Materials implements DamagedDefinitions<DamagedItemDefinition, Mate
 		CELL_FLUID_PART_1GB("cell_part_fluid_1gb", Features.MEGA_DENSE_CELLS),
 		CELL_FLUID_PART_2GB("cell_part_fluid_2gb", Features.MEGA_DENSE_CELLS),
 
-		QUANTUM_PROCESSOR("quantum_processor", Features.STUB);
+		QUANTUM_PROCESSOR("quantum_processor", Features.STUB),
+		MANA_PROCESSOR("mana_processor", Features.STUB, "botania"),
+
+		MANA_PART_1K("mana_part_1k", Features.MANA_CELLS),
+		MANA_PART_4K("mana_part_4k", Features.MANA_CELLS),
+		MANA_PART_16K("mana_part_16k", Features.MANA_CELLS),
+		MANA_PART_64K("mana_part_64k", Features.MANA_CELLS),
+		MANA_PART_256K("mana_part_256k", Features.MANA_DENSE_CELLS),
+		MANA_PART_1MB("mana_part_1mb", Features.MANA_DENSE_CELLS),
+		MANA_PART_4MB("mana_part_4mb", Features.MANA_DENSE_CELLS),
+		MANA_PART_16MB("mana_part_16mb", Features.MANA_DENSE_CELLS),
+		MANA_PART_64MB("mana_part_64mb", Features.MEGA_MANA_DENSE_CELLS),
+		MANA_PART_256MB("mana_part_256mb", Features.MEGA_MANA_DENSE_CELLS),
+		MANA_PART_1GB("mana_part_1gb", Features.MEGA_MANA_DENSE_CELLS),
+		MANA_PART_2GB("mana_part_2gb", Features.MEGA_MANA_DENSE_CELLS);
 
 
 		private static Int2ObjectLinkedOpenHashMap<MaterialType> cachedValues;
 
 		private final String id;
-		private final Features features;
+		private final String modid;
 		private final String translationKey;
 		private final ModelResourceLocation model;
 		private boolean isRegistered;
 		private int damageValue = this.ordinal();
+		private final Features features;
 		private Item itemInstance;
 		private IStackSrc stackSrc;
 
 		MaterialType(String id, Features features) {
 			this.id = id;
+			this.modid = null;
 			this.features = features;
 			this.translationKey = "item." + Tags.MODID + ".material." + id;
 			this.model = new ModelResourceLocation(new ResourceLocation(Tags.MODID, "material/" + id), "inventory");
+		}
+
+		MaterialType(String id, Features features, String modid) {
+			this.id = id;
+			this.features = features;
+			this.translationKey = "item." + Tags.MODID + ".material." + id;
+			this.model = new ModelResourceLocation(new ResourceLocation(Tags.MODID, "material/" + id), "inventory");
+			this.modid = modid;
 		}
 
 		public static Int2ObjectLinkedOpenHashMap<MaterialType> getCachedValues() {
@@ -247,6 +350,10 @@ public class Materials implements DamagedDefinitions<DamagedItemDefinition, Mate
 
 		@Override
 		public boolean isEnabled() {
+			if (this.modid != null && !Loader.isModLoaded(this.modid)) {
+				return false;
+			}
+
 			return this.features != null && this.features.isEnabled();
 		}
 

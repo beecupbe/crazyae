@@ -19,8 +19,11 @@ import appeng.helpers.InventoryAction;
 import appeng.parts.automation.PartExportBus;
 import appeng.util.item.AEItemStack;
 import dev.beecube31.crazyae2.common.containers.ContainerCrazyAEUpgradeable;
+import dev.beecube31.crazyae2.common.interfaces.mana.IManaLinkableDevice;
 import dev.beecube31.crazyae2.common.parts.implementations.PartExportBusImp;
 import dev.beecube31.crazyae2.common.parts.implementations.PartImportBusImp;
+import dev.beecube31.crazyae2.common.parts.implementations.PartManaExportBus;
+import dev.beecube31.crazyae2.common.parts.implementations.PartManaImportBus;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiText;
 import dev.beecube31.crazyae2.common.tile.networking.TilePatternsInterface;
 import mezz.jei.api.gui.IGhostIngredientHandler.Target;
@@ -98,6 +101,11 @@ public class GuiCrazyAEUpgradeable extends AEBaseGui implements IJEIGhostIngredi
 
     @Override
     public void drawFG(final int offsetX, final int offsetY, final int mouseX, final int mouseY) {
+        if (this.bc instanceof IManaLinkableDevice) {
+            this.fontRenderer.drawString(CrazyAEGuiText.LINK_WITH_MANA_CONNECTOR.getLocal(), 8, 20, 4210752);
+            this.fontRenderer.drawString(CrazyAEGuiText.LINK_WITH_MANA_CONNECTOR2.getLocal(), 8, 29, 4210752);
+            this.fontRenderer.drawString(CrazyAEGuiText.LINK_WITH_MANA_CONNECTOR3.getLocal(), 8, 38, 4210752);
+        }
         this.fontRenderer.drawString(this.getGuiDisplayName(this.getName().getLocal()), 8, 6, 4210752);
         this.fontRenderer.drawString(GuiText.inventory.getLocal(), 8, this.ySize - 96 + 3, 4210752);
 
@@ -122,7 +130,11 @@ public class GuiCrazyAEUpgradeable extends AEBaseGui implements IJEIGhostIngredi
     public void drawBG(final int offsetX, final int offsetY, final int mouseX, final int mouseY) {
         this.handleButtonVisibility();
 
-        this.bindTexture(this.getBackground());
+        if (!(this.bc instanceof IManaLinkableDevice)) {
+            this.bindTexture(this.getBackground());
+        } else {
+            this.bindTexture(this.getManaBusBackground());
+        }
         this.drawTexturedModalRect(offsetX, offsetY, 0, 0, 211 - 34, this.ySize);
         if (this.drawUpgrades()) {
             this.drawTexturedModalRect(offsetX + 177, offsetY, 177, 0, 35, 14 + this.cvb.availableUpgrades() * 18);
@@ -159,6 +171,10 @@ public class GuiCrazyAEUpgradeable extends AEBaseGui implements IJEIGhostIngredi
         return "guis/bus.png";
     }
 
+    protected String getManaBusBackground() {
+        return "guis/manabus.png";
+    }
+
     protected boolean drawUpgrades() {
         return true;
     }
@@ -171,6 +187,8 @@ public class GuiCrazyAEUpgradeable extends AEBaseGui implements IJEIGhostIngredi
         return this.bc instanceof PartImportBusImp ? CrazyAEGuiText.IMP_IMPORT_BUS
                 : this.bc instanceof PartExportBusImp ? CrazyAEGuiText.IMP_EXPORT_BUS
                 : this.bc instanceof TilePatternsInterface ? CrazyAEGuiText.PATTERN_INTERFACE
+                : this.bc instanceof PartManaImportBus ? CrazyAEGuiText.MANA_IMPORT_BUS
+                : this.bc instanceof PartManaExportBus ? CrazyAEGuiText.MANA_EXPORT_BUS
                 : CrazyAEGuiText.NOT_DEFINED;
     }
 

@@ -8,12 +8,10 @@ import appeng.util.Platform;
 import com.google.common.collect.ImmutableList;
 import dev.beecube31.crazyae2.Tags;
 import dev.beecube31.crazyae2.common.features.Features;
-import dev.beecube31.crazyae2.common.features.IFeature;
 import dev.beecube31.crazyae2.common.items.CrazyAEBaseItemPart;
-import dev.beecube31.crazyae2.common.parts.implementations.PartExportBusImp;
+import dev.beecube31.crazyae2.common.parts.implementations.*;
 import dev.beecube31.crazyae2.common.parts.implementations.fluid.PartFluidExportBusImp;
 import dev.beecube31.crazyae2.common.parts.implementations.fluid.PartFluidImportBusImp;
-import dev.beecube31.crazyae2.common.parts.implementations.PartImportBusImp;
 import dev.beecube31.crazyae2.common.registration.registry.Registry;
 import dev.beecube31.crazyae2.common.registration.registry.helpers.PartModelsHelper;
 import dev.beecube31.crazyae2.common.registration.registry.interfaces.Definitions;
@@ -26,9 +24,9 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Constructor;
 import java.util.*;
@@ -41,6 +39,11 @@ public class Parts implements Definitions<DamagedItemDefinition> {
 	private final DamagedItemDefinition improvedExportBus;
 	private final DamagedItemDefinition improvedImportFluidBus;
 	private final DamagedItemDefinition improvedExportFluidBus;
+
+	private final DamagedItemDefinition manaImportBus;
+	private final DamagedItemDefinition manaExportBus;
+
+	private final DamagedItemDefinition manaTerm;
 
 
 	public Parts(Registry registry) {
@@ -60,6 +63,11 @@ public class Parts implements Definitions<DamagedItemDefinition> {
 
 		this.improvedImportFluidBus = this.createPart(this.itemPart, PartType.IMPROVED_IMPORT_FLUID_BUS);
 		this.improvedExportFluidBus = this.createPart(this.itemPart, PartType.IMPROVED_EXPORT_FLUID_BUS);
+
+		this.manaImportBus = this.createPart(this.itemPart, PartType.MANA_IMPORT_BUS);
+		this.manaExportBus = this.createPart(this.itemPart, PartType.MANA_EXPORT_BUS);
+
+		this.manaTerm = this.createPart(this.itemPart, PartType.MANA_TERM);
 	}
 
 	public DamagedItemDefinition improvedImportBus() {
@@ -78,14 +86,24 @@ public class Parts implements Definitions<DamagedItemDefinition> {
 		return this.improvedExportFluidBus;
 	}
 
+	public DamagedItemDefinition manaImportBus() {
+		return this.manaImportBus;
+	}
+
+	public DamagedItemDefinition manaExportBus() {
+		return this.manaExportBus;
+	}
+
+	public DamagedItemDefinition manaTerminal() {
+		return this.manaTerm;
+	}
+
 	public static Optional<PartType> getById(int itemDamage) {
 		return Optional.ofNullable(PartType.getCachedValues().getOrDefault(itemDamage, null));
 	}
 
-	@NotNull
 	private DamagedItemDefinition createPart(CrazyAEBaseItemPart baseItemPart, PartType partType) {
-		var def = new DamagedItemDefinition(partType.getId(),
-			baseItemPart.createPart(partType));
+		var def = new DamagedItemDefinition(partType.getId(), baseItemPart.createPart(partType));
 
 		this.byId.put(partType.id, def);
 		return def;
@@ -101,7 +119,12 @@ public class Parts implements Definitions<DamagedItemDefinition> {
 		IMPROVED_EXPORT_BUS("improved_export_bus", PartExportBusImp.class, Features.IMPROVED_BUSES),
 
 		IMPROVED_IMPORT_FLUID_BUS("improved_import_fluid_bus", PartFluidImportBusImp.class, Features.IMPROVED_BUSES),
-		IMPROVED_EXPORT_FLUID_BUS("improved_export_fluid_bus", PartFluidExportBusImp.class, Features.IMPROVED_BUSES);
+		IMPROVED_EXPORT_FLUID_BUS("improved_export_fluid_bus", PartFluidExportBusImp.class, Features.IMPROVED_BUSES),
+
+		MANA_IMPORT_BUS("mana_import_bus", PartManaImportBus.class, Features.MANA_BUSES),
+		MANA_EXPORT_BUS("mana_export_bus", PartManaExportBus.class, Features.MANA_BUSES),
+
+		MANA_TERM("mana_terminal", PartManaTerminal.class, Features.MANA_TERM);
 
 
 
@@ -113,12 +136,14 @@ public class Parts implements Definitions<DamagedItemDefinition> {
 		private final Set<ResourceLocation> models;
 		private Constructor<? extends IPart> constructor;
 		private GuiText extraName;
+		private final Features features;
 		private List<ModelResourceLocation> itemModels;
 
-		PartType(String id, Class<? extends IPart> clazz, IFeature features) {
+		PartType(String id, Class<? extends IPart> clazz, Features features) {
 			this.id = id;
 			this.clazz = clazz;
 			this.baseDamage = this.ordinal();
+			this.features = features;
 
 			this.enabled = features.isEnabled();
 			if (this.enabled) {
@@ -163,7 +188,14 @@ public class Parts implements Definitions<DamagedItemDefinition> {
 			return ImmutableList.of(modelFromBaseName(baseName));
 		}
 
+		public Features getFeature() {
+			return this.features;
+		}
+
 		public boolean isEnabled() {
+			if (this.features.getRequiredModid() != null && !Loader.isModLoaded(this.features.getRequiredModid())) {
+				return false;
+			}
 			return this.enabled;
 		}
 

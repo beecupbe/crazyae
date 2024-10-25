@@ -2,6 +2,7 @@ package dev.beecube31.crazyae2.common.features;
 
 import dev.beecube31.crazyae2.common.features.subfeatures.*;
 import dev.beecube31.crazyae2.common.features.subfeatures.ISubFeature;
+import net.minecraftforge.fml.common.Loader;
 
 import javax.annotation.Nullable;
 import java.util.EnumSet;
@@ -12,12 +13,21 @@ public enum Features implements IFeature {
 	UPGRADES(EnumSet.allOf(UpgradeFeatures.class), "upgrades"),
 	DENSE_CELLS(EnumSet.allOf(DenseCellFeatures.class)),
 	MEGA_DENSE_CELLS(EnumSet.allOf(MegaDenseCellFeatures.class)),
+
+	MANA_CELLS("manastorage", "botania"),
+	MANA_DENSE_CELLS("manastorage", "botania"),
+	MEGA_MANA_DENSE_CELLS("manastorage", "botania"),
+	MANA_TERM("manastorage", "botania"),
+	BOTANIA_JEI_INTEGRATION("botaniajei", "botania"),
+
 	PORTABLE_DENSE_CELLS,
 	IMPROVED_DRIVE,
 	IMPROVED_IO_PORT,
+	BIG_CRYSTAL_CHARGER,
+	CRAFTING_UNITS_COMBINER("cu.combiner"),
 	IMPROVED_GRINDSTONE_CRANK,
 	IMPROVED_BUSES,
-	MANA_BUSES,
+	MANA_BUSES(false, "botania"),
 	IMPROVED_ENERGY_CELLS,
 	SOLAR_PANELS,
 	QUANTUM_CHANNELS_MULTIPLIER("qcm"),
@@ -29,6 +39,7 @@ public enum Features implements IFeature {
 	QUANTUM_WIRELESS_BOOSTER("wireless.booster");
 
 	private String[] mixins;
+	private String modid;
 	private EnumSet<? extends ISubFeature> subFeatures = null;
 	private boolean enabled;
 
@@ -37,6 +48,17 @@ public enum Features implements IFeature {
 	Features(String mixins) {
 		this();
 		this.mixins = new String[]{ mixins };
+	}
+
+	Features(String mixins, String modid) {
+		this();
+		this.modid = modid;
+		this.mixins = new String[]{ mixins };
+	}
+
+	Features(boolean stub, String modid) {
+		this();
+		this.modid = modid;
 	}
 
 	Features(EnumSet<? extends ISubFeature> subFeatures) {
@@ -50,7 +72,11 @@ public enum Features implements IFeature {
 	}
 
 	public boolean isEnabled() {
-		return this.enabled;
+		if (this.modid != null && !Loader.isModLoaded(this.modid)) {
+			return false;
+		}
+
+		return this.enabled || this == STUB;
 	}
 
 	public void setEnabled(boolean enabled) {
@@ -65,5 +91,10 @@ public enum Features implements IFeature {
 	@Nullable
 	public String[] getMixins() {
 		return this.mixins;
+	}
+
+	@Nullable
+	public String getRequiredModid() {
+		return this.modid;
 	}
 }

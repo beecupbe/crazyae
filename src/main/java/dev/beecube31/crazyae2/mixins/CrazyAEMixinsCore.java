@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import dev.beecube31.crazyae2.core.CrazyAE;
 import dev.beecube31.crazyae2.common.features.Features;
 import net.minecraftforge.common.ForgeVersion;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 import zone.rong.mixinbooter.ILateMixinLoader;
@@ -53,13 +54,14 @@ public class CrazyAEMixinsCore implements IFMLLoadingPlugin, ILateMixinLoader {
 
 		mixins.add("mixins.crazyae.json");
 		mixins.add(String.format(MIXIN_PATH, "core"));
-		mixins.add(String.format(MIXIN_PATH, "cu.combiner"));
 
 
 
 		for (var feature : Features.values()) {
 			if (feature.name().equals("STUB")) continue;
 			if (!feature.isEnabled()) continue;
+			if (feature.getRequiredModid() != null
+				&& !Loader.isModLoaded(feature.getRequiredModid())) continue;
 
 			var featureMixins = feature.getMixins();
 			if (featureMixins != null) {

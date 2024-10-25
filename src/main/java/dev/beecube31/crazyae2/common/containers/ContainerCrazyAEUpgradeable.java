@@ -11,12 +11,15 @@ import appeng.container.slot.*;
 import appeng.items.contents.NetworkToolViewer;
 import appeng.items.tools.ToolNetworkTool;
 import appeng.parts.automation.PartExportBus;
+import appeng.tile.networking.TileCableBus;
 import appeng.util.Platform;
 import dev.beecube31.crazyae2.common.containers.slot.RestrictedSlot;
+import dev.beecube31.crazyae2.common.interfaces.mana.IManaLinkableDevice;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
@@ -94,6 +97,13 @@ public class ContainerCrazyAEUpgradeable extends AEBaseContainer implements IOpt
 
     protected void setupConfig() {
         this.setupUpgrades();
+
+        for (EnumFacing i : EnumFacing.VALUES) {
+            if (this.upgradeable.getTile() instanceof final TileCableBus p
+                    && p.getCableBus().getPart(i) instanceof IManaLinkableDevice) {
+                return;
+            }
+        }
 
         final IItemHandler inv = this.getUpgradeable().getInventoryByName("config");
         final int y = 40;
