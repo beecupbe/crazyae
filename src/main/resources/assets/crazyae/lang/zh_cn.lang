@@ -2,36 +2,36 @@ itemGroup.crazyae=疯狂的AE
 item.crazyae.invalid.name=无效或被禁用的物品
 
 # Cells
-item.crazyae.storage_cell_256k.name=§c256k§r-存储元件
-item.crazyae.storage_cell_1mb.name=§61MB§r-存储元件
-item.crazyae.storage_cell_4mb.name=§e4MB§r-存储元件
-item.crazyae.storage_cell_16mb.name=§a16MB§r-存储元件
-item.crazyae.storage_cell_64mb.name=§264MB§r-存储元件
-item.crazyae.storage_cell_256mb.name=§b256MB§r-存储元件
-item.crazyae.storage_cell_1gb.name=§11GB§r-存储元件
-item.crazyae.storage_cell_2gb.name=§d2GB§r-存储元件
+item.crazyae.storage_cell_256k.name=§c256k§r-ME存储元件
+item.crazyae.storage_cell_1mb.name=§61MB§r-ME存储元件
+item.crazyae.storage_cell_4mb.name=§e4MB§r-ME存储元件
+item.crazyae.storage_cell_16mb.name=§a16MB§r-ME存储元件
+item.crazyae.storage_cell_64mb.name=§264MB§r-ME存储元件
+item.crazyae.storage_cell_256mb.name=§b256MB§r-ME存储元件
+item.crazyae.storage_cell_1gb.name=§11GB§r-ME存储元件
+item.crazyae.storage_cell_2gb.name=§d2GB§r-ME存储元件
 
-item.crazyae.mana_cell_1k.name=§61k§r-魔力存储元件
-item.crazyae.mana_cell_4k.name=§e4k§r-魔力存储元件
-item.crazyae.mana_cell_16k.name=§a16k§r-魔力存储元件
-item.crazyae.mana_cell_64k.name=§b64k§r-魔力存储元件
-item.crazyae.mana_cell_256k.name=§c256k§r-魔力存储元件
-item.crazyae.mana_cell_1mb.name=§61MB§r-魔力存储元件
-item.crazyae.mana_cell_4mb.name=§e4MB§r-魔力存储元件
-item.crazyae.mana_cell_16mb.name=§a16MB§r-魔力存储元件
-item.crazyae.mana_cell_64mb.name=§264MB§r-魔力存储元件
-item.crazyae.mana_cell_256mb.name=§b256MB§r-魔力存储元件
-item.crazyae.mana_cell_1gb.name=§11GB§r-魔力存储元件
-item.crazyae.mana_cell_2gb.name=§d2GB§r-魔力存储元件
+item.crazyae.mana_cell_1k.name=§61k§r-ME魔力存储元件
+item.crazyae.mana_cell_4k.name=§e4k§r-ME魔力存储元件
+item.crazyae.mana_cell_16k.name=§a16k§r-ME魔力存储元件
+item.crazyae.mana_cell_64k.name=§b64k§r-ME魔力存储元件
+item.crazyae.mana_cell_256k.name=§c256k§r-ME魔力存储元件
+item.crazyae.mana_cell_1mb.name=§61MB§r-ME魔力存储元件
+item.crazyae.mana_cell_4mb.name=§e4MB§r-ME魔力存储元件
+item.crazyae.mana_cell_16mb.name=§a16MB§r-ME魔力存储元件
+item.crazyae.mana_cell_64mb.name=§264MB§r-ME魔力存储元件
+item.crazyae.mana_cell_256mb.name=§b256MB§r-ME魔力存储元件
+item.crazyae.mana_cell_1gb.name=§11GB§r-ME魔力存储元件
+item.crazyae.mana_cell_2gb.name=§d2GB§r-ME魔力存储元件
 
-item.crazyae.fluid_storage_cell_256k.name=§c256k§r-流体存储元件
-item.crazyae.fluid_storage_cell_1mb.name=§61MB§r-流体存储元件
-item.crazyae.fluid_storage_cell_4mb.name=§e4MB§r-流体存储元件
-item.crazyae.fluid_storage_cell_16mb.name=§a16MB§r-流体存储元件
-item.crazyae.fluid_storage_cell_64mb.name=§264MB§r-流体存储元件
-item.crazyae.fluid_storage_cell_256mb.name=§b256MB§r-流体存储元件
-item.crazyae.fluid_storage_cell_1gb.name=§11GB§r-流体存储元件
-item.crazyae.fluid_storage_cell_2gb.name=§d2GB§r-流体存储元件
+item.crazyae.fluid_storage_cell_256k.name=§c256k§r-ME流体存储元件
+item.crazyae.fluid_storage_cell_1mb.name=§61MB§r-ME流体存储元件
+item.crazyae.fluid_storage_cell_4mb.name=§e4MB§r-ME流体存储元件
+item.crazyae.fluid_storage_cell_16mb.name=§a16MB§r-ME流体存储元件
+item.crazyae.fluid_storage_cell_64mb.name=§264MB§r-ME流体存储元件
+item.crazyae.fluid_storage_cell_256mb.name=§b256MB§r-ME流体存储元件
+item.crazyae.fluid_storage_cell_1gb.name=§11GB§r-ME流体存储元件
+item.crazyae.fluid_storage_cell_2gb.name=§d2GB§r-ME流体存储元件
 
 item.crazyae.improved_portable_cell.name=§61MB§r便携元件
 item.crazyae.advanced_portable_cell.name=§e4MB§r便携元件
@@ -196,9 +196,9 @@ tooltip.crazyae.disabled_lowercase.name=禁用
 tooltip.crazyae.enabled.name=启用
 tooltip.crazyae.disabled.name=禁用
 
-tooltip.crazyae.mana_connector_block_linked.name=绑定成功
+tooltip.crazyae.mana_connector_block_linked.name=连接成功
 tooltip.crazyae.mana_connector_block_saved.name=已绑定魔力池
-tooltip.crazyae.mana_connector_clear.name=已解除绑定
+tooltip.crazyae.mana_connector_clear.name=已解除
 
 #Internal
 
