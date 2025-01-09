@@ -1,6 +1,5 @@
-#PARSE_ESCAPES
-# Corresponding Version: CrazyAE-v0.1.1-3b00d41
-# 対応バージョン: CrazyAE-v0.1.1-3b00d41
+# Corresponding Version: CrazyAE-v0.3
+# 対応バージョン: CrazyAE-v0.3
 
 itemGroup.crazyae=CrazyAE
 item.crazyae.invalid.name=無効または利用不可のアイテム
@@ -14,6 +13,19 @@ item.crazyae.storage_cell_64mb.name=§264MB§r MEストレージセル
 item.crazyae.storage_cell_256mb.name=§b256MB§r MEストレージセル
 item.crazyae.storage_cell_1gb.name=§11GB§r MEストレージセル
 item.crazyae.storage_cell_2gb.name=§d2GB§r MEストレージセル
+
+item.crazyae.mana_cell_1k.name=§61k§r MEマナセル
+item.crazyae.mana_cell_4k.name=§e4k§r MEマナセル
+item.crazyae.mana_cell_16k.name=§a16k§r MEマナセル
+item.crazyae.mana_cell_64k.name=§b64k§r MEマナセル
+item.crazyae.mana_cell_256k.name=§c256k§r MEマナセル
+item.crazyae.mana_cell_1mb.name=§61MB§r MEマナセル
+item.crazyae.mana_cell_4mb.name=§e4MB§r MEマナセル
+item.crazyae.mana_cell_16mb.name=§a16MB§r MEマナセル
+item.crazyae.mana_cell_64mb.name=§264MB§r MEマナセル
+item.crazyae.mana_cell_256mb.name=§b256MB§r MEマナセル
+item.crazyae.mana_cell_1gb.name=§11GB§r MEマナセル
+item.crazyae.mana_cell_2gb.name=§d2GB§r MEマナセル
 
 item.crazyae.fluid_storage_cell_256k.name=§c256k§r ME液体セル
 item.crazyae.fluid_storage_cell_1mb.name=§61MB§r ME液体セル
@@ -38,6 +50,19 @@ item.crazyae.material.cell_part_256mb.name=§b256MB§r MEストレージコン�
 item.crazyae.material.cell_part_1gb.name=§11GB§r MEストレージコンポーネント
 item.crazyae.material.cell_part_2gb.name=§d2GB§r MEストレージコンポーネント
 
+item.crazyae.material.mana_part_1k.name=§61k§r MEマナコンポーネント
+item.crazyae.material.mana_part_4k.name=§e4k§r MEマナコンポーネント
+item.crazyae.material.mana_part_16k.name=§a16k§r MEマナコンポーネント
+item.crazyae.material.mana_part_64k.name=§b64k§r MEマナコンポーネント
+item.crazyae.material.mana_part_256k.name=§c256k§r MEマナコンポーネント
+item.crazyae.material.mana_part_1mb.name=§61MB§r MEマナコンポーネント
+item.crazyae.material.mana_part_4mb.name=§e4MB§r MEマナコンポーネント
+item.crazyae.material.mana_part_16mb.name=§a16MB§r MEマナコンポーネント
+item.crazyae.material.mana_part_64mb.name=§264MB§r MEマナコンポーネント
+item.crazyae.material.mana_part_256mb.name=§b256MB§r MEマナコンポーネント
+item.crazyae.material.mana_part_1gb.name=§11GB§r MEマナコンポーネント
+item.crazyae.material.mana_part_2gb.name=§d2GB§r MEマナコンポーネント
+
 item.crazyae.material.cell_part_fluid_256k.name=§c256k§r ME液体コンポーネント
 item.crazyae.material.cell_part_fluid_1mb.name=§61MB§r ME液体コンポーネント
 item.crazyae.material.cell_part_fluid_4mb.name=§e4MB§r ME液体コンポーネント
@@ -47,11 +72,17 @@ item.crazyae.material.cell_part_fluid_256mb.name=§b256MB§r ME液体コンポ�
 item.crazyae.material.cell_part_fluid_1gb.name=§11GB§r ME液体コンポーネント
 item.crazyae.material.cell_part_fluid_2gb.name=§d2GB§r ME液体コンポーネント
 
-item.crazyae.material.quantum_processor.name=量子プロセッサ
 
 #Items
 item.crazyae.quantum_wireless_booster.name=量子無線ブースター
+item.crazyae.material.quantum_processor.name=量子プロセッサ
+item.crazyae.material.mana_processor.name=マナプロセッサ
+item.crazyae.mana_connector.name=マナコネクタ
 tooltip.crazyae.quantum_wireless_booster_desc.name=このアイテムは現在開発中です
+tooltip.crazyae.mana_connector_desc.name=マナプールをマナ入力/出力バスにリンクさせる
+tooltip.crazyae.linked_with_mana_pool_at_pos.name=x=%s, y=%s, z=%s のマナプールに接続
+tooltip.crazyae.mana_connector_lets_connect_to_bus.name=マナ入力/出力バスをクリックして接続する
+
 
 
 # Parts
@@ -60,6 +91,10 @@ item.crazyae.part.improved_export_bus.name=ME発展型出力バス
 
 item.crazyae.part.improved_export_fluid_bus.name=ME発展型液体出力バス
 item.crazyae.part.improved_import_fluid_bus.name=ME発展型液体入力バス
+
+item.crazyae.part.mana_import_bus.name=MEマナ入力バス
+item.crazyae.part.mana_export_bus.name=MEマナ出力バス
+item.crazyae.part.mana_term.name=MEマナターミナル
 
 
 # Upgrades
@@ -104,6 +139,10 @@ tile.crazyae.perfect_solar_panel.name=§cME究極型ソーラーパネル§r
 
 tile.crazyae.patterns_interface.name=§8MEパターンインターフェース§r
 
+tile.crazyae.improved_condenser.name=§6発展型コンデンサー§r
+
+tile.crazyae.quantum_channels_multiplier.name=量子チャンネルマルチプライヤー
+
 #Resource
 
 tile.crazyae.fluixilized_block.name=§5チャージドフルーシュブロック§r
@@ -120,8 +159,16 @@ gui.crazyae.imp_export_bus.name=ME発展型出力バス
 gui.crazyae.imp_fluid_import_bus.name=ME発展型液体入力バス
 gui.crazyae.imp_fluid_export_bus.name=ME発展型液体出力バス
 
-gui.crazyae.pattern_interface.name=MEパターンインターフェース
+gui.crazyae.pattern_interface.name=§8MEパターンインターフェース§r
 
+gui.crazyae.mana_terminal.name=MEマナターミナル
+gui.crazyae.mana_import_bus.name=MEマナ入力バス
+gui.crazyae.mana_export_bus.name=MEマナ出力バス
+
+gui.crazyae.link_with_mana_connector.name=このバスはリンクする必要があります
+gui.crazyae.link_with_mana_connector2.name=をマナプールに接続する
+gui.crazyae.link_with_mana_connector3.name="マナコネクター".
+gui.crazyae.linked_with_mana_pool.name=х=%s y=%s z=%s と接続中
 
 # GUI's Tooltip
 
@@ -138,7 +185,12 @@ tooltip.crazyae.passive_generation_day.name=昼の発電量:
 tooltip.crazyae.passive_generation_night.name=夜の発電量:
 tooltip.crazyae.max_solar_capacity.name=容量
 
+tooltip.crazyae.qcm_desc.name=ケーブルの容量を増やすことができます。例:
+tooltip.crazyae.qcm_desc1.name=各量子マルチプライヤーは通常ケーブルに対して%s個のチャンネルを、
+tooltip.crazyae.qcm_desc2.name=高密度ケーブルには%s個のチャンネルを%s AE/tのコストで追加する。
+
 tooltip.crazyae.auto_pickup.name=自動回収は
+tooltip.crazyae.auto_pickup_how_to_enable.name=SHIFT+RMBを押す毎に自動回収を切り替え
 tooltip.crazyae.auto_pickup_tip.name=セルワークベンチで指定した設定はフィルターとして使用されます。
 
 
@@ -146,6 +198,16 @@ tooltip.crazyae.enabled_lowercase.name=有効
 tooltip.crazyae.disabled_lowercase.name=無効
 tooltip.crazyae.enabled.name=有効
 tooltip.crazyae.disabled.name=無効
+
+tooltip.crazyae.mana_connector_block_linked.name=紐づけが成功しました
+tooltip.crazyae.mana_connector_block_saved.name=マナプールと接続しました
+tooltip.crazyae.mana_connector_clear.name=紐づけを解除しました
+
+#Internal
+
+item.crazyae.mana_as_aestack.name=マナ
+gui.tooltip.crazyae.mana.name=マナ
+gui.tooltip.crazyae.stored_mana.name=在庫マナ: %s
 
 #Misc
 
