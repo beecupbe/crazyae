@@ -5,6 +5,7 @@ import appeng.api.config.Actionable;
 import appeng.api.config.FuzzyMode;
 import appeng.api.config.RedstoneMode;
 import appeng.api.config.Settings;
+import appeng.api.definitions.IItemDefinition;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.energy.IEnergyGrid;
 import appeng.api.networking.security.IActionSource;
@@ -52,9 +53,9 @@ public class PartManaExportBus extends CrazyAEPartSharedBus implements IManaLink
 
     private final IActionSource source;
 
-    private int connectionX;
-    private int connectionY;
-    private int connectionZ;
+    private int connectionX = Integer.MIN_VALUE;
+    private int connectionY = Integer.MIN_VALUE;
+    private int connectionZ = Integer.MIN_VALUE;
     private boolean hasConnection;
 
     @Reflected
@@ -213,5 +214,10 @@ public class PartManaExportBus extends CrazyAEPartSharedBus implements IManaLink
     @Override
     public boolean hasLinkedPool() {
         return this.hasConnection;
+    }
+
+    @Override
+    public IItemDefinition getBlock() {
+        return CrazyAE.definitions().parts().manaExportBus();
     }
 }

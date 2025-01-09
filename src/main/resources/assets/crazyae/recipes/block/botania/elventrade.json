@@ -1,0 +1,46 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "minecraft:item_exists",
+          "item": "botania:alfheimportal"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "botania:manaresource"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:crafting_accelerator_16x"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "item": "crazyae:mechanical_elventrade"
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "gxg",
+    "aea",
+    "gxg"
+  ],
+  "key": {
+    "g": {
+      "item": "botania:manaresource",
+      "data": 14
+    },
+    "e": {
+      "item": "botania:alfheimportal"
+    },
+    "x": {
+      "item": "botania:manaresource",
+      "data": 8
+    },
+    "a": {
+      "item": "crazyae:crafting_accelerator_16x"
+    }
+  }
+}

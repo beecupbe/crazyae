@@ -11,8 +11,10 @@ import dev.beecube31.crazyae2.common.networking.CrazyAENetworkHandler;
 import dev.beecube31.crazyae2.common.networking.network.NetworkHandler;
 import dev.beecube31.crazyae2.common.registration.Registration;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiHandler;
-import dev.beecube31.crazyae2.common.util.GridChannelBoostersCache;
-import dev.beecube31.crazyae2.common.util.IGridChannelBoostersCache;
+import dev.beecube31.crazyae2.core.cache.impl.GridChannelBoostersCache;
+import dev.beecube31.crazyae2.core.cache.IGridChannelBoostersCache;
+import dev.beecube31.crazyae2.core.client.CrazyAEClientConfig;
+import dev.beecube31.crazyae2.core.helpers.ClientHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
@@ -44,6 +46,10 @@ import java.io.File;
 )
 public class CrazyAE {
 	public static CrazyAE instance;
+
+	@SideOnly(Side.CLIENT)
+	private static final ClientHelper clientHelper = new ClientHelper();
+
 	private static FeatureManager featureManager;
 	private final Logger logger = LogManager.getLogger(Tags.MODID.toUpperCase());
 	private final CrazyAENetworkHandler network = new CrazyAENetworkHandler();
@@ -84,7 +90,18 @@ public class CrazyAE {
 		this.registration = new Registration();
 
 		CrazyAE.instance = this;
+		CrazyAEClientConfig.init(
+				new Configuration(
+						new File(
+								event.getModConfigurationDirectory().getPath(),
+								"crazyae-client.cfg"
+						)
+				)
+		);
+
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, this.crazyAEGuiHandler = new CrazyAEGuiHandler());
+
+		clientHelper.preinit();
 
 		MinecraftForge.EVENT_BUS.register(instance);
 
@@ -94,6 +111,8 @@ public class CrazyAE {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		this.registration.init(event);
+
+		clientHelper.init();
 
 		if (!CrazyAEConfig.disableUpdatesCheck) {
 			MinecraftForge.EVENT_BUS.register(new UpdateChecker());
@@ -113,12 +132,13 @@ public class CrazyAE {
 			this.icon = CrazyAE.definitions().items().storageCell1MB().maybeStack(1).orElse(ItemStack.EMPTY);
 		}
 
+		clientHelper.postinit();
+
 		NetworkHandler.init("CrazyAE");
 		this.registration.postInit(event);
 	}
 
 	public static class FeatureManager {
-
 		public FeatureManager() {
 			var file = new File("config/crazyae-features.cfg");
 			var config = new Configuration(file);
@@ -156,7 +176,6 @@ public class CrazyAE {
 
 	@SubscribeEvent
 	public void handleEntityItemPickup(EntityItemPickupEvent event) {
-
 		EntityPlayer player = event.getEntityPlayer();
 
 		if (player.openContainer instanceof ContainerMEPortableCell) {
@@ -166,9 +185,11 @@ public class CrazyAE {
 		InventoryPlayer inventory = event.getEntityPlayer().inventory;
 		for (int i = 0; i < inventory.getSizeInventory(); i++) {
 			ItemStack stack = inventory.getStackInSlot(i);
-			if (stack.getItem() instanceof ImprovedPortableCell cell) {
-				event.setCanceled(cell.isAutoPickupEnabled(stack) && cell.onItemPickup(event, stack));
-				return;
+			if (stack.getItem() instanceof ImprovedPortableCell cell && cell.isAutoPickupEnabled(stack)) {
+				if (cell.onItemPickup(event, stack)) {
+					event.setCanceled(true);
+					return;
+				}
 			}
 		}
 	}

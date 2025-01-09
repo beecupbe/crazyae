@@ -1,3 +1,4 @@
+#PARSE_ESCAPES
 itemGroup.crazyae=疯狂的AE
 item.crazyae.invalid.name=无效或被禁用的物品
 
@@ -116,7 +117,7 @@ gui.crazyae.imp_export_bus.name=增强型ME输出总线
 gui.crazyae.imp_fluid_import_bus.name=增强型ME流体输入总线
 gui.crazyae.imp_fluid_export_bus.name=增强型ME流体输出总线
 
-gui.crazyae.pattern_interface.name=§8ME样板接口§r
+gui.crazyae.pattern_interface.name=ME样板接口
 
 
 # GUI's Tooltip

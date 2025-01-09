@@ -1,7 +1,8 @@
 package dev.beecube31.crazyae2.common.blocks.crafting;
 
 import appeng.api.util.AEPartLocation;
-import appeng.block.AEBaseTileBlock;
+import dev.beecube31.crazyae2.common.base.CrazyAEBlockAttribute;
+import dev.beecube31.crazyae2.common.enums.MachineAttributes;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiBridge;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiHandler;
 import dev.beecube31.crazyae2.common.tile.crafting.TileImprovedMAC;
@@ -17,7 +18,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockImprovedMAC extends AEBaseTileBlock {
+public class BlockImprovedMAC extends CrazyAEBlockAttribute {
 
     public static final PropertyBool POWERED = PropertyBool.create("powered");
 
@@ -57,5 +58,10 @@ public class BlockImprovedMAC extends AEBaseTileBlock {
         }
 
         return super.onBlockActivated(w, pos, state, p, hand, side, hitX, hitY, hitZ);
+    }
+
+    @Override
+    public MachineAttributes getAttributes() {
+        return new MachineAttributes().setRequiredAEPerTick(32.0D);
     }
 }

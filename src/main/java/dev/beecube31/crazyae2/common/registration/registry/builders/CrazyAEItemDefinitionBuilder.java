@@ -12,6 +12,7 @@ import dev.beecube31.crazyae2.common.features.IFeature;
 import dev.beecube31.crazyae2.common.registration.definitions.CreativeTab;
 import dev.beecube31.crazyae2.common.registration.registry.Registry;
 import dev.beecube31.crazyae2.common.registration.registry.rendering.CrazyAEItemRendering;
+import dev.beecube31.crazyae2.integrations.jei.JEIPlugin;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.dispenser.IBehaviorDispenseItem;
@@ -143,10 +144,10 @@ public class CrazyAEItemDefinitionBuilder implements ICrazyAEItemBuilder {
 	}
 
 	private ItemDefinition buildItem() {
-		var item = this.itemSupplier.get();
+		Item item = this.itemSupplier.get();
 		item.setRegistryName(Tags.MODID, this.registryName);
 
-		var definition = new ItemDefinition(this.registryName, item);
+		ItemDefinition definition = new ItemDefinition(this.registryName, item);
 
 		item.setTranslationKey(Tags.MODID + "." + this.registryName);
 		if (!this.hidden) {
@@ -160,7 +161,7 @@ public class CrazyAEItemDefinitionBuilder implements ICrazyAEItemBuilder {
 		if (this.dispenserBehaviorSupplier != null) {
 			this.registry.addBootstrapComponent((IPostInitComponent) side ->
 			{
-				var behavior = this.dispenserBehaviorSupplier.get();
+				IBehaviorDispenseItem behavior = this.dispenserBehaviorSupplier.get();
 				BlockDispenser.DISPENSE_BEHAVIOR_REGISTRY.putObject(item, behavior);
 			});
 		}
@@ -168,7 +169,9 @@ public class CrazyAEItemDefinitionBuilder implements ICrazyAEItemBuilder {
 		this.registry.addBootstrapComponent((IItemRegistrationComponent) (side, reg) -> reg.register(item));
 
 		if (Platform.isClient()) {
-
+			if (this.hidden && Platform.isModLoaded("jei")) {
+				JEIPlugin.hideItemFromJEI(definition);
+			}
 			this.itemRendering.apply(this.registry, item);
 		}
 

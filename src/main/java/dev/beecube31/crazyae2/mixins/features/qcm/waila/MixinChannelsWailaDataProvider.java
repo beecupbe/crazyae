@@ -7,21 +7,27 @@ import appeng.core.localization.WailaText;
 import appeng.integration.modules.waila.part.ChannelWailaDataProvider;
 import appeng.parts.networking.PartCableSmart;
 import appeng.parts.networking.PartDenseCableSmart;
-import dev.beecube31.crazyae2.common.util.IGridChannelBoostersCache;
+import dev.beecube31.crazyae2.core.cache.IGridChannelBoostersCache;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import mcp.mobius.waila.api.IWailaConfigHandler;
 import mcp.mobius.waila.api.IWailaDataAccessor;
 import net.minecraft.nbt.NBTTagCompound;
-import org.spongepowered.asm.mixin.*;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Shadow;
 
 import java.util.List;
 
 @Mixin(value = ChannelWailaDataProvider.class, remap = false)
 public abstract class MixinChannelsWailaDataProvider {
 
-    @Shadow protected abstract int getUsedChannels(IPart part, NBTTagCompound tag, Object2IntMap<IPart> cache);
+    @Shadow
+    protected abstract int getUsedChannels(IPart part, NBTTagCompound tag, Object2IntMap<IPart> cache);
 
-    @Shadow @Final private Object2IntMap<IPart> cache;
+    @Shadow
+    @Final
+    private Object2IntMap<IPart> cache;
 
     /**
      * @author Beecube31
@@ -38,22 +44,14 @@ public abstract class MixinChannelsWailaDataProvider {
             final int usedChannels = this.getUsedChannels(part, tag, this.cache);
 
             if (usedChannels >= 0) {
-                final int boostChannels = part.getGridNode().getGrid().<IGridChannelBoostersCache>getCache(IGridChannelBoostersCache.class).getChannels();
-                if (part instanceof PartDenseCableSmart) {
-                    final int channels = AEConfig.instance().getDenseChannelCapacity() + boostChannels;
-                    currentToolTip.add(String.format(WailaText.Channels.getLocal(), usedChannels, channels));
-                    return currentToolTip;
-                } else if (part instanceof PartCableSmart) {
-                    final int channels = AEConfig.instance().getNormalChannelCapacity() + boostChannels / 4;
-                    currentToolTip.add(String.format(WailaText.Channels.getLocal(), usedChannels, channels));
-                    return currentToolTip;
-                }
+                IGridChannelBoostersCache cache = part.getGridNode().getGrid().getCache(IGridChannelBoostersCache.class);
+                final int boostChannels = cache.getChannels();
+                final int channels = cache.isForcingCreativeMultiplier() ? Integer.MAX_VALUE
+                        : ((part instanceof PartDenseCableSmart) ? AEConfig.instance().getDenseChannelCapacity() + boostChannels : AEConfig.instance().getNormalChannelCapacity() + boostChannels / 4);
 
-                final int channels = ((part instanceof PartDenseCableSmart) ? AEConfig.instance().getDenseChannelCapacity() : AEConfig.instance().getNormalChannelCapacity());
                 currentToolTip.add(String.format(WailaText.Channels.getLocal(), usedChannels, channels));
             }
         }
-
         return currentToolTip;
     }
 }

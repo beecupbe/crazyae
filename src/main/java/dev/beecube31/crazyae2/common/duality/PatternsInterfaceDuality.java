@@ -5,6 +5,7 @@ import appeng.api.config.Actionable;
 import appeng.api.config.Settings;
 import appeng.api.config.Upgrades;
 import appeng.api.config.YesNo;
+import appeng.api.definitions.IItemDefinition;
 import appeng.api.implementations.ICraftingPatternItem;
 import appeng.api.implementations.IUpgradeableHost;
 import appeng.api.implementations.tiles.ICraftingMachine;
@@ -31,6 +32,7 @@ import appeng.api.util.AEPartLocation;
 import appeng.api.util.DimensionalCoord;
 import appeng.api.util.IConfigManager;
 import appeng.capabilities.Capabilities;
+import appeng.core.localization.GuiText;
 import appeng.helpers.*;
 import appeng.me.GridAccessException;
 import appeng.me.helpers.AENetworkProxy;
@@ -40,8 +42,10 @@ import appeng.me.storage.MEMonitorPassThrough;
 import appeng.me.storage.NullInventory;
 import appeng.parts.automation.StackUpgradeInventory;
 import appeng.parts.automation.UpgradeInventory;
+import appeng.parts.misc.PartInterface;
 import appeng.tile.inventory.AppEngInternalInventory;
 import appeng.tile.inventory.AppEngInternalOversizedInventory;
+import appeng.tile.networking.TileCableBus;
 import appeng.util.ConfigManager;
 import appeng.util.IConfigManagerHost;
 import appeng.util.InventoryAdaptor;
@@ -49,13 +53,24 @@ import appeng.util.Platform;
 import appeng.util.inv.*;
 import appeng.util.item.AEItemStack;
 import de.ellpeck.actuallyadditions.api.tile.IPhantomTile;
-import dev.beecube31.crazyae2.common.interfaces.ICrazyAEPatternsInterface;
+import dev.beecube31.crazyae2.common.interfaces.ICrazyAEInterfaceHost;
+import dev.beecube31.crazyae2.common.interfaces.upgrades.IUpgradesInfoProvider;
+import dev.beecube31.crazyae2.core.CrazyAE;
+import gregtech.api.block.machines.BlockMachine;
+import gregtech.api.metatileentity.MetaTileEntity;
+import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.fml.common.Loader;
@@ -68,12 +83,14 @@ import java.util.*;
 import static appeng.helpers.ItemStackHelper.stackFromNBT;
 import static appeng.helpers.ItemStackHelper.stackToNBT;
 
-public class PatternsInterfaceDuality implements IGridTickable, IStorageMonitorable, IInventoryDestination, IAEAppEngInventory, IConfigManagerHost, ICraftingProvider, IUpgradeableHost {
+public class PatternsInterfaceDuality implements IGridTickable, IStorageMonitorable, IInventoryDestination, IAEAppEngInventory, IConfigManagerHost, ICraftingProvider, IUpgradesInfoProvider {
     public static final int NUMBER_OF_STORAGE_SLOTS = 9;
     public static final int NUMBER_OF_PATTERN_SLOTS = 72;
 
+    private static final Collection<Block> BAD_BLOCKS = new HashSet<>(100);
+
     private final AENetworkProxy gridProxy;
-    private final ICrazyAEPatternsInterface iHost;
+    private final ICrazyAEInterfaceHost iHost;
     private final ConfigManager cm = new ConfigManager(this);
     private final AppEngInternalInventory storage = new AppEngInternalOversizedInventory(this, NUMBER_OF_STORAGE_SLOTS, 8192);
     private final AppEngInternalInventory patterns = new AppEngInternalInventory(this, NUMBER_OF_PATTERN_SLOTS, 1);
@@ -91,7 +108,7 @@ public class PatternsInterfaceDuality implements IGridTickable, IStorageMonitora
     private EnumMap<EnumFacing, List<ItemStack>> waitingToSendFacing = new EnumMap<>(EnumFacing.class);
     private final boolean isActuallyAdditionsLoaded;
 
-    public PatternsInterfaceDuality(final AENetworkProxy networkProxy, final ICrazyAEPatternsInterface ih) {
+    public PatternsInterfaceDuality(final AENetworkProxy networkProxy, final ICrazyAEInterfaceHost ih) {
         this.isActuallyAdditionsLoaded = Loader.isModLoaded("actuallyadditions");
         this.gridProxy = networkProxy;
         this.gridProxy.setFlags(GridFlags.REQUIRE_CHANNEL);
@@ -270,7 +287,7 @@ public class PatternsInterfaceDuality implements IGridTickable, IStorageMonitora
         } catch (final GridAccessException e) {
             // :P
         }
-    }
+    } 
 
     private void updateCraftingList() {
         final Boolean[] accountedFor = new Boolean[this.patterns.getSlots()];
@@ -469,9 +486,9 @@ public class PatternsInterfaceDuality implements IGridTickable, IStorageMonitora
         final TileEntity tile = this.iHost.getTileEntity();
         final World w = tile.getWorld();
 
-        final Iterator<ItemStack> i = this.waitingToSend.iterator();
-        while (i.hasNext()) {
-            ItemStack whatToSend = i.next();
+        final Iterator<ItemStack> items = this.waitingToSend.iterator();
+        while (items.hasNext()) {
+            ItemStack itemToSend = items.next();
 
             for (final EnumFacing s : possibleDirections) {
                 final TileEntity te = w.getTileEntity(tile.getPos().offset(s));
@@ -479,25 +496,32 @@ public class PatternsInterfaceDuality implements IGridTickable, IStorageMonitora
                     continue;
                 }
 
+                if (te instanceof IInterfaceHost
+                        || te instanceof ICrazyAEInterfaceHost
+                        || (te instanceof TileCableBus && ((TileCableBus) te).getPart(s.getOpposite()) instanceof PartInterface
+                )) {
+                    continue;
+                }
+
                 final InventoryAdaptor ad = InventoryAdaptor.getAdaptor(te, s.getOpposite());
                 if (ad != null) {
-                    final ItemStack result = ad.addItems(whatToSend);
+                    final ItemStack result = ad.addItems(itemToSend);
 
                     if (result.isEmpty()) {
-                        whatToSend = ItemStack.EMPTY;
+                        itemToSend = ItemStack.EMPTY;
                     } else {
-                        whatToSend.setCount(result.getCount());
-                        whatToSend.setTagCompound(result.getTagCompound());
+                        itemToSend.setCount(result.getCount());
+                        itemToSend.setTagCompound(result.getTagCompound());
                     }
 
-                    if (whatToSend.isEmpty()) {
+                    if (itemToSend.isEmpty()) {
                         break;
                     }
                 }
             }
 
-            if (whatToSend.isEmpty()) {
-                i.remove();
+            if (itemToSend.isEmpty()) {
+                items.remove();
             }
         }
 
@@ -808,14 +832,84 @@ public class PatternsInterfaceDuality implements IGridTickable, IStorageMonitora
         }
     }
 
-    public IUpgradeableHost getHost() {
+    public IUpgradesInfoProvider getHost() {
         if (this.getPart() != null) {
-            return (IUpgradeableHost) this.getPart();
+            return (IUpgradesInfoProvider) this.getPart();
         }
         if (this.getTile() instanceof IUpgradeableHost) {
-            return (IUpgradeableHost) this.getTile();
+            return (IUpgradesInfoProvider) this.getTile();
         }
         return null;
+    }
+
+    public String getTermName() {
+        final TileEntity hostTile = this.iHost.getTileEntity();
+        final World hostWorld = hostTile.getWorld();
+
+        if (((ICustomNameObject) this.iHost).hasCustomInventoryName()) {
+            return ((ICustomNameObject) this.iHost).getCustomInventoryName();
+        }
+
+        final EnumSet<EnumFacing> possibleDirections = this.iHost.getTargets();
+        for (final EnumFacing direction : possibleDirections) {
+            final BlockPos targ = hostTile.getPos().offset(direction);
+            final TileEntity directedTile = hostWorld.getTileEntity(targ);
+
+            if (directedTile == null) {
+                continue;
+            }
+
+            final InventoryAdaptor adaptor = InventoryAdaptor.getAdaptor(directedTile, direction.getOpposite());
+            if (directedTile instanceof ICraftingMachine || adaptor != null) {
+                if (adaptor != null && !adaptor.hasSlots()) {
+                    continue;
+                }
+
+                final IBlockState directedBlockState = hostWorld.getBlockState(targ);
+                final Block directedBlock = directedBlockState.getBlock();
+                ItemStack what = new ItemStack(directedBlock, 1, directedBlock.getMetaFromState(directedBlockState));
+
+                if (Platform.GTLoaded && directedBlock instanceof BlockMachine) {
+                    MetaTileEntity metaTileEntity = Platform.getMetaTileEntity(directedTile.getWorld(), directedTile.getPos());
+                    if (metaTileEntity != null) {
+                        return metaTileEntity.getMetaFullName();
+                    }
+                }
+
+                try {
+                    Vec3d from = new Vec3d(hostTile.getPos().getX() + 0.5, hostTile.getPos().getY() + 0.5, hostTile.getPos().getZ() + 0.5);
+                    from = from.add(direction.getXOffset() * 0.501, direction.getYOffset() * 0.501, direction.getZOffset() * 0.501);
+                    final Vec3d to = from.add(direction.getXOffset(), direction.getYOffset(), direction.getZOffset());
+                    final RayTraceResult mop = hostWorld.rayTraceBlocks(from, to, true);
+                    if (mop != null && !BAD_BLOCKS.contains(directedBlock)) {
+                        if (mop.getBlockPos().equals(directedTile.getPos())) {
+                            final ItemStack g = directedBlock.getPickBlock(directedBlockState, mop, hostWorld, directedTile.getPos(), null);
+                            if (!g.isEmpty()) {
+                                what = g;
+                            }
+                        }
+                    }
+                } catch (final Throwable t) {
+                    BAD_BLOCKS.add(directedBlock);
+                }
+
+                if (what.getItem() != Items.AIR) {
+                    return what.getItem().getItemStackDisplayName(what);
+                }
+
+                final Item item = Item.getItemFromBlock(directedBlock);
+                if (item == Items.AIR) {
+                    return directedBlock.getTranslationKey();
+                }
+            }
+        }
+
+        return GuiText.Nothing.getLocal();
+    }
+
+    public long getSortValue() {
+        final TileEntity te = this.iHost.getTileEntity();
+        return ((long) te.getPos().getZ() << 24) ^ ((long) te.getPos().getX() << 8) ^ te.getPos().getY();
     }
 
     private IPart getPart() {
@@ -855,6 +949,10 @@ public class PatternsInterfaceDuality implements IGridTickable, IStorageMonitora
         return null;
     }
 
+    @Override
+    public IItemDefinition getBlock() {
+        return CrazyAE.definitions().blocks().patternsInterface();
+    }
 
     private class InterfaceRequestContext implements Comparable<Integer> {
         @Override
@@ -862,7 +960,6 @@ public class PatternsInterfaceDuality implements IGridTickable, IStorageMonitora
             return Integer.compare(PatternsInterfaceDuality.this.priority, o);
         }
     }
-
 
     private class InterfaceInventory extends MEMonitorIInventory {
         public InterfaceInventory(final PatternsInterfaceDuality tileInterface) {
@@ -893,7 +990,6 @@ public class PatternsInterfaceDuality implements IGridTickable, IStorageMonitora
             return super.extractItems(request, type, src);
         }
     }
-
 
     private class Accessor implements IStorageMonitorableAccessor {
         @Nullable

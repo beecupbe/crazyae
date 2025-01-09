@@ -3,22 +3,25 @@ package dev.beecube31.crazyae2.common.sync;
 import appeng.api.AEApi;
 import appeng.api.config.SecurityPermissions;
 import appeng.api.exceptions.AppEngException;
-import appeng.api.implementations.IUpgradeableHost;
 import appeng.api.networking.security.IActionHost;
 import appeng.api.networking.security.ISecurityGrid;
 import appeng.api.parts.IPartHost;
 import appeng.api.storage.ITerminalHost;
 import appeng.api.util.AEPartLocation;
 import appeng.api.util.DimensionalCoord;
-import appeng.client.gui.AEBaseGui;
-import appeng.container.AEBaseContainer;
 import appeng.core.sync.GuiHostType;
 import appeng.helpers.WirelessTerminalGuiObject;
 import appeng.util.Platform;
+import dev.beecube31.crazyae2.client.gui.CrazyAEBaseGui;
 import dev.beecube31.crazyae2.common.containers.*;
+import dev.beecube31.crazyae2.common.containers.base.CrazyAEBaseContainer;
 import dev.beecube31.crazyae2.common.interfaces.IChangeablePriorityHost;
 import dev.beecube31.crazyae2.common.interfaces.ICrazyAEGuiItem;
+import dev.beecube31.crazyae2.common.interfaces.upgrades.IUpgradesInfoProvider;
+import dev.beecube31.crazyae2.common.items.ColorizerObj;
+import dev.beecube31.crazyae2.common.items.PatternsUSBStickObj;
 import dev.beecube31.crazyae2.common.parts.implementations.fluid.CrazyAEPartSharedFluidBus;
+import dev.beecube31.crazyae2.common.tile.botania.*;
 import dev.beecube31.crazyae2.common.tile.crafting.TileImprovedMAC;
 import dev.beecube31.crazyae2.common.tile.misc.TileImprovedCondenser;
 import dev.beecube31.crazyae2.common.tile.networking.TileBigCrystalCharger;
@@ -49,22 +52,36 @@ public enum CrazyAEGuiBridge {
 	IMPROVED_IO_PORT(TileImprovedIOPort.class, ContainerIOPortImproved.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
 	CRAFTING_UNITS_COMBINER(TileCraftingUnitsCombiner.class, ContainerCraftingUnitsCombiner.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
 	BIG_CRYSTAL_CHARGER(TileBigCrystalCharger.class, ContainerBigCrystalCharger.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
-	IMPROVED_BUS(IUpgradeableHost.class, ContainerCrazyAEUpgradeable.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
+	IMPROVED_BUS(IUpgradesInfoProvider.class, ContainerCrazyAEUpgradeable.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
 	IMPROVED_FLUID_BUSES(CrazyAEPartSharedFluidBus.class, ContainerImprovedFluidBuses.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
 	IMPROVED_CONDENSER(TileImprovedCondenser.class, ContainerImprovedCondenser.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
 	PATTERN_INTERFACE(TilePatternsInterface.class, ContainerPatternsInterface.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
-	GUI_MANA_TERMINAL(ITerminalHost.class, ContainerManaTerminal.class, GuiHostType.WORLD, SecurityPermissions.BUILD);
+	GUI_MANA_TERMINAL(ITerminalHost.class, ContainerManaTerminal.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
+
+	GUI_ELVENTRADE_MECHANICAL(TileMechanicalElventrade.class, ContainerElventradeMechanical.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
+	GUI_MANAPOOL_MECHANICAL(TileMechanicalManapool.class, ContainerManapoolMechanical.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
+	GUI_PETAL_MECHANICAL(TileMechanicalPetal.class, ContainerPetalMechanical.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
+	GUI_PUREDAISY_MECHANICAL(TileMechanicalPuredaisy.class, ContainerPuredaisyMechanical.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
+	GUI_RUNEALTAR_MECHANICAL(TileMechanicalRunealtar.class, ContainerRunealtarMechanical.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
+
+	GUI_MECHANICAL_DEVICE_PATTERN_INV(TileBotaniaMechanicalMachineBase.class, ContainerBotaniaDevicePatternsInv.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
+
+	//Item GUIs
+	GUI_ITEM_COLORIZER_GUI(ColorizerObj.class, ContainerColorizerGui.class, GuiHostType.ITEM, SecurityPermissions.BUILD),
+	GUI_ITEM_COLORIZER_TEXT(ColorizerObj.class, ContainerColorizerText.class, GuiHostType.ITEM, SecurityPermissions.BUILD),
+
+	GUI_USB_PATTERNS_STICK(PatternsUSBStickObj.class, ContainerColorizerGui.class, GuiHostType.ITEM, SecurityPermissions.BUILD);
 
 	private static CrazyAEGuiBridge[] cachedValues;
 	private final Class<?> clazz;
-	private final Class<? extends AEBaseContainer> containerClass;
+	private final Class<? extends CrazyAEBaseContainer> containerClass;
 	private final GuiHostType hostType;
 	private final SecurityPermissions securityPermissions;
 
 	@SideOnly(Side.CLIENT)
-	private Class<? super AEBaseGui> clientGuiClass;
+	private Class<? super CrazyAEBaseGui> clientGuiClass;
 
-	CrazyAEGuiBridge(Class<?> clazz, Class<? extends AEBaseContainer> containerClass, GuiHostType hostType,
+	CrazyAEGuiBridge(Class<?> clazz, Class<? extends CrazyAEBaseContainer> containerClass, GuiHostType hostType,
 					 SecurityPermissions securityPermissions) {
 		this.hostType = hostType;
 		this.securityPermissions = securityPermissions;
@@ -133,7 +150,7 @@ public enum CrazyAEGuiBridge {
 	private void getGui() {
 		if (Platform.isClientInstall()) {
 			//noinspection ResultOfMethodCallIgnored
-			AEBaseGui.class.getName();
+			CrazyAEBaseGui.class.getName();
 			var start = this.containerClass.getName();
 			var guiClass = start.replaceFirst("common.containers.Container", "client.gui.implementations.Gui");
 			if (start.equals(guiClass)) {

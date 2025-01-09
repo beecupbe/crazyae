@@ -1,42 +1,43 @@
 package dev.beecube31.crazyae2.client.gui.implementations;
 
-import appeng.client.gui.AEBaseGui;
-import appeng.client.gui.widgets.GuiNumberBox;
-import appeng.client.gui.widgets.GuiTabButton;
 import appeng.core.AEConfig;
 import appeng.core.AELog;
 import appeng.core.localization.GuiText;
+import dev.beecube31.crazyae2.client.gui.CrazyAEBaseGui;
+import dev.beecube31.crazyae2.client.gui.widgets.BasicButton;
+import dev.beecube31.crazyae2.client.gui.widgets.NumberTextField;
+import dev.beecube31.crazyae2.client.gui.widgets.OptionSideButton;
 import dev.beecube31.crazyae2.common.containers.ContainerPriority;
 import dev.beecube31.crazyae2.common.interfaces.IChangeablePriorityHost;
 import dev.beecube31.crazyae2.common.networking.network.NetworkHandler;
-import dev.beecube31.crazyae2.common.networking.packets.PacketChangePriority;
+import dev.beecube31.crazyae2.common.networking.packets.PacketUptadeTextField;
 import dev.beecube31.crazyae2.common.networking.packets.PacketSwitchGuis;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiBridge;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 
 import java.io.IOException;
 
-public class GuiPriority extends AEBaseGui {
+public class GuiPriority extends CrazyAEBaseGui {
 
-    private GuiNumberBox priority;
-    private GuiTabButton originalGuiBtn;
+    private NumberTextField priority;
+    private OptionSideButton backBtn;
 
-    private GuiButton plus1;
-    private GuiButton plus10;
-    private GuiButton plus100;
-    private GuiButton plus1000;
-    private GuiButton minus1;
-    private GuiButton minus10;
-    private GuiButton minus100;
-    private GuiButton minus1000;
+    private BasicButton plus1;
+    private BasicButton plus10;
+    private BasicButton plus100;
+    private BasicButton plus1000;
+    private BasicButton minus1;
+    private BasicButton minus10;
+    private BasicButton minus100;
+    private BasicButton minus1000;
 
-    private CrazyAEGuiBridge OriginalGui;
+    private CrazyAEGuiBridge origGui;
 
     public GuiPriority(final InventoryPlayer inventoryPlayer, final IChangeablePriorityHost te) {
         super(new ContainerPriority(inventoryPlayer, te));
+        this.xSize += 26;
     }
 
     @Override
@@ -48,25 +49,38 @@ public class GuiPriority extends AEBaseGui {
         final int c = AEConfig.instance().priorityByStacksAmounts(2);
         final int d = AEConfig.instance().priorityByStacksAmounts(3);
 
-        this.buttonList.add(this.plus1 = new GuiButton(0, this.guiLeft + 20, this.guiTop + 32, 22, 20, "+" + a));
-        this.buttonList.add(this.plus10 = new GuiButton(0, this.guiLeft + 48, this.guiTop + 32, 28, 20, "+" + b));
-        this.buttonList.add(this.plus100 = new GuiButton(0, this.guiLeft + 82, this.guiTop + 32, 32, 20, "+" + c));
-        this.buttonList.add(this.plus1000 = new GuiButton(0, this.guiLeft + 120, this.guiTop + 32, 38, 20, "+" + d));
+        this.buttonList.add(this.plus1 = new BasicButton(0, this.guiLeft + 20, this.guiTop + 32, 22, 20, "+" + a, this.getGuiHue()));
+        this.buttonList.add(this.plus10 = new BasicButton(0, this.guiLeft + 48, this.guiTop + 32, 28, 20, "+" + b, this.getGuiHue()));
+        this.buttonList.add(this.plus100 = new BasicButton(0, this.guiLeft + 82, this.guiTop + 32, 32, 20, "+" + c, this.getGuiHue()));
+        this.buttonList.add(this.plus1000 = new BasicButton(0, this.guiLeft + 120, this.guiTop + 32, 38, 20, "+" + d, this.getGuiHue()));
 
-        this.buttonList.add(this.minus1 = new GuiButton(0, this.guiLeft + 20, this.guiTop + 69, 22, 20, "-" + a));
-        this.buttonList.add(this.minus10 = new GuiButton(0, this.guiLeft + 48, this.guiTop + 69, 28, 20, "-" + b));
-        this.buttonList.add(this.minus100 = new GuiButton(0, this.guiLeft + 82, this.guiTop + 69, 32, 20, "-" + c));
-        this.buttonList.add(this.minus1000 = new GuiButton(0, this.guiLeft + 120, this.guiTop + 69, 38, 20, "-" + d));
+        this.buttonList.add(this.minus1 = new BasicButton(0, this.guiLeft + 20, this.guiTop + 69, 22, 20, "-" + a, this.getGuiHue()));
+        this.buttonList.add(this.minus10 = new BasicButton(0, this.guiLeft + 48, this.guiTop + 69, 28, 20, "-" + b, this.getGuiHue()));
+        this.buttonList.add(this.minus100 = new BasicButton(0, this.guiLeft + 82, this.guiTop + 69, 32, 20, "-" + c, this.getGuiHue()));
+        this.buttonList.add(this.minus1000 = new BasicButton(0, this.guiLeft + 120, this.guiTop + 69, 38, 20, "-" + d, this.getGuiHue()));
 
         final ContainerPriority con = ((ContainerPriority) this.inventorySlots);
         final ItemStack myIcon = con.getPriorityHost().getItemStackRepresentation();
-        this.OriginalGui = con.getPriorityHost().getGuiBridge();
+        this.origGui = con.getPriorityHost().getGuiBridge();
 
-        if (this.OriginalGui != null && !myIcon.isEmpty()) {
-            this.buttonList.add(this.originalGuiBtn = new GuiTabButton(this.guiLeft + 154, this.guiTop, myIcon, myIcon.getDisplayName(), this.itemRender));
+        if (this.origGui != null && !myIcon.isEmpty()) {
+            this.buttonList.add(
+                    this.backBtn = new OptionSideButton(
+                            this.guiLeft + 174,
+                            this.guiTop,
+                            myIcon,
+                            myIcon.getDisplayName(),
+                            "",
+                            this.itemRender,
+                            this.getGuiHue(),
+                            this.getTextHue(),
+                            0,
+                            OptionSideButton.ButtonType.DEFAULT
+                    )
+            );
         }
 
-        this.priority = new GuiNumberBox(this.fontRenderer, this.guiLeft + 62, this.guiTop + 57, 59, this.fontRenderer.FONT_HEIGHT, Long.class);
+        this.priority = new NumberTextField(this.fontRenderer, this.guiLeft + 62, this.guiTop + 57, 59, this.fontRenderer.FONT_HEIGHT, Long.class, 0);
         this.priority.setEnableBackgroundDrawing(false);
         this.priority.setMaxStringLength(16);
         this.priority.setTextColor(0xFFFFFF);
@@ -77,28 +91,24 @@ public class GuiPriority extends AEBaseGui {
 
     @Override
     public void drawFG(final int offsetX, final int offsetY, final int mouseX, final int mouseY) {
-        this.fontRenderer.drawString(GuiText.Priority.getLocal(), 8, 6, 4210752);
+        this.drawString(GuiText.Priority.getLocal(), 8, 6);
     }
 
     @Override
     public void drawBG(final int offsetX, final int offsetY, final int mouseX, final int mouseY) {
+        super.drawBG(offsetX, offsetY, mouseX, mouseY);
         this.bindTexture("guis/priority.png");
         this.drawTexturedModalRect(offsetX, offsetY, 0, 0, this.xSize, this.ySize);
 
         this.priority.drawTextBox();
     }
 
-    public void bindTexture(String file) {
-        ResourceLocation loc = new ResourceLocation("crazyae", "textures/" + file);
-        this.mc.getTextureManager().bindTexture(loc);
-    }
-
     @Override
     protected void actionPerformed(final GuiButton btn) throws IOException {
         super.actionPerformed(btn);
 
-        if (btn == this.originalGuiBtn) {
-            NetworkHandler.instance().sendToServer(new PacketSwitchGuis(this.OriginalGui));
+        if (btn == this.backBtn) {
+            NetworkHandler.instance().sendToServer(new PacketSwitchGuis(this.origGui));
         }
 
         final boolean isPlus = btn == this.plus1 || btn == this.plus10 || btn == this.plus100 || btn == this.plus1000;
@@ -132,7 +142,7 @@ public class GuiPriority extends AEBaseGui {
 
             this.priority.setText(out = Long.toString(result));
 
-            NetworkHandler.instance().sendToServer(new PacketChangePriority("PriorityHost.Priority", out));
+            NetworkHandler.instance().sendToServer(new PacketUptadeTextField("PriorityHost.Priority", out));
         } catch (final NumberFormatException e) {
             this.priority.setText("0");
         } catch (final IOException e) {
@@ -162,7 +172,7 @@ public class GuiPriority extends AEBaseGui {
                         out = "0";
                     }
 
-                    NetworkHandler.instance().sendToServer(new PacketChangePriority("PriorityHost.Priority", out));
+                    NetworkHandler.instance().sendToServer(new PacketUptadeTextField("PriorityHost.Priority", out));
                 } catch (final IOException e) {
                     AELog.debug(e);
                 }

@@ -1,3 +1,4 @@
+#PARSE_ESCAPES
 itemGroup.crazyae=CrazyAE
 item.crazyae.invalid.name=Invalid or Disabled Item
 
@@ -69,13 +70,31 @@ item.crazyae.material.cell_part_fluid_256mb.name=§b256MB§r ME Fluid Storage Co
 item.crazyae.material.cell_part_fluid_1gb.name=§11GB§r ME Fluid Storage Component
 item.crazyae.material.cell_part_fluid_2gb.name=§d2GB§r ME Fluid Storage Component
 
+item.crazyae.material.fluixilized_ingot.name=§5Fluixilized Crystal§r
+
 
 #Items
 item.crazyae.quantum_wireless_booster.name=Quantum Wireless Booster
 item.crazyae.material.quantum_processor.name=Quantum Processor
 item.crazyae.material.mana_processor.name=Mana Processor
 item.crazyae.mana_connector.name=Mana Connector
-tooltip.crazyae.quantum_wireless_booster_desc.name=This item is under development.
+item.crazyae.gui_colorizer.name=Gui Colorizer
+
+
+item.crazyae.material.elventrade_blank_pattern.name=Elven Trade Blank Pattern
+item.crazyae.material.manapool_blank_pattern.name=Mana Pool Blank Pattern
+item.crazyae.material.petal_blank_pattern.name=Petal Blank Pattern
+item.crazyae.material.runealtar_blank_pattern.name=Rune Altar Blank Pattern
+item.crazyae.material.puredaisy_blank_pattern.name=Pure Daisy Blank Pattern
+
+item.crazyae.elventrade_encoded_pattern.name=Elven Trade Encoded Pattern
+item.crazyae.manapool_encoded_pattern.name=Mana Pool Encoded Pattern
+item.crazyae.petal_encoded_pattern.name=Petal Encoded Pattern
+item.crazyae.runealtar_encoded_pattern.name=Rune Altar Encoded Pattern
+item.crazyae.puredaisy_encoded_pattern.name=Pure Daisy Encoded Pattern
+
+
+tooltip.crazyae.colorizer_desc.name=Allows to change Gui/Text colors in CrazyAE Guis.
 tooltip.crazyae.mana_connector_desc.name=Links the mana pool to the mana import/export bus.
 tooltip.crazyae.linked_with_mana_pool_at_pos.name=Linked with mana pool at x=%s, y=%s, z=%s.
 tooltip.crazyae.mana_connector_lets_connect_to_bus.name=Click mana import/export bus to connect them.
@@ -139,6 +158,17 @@ tile.crazyae.patterns_interface.name=§8ME Patterns Interface§r
 tile.crazyae.improved_condenser.name=§6Improved Condenser§r
 
 tile.crazyae.quantum_channels_multiplier.name=Quantum Channels Multiplier
+tile.crazyae.quantum_channels_multiplier_creative.name=Creative Quantum Channels Multiplier
+
+tile.crazyae.quantum_wap.name=Quantum Wireless Access Point
+
+
+tile.crazyae.mechanical_elventrade.name=Mechanical Elven Trade
+tile.crazyae.mechanical_manapool.name=Mechanical Mana Pool
+tile.crazyae.mechanical_runealtar.name=Mechanical Rune Altar
+tile.crazyae.mechanical_petal.name=Mechanical Petal
+tile.crazyae.mechanical_puredaisy.name=Mechanical Pure Daisy
+
 
 #Resource
 
@@ -156,16 +186,31 @@ gui.crazyae.imp_export_bus.name=Improved ME Export Bus
 gui.crazyae.imp_fluid_import_bus.name=Improved ME Fluid Import Bus
 gui.crazyae.imp_fluid_export_bus.name=Improved ME Fluid Export Bus
 
-gui.crazyae.pattern_interface.name=§8ME Patterns Interface§r
+gui.crazyae.pattern_interface.name=ME Patterns Interface
 
 gui.crazyae.mana_terminal.name=ME Mana Terminal
 gui.crazyae.mana_import_bus.name=ME Mana Import Bus
 gui.crazyae.mana_export_bus.name=ME Mana Export Bus
 
 gui.crazyae.link_with_mana_connector.name=This bus needs to be linked
-gui.crazyae.link_with_mana_connector2.name=to the mana pool with the
+gui.crazyae.link_with_mana_connector2.name=to the mana block with the
 gui.crazyae.link_with_mana_connector3.name="Mana Connector".
-gui.crazyae.linked_with_mana_pool.name=Linked with х=%s y=%s z=%s
+gui.crazyae.linked_with_mana_pool.name=Linked with block at:
+gui.crazyae.mana_amt_to_max.name=Mana stored in block:
+
+gui.crazyae.gui_colorizer_gui.name=Gui Colorizer
+gui.crazyae.gui_colorizer_text.name=Text Colorizer
+
+gui.crazyae.open_pattern_storage.name=Open pattern storage
+
+gui.crazyae.mechanical_elventrade.name=Mechanical Elven Trade
+gui.crazyae.mechanical_manapool.name=Mechanical Mana Pool
+gui.crazyae.mechanical_runealtar.name=Mechanical Rune Altar
+gui.crazyae.mechanical_petal.name=Mechanical Petal
+gui.crazyae.mechanical_puredaisy.name=Mechanical Pure Daisy
+
+gui.crazyae.patterns_inv_gui.name=Patterns storage
+
 
 # GUI's Tooltip
 
@@ -173,6 +218,25 @@ gui.tooltip.crazyae.cu_place_all_accelerators_here.name=Slots for accelerators
 gui.tooltip.crazyae.cu_place_all_crafting_storages_here.name=Slots for crafting storages
 
 gui.tooltip.crazyae.progress.name=Progress:
+
+gui.crazyae.colorizer_gui_gui_to_text.name=Open Text Colorizer
+gui.crazyae.colorizer_gui_text_to_gui.name=Open Gui Colorizer
+
+gui.crazyae.copy_to_clipboard.name=Copy to clipboard
+gui.crazyae.paste_from_clipboard.name=Paste from clipboard
+
+gui.crazyae.restore_defaults.name=Restore defaults
+
+gui.crazyae.button_pattern_fast_place.name=Place crafting pattern\nin %s
+
+gui.crazyae.checkbox_qwap_text.name=Access from any dimensions
+
+gui.crazyae.highlight_mana_block.name=Highlight mana block
+gui.crazyae.mana_block_highlighted_in.name=The mana block is now highlighted at x=%s y=%s z=%s
+gui.crazyae.mana_block_highlighted_in_another_dimension_with_pos.name=The mana block located in another dimension %s (%s) at x=%s y=%s z=%s, and cannot be highlighted
+gui.crazyae.mana_block_highlighted_in_another_dimension.name=The mana block located in another dimension, and cannot be highlighted
+gui.crazyae.colorizing_disabled.name=Colorizing is disabled in your config file.
+
 
 #Tooltips
 
@@ -211,3 +275,9 @@ gui.tooltip.crazyae.stored_mana.name=Mana stored: %s
 gui.crazyae.update_found.name=[CrazyAE] §lNew version found :§r
 gui.crazyae.download_link.name=[CrazyAE] §oClick here to open download page.§r
 gui.crazyae.disable_updates_tip.name=[CrazyAE] Also, you can disable updates checking in the CrazyAE config.
+
+
+tooltip.crazyae.require_mana_per_job.name=Consumes %s Mana per job
+tooltip.crazyae.require_mana_per_tick.name=Consumes %s Mana/t
+tooltip.crazyae.require_ae_per_job.name=Consumes %s AE per job
+tooltip.crazyae.require_ae_per_tick.name=Consumes %s AE/t

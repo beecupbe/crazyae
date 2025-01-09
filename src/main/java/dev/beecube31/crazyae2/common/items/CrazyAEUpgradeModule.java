@@ -33,6 +33,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class CrazyAEUpgradeModule extends AEBaseItem implements ICrazyAEUpgradeModule {
 	public static CrazyAEUpgradeModule instance;
@@ -68,7 +69,7 @@ public class CrazyAEUpgradeModule extends AEBaseItem implements ICrazyAEUpgradeM
 	@SideOnly(Side.CLIENT)
 	public void addCheckedInformation(ItemStack stack, World world, List<String> lines,
 	                                  ITooltipFlag advancedTooltips) {
-		var u = this.getType(stack);
+		Upgrades.UpgradeType u = this.getType(stack);
 		if (u != null) {
 			List<String> textList = new ArrayList<>();
 			u.addCheckedInformation(stack, world, lines, advancedTooltips);
@@ -76,11 +77,11 @@ public class CrazyAEUpgradeModule extends AEBaseItem implements ICrazyAEUpgradeM
 				lines.add("");
 			}
 
-			for (var j : u.getSupported().entrySet()) {
+			for (Map.Entry<ItemStack, Integer> j : u.getSupported().entrySet()) {
 				String name = null;
 				int limit = j.getValue();
 				if (j.getKey().getItem() instanceof IItemGroup ig) {
-					var str = ig.getUnlocalizedGroupName(u.getSupported().keySet(), j.getKey());
+					String str = ig.getUnlocalizedGroupName(u.getSupported().keySet(), j.getKey());
 					if (str != null) {
 						name = Platform.gui_localize(str) + (limit > 1 ? " (" + limit + ')' : "");
 					}

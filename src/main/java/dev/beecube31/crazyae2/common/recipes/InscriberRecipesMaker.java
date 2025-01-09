@@ -36,14 +36,14 @@ public class InscriberRecipesMaker {
     }
 
     public static void init() {
-        if (CrazyAE.definitions().materials().quantumProcessor().maybeStack(1).orElse(ItemStack.EMPTY) != ItemStack.EMPTY) {
+        CrazyAE.definitions().materials().quantumProcessor().maybeStack(1).ifPresent(quantumProcessor -> {
             make(
                     AEApi.instance().definitions().materials().matterBall().maybeStack(1).orElse(ItemStack.EMPTY),
                     AEApi.instance().definitions().materials().logicProcessor().maybeStack(1).orElse(ItemStack.EMPTY),
                     AEApi.instance().definitions().materials().engProcessor().maybeStack(1).orElse(ItemStack.EMPTY),
-                    CrazyAE.definitions().materials().quantumProcessor().maybeStack(1).orElse(ItemStack.EMPTY),
+                    quantumProcessor,
                     InscriberProcessType.PRESS
             );
-        }
+        });
     }
 }

@@ -24,6 +24,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
 
+@SuppressWarnings("unused")
 public class Materials implements DamagedDefinitions<DamagedItemDefinition, Materials.MaterialType> {
 	private final Object2ObjectOpenHashMap<String, DamagedItemDefinition> byId = new Object2ObjectOpenHashMap<>();
 
@@ -61,6 +62,15 @@ public class Materials implements DamagedDefinitions<DamagedItemDefinition, Mate
 	private final IItemDefinition manaPart1gb;
 	private final IItemDefinition manaPart2gb;
 
+	private final IItemDefinition elventradeBlankPattern;
+	private final IItemDefinition manapoolBlankPattern;
+	private final IItemDefinition petalBlankPattern;
+	private final IItemDefinition puredaisyBlankPattern;
+	private final IItemDefinition runealtarBlankPattern;
+
+
+	private final IItemDefinition fluixilizedIngot;
+
 
 
 	private final CrazyAEMaterial material;
@@ -91,6 +101,7 @@ public class Materials implements DamagedDefinitions<DamagedItemDefinition, Mate
 
 		this.quantumProcessor = this.createMaterial(this.material, MaterialType.QUANTUM_PROCESSOR);
 		this.manaProcessor = this.createMaterial(this.material, MaterialType.MANA_PROCESSOR);
+		this.fluixilizedIngot = this.createMaterial(this.material, MaterialType.FLUIXILIZED_INGOT);
 
 		this.manaPart1k = this.createMaterial(this.material, MaterialType.MANA_PART_1K);
 		this.manaPart4k = this.createMaterial(this.material, MaterialType.MANA_PART_4K);
@@ -104,6 +115,13 @@ public class Materials implements DamagedDefinitions<DamagedItemDefinition, Mate
 		this.manaPart256mb = this.createMaterial(this.material, MaterialType.MANA_PART_256MB);
 		this.manaPart1gb = this.createMaterial(this.material, MaterialType.MANA_PART_1GB);
 		this.manaPart2gb = this.createMaterial(this.material, MaterialType.MANA_PART_2GB);
+
+
+		this.elventradeBlankPattern = this.createMaterial(this.material, MaterialType.ELVENTRADE_BLANK_PATTERN);
+		this.manapoolBlankPattern = this.createMaterial(this.material, MaterialType.MANAPOOL_BLANK_PATTERN);
+		this.petalBlankPattern = this.createMaterial(this.material, MaterialType.PETAL_BLANK_PATTERN);
+		this.puredaisyBlankPattern = this.createMaterial(this.material, MaterialType.PUREDAISY_BLANK_PATTERN);
+		this.runealtarBlankPattern = this.createMaterial(this.material, MaterialType.RUNEALTAR_BLANK_PATTERN);
 	}
 
 
@@ -255,6 +273,31 @@ public class Materials implements DamagedDefinitions<DamagedItemDefinition, Mate
 	}
 
 
+	public IItemDefinition petalBlankPattern() {
+		return this.petalBlankPattern;
+	}
+
+	public IItemDefinition runealtarBlankPattern() {
+		return this.runealtarBlankPattern;
+	}
+
+	public IItemDefinition manapoolBlankPattern() {
+		return this.manapoolBlankPattern;
+	}
+
+	public IItemDefinition puredaisyBlankPattern() {
+		return this.puredaisyBlankPattern;
+	}
+
+	public IItemDefinition elventradeBlankPattern() {
+		return this.elventradeBlankPattern;
+	}
+
+	public IItemDefinition fluixilizedIngot() {
+		return this.fluixilizedIngot;
+	}
+
+
 	public enum MaterialType implements CrazyAEIModelProvider {
 		CELL_PART_256K("cell_part_256k", Features.DENSE_CELLS),
 		CELL_PART_1MB("cell_part_1mb", Features.DENSE_CELLS),
@@ -288,7 +331,15 @@ public class Materials implements DamagedDefinitions<DamagedItemDefinition, Mate
 		MANA_PART_64MB("mana_part_64mb", Features.MEGA_MANA_DENSE_CELLS),
 		MANA_PART_256MB("mana_part_256mb", Features.MEGA_MANA_DENSE_CELLS),
 		MANA_PART_1GB("mana_part_1gb", Features.MEGA_MANA_DENSE_CELLS),
-		MANA_PART_2GB("mana_part_2gb", Features.MEGA_MANA_DENSE_CELLS);
+		MANA_PART_2GB("mana_part_2gb", Features.MEGA_MANA_DENSE_CELLS),
+
+		ELVENTRADE_BLANK_PATTERN("elventrade_blank_pattern", Features.STUB),
+		MANAPOOL_BLANK_PATTERN("manapool_blank_pattern", Features.STUB),
+		PETAL_BLANK_PATTERN("petal_blank_pattern", Features.STUB),
+		PUREDAISY_BLANK_PATTERN("puredaisy_blank_pattern", Features.STUB),
+		RUNEALTAR_BLANK_PATTERN("runealtar_blank_pattern", Features.STUB),
+
+		FLUIXILIZED_INGOT("fluixilized_ingot", Features.STUB);
 
 
 		private static Int2ObjectLinkedOpenHashMap<MaterialType> cachedValues;

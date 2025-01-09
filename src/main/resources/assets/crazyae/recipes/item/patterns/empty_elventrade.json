@@ -1,0 +1,49 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "minecraft:item_exists",
+          "item": "botania:alfheimportal"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "botania:manaresource"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:crafting_accelerator_16x"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "type": "material",
+    "name": "elventrade_blank_pattern"
+  },
+  "type": "crazyae:shaped_recipe",
+  "pattern": [
+    "aba",
+    "qpq",
+    "aba"
+  ],
+  "key": {
+    "b": {
+      "item": "botania:manaresource",
+      "data": 18
+    },
+    "p": {
+      "type": "appliedenergistics2:part",
+      "part": "material.blank_pattern"
+    },
+    "q": {
+      "type": "material",
+      "name": "quantum_processor"
+    },
+    "a": {
+      "item": "botania:platform",
+      "data": 0
+    }
+  }
+}

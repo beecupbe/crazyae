@@ -18,6 +18,7 @@ public enum Features implements IFeature {
 	MANA_DENSE_CELLS("manastorage", "botania"),
 	MEGA_MANA_DENSE_CELLS("manastorage", "botania"),
 	MANA_TERM("manastorage", "botania"),
+	BOTANIA_MECHANICAL_BLOCKS(false, "botania"),
 	BOTANIA_JEI_INTEGRATION("botaniajei", "botania"),
 
 	PORTABLE_DENSE_CELLS,
@@ -31,12 +32,12 @@ public enum Features implements IFeature {
 	IMPROVED_ENERGY_CELLS,
 	SOLAR_PANELS,
 	QUANTUM_CHANNELS_MULTIPLIER("qcm"),
-	PATTERNS_INTERFACE,
+	PATTERNS_INTERFACE("patterns.interface"),
 
+//	QUANTUM_WIRELESS_ACCESS_POINT("qwap"),
 
 	DENSE_CPU_COPROCESSORS("dense.coprocessor"),
-	MEGA_DENSE_CPU_COPROCESSORS("dense.coprocessor"),
-	QUANTUM_WIRELESS_BOOSTER("wireless.booster");
+	MEGA_DENSE_CPU_COPROCESSORS("dense.coprocessor");
 
 	private String[] mixins;
 	private String modid;

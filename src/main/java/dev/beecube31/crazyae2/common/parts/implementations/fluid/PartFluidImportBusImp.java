@@ -1,6 +1,7 @@
 package dev.beecube31.crazyae2.common.parts.implementations.fluid;
 
 import appeng.api.config.*;
+import appeng.api.definitions.IItemDefinition;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.security.IActionSource;
 import appeng.api.networking.ticking.TickRateModulation;
@@ -15,6 +16,7 @@ import appeng.me.GridAccessException;
 import appeng.me.helpers.MachineSource;
 import appeng.parts.PartModel;
 import dev.beecube31.crazyae2.Tags;
+import dev.beecube31.crazyae2.core.CrazyAE;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -68,7 +70,7 @@ public class PartFluidImportBusImp extends CrazyAEPartSharedFluidBus {
                 final IMEMonitor<IAEFluidStack> inv = this.getProxy().getStorage().getInventory(this.getChannel());
 
                 if (fh != null) {
-                    final FluidStack fluidStack = fh.drain(this.calculateItemsToSend(), false);
+                    final FluidStack fluidStack = fh.drain(this.calculateFluidsToSend(), false);
 
                     if (this.filterEnabled() && !this.isInFilter(fluidStack)) {
                         return TickRateModulation.SLOWER;
@@ -138,5 +140,10 @@ public class PartFluidImportBusImp extends CrazyAEPartSharedFluidBus {
         } else {
             return MODELS_OFF;
         }
+    }
+
+    @Override
+    public IItemDefinition getBlock() {
+        return CrazyAE.definitions().parts().improvedImportFluidBus();
     }
 }

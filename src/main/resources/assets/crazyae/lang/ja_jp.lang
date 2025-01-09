@@ -1,3 +1,4 @@
+#PARSE_ESCAPES
 # Corresponding Version: CrazyAE-v0.1.1-3b00d41
 # 対応バージョン: CrazyAE-v0.1.1-3b00d41
 
@@ -119,7 +120,7 @@ gui.crazyae.imp_export_bus.name=ME発展型出力バス
 gui.crazyae.imp_fluid_import_bus.name=ME発展型液体入力バス
 gui.crazyae.imp_fluid_export_bus.name=ME発展型液体出力バス
 
-gui.crazyae.pattern_interface.name=§8MEパターンインターフェース§r
+gui.crazyae.pattern_interface.name=MEパターンインターフェース
 
 
 # GUI's Tooltip

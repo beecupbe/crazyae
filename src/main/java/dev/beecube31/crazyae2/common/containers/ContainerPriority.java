@@ -2,9 +2,9 @@ package dev.beecube31.crazyae2.common.containers;
 
 import appeng.api.config.SecurityPermissions;
 import appeng.api.parts.IPart;
-import appeng.container.AEBaseContainer;
-import appeng.container.guisync.GuiSync;
 import appeng.util.Platform;
+import dev.beecube31.crazyae2.common.containers.base.CrazyAEBaseContainer;
+import dev.beecube31.crazyae2.common.containers.guisync.GuiSync;
 import dev.beecube31.crazyae2.common.interfaces.IChangeablePriorityHost;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,7 +13,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class ContainerPriority extends AEBaseContainer {
+public class ContainerPriority extends CrazyAEBaseContainer {
 
     private final IChangeablePriorityHost priHost;
 

@@ -1,9 +1,10 @@
 package dev.beecube31.crazyae2.common.blocks.networking;
 
 import appeng.api.util.AEPartLocation;
-import appeng.block.AEBaseTileBlock;
 import appeng.helpers.ICustomCollision;
 import appeng.util.Platform;
+import dev.beecube31.crazyae2.common.base.CrazyAEBlockAttribute;
+import dev.beecube31.crazyae2.common.enums.MachineAttributes;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiBridge;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiHandler;
 import dev.beecube31.crazyae2.common.tile.networking.TileCraftingUnitsCombiner;
@@ -24,7 +25,7 @@ import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
 
-public class BlockCraftingUnitsCombiner extends AEBaseTileBlock implements ICustomCollision {
+public class BlockCraftingUnitsCombiner extends CrazyAEBlockAttribute implements ICustomCollision {
 
     public static final PropertyBool POWERED = PropertyBool.create("powered");
 
@@ -83,5 +84,10 @@ public class BlockCraftingUnitsCombiner extends AEBaseTileBlock implements ICust
     @Override
     public boolean isFullCube(IBlockState state) {
         return false;
+    }
+
+    @Override
+    public MachineAttributes getAttributes() {
+        return new MachineAttributes().setRequiredAEPerTick(1024.0D);
     }
 }

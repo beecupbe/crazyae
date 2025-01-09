@@ -1,0 +1,46 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "minecraft:item_exists",
+          "item": "botania:runealtar"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "botania:manaresource"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:crafting_accelerator_16x"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "item": "crazyae:mechanical_runealtar"
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "gxg",
+    "aea",
+    "gxg"
+  ],
+  "key": {
+    "g": {
+      "item": "botania:manaresource",
+      "data": 14
+    },
+    "e": {
+      "item": "botania:runealtar"
+    },
+    "x": {
+      "item": "botania:manaresource",
+      "data": 2
+    },
+    "a": {
+      "item": "crazyae:crafting_accelerator_16x"
+    }
+  }
+}

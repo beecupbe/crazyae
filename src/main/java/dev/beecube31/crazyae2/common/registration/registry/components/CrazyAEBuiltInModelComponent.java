@@ -1,7 +1,6 @@
 package dev.beecube31.crazyae2.common.registration.registry.components;
 
 import appeng.bootstrap.components.IPreInitComponent;
-import appeng.client.render.model.BuiltInModelLoader;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import dev.beecube31.crazyae2.Tags;

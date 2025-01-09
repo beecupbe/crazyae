@@ -3,14 +3,17 @@ package dev.beecube31.crazyae2.core;
 import dev.beecube31.crazyae2.Tags;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
+import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.awt.*;
+
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = Tags.MODID)
 @Config(modid = Tags.MODID, name = "crazyae")
-public final class CrazyAEConfig {
+public final class CrazyAEConfig extends Configuration {
     @Config.Comment("Capacity of the Improved Energy Cell.")
     @Config.Name("impEnergyCellCap")
     @Config.RangeDouble(min = 0)
@@ -79,6 +82,7 @@ public final class CrazyAEConfig {
 
     @SubscribeEvent
     public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
-        if (event.getModID().equals("crazyae")) ConfigManager.sync("crazyae", Config.Type.INSTANCE);
+        if (event.getModID().equals(Tags.MODID))
+            ConfigManager.sync(Tags.MODID, Config.Type.INSTANCE);
     }
 }

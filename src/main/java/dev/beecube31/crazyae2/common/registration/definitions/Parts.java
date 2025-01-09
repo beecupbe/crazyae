@@ -2,7 +2,6 @@ package dev.beecube31.crazyae2.common.registration.definitions;
 
 import appeng.api.AEApi;
 import appeng.api.parts.IPart;
-import appeng.core.features.DamagedItemDefinition;
 import appeng.core.localization.GuiText;
 import appeng.util.Platform;
 import com.google.common.collect.ImmutableList;
@@ -12,6 +11,7 @@ import dev.beecube31.crazyae2.common.items.CrazyAEBaseItemPart;
 import dev.beecube31.crazyae2.common.parts.implementations.*;
 import dev.beecube31.crazyae2.common.parts.implementations.fluid.PartFluidExportBusImp;
 import dev.beecube31.crazyae2.common.parts.implementations.fluid.PartFluidImportBusImp;
+import dev.beecube31.crazyae2.common.registration.registry.CrazyAEDamagedItemDefinition;
 import dev.beecube31.crazyae2.common.registration.registry.Registry;
 import dev.beecube31.crazyae2.common.registration.registry.helpers.PartModelsHelper;
 import dev.beecube31.crazyae2.common.registration.registry.interfaces.Definitions;
@@ -31,19 +31,20 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import java.lang.reflect.Constructor;
 import java.util.*;
 
-public class Parts implements Definitions<DamagedItemDefinition> {
-	private final Object2ObjectOpenHashMap<String, DamagedItemDefinition> byId = new Object2ObjectOpenHashMap<>();
+@SuppressWarnings("unused")
+public class Parts implements Definitions<CrazyAEDamagedItemDefinition> {
+	private final Object2ObjectOpenHashMap<String, CrazyAEDamagedItemDefinition> byId = new Object2ObjectOpenHashMap<>();
 	private final CrazyAEBaseItemPart itemPart;
 
-	private final DamagedItemDefinition improvedImportBus;
-	private final DamagedItemDefinition improvedExportBus;
-	private final DamagedItemDefinition improvedImportFluidBus;
-	private final DamagedItemDefinition improvedExportFluidBus;
+	private final CrazyAEDamagedItemDefinition improvedImportBus;
+	private final CrazyAEDamagedItemDefinition improvedExportBus;
+	private final CrazyAEDamagedItemDefinition improvedImportFluidBus;
+	private final CrazyAEDamagedItemDefinition improvedExportFluidBus;
 
-	private final DamagedItemDefinition manaImportBus;
-	private final DamagedItemDefinition manaExportBus;
+	private final CrazyAEDamagedItemDefinition manaImportBus;
+	private final CrazyAEDamagedItemDefinition manaExportBus;
 
-	private final DamagedItemDefinition manaTerm;
+	private final CrazyAEDamagedItemDefinition manaTerm;
 
 
 	public Parts(Registry registry) {
@@ -70,31 +71,31 @@ public class Parts implements Definitions<DamagedItemDefinition> {
 		this.manaTerm = this.createPart(this.itemPart, PartType.MANA_TERM);
 	}
 
-	public DamagedItemDefinition improvedImportBus() {
+	public CrazyAEDamagedItemDefinition improvedImportBus() {
 		return this.improvedImportBus;
 	}
 
-	public DamagedItemDefinition improvedExportBus() {
+	public CrazyAEDamagedItemDefinition improvedExportBus() {
 		return this.improvedExportBus;
 	}
 
-	public DamagedItemDefinition improvedImportFluidBus() {
+	public CrazyAEDamagedItemDefinition improvedImportFluidBus() {
 		return this.improvedImportFluidBus;
 	}
 
-	public DamagedItemDefinition improvedExportFluidBus() {
+	public CrazyAEDamagedItemDefinition improvedExportFluidBus() {
 		return this.improvedExportFluidBus;
 	}
 
-	public DamagedItemDefinition manaImportBus() {
+	public CrazyAEDamagedItemDefinition manaImportBus() {
 		return this.manaImportBus;
 	}
 
-	public DamagedItemDefinition manaExportBus() {
+	public CrazyAEDamagedItemDefinition manaExportBus() {
 		return this.manaExportBus;
 	}
 
-	public DamagedItemDefinition manaTerminal() {
+	public CrazyAEDamagedItemDefinition manaTerminal() {
 		return this.manaTerm;
 	}
 
@@ -102,15 +103,15 @@ public class Parts implements Definitions<DamagedItemDefinition> {
 		return Optional.ofNullable(PartType.getCachedValues().getOrDefault(itemDamage, null));
 	}
 
-	private DamagedItemDefinition createPart(CrazyAEBaseItemPart baseItemPart, PartType partType) {
-		var def = new DamagedItemDefinition(partType.getId(), baseItemPart.createPart(partType));
+	private CrazyAEDamagedItemDefinition createPart(CrazyAEBaseItemPart baseItemPart, PartType partType) {
+		var def = new CrazyAEDamagedItemDefinition(partType.getId(), baseItemPart.createPart(partType));
 
 		this.byId.put(partType.id, def);
 		return def;
 	}
 
 	@Override
-	public Optional<DamagedItemDefinition> getById(String id) {
+	public Optional<CrazyAEDamagedItemDefinition> getById(String id) {
 		return Optional.ofNullable(this.byId.getOrDefault(id, null));
 	}
 
@@ -125,7 +126,6 @@ public class Parts implements Definitions<DamagedItemDefinition> {
 		MANA_EXPORT_BUS("mana_export_bus", PartManaExportBus.class, Features.MANA_BUSES),
 
 		MANA_TERM("mana_terminal", PartManaTerminal.class, Features.MANA_TERM);
-
 
 
 		private static Int2ObjectLinkedOpenHashMap<PartType> cachedValues;

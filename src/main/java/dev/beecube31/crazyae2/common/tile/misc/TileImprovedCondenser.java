@@ -25,6 +25,7 @@ import appeng.util.inv.InvOperation;
 import appeng.util.inv.WrapperChainedItemHandler;
 import appeng.util.inv.WrapperFilteredItemHandler;
 import appeng.util.inv.filter.AEItemFilters;
+import dev.beecube31.crazyae2.common.tile.base.CrazyAEInvOCTile;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumFacing;
@@ -40,7 +41,7 @@ import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nullable;
 
-public class TileImprovedCondenser extends AEBaseInvTile implements IConfigManagerHost, IConfigurableObject {
+public class TileImprovedCondenser extends CrazyAEInvOCTile implements IConfigManagerHost, IConfigurableObject {
 
     public static final int BYTE_MULTIPLIER = 8;
 

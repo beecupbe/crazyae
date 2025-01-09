@@ -8,7 +8,6 @@ import appeng.api.networking.ticking.TickRateModulation;
 import appeng.api.parts.IPartCollisionHelper;
 import appeng.api.storage.channels.IFluidStorageChannel;
 import appeng.api.util.AECableType;
-import appeng.core.sync.GuiBridge;
 import appeng.fluids.helper.IConfigurableFluidInventory;
 import appeng.fluids.util.AEFluidInventory;
 import appeng.fluids.util.IAEFluidTank;
@@ -96,24 +95,18 @@ public abstract class CrazyAEPartSharedFluidBus extends CrazyAEPartUpgradeable i
         return null;
     }
 
-    protected int calculateItemsToSend() {
-        int fluidMB = this.getChannel().transferFactor() * 2;
-        switch (this.getInstalledUpgrades(Upgrades.SPEED)) {
-            case 1 -> fluidMB += 4000;
-            case 2 -> fluidMB += 12000;
-            case 3 -> fluidMB += 24000;
-            case 4 -> fluidMB += 48000;
-        }
+    protected int calculateFluidsToSend() {
+        int fluidMB = this.getChannel().transferFactor() * 8;
 
         switch (this.getInstalledUpgrades(dev.beecube31.crazyae2.common.registration.definitions.Upgrades.UpgradeType.STACKS)) {
-            case 1 -> fluidMB += 4000 * 4;
-            case 2 -> fluidMB += 12000 * 8;
-            case 3 -> fluidMB += 24000 * 12;
-            case 4 -> fluidMB += 48000 * 16;
+            case 1 -> fluidMB += 4000 * 8;
+            case 2 -> fluidMB += 8000 * 16;
+            case 3 -> fluidMB += 16000 * 24;
+            case 4 -> fluidMB += 32000 * 32;
         }
 
         if (this.getInstalledUpgrades(dev.beecube31.crazyae2.common.registration.definitions.Upgrades.UpgradeType.ADVANCED_SPEED) > 0) {
-            fluidMB += 64000;
+            fluidMB += 192000;
         }
 
         return fluidMB;

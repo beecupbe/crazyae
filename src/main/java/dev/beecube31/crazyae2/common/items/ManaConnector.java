@@ -32,8 +32,7 @@ public class ManaConnector extends AEBaseItem {
     @Override
     @SideOnly(Side.CLIENT)
     public void addCheckedInformation(final ItemStack stack, final World world, final List<String> lines, final ITooltipFlag advancedTooltips) {
-        if (stack.getTagCompound() != null
-            && stack.getTagCompound().hasKey("connectFrom")) {
+        if (stack.getTagCompound() != null && stack.getTagCompound().hasKey("connectFrom")) {
             int[] pos = stack.getTagCompound().getIntArray("connectFrom");
             lines.add(String.format(CrazyAETooltip.LINKED_WITH_MANA_POOL_AT_POS.getLocalWithSpaceAtEnd(), pos[0], pos[1], pos[2]));
             lines.add(CrazyAETooltip.MANA_CONNECTOR_LETS_CONNECT_TO_BUS.getLocal());
@@ -56,7 +55,7 @@ public class ManaConnector extends AEBaseItem {
                         int[] poz = nbt.getIntArray("connectFrom");
                         p.link(poz[0], poz[1], poz[2]);
                         player.getHeldItem(hand).setTagCompound(null);
-                        player.sendStatusMessage(new TextComponentString(CrazyAETooltip.MANA_CONNECTOR_BLOCK_LINKED.getLocalWithSpaceAtEnd()), true);
+                        player.sendStatusMessage(new TextComponentString(CrazyAETooltip.MANA_CONNECTOR_BLOCK_LINKED.getLocal()), true);
                         return EnumActionResult.SUCCESS;
                     }
                 }
@@ -70,7 +69,7 @@ public class ManaConnector extends AEBaseItem {
 
             nbt.setIntArray("connectFrom", poz);
             player.getHeldItem(hand).setTagCompound(nbt);
-            player.sendStatusMessage(new TextComponentString(CrazyAETooltip.MANA_CONNECTOR_BLOCK_SAVED.getLocalWithSpaceAtEnd()), true);
+            player.sendStatusMessage(new TextComponentString(CrazyAETooltip.MANA_CONNECTOR_BLOCK_SAVED.getLocal()), true);
             return EnumActionResult.SUCCESS;
         }
 

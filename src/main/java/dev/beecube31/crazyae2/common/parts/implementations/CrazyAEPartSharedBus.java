@@ -84,23 +84,17 @@ public abstract class CrazyAEPartSharedBus extends CrazyAEPartUpgradeable implem
     }
 
     protected int calculateItemsToSend() {
-        int items = 8;
-        switch (this.getInstalledUpgrades(Upgrades.SPEED)) {
-            case 1 -> items += 64;
-            case 2 -> items += 128;
-            case 3 -> items += 192;
-            case 4 -> items += 256;
-        }
+        int items = 256;
 
         switch (this.getInstalledUpgrades(dev.beecube31.crazyae2.common.registration.definitions.Upgrades.UpgradeType.STACKS)) {
-            case 1 -> items += 8 * 32;
-            case 2 -> items += 8 * 64;
-            case 3 -> items += 8 * 160;
-            case 4 -> items += 8 * 256;
+            case 1 -> items += 8 * 96;
+            case 2 -> items += 8 * 192;
+            case 3 -> items += 8 * 384;
+            case 4 -> items += 8 * 512;
         }
 
         if (this.getInstalledUpgrades(dev.beecube31.crazyae2.common.registration.definitions.Upgrades.UpgradeType.ADVANCED_SPEED) > 0) {
-            items += 1024;
+            items += 4096;
         }
 
         return items;
@@ -108,6 +102,7 @@ public abstract class CrazyAEPartSharedBus extends CrazyAEPartUpgradeable implem
 
     protected int calculateManaIterations() {
         int mana = 1;
+
         switch (this.getInstalledUpgrades(dev.beecube31.crazyae2.common.registration.definitions.Upgrades.UpgradeType.STACKS)) {
             case 1 -> mana += 1;
             case 2 -> mana += 2;
@@ -123,23 +118,17 @@ public abstract class CrazyAEPartSharedBus extends CrazyAEPartUpgradeable implem
     }
 
     protected int calculateManaToSend() {
-        int mana = 32;
-        switch (this.getInstalledUpgrades(Upgrades.SPEED)) {
-            case 1 -> mana += 256;
-            case 2 -> mana += 512;
-            case 3 -> mana += 1024;
-            case 4 -> mana += 1536;
-        }
+        int mana = 256;
 
         switch (this.getInstalledUpgrades(dev.beecube31.crazyae2.common.registration.definitions.Upgrades.UpgradeType.STACKS)) {
-            case 1 -> mana += 256 * 256;
-            case 2 -> mana += 256 * 1024;
-            case 3 -> mana += 256 * 4096;
+            case 1 -> mana += 256 * 64;
+            case 2 -> mana += 256 * 512;
+            case 3 -> mana += 256 * 2048;
             case 4 -> mana += 256 * 8192;
         }
 
         if (this.getInstalledUpgrades(dev.beecube31.crazyae2.common.registration.definitions.Upgrades.UpgradeType.ADVANCED_SPEED) > 0) {
-            mana += 65536;
+            mana += 65536 * 2;
         }
 
         return mana;

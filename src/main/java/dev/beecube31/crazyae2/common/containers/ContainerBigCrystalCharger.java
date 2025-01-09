@@ -1,16 +1,16 @@
 package dev.beecube31.crazyae2.common.containers;
 
 import appeng.api.config.*;
-import appeng.container.guisync.GuiSync;
-import appeng.container.interfaces.IProgressProvider;
-import appeng.container.slot.SlotOutput;
 import appeng.util.Platform;
-import dev.beecube31.crazyae2.common.containers.slot.RestrictedSlot;
+import dev.beecube31.crazyae2.common.containers.base.slot.RestrictedSlot;
+import dev.beecube31.crazyae2.common.containers.base.slot.SlotOutput;
+import dev.beecube31.crazyae2.common.containers.guisync.GuiSync;
+import dev.beecube31.crazyae2.common.interfaces.gui.ICrazyAEProgressProvider;
 import dev.beecube31.crazyae2.common.tile.networking.TileBigCrystalCharger;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraftforge.items.IItemHandler;
 
-public class ContainerBigCrystalCharger extends ContainerCrazyAEUpgradeable implements IProgressProvider {
+public class ContainerBigCrystalCharger extends ContainerCrazyAEUpgradeable implements ICrazyAEProgressProvider {
 
     private final TileBigCrystalCharger te;
     @GuiSync(4)
@@ -29,7 +29,7 @@ public class ContainerBigCrystalCharger extends ContainerCrazyAEUpgradeable impl
 
         for (int y = 0; y < 2; y++) {
             for (int x = 0; x < 9; x++) {
-                this.addSlotToContainer(new RestrictedSlot(RestrictedSlot.PlacableItemType.CERTUS_QUARTZ_CRYSTALS, input,
+                this.addSlotToContainer(new RestrictedSlot(RestrictedSlot.PlaceableItemType.CERTUS_QUARTZ_CRYSTALS, input,
                         x + y * 9, 8 + x * 18, 18 + y * 18, this.getInventoryPlayer()));
             }
         }
@@ -37,12 +37,12 @@ public class ContainerBigCrystalCharger extends ContainerCrazyAEUpgradeable impl
         for (int y = 0; y < 2; y++) {
             for (int x = 0; x < 9; x++) {
                 this.addSlotToContainer(new SlotOutput(output, x + y * 9, 8 + x * 18, 74 + y * 18,
-                        RestrictedSlot.PlacableItemType.CHARGED_CERTUS_QUARTZ_CRYSTALS.IIcon));
+                        RestrictedSlot.PlaceableItemType.CHARGED_CERTUS_QUARTZ_CRYSTALS.IIcon));
             }
         }
 
         for (int u = 0; u < this.availableUpgrades(); u++) {
-            this.addSlotToContainer((new RestrictedSlot(RestrictedSlot.PlacableItemType.UPGRADES, upgrades, u, 187, 8 + u * 18, this.getInventoryPlayer())).setNotDraggable());
+            this.addSlotToContainer((new RestrictedSlot(RestrictedSlot.PlaceableItemType.UPGRADES, upgrades, u, 187, 8 + u * 18, this.getInventoryPlayer())).setStackLimit(1).setNotDraggable());
         }
     }
 

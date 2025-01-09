@@ -1,57 +1,87 @@
 package dev.beecube31.crazyae2.client.gui.widgets;
 
-import appeng.client.gui.widgets.ITooltip;
-import appeng.container.interfaces.IProgressProvider;
 import appeng.core.localization.GuiText;
+import dev.beecube31.crazyae2.client.gui.components.ComponentHue;
+import dev.beecube31.crazyae2.client.gui.sprites.StateSprite;
+import dev.beecube31.crazyae2.common.interfaces.gui.ICrazyAEProgressProvider;
+import dev.beecube31.crazyae2.common.interfaces.gui.ITooltipObj;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.util.ResourceLocation;
 
-public class ProgressBar extends GuiButton implements ITooltip {
+public class ProgressBar extends GuiButton implements ITooltipObj {
 
-    private final IProgressProvider source;
-    private final ResourceLocation texture;
-    private final int fill_u;
-    private final int fill_v;
+    private final ICrazyAEProgressProvider source;
+
+    private final int id;
     private final Direction layout;
     private final String titleName;
     private String fullMsg;
 
-    public ProgressBar(final IProgressProvider source, final String texture, final int posX, final int posY, final int u, final int y, final int width, final int height, final Direction dir) {
-        this(source, texture, posX, posY, u, y, width, height, dir, null);
+    private final ComponentHue hue;
+
+    public ProgressBar(final ICrazyAEProgressProvider source, final int posX, final int posY, final int width, final int height, final Direction dir, final int id, final ComponentHue hue) {
+        this(source, posX, posY, width, height, dir, null, id, hue);
     }
 
-    public ProgressBar(final IProgressProvider source, final String texture, final int posX, final int posY, final int u, final int y, final int width, final int height, final Direction dir, final String title) {
-        super(posX, posY, width, "");
+    public ProgressBar(final ICrazyAEProgressProvider source, final int posX, final int posY, final int width, final int height, final Direction dir, final String title, final int id, final ComponentHue hue) {
+        super(id, posX, posY, "");
         this.source = source;
         this.x = posX;
         this.y = posY;
-        this.texture = new ResourceLocation("crazyae", "textures/" + texture);
         this.width = width;
         this.height = height;
-        this.fill_u = u;
-        this.fill_v = y;
         this.layout = dir;
         this.titleName = title;
+        this.id = id;
+        this.hue = hue;
     }
+
+    @Override public void playPressSound(SoundHandler soundHandlerIn) {}
 
     @Override
     public void drawButton(final Minecraft par1Minecraft, final int par2, final int par3, final float partial) {
         if (this.visible) {
-            par1Minecraft.getTextureManager().bindTexture(this.texture);
-            final int max = this.source.getMaxProgress();
-            final int current = this.source.getCurrentProgress();
+            this.hue.drawHue();
+            par1Minecraft.getTextureManager().bindTexture(
+                    new ResourceLocation("crazyae", "textures/guis/states.png")
+            );
+            final int max = this.source.getMaxProgress(this.id);
+            final int current = this.source.getCurrentProgress(this.id);
+
+            int texX = StateSprite.PROGRESS_BAR_FILLED.getTextureX();
+            int texY = StateSprite.PROGRESS_BAR_FILLED.getTextureY();
 
             if (this.layout == Direction.VERTICAL) {
                 final int diff = this.height - (max > 0 ? (this.height * current) / max : 0);
-                this.drawTexturedModalRect(this.x, this.y + diff, this.fill_u, this.fill_v + diff, this.width, this.height - diff);
+                this.drawTexturedModalRect(
+                        this.x,
+                        this.y + diff,
+                        texX,
+                        texY + diff,
+                        this.width,
+                        this.height - diff
+                );
             } else {
                 final int diff = this.width - (max > 0 ? (this.width * current) / max : 0);
-                this.drawTexturedModalRect(this.x, this.y, this.fill_u + diff, this.fill_v, this.width - diff, this.height);
+                this.drawTexturedModalRect(
+                        this.x,
+                        this.y,
+                        texX + diff,
+                        texY,
+                        this.width - diff,
+                        this.height
+                );
             }
 
+            this.hue.endDrawHue();
             this.mouseDragged(par1Minecraft, par2, par3);
         }
+    }
+
+    public void setVisible(boolean v) {
+        this.visible = v;
     }
 
     public void setFullMsg(final String msg) {
@@ -59,13 +89,13 @@ public class ProgressBar extends GuiButton implements ITooltip {
     }
 
     @Override
-    public String getMessage() {
+    public String getTooltipMsg() {
         if (this.fullMsg != null) {
             return this.fullMsg;
         }
 
-        return (this.titleName != null ? this.titleName : "") + '\n' + this.source.getCurrentProgress() + ' ' + GuiText.Of.getLocal() + ' ' + this.source
-                .getMaxProgress();
+        return (this.titleName != null ? this.titleName : "") + '\n' + this.source.getCurrentProgress(this.id) + ' ' + GuiText.Of.getLocal() + ' ' + this.source
+                .getMaxProgress(this.id);
     }
 
     @Override
@@ -90,7 +120,7 @@ public class ProgressBar extends GuiButton implements ITooltip {
 
     @Override
     public boolean isVisible() {
-        return true;
+        return this.visible;
     }
 
     public enum Direction {

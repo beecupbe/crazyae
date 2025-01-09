@@ -54,6 +54,7 @@ public class CrazyAEMixinsCore implements IFMLLoadingPlugin, ILateMixinLoader {
 
 		mixins.add("mixins.crazyae.json");
 		mixins.add(String.format(MIXIN_PATH, "core"));
+		mixins.add(String.format(MIXIN_PATH, "aefixes"));
 
 
 

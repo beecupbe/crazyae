@@ -11,7 +11,8 @@ import appeng.api.util.DimensionalCoord;
 import appeng.me.GridAccessException;
 import appeng.tile.grid.AENetworkTile;
 import appeng.util.Platform;
-import dev.beecube31.crazyae2.common.util.IGridChannelBoostersCache;
+import dev.beecube31.crazyae2.common.interfaces.IChannelsMultiplier;
+import dev.beecube31.crazyae2.core.cache.IGridChannelBoostersCache;
 import dev.beecube31.crazyae2.core.CrazyAEConfig;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.util.EnumFacing;
@@ -19,7 +20,7 @@ import net.minecraft.util.EnumFacing;
 import java.io.IOException;
 import java.util.EnumSet;
 
-public class TileQuantumChannelsBooster extends AENetworkTile implements IPowerChannelState {
+public class TileQuantumChannelsBooster extends AENetworkTile implements IPowerChannelState, IChannelsMultiplier {
 
     public static final int POWERED_FLAG = 1;
     public static final int CHANNEL_FLAG = 2;
@@ -138,5 +139,10 @@ public class TileQuantumChannelsBooster extends AENetworkTile implements IPowerC
 
     private void setClientFlags(final int clientFlags) {
         this.clientFlags = clientFlags;
+    }
+
+    @Override
+    public boolean isCreative() {
+        return false;
     }
 }

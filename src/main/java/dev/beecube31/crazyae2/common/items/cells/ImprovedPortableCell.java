@@ -33,7 +33,6 @@ public class ImprovedPortableCell extends DensePortableCell {
 	}
 
 	public boolean onItemPickup(EntityItemPickupEvent event, ItemStack stack) {
-
 		ICellInventoryHandler<IAEItemStack> storage = AEApi.instance().registries().cell().getCellInventory(stack, null, AEApi.instance().storage().getStorageChannel(IItemStorageChannel.class));
 
 		if (storage != null) {

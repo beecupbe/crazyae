@@ -5,9 +5,11 @@
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "core.MixinCreativeCellInventory",
     "features.cellinformation.MixinApiClientHelper",
-    "core.MixinCraftingCPUCluster"
+    "aefixes.crafting.MixinCraftingCPUClusterGG",
+    "aefixes.crafting.MixinPatternHelper",
+    "aefixes.crafting.MixinNetworkMonitor",
+    "core.AccessorDualityInterface"
   ],
   "client": [],
   "server": []

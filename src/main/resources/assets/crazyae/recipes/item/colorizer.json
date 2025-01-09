@@ -1,0 +1,32 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:gui_colorizer"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "item": "crazyae:gui_colorizer"
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " a ",
+    "aba",
+    " a "
+  ],
+  "key": {
+    "a": {
+      "type": "crazyae:material",
+      "name": "fluixilized_ingot"
+    },
+    "b": {
+      "type": "appliedenergistics2:part",
+      "part": "material.calculation_processor"
+    }
+  }
+}

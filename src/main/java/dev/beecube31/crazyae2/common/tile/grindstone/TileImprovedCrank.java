@@ -2,8 +2,8 @@ package dev.beecube31.crazyae2.common.tile.grindstone;
 
 import appeng.api.implementations.tiles.ICrankable;
 import appeng.helpers.ICustomCollision;
-import appeng.tile.AEBaseTile;
 import appeng.util.Platform;
+import dev.beecube31.crazyae2.common.tile.base.CrazyAEOCTile;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-public class TileImprovedCrank extends AEBaseTile implements ICustomCollision, ITickable {
+public class TileImprovedCrank extends CrazyAEOCTile implements ICustomCollision, ITickable {
 
     private final int ticksPerRotation = 18;
     private float visibleRotation = 0;

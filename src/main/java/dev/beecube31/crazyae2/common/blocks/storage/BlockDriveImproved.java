@@ -47,7 +47,7 @@ public class BlockDriveImproved extends AEBaseTileBlock {
     public IBlockState getExtendedState(IBlockState state, IBlockAccess world, BlockPos pos) {
         TileImprovedDrive te = this.getTileEntity(world, pos);
         IExtendedBlockState extState = (IExtendedBlockState) super.getExtendedState(state, world, pos);
-        return extState.withProperty(SLOTS_STATE, te == null ? DriveSlotsState.createEmpty(30) : DriveSlotsState.fromChestOrDrive(te));
+        return extState.withProperty(SLOTS_STATE, te == null ? DriveSlotsState.createEmpty(35) : DriveSlotsState.fromChestOrDrive(te));
     }
 
     @Override

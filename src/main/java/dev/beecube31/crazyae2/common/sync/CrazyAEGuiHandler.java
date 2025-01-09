@@ -3,13 +3,12 @@ package dev.beecube31.crazyae2.common.sync;
 import appeng.api.parts.IPartHost;
 import appeng.api.util.AEPartLocation;
 import appeng.client.gui.GuiNull;
-import appeng.container.AEBaseContainer;
-import appeng.container.ContainerNull;
-import appeng.container.ContainerOpenContext;
-import appeng.container.interfaces.IInventorySlotAware;
 import appeng.core.sync.GuiHostType;
 import appeng.util.Platform;
 import baubles.api.BaublesApi;
+import dev.beecube31.crazyae2.common.containers.base.ContainerNull;
+import dev.beecube31.crazyae2.common.containers.base.ContainerOpenContext;
+import dev.beecube31.crazyae2.common.containers.base.CrazyAEBaseContainer;
 import dev.beecube31.crazyae2.core.CrazyAE;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -36,12 +35,7 @@ public class CrazyAEGuiHandler implements IGuiHandler {
 			y = tile.getPos().getY();
 			z = tile.getPos().getZ();
 		} else {
-			if (p.openContainer instanceof IInventorySlotAware) {
-				x = ((IInventorySlotAware) p.openContainer).getInventorySlot();
-				y = ((IInventorySlotAware) p.openContainer).isBaubleSlot() ? 1 : 0;
-			} else {
-				x = p.inventory.currentItem;
-			}
+			x = p.inventory.currentItem;
 		}
 
 		if ((type.getHostType().isItem() && tile == null) || type.hasPermissions(tile, x, y, z, side, p)) {
@@ -49,8 +43,7 @@ public class CrazyAEGuiHandler implements IGuiHandler {
 				p.openGui(CrazyAE.instance, type.ordinal() << 4, p.getEntityWorld(), x, 0, 0);
 			} else if (tile == null || type.getHostType() == GuiHostType.ITEM) {
 				if (tile != null) {
-					p.openGui(CrazyAE.instance, type.ordinal() << 4 | side.ordinal() | (1 << 3), p.getEntityWorld(), x, y
-						, z);
+					p.openGui(CrazyAE.instance, type.ordinal() << 4 | side.ordinal() | (1 << 3), p.getEntityWorld(), x, y, z);
 				} else {
 					p.openGui(CrazyAE.instance, type.ordinal() << 4, p.getEntityWorld(), x, y, z);
 				}
@@ -107,7 +100,7 @@ public class CrazyAEGuiHandler implements IGuiHandler {
 	}
 
 	private Object updateGui(final Object newContainer, final World w, final int x, final int y, final int z, final AEPartLocation side, final Object myItem) {
-		if (newContainer instanceof AEBaseContainer bc) {
+		if (newContainer instanceof CrazyAEBaseContainer bc) {
 			bc.setOpenContext(new ContainerOpenContext(myItem));
 			bc.getOpenContext().setWorld(w);
 			bc.getOpenContext().setX(x);

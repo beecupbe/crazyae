@@ -12,7 +12,10 @@ public enum CrazyAEGuiTooltip {
     MANA,
     STORED_MANA,
 
-    PROGRESS;
+    PROGRESS,
+
+    QUEUED_ITEMS,
+    PROGRESS_PER_TICK;
 
     private final String root;
 

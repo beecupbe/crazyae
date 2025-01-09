@@ -18,6 +18,7 @@ public class GuiFastMAC extends GuiCrazyAEUpgradeable {
         super(new ContainerFastMAC(inventoryPlayer, te));
         this.ySize = 197;
         this.container = (ContainerFastMAC) this.inventorySlots;
+        this.setDisableDrawInventoryString(true);
     }
 
     @Override
@@ -33,7 +34,8 @@ public class GuiFastMAC extends GuiCrazyAEUpgradeable {
 
     @Override
     public void drawFG(final int offsetX, final int offsetY, final int mouseX, final int mouseY) {
-        this.fontRenderer.drawString(this.getGuiDisplayName(this.getName().getLocal()), 8, 6, 4210752);
+        super.drawFG(offsetX, offsetY, mouseX, mouseY);
+        this.drawString(this.getGuiDisplayName(this.getName().getLocal()), 8, 6);
     }
 
     @Override

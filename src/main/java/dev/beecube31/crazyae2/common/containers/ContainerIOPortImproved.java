@@ -1,11 +1,10 @@
 package dev.beecube31.crazyae2.common.containers;
 
 import appeng.api.config.*;
-import appeng.container.guisync.GuiSync;
-import appeng.container.slot.SlotOutput;
-import appeng.container.slot.SlotRestrictedInput;
 import appeng.util.Platform;
-import dev.beecube31.crazyae2.common.containers.slot.RestrictedSlot;
+import dev.beecube31.crazyae2.common.containers.base.slot.RestrictedSlot;
+import dev.beecube31.crazyae2.common.containers.base.slot.SlotOutput;
+import dev.beecube31.crazyae2.common.containers.guisync.GuiSync;
 import dev.beecube31.crazyae2.common.tile.networking.TileImprovedIOPort;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraftforge.items.IItemHandler;
@@ -38,7 +37,7 @@ public class ContainerIOPortImproved extends ContainerCrazyAEUpgradeable {
         for (int y = 0; y < 4; y++) {
             for (int x = 0; x < 3; x++) {
                 this.addSlotToContainer(
-                        new SlotRestrictedInput(SlotRestrictedInput.PlacableItemType.STORAGE_CELLS, cells, x + y * 3, offX + x * 18, offY + y * 18, this
+                        new RestrictedSlot(RestrictedSlot.PlaceableItemType.STORAGE_CELLS, cells, x + y * 3, offX + x * 18, offY + y * 18, this
                                 .getInventoryPlayer()));
             }
         }
@@ -47,12 +46,12 @@ public class ContainerIOPortImproved extends ContainerCrazyAEUpgradeable {
         for (int y = 0; y < 4; y++) {
             for (int x = 0; x < 3; x++) {
                 this.addSlotToContainer(
-                        new SlotOutput(cells, 12 + x + y * 3, offX + x * 18, offY + y * 18, SlotRestrictedInput.PlacableItemType.STORAGE_CELLS.IIcon));
+                        new SlotOutput(cells, 12 + x + y * 3, offX + x * 18, offY + y * 18, RestrictedSlot.PlaceableItemType.STORAGE_CELLS.IIcon));
             }
         }
 
         for (int u = 0; u < this.availableUpgrades(); u++) {
-            this.addSlotToContainer((new RestrictedSlot(RestrictedSlot.PlacableItemType.UPGRADES, upgrades, u, 187, 8 + u * 18, this.getInventoryPlayer())).setNotDraggable());
+            this.addSlotToContainer((new RestrictedSlot(RestrictedSlot.PlaceableItemType.UPGRADES, upgrades, u, 187, 8 + u * 18, this.getInventoryPlayer())).setStackLimit(1).setNotDraggable());
         }
 
     }

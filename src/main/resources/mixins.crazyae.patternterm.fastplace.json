@@ -1,0 +1,13 @@
+{
+  "package": "dev.beecube31.crazyae2.mixins",
+  "refmap": "mixins.crazyae.refmap.json",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "features.patternterm.fastplace.AccessorContainerPatternEncoder",
+    "features.patternterm.fastplace.MixinGuiPatternTerm"
+  ],
+  "client": [],
+  "server": []
+}

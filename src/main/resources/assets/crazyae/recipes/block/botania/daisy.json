@@ -1,0 +1,51 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "minecraft:item_exists",
+          "item": "botania:manaresource"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "botania:specialflower"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:crafting_accelerator_16x"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "item": "crazyae:mechanical_puredaisy"
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "gxg",
+    "aea",
+    "gxg"
+  ],
+  "key": {
+    "g": {
+      "item": "botania:manaresource",
+      "data": 14
+    },
+    "e": {
+      "type": "minecraft:item_nbt",
+      "item": "botania:specialflower",
+      "data": 0,
+      "nbt": {
+        "type": "puredaisy"
+      }
+    },
+    "x": {
+      "item": "botania:manaresource",
+      "data": 1
+    },
+    "a": {
+      "item": "crazyae:crafting_accelerator_16x"
+    }
+  }
+}

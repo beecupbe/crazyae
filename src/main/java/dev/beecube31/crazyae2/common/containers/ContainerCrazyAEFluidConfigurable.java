@@ -2,13 +2,13 @@ package dev.beecube31.crazyae2.common.containers;
 
 
 import appeng.api.config.Upgrades;
-import appeng.api.implementations.IUpgradeableHost;
 import appeng.api.storage.data.IAEFluidStack;
 import appeng.fluids.container.IFluidSyncContainer;
 import appeng.fluids.helper.FluidSyncHelper;
 import appeng.fluids.util.AEFluidStack;
 import appeng.fluids.util.IAEFluidTank;
 import appeng.util.Platform;
+import dev.beecube31.crazyae2.common.interfaces.upgrades.IUpgradesInfoProvider;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.item.ItemStack;
@@ -22,7 +22,7 @@ import java.util.Map;
 public abstract class ContainerCrazyAEFluidConfigurable extends ContainerCrazyAEUpgradeable implements IFluidSyncContainer {
     private FluidSyncHelper sync = null;
 
-    public ContainerCrazyAEFluidConfigurable(InventoryPlayer ip, IUpgradeableHost te) {
+    public ContainerCrazyAEFluidConfigurable(InventoryPlayer ip, IUpgradesInfoProvider te) {
         super(ip, te);
     }
 

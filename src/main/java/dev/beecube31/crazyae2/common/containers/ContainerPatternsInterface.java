@@ -4,13 +4,13 @@ import appeng.api.config.SecurityPermissions;
 import appeng.api.config.Settings;
 import appeng.api.config.YesNo;
 import appeng.api.util.IConfigManager;
-import appeng.container.guisync.GuiSync;
 import appeng.container.slot.IOptionalSlotHost;
-import appeng.container.slot.OptionalSlotRestrictedInput;
-import appeng.container.slot.SlotOversized;
-import appeng.container.slot.SlotRestrictedInput;
+import dev.beecube31.crazyae2.common.containers.base.slot.OptionalSlotRestrictedInput;
+import dev.beecube31.crazyae2.common.containers.base.slot.RestrictedSlot;
+import dev.beecube31.crazyae2.common.containers.base.slot.SlotOversized;
+import dev.beecube31.crazyae2.common.containers.guisync.GuiSync;
 import dev.beecube31.crazyae2.common.duality.PatternsInterfaceDuality;
-import dev.beecube31.crazyae2.common.interfaces.ICrazyAEPatternsInterface;
+import dev.beecube31.crazyae2.common.interfaces.ICrazyAEInterfaceHost;
 import net.minecraft.entity.player.InventoryPlayer;
 
 public class ContainerPatternsInterface extends ContainerCrazyAEUpgradeable implements IOptionalSlotHost {
@@ -23,20 +23,20 @@ public class ContainerPatternsInterface extends ContainerCrazyAEUpgradeable impl
     @GuiSync(4)
     public YesNo iTermMode = YesNo.YES;
 
-    public ContainerPatternsInterface(final InventoryPlayer ip, final ICrazyAEPatternsInterface te) {
+    public ContainerPatternsInterface(final InventoryPlayer ip, final ICrazyAEInterfaceHost te) {
         super(ip, te.getInterfaceDuality().getHost());
 
         this.myDuality = te.getInterfaceDuality();
 
         for (int row = 0; row < 8; ++row) {
             for (int x = 0; x < 9; x++) {
-                this.addSlotToContainer(new OptionalSlotRestrictedInput(SlotRestrictedInput.PlacableItemType.ENCODED_PATTERN, this.myDuality
+                this.addSlotToContainer(new OptionalSlotRestrictedInput(RestrictedSlot.PlaceableItemType.ENCODED_PATTERN, this.myDuality
                         .getPatterns(), this, x + row * 9, 8 + 18 * x, 25 + (18 * row), row, this.getInventoryPlayer()).setStackLimit(1));
             }
         }
         for (int i = 0; i < 3; i++) {
             for (int x = 0; x < 3; x++) {
-                this.addSlotToContainer(new SlotOversized(this.myDuality.getStorage(), x + i * 3, 186 + (18 * x), 92 + (18 * i)));
+                this.addSlotToContainer(new SlotOversized(this.myDuality.getStorage(), x + i * 3, 187 + (18 * x), 99 + (18 * i)));
             }
         }
     }
@@ -52,8 +52,8 @@ public class ContainerPatternsInterface extends ContainerCrazyAEUpgradeable impl
     }
 
     @Override
-    public int availableUpgrades() {
-        return 4;
+    protected boolean isPatternInterface() {
+        return true;
     }
 
     @Override
@@ -65,11 +65,6 @@ public class ContainerPatternsInterface extends ContainerCrazyAEUpgradeable impl
     public void detectAndSendChanges() {
         this.verifyPermissions(SecurityPermissions.BUILD, false);
         super.detectAndSendChanges();
-    }
-
-    @Override
-    public void onUpdate(final String field, final Object oldValue, final Object newValue) {
-        super.onUpdate(field, oldValue, newValue);
     }
 
     @Override

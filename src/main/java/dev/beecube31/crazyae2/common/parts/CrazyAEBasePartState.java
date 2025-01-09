@@ -7,12 +7,13 @@ import appeng.api.networking.events.MENetworkEventSubscribe;
 import appeng.api.networking.events.MENetworkPowerStatusChange;
 import appeng.me.GridAccessException;
 import appeng.parts.AEBasePart;
+import dev.beecube31.crazyae2.common.interfaces.upgrades.IUpgradesInfoProvider;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.item.ItemStack;
 
 import java.io.IOException;
 
-public abstract class CrazyAEBasePartState extends AEBasePart implements IPowerChannelState {
+public abstract class CrazyAEBasePartState extends AEBasePart implements IPowerChannelState, IUpgradesInfoProvider {
 	protected static final int POWERED_FLAG = 1;
 	private int clientFlags = 0; // sent as byte.
 

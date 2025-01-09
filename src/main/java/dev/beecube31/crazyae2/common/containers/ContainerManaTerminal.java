@@ -21,8 +21,6 @@ import appeng.api.storage.data.IItemList;
 import appeng.api.util.AEPartLocation;
 import appeng.api.util.IConfigManager;
 import appeng.api.util.IConfigurableObject;
-import appeng.container.AEBaseContainer;
-import appeng.container.guisync.GuiSync;
 import appeng.core.AELog;
 import appeng.core.Api;
 import appeng.core.sync.network.NetworkHandler;
@@ -35,6 +33,8 @@ import appeng.util.ConfigManager;
 import appeng.util.IConfigManagerHost;
 import appeng.util.Platform;
 import dev.beecube31.crazyae2.client.gui.implementations.GuiManaTerminal;
+import dev.beecube31.crazyae2.common.containers.base.CrazyAEBaseContainer;
+import dev.beecube31.crazyae2.common.containers.guisync.GuiSync;
 import dev.beecube31.crazyae2.core.api.storage.IManaStorageChannel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -47,7 +47,7 @@ import java.io.IOException;
 import java.nio.BufferOverflowException;
 import java.util.List;
 
-public class ContainerManaTerminal extends AEBaseContainer implements IConfigManagerHost, IConfigurableObject, IMEMonitorHandlerReceiver<IAEItemStack> {
+public class ContainerManaTerminal extends CrazyAEBaseContainer implements IConfigManagerHost, IConfigurableObject, IMEMonitorHandlerReceiver<IAEItemStack> {
     private final IConfigManager clientCM;
     private final IMEMonitor<IAEItemStack> monitor;
     private final IItemList<IAEItemStack> items = Api.INSTANCE.storage().getStorageChannel(IManaStorageChannel.class).createList();

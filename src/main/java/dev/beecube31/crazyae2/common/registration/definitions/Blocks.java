@@ -6,16 +6,14 @@ import appeng.block.crafting.ItemCraftingStorage;
 import appeng.bootstrap.definitions.TileEntityDefinition;
 import appeng.core.features.AEFeature;
 import dev.beecube31.crazyae2.Tags;
-import dev.beecube31.crazyae2.client.rendering.BlockBigEnergyCellRendering;
-import dev.beecube31.crazyae2.client.rendering.ImprovedDriveRendering;
-import dev.beecube31.crazyae2.client.rendering.QCMRendering;
+import dev.beecube31.crazyae2.client.rendering.*;
 import dev.beecube31.crazyae2.common.blocks.BlockDenseCraftingUnit;
+import dev.beecube31.crazyae2.common.blocks.botania.*;
 import dev.beecube31.crazyae2.common.blocks.crafting.BlockImprovedMAC;
 import dev.beecube31.crazyae2.common.blocks.energycells.BlockAdvancedEnergyCell;
 import dev.beecube31.crazyae2.common.blocks.energycells.BlockImprovedEnergyCell;
 import dev.beecube31.crazyae2.common.blocks.energycells.BlockPerfectEnergyCell;
 import dev.beecube31.crazyae2.common.blocks.grindstone.BlockImprovedCrank;
-import dev.beecube31.crazyae2.client.rendering.ImprovedCrankRendering;
 import dev.beecube31.crazyae2.common.blocks.materials.BlockFluxilized;
 import dev.beecube31.crazyae2.common.blocks.misc.BlockImprovedCondenser;
 import dev.beecube31.crazyae2.common.blocks.networking.*;
@@ -31,6 +29,7 @@ import dev.beecube31.crazyae2.common.items.ItemEnergyCells;
 import dev.beecube31.crazyae2.common.registration.registry.Registry;
 import dev.beecube31.crazyae2.common.registration.registry.rendering.CrazyAEDenseCraftingCubeRendering;
 import dev.beecube31.crazyae2.common.tile.TileDenseCraftingUnit;
+import dev.beecube31.crazyae2.common.tile.botania.*;
 import dev.beecube31.crazyae2.common.tile.crafting.TileImprovedMAC;
 import dev.beecube31.crazyae2.common.tile.energycells.TileAdvancedEnergyCell;
 import dev.beecube31.crazyae2.common.tile.energycells.TileImprovedEnergyCell;
@@ -88,6 +87,14 @@ public class Blocks {
 
 	private final ITileDefinition patternsInterface;
 	private final ITileDefinition quantumChannelMultiplier;
+	private final ITileDefinition quantumChannelMultiplierCreative;
+
+
+	private final ITileDefinition elventradeMechanical;
+	private final ITileDefinition manapoolMechanical;
+	private final ITileDefinition petalMechanical;
+	private final ITileDefinition runealtarMechanical;
+	private final ITileDefinition puredaisyMechanical;
 
 	public Blocks(Registry registry) {
 		this.craftingStorage256k = registry.block("crafting_storage_256k", () -> new BlockDenseCraftingUnit(BlockDenseCraftingUnit.DenseCraftingUnitType.STORAGE_256K))
@@ -295,6 +302,35 @@ public class Blocks {
 				.rendering(new QCMRendering())
 				.build();
 
+		this.quantumChannelMultiplierCreative = registry.block("quantum_channels_multiplier_creative", BlockQuantumChannelsMultiplierCreative::new)
+				.features(Features.QUANTUM_CHANNELS_MULTIPLIER)
+				.tileEntity(new TileEntityDefinition(TileCreativeQuantumChannelsBooster.class))
+				.rendering(new QCMCreativeRendering())
+				.build();
+
+
+		this.elventradeMechanical = registry.block("mechanical_elventrade", BlockMechanicalElventrade::new)
+				.features(Features.BOTANIA_MECHANICAL_BLOCKS)
+				.tileEntity(new TileEntityDefinition(TileMechanicalElventrade.class))
+				.build();
+		this.manapoolMechanical = registry.block("mechanical_manapool", BlockMechanicalManapool::new)
+				.features(Features.BOTANIA_MECHANICAL_BLOCKS)
+				.tileEntity(new TileEntityDefinition(TileMechanicalManapool.class))
+				.build();
+		this.runealtarMechanical = registry.block("mechanical_runealtar", BlockMechanicalRunealtar::new)
+				.features(Features.BOTANIA_MECHANICAL_BLOCKS)
+				.tileEntity(new TileEntityDefinition(TileMechanicalRunealtar.class))
+				.build();
+		this.petalMechanical = registry.block("mechanical_petal", BlockMechanicalPetal::new)
+				.features(Features.BOTANIA_MECHANICAL_BLOCKS)
+				.tileEntity(new TileEntityDefinition(TileMechanicalPetal.class))
+				.build();
+		this.puredaisyMechanical = registry.block("mechanical_puredaisy", BlockMechanicalPuredaisy::new)
+				.features(Features.BOTANIA_MECHANICAL_BLOCKS)
+				.tileEntity(new TileEntityDefinition(TileMechanicalPuredaisy.class))
+				.build();
+
+
 		this.improvedCondenser = registry.block("improved_condenser", BlockImprovedCondenser::new)
 				.features(Features.STUB)
 				.tileEntity(new TileEntityDefinition(TileImprovedCondenser.class))
@@ -307,6 +343,26 @@ public class Blocks {
 
 	public ITileDefinition improvedMolecularAssembler() {
 		return this.fastMAC;
+	}
+
+	public ITileDefinition mechanicalElventrade() {
+		return this.elventradeMechanical;
+	}
+
+	public ITileDefinition mechanicalManapool() {
+		return this.manapoolMechanical;
+	}
+
+	public ITileDefinition mechanicalRunealtar() {
+		return this.runealtarMechanical;
+	}
+
+	public ITileDefinition mechanicalPuredaisy() {
+		return this.puredaisyMechanical;
+	}
+
+	public ITileDefinition mechanicalPetal() {
+		return this.petalMechanical;
 	}
 
 	public ITileDefinition improvedDrive() {
@@ -421,6 +477,10 @@ public class Blocks {
 
 	public ITileDefinition quantumChannelMultiplier() {
 		return this.quantumChannelMultiplier;
+	}
+
+	public ITileDefinition quantumChannelMultiplierCreative() {
+		return this.quantumChannelMultiplierCreative;
 	}
 
 	public ITileDefinition craftingUnitsCombiner() {

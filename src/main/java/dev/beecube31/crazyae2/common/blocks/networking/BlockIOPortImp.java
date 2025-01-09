@@ -2,8 +2,9 @@ package dev.beecube31.crazyae2.common.blocks.networking;
 
 import appeng.api.config.Upgrades;
 import appeng.api.util.AEPartLocation;
-import appeng.block.AEBaseTileBlock;
 import appeng.util.Platform;
+import dev.beecube31.crazyae2.common.base.CrazyAEBlockAttribute;
+import dev.beecube31.crazyae2.common.enums.MachineAttributes;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiBridge;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiHandler;
 import dev.beecube31.crazyae2.common.tile.networking.TileImprovedIOPort;
@@ -22,7 +23,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class BlockIOPortImp extends AEBaseTileBlock {
+public class BlockIOPortImp extends CrazyAEBlockAttribute {
 
     public static final PropertyBool POWERED = PropertyBool.create("powered");
 
@@ -68,5 +69,10 @@ public class BlockIOPortImp extends AEBaseTileBlock {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public MachineAttributes getAttributes() {
+        return new MachineAttributes().setRequiredAEPerTick(64.0D);
     }
 }

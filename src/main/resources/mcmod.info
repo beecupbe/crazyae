@@ -6,7 +6,7 @@
     "version": "${version}",
     "mcversion": "${mcversion}",
     "logoFile": "assets/crazyae/meta/logo.png",
-    "url": "https://legacy.curseforge.com/minecraft/mc-mods/crazyae",
+    "url": "https://www.curseforge.com/minecraft/mc-mods/crazyae/files/all?showAlphaFiles=show",
     "authorList": ["beecube31"],
     "credits": "",
     "dependencies": []

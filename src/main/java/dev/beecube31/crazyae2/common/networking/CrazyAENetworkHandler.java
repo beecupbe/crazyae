@@ -15,9 +15,6 @@ public class CrazyAENetworkHandler implements IMessageHandler<ICrazyAEMessage, I
 
 	public CrazyAENetworkHandler() {
 		this.channel = NetworkRegistry.INSTANCE.newSimpleChannel(Tags.MODID);
-
-//		this.channel.registerMessage(this, PatternMultiToolPacket.class, 0, Side.SERVER);
-//		this.channel.registerMessage(this, ReconstructorFXPacket.class, 1, Side.CLIENT);
 	}
 
 	@Override

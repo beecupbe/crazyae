@@ -2,8 +2,6 @@ package dev.beecube31.crazyae2.common.blocks.misc;
 
 import appeng.api.util.AEPartLocation;
 import appeng.block.AEBaseTileBlock;
-import appeng.core.sync.GuiBridge;
-import appeng.tile.misc.TileCondenser;
 import appeng.util.Platform;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiBridge;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiHandler;

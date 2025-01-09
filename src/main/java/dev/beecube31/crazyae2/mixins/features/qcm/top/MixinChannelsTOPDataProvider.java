@@ -7,7 +7,7 @@ import appeng.integration.modules.theoneprobe.TheOneProbeText;
 import appeng.integration.modules.theoneprobe.part.ChannelInfoProvider;
 import appeng.parts.networking.PartCableSmart;
 import appeng.parts.networking.PartDenseCableSmart;
-import dev.beecube31.crazyae2.common.util.IGridChannelBoostersCache;
+import dev.beecube31.crazyae2.core.cache.IGridChannelBoostersCache;
 import mcjty.theoneprobe.api.IProbeHitData;
 import mcjty.theoneprobe.api.IProbeInfo;
 import mcjty.theoneprobe.api.ProbeMode;
@@ -31,9 +31,11 @@ public abstract class MixinChannelsTOPDataProvider {
             return;
         }
         if (part instanceof PartCableSmart || part instanceof PartDenseCableSmart) {
+            IGridChannelBoostersCache cache = part.getGridNode().getGrid().getCache(IGridChannelBoostersCache.class);
             final int usedChannels;
-            final int boostChannels = part.getGridNode().getGrid().<IGridChannelBoostersCache>getCache(IGridChannelBoostersCache.class).getChannels();
-            final int maxChannels = (part instanceof PartDenseCableSmart) ? AEConfig.instance().getDenseChannelCapacity() + boostChannels : AEConfig.instance().getNormalChannelCapacity() + boostChannels / 4;
+            final int boostChannels = cache.getChannels();
+            final int maxChannels = cache.isForcingCreativeMultiplier() ? Integer.MAX_VALUE
+                    : ((part instanceof PartDenseCableSmart) ? AEConfig.instance().getDenseChannelCapacity() + boostChannels : AEConfig.instance().getNormalChannelCapacity() + boostChannels / 4);
 
             if (part.getGridNode().isActive()) {
                 final NBTTagCompound tmp = new NBTTagCompound();

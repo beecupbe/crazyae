@@ -2,6 +2,7 @@ package dev.beecube31.crazyae2.common.parts.implementations;
 
 import appeng.api.AEApi;
 import appeng.api.config.*;
+import appeng.api.definitions.IItemDefinition;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.security.IActionSource;
 import appeng.api.networking.ticking.TickRateModulation;
@@ -48,9 +49,9 @@ public class PartManaImportBus extends CrazyAEPartSharedBus implements IManaLink
 
     private final IActionSource source;
 
-    private int connectionX;
-    private int connectionY;
-    private int connectionZ;
+    private int connectionX = Integer.MIN_VALUE;
+    private int connectionY = Integer.MIN_VALUE;
+    private int connectionZ = Integer.MIN_VALUE;
     private boolean hasConnection;
 
     @Reflected
@@ -206,5 +207,10 @@ public class PartManaImportBus extends CrazyAEPartSharedBus implements IManaLink
     @Override
     public boolean hasLinkedPool() {
         return this.hasConnection;
+    }
+
+    @Override
+    public IItemDefinition getBlock() {
+        return CrazyAE.definitions().parts().manaImportBus();
     }
 }

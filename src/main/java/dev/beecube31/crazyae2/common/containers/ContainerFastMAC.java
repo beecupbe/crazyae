@@ -1,20 +1,17 @@
 package dev.beecube31.crazyae2.common.containers;
 
-
 import appeng.api.config.RedstoneMode;
 import appeng.api.config.SecurityPermissions;
 import appeng.api.config.Settings;
 import appeng.api.networking.crafting.ICraftingPatternDetails;
-import appeng.container.slot.SlotRestrictedInput;
 import appeng.items.misc.ItemEncodedPattern;
 import appeng.util.Platform;
-import dev.beecube31.crazyae2.common.containers.slot.RestrictedSlot;
+import dev.beecube31.crazyae2.common.containers.base.slot.RestrictedSlot;
 import dev.beecube31.crazyae2.common.tile.crafting.TileImprovedMAC;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
-
 
 public class ContainerFastMAC extends ContainerCrazyAEUpgradeable {
 
@@ -23,22 +20,7 @@ public class ContainerFastMAC extends ContainerCrazyAEUpgradeable {
     }
 
     public boolean isValidItemForSlot(final int slotIndex, final ItemStack i) {
-        final IItemHandler mac = this.getUpgradeable().getInventoryByName("mac");
-
-        final ItemStack is = mac.getStackInSlot(10);
-        if (is.isEmpty()) {
-            return false;
-        }
-
-        if (is.getItem() instanceof final ItemEncodedPattern iep) {
-            final World w = this.getTileEntity().getWorld();
-            final ICraftingPatternDetails ph = iep.getPatternForItem(is, w);
-            if (ph.isCraftable()) {
-                return ph.isValidItemForSlot(slotIndex, i, w);
-            }
-        }
-
-        return false;
+        return true;
     }
 
     @Override
@@ -53,12 +35,12 @@ public class ContainerFastMAC extends ContainerCrazyAEUpgradeable {
 
         for (int y = 0; y < 5; y++) {
             for (int x = 0; x < 9; x++) {
-                this.addSlotToContainer(new SlotRestrictedInput(SlotRestrictedInput.PlacableItemType.ENCODED_CRAFTING_PATTERN, patternsHandler, x + y * 9, 8 + x * 18, 18 + y * 18, this.getInventoryPlayer()).setStackLimit(1));
+                this.addSlotToContainer(new RestrictedSlot(RestrictedSlot.PlaceableItemType.ENCODED_PATTERN, patternsHandler, x + y * 9, 8 + x * 18, 18 + y * 18, this.getInventoryPlayer()).setStackLimit(1));
             }
         }
 
         for (int u = 0; u < this.availableUpgrades(); u++) {
-            this.addSlotToContainer((new RestrictedSlot(RestrictedSlot.PlacableItemType.UPGRADES, upgrades, u, 187, 8 + u * 18, this.getInventoryPlayer())).setNotDraggable());
+            this.addSlotToContainer((new RestrictedSlot(RestrictedSlot.PlaceableItemType.UPGRADES, upgrades, u, 187, 8 + u * 18, this.getInventoryPlayer())).setStackLimit(1).setNotDraggable());
         }
     }
 

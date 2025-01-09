@@ -1,17 +1,17 @@
 package dev.beecube31.crazyae2.client.gui.implementations;
 
-import appeng.client.gui.AEBaseGui;
+import dev.beecube31.crazyae2.client.gui.CrazyAEBaseGui;
+import dev.beecube31.crazyae2.client.gui.sprites.Sprite;
 import dev.beecube31.crazyae2.client.gui.widgets.TooltipArea;
 import dev.beecube31.crazyae2.common.containers.ContainerCraftingUnitsCombiner;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiTooltip;
 import dev.beecube31.crazyae2.common.tile.networking.TileCraftingUnitsCombiner;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.ResourceLocation;
 
 import java.io.IOException;
 
-public class GuiCraftingUnitsCombiner extends AEBaseGui {
+public class GuiCraftingUnitsCombiner extends CrazyAEBaseGui {
 
     public GuiCraftingUnitsCombiner(final InventoryPlayer inventoryPlayer, final TileCraftingUnitsCombiner te) {
         super(new ContainerCraftingUnitsCombiner(inventoryPlayer, te));
@@ -33,19 +33,40 @@ public class GuiCraftingUnitsCombiner extends AEBaseGui {
 
     @Override
     public void drawFG(final int offsetX, final int offsetY, final int mouseX, final int mouseY) {
-//        this.fontRenderer.drawString(this.getGuiDisplayName(GuiText.Condenser.getLocal()), 8, 6, 4210752);
-//        this.fontRenderer.drawString(GuiText.inventory.getLocal(), 8, this.ySize - 96 + 3, 4210752);
+        this.drawSprite(
+                Sprite.CRAFTING_ACCELERATOR.getTextureStr(),
+                14,
+                10,
+                Sprite.CRAFTING_ACCELERATOR.getTextureX(),
+                Sprite.CRAFTING_ACCELERATOR.getTextureY(),
+                40,
+                40,
+                Sprite.CRAFTING_ACCELERATOR.getSizeX(),
+                Sprite.CRAFTING_ACCELERATOR.getSizeY(),
+                false
+        );
+
+        this.drawSprite(
+                Sprite.CRAFTING_STORAGE.getTextureStr(),
+                14,
+                66,
+                Sprite.CRAFTING_STORAGE.getTextureX(),
+                Sprite.CRAFTING_STORAGE.getTextureY(),
+                40,
+                40,
+                Sprite.CRAFTING_STORAGE.getSizeX(),
+                Sprite.CRAFTING_STORAGE.getSizeY(),
+                false
+        );
     }
 
     @Override
     public void drawBG(final int offsetX, final int offsetY, final int mouseX, final int mouseY) {
-        this.bindTexture("guis/crafting_units_combiner.png");
+        super.drawBG(offsetX, offsetY, mouseX, mouseY);
+        this.bindTexture(
+                "guis/crafting_units_combiner.png"
+        );
 
         this.drawTexturedModalRect(offsetX, offsetY, 0, 0, this.xSize, this.ySize);
-    }
-
-    public void bindTexture(String file) {
-        ResourceLocation loc = new ResourceLocation("crazyae", "textures/" + file);
-        this.mc.getTextureManager().bindTexture(loc);
     }
 }

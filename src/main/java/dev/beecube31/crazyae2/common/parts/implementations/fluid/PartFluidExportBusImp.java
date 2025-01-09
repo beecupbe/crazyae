@@ -1,6 +1,7 @@
 package dev.beecube31.crazyae2.common.parts.implementations.fluid;
 
 import appeng.api.config.*;
+import appeng.api.definitions.IItemDefinition;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.security.IActionSource;
 import appeng.api.networking.ticking.TickRateModulation;
@@ -15,6 +16,7 @@ import appeng.me.GridAccessException;
 import appeng.me.helpers.MachineSource;
 import appeng.parts.PartModel;
 import dev.beecube31.crazyae2.Tags;
+import dev.beecube31.crazyae2.core.CrazyAE;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -77,7 +79,7 @@ public class PartFluidExportBusImp extends CrazyAEPartSharedFluidBus {
                         if (fluid != null) {
                             final IAEFluidStack toExtract = fluid.copy();
 
-                            toExtract.setStackSize(this.calculateItemsToSend());
+                            toExtract.setStackSize(this.calculateFluidsToSend());
 
                             final IAEFluidStack out = inv.extractItems(toExtract, Actionable.SIMULATE, this.source);
 
@@ -127,5 +129,10 @@ public class PartFluidExportBusImp extends CrazyAEPartSharedFluidBus {
         } else {
             return MODELS_OFF;
         }
+    }
+
+    @Override
+    public IItemDefinition getBlock() {
+        return CrazyAE.definitions().parts().improvedExportFluidBus();
     }
 }

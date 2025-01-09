@@ -2,7 +2,7 @@ package dev.beecube31.crazyae2.common.tile.networking;
 
 import appeng.api.AEApi;
 import appeng.api.config.*;
-import appeng.api.implementations.IUpgradeableHost;
+import appeng.api.definitions.IItemDefinition;
 import appeng.api.networking.GridFlags;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.energy.IEnergyGrid;
@@ -24,7 +24,6 @@ import appeng.me.GridAccessException;
 import appeng.me.helpers.MachineSource;
 import appeng.parts.automation.BlockUpgradeInventory;
 import appeng.parts.automation.UpgradeInventory;
-import appeng.tile.grid.AENetworkTile;
 import appeng.tile.inventory.AppEngInternalInventory;
 import appeng.util.ConfigManager;
 import appeng.util.IConfigManagerHost;
@@ -35,6 +34,8 @@ import appeng.util.inv.InvOperation;
 import appeng.util.item.AEItemStack;
 import com.google.common.base.Preconditions;
 import dev.beecube31.crazyae2.common.interfaces.ICrazyAEUpgradeInventory;
+import dev.beecube31.crazyae2.common.interfaces.upgrades.IUpgradesInfoProvider;
+import dev.beecube31.crazyae2.common.tile.base.CrazyAENetworkOCTile;
 import dev.beecube31.crazyae2.core.CrazyAE;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
@@ -52,7 +53,7 @@ import javax.annotation.Nullable;
 import java.io.IOException;
 import java.util.List;
 
-public class TileBigCrystalCharger extends AENetworkTile implements IConfigManagerHost, IUpgradeableHost, IAEAppEngInventory, IGridTickable {
+public class TileBigCrystalCharger extends CrazyAENetworkOCTile implements IConfigManagerHost, IUpgradesInfoProvider, IAEAppEngInventory, IGridTickable {
     private static final int NUMBER_OF_UPGRADE_SLOTS = 5;
 
     private final UpgradeInventory upgrades;
@@ -137,6 +138,7 @@ public class TileBigCrystalCharger extends AENetworkTile implements IConfigManag
     }
 
     @Override
+    @NotNull
     public AECableType getCableConnectionType(final AEPartLocation dir) {
         return AECableType.COVERED;
     }
@@ -250,6 +252,7 @@ public class TileBigCrystalCharger extends AENetworkTile implements IConfigManag
                             int amt = Math.min(Math.min(itemsLeft, 64 - this.outputInv.getStackInSlot(j).getCount()), this.inputInv.getStackInSlot(j).getCount());
                             this.outputInv.insertItem(j, AEApi.instance().definitions().materials().certusQuartzCrystalCharged().maybeStack(amt).orElse(ItemStack.EMPTY), false);
                             this.inputInv.extractItem(j, amt, false);
+                            this.addCompletedOperations(amt);
                             itemsLeft -= amt;
                             if (itemsLeft <= 0) {
                                 break;
@@ -294,39 +297,22 @@ public class TileBigCrystalCharger extends AENetworkTile implements IConfigManag
     private void checkUpgrades() {
         this.progressPerTick = 0;
         this.outputItemsPerJob = 0;
-        switch (this.getInstalledUpgrades(Upgrades.SPEED)) {
-            case 1:
-                this.progressPerTick++;
-                break;
-            case 2:
-                this.progressPerTick += 3;
-                break;
-            case 3:
-                this.progressPerTick += 5;
-                break;
-            case 4:
-                this.progressPerTick += 8;
-                break;
-            case 5:
-                this.progressPerTick += 12;
-                break;
-        }
 
         switch (this.getInstalledCustomUpgrades(dev.beecube31.crazyae2.common.registration.definitions.Upgrades.UpgradeType.IMPROVED_SPEED)) {
             case 1:
                 this.progressPerTick += 10;
                 break;
             case 2:
-                this.progressPerTick += 16;
+                this.progressPerTick += 15;
                 break;
             case 3:
                 this.progressPerTick += 25;
                 break;
             case 4:
-                this.progressPerTick += 36;
+                this.progressPerTick += 40;
                 break;
             case 5:
-                this.progressPerTick += 50;
+                this.progressPerTick += 60;
                 break;
         }
 
@@ -336,16 +322,16 @@ public class TileBigCrystalCharger extends AENetworkTile implements IConfigManag
 
         switch (this.getInstalledCustomUpgrades(dev.beecube31.crazyae2.common.registration.definitions.Upgrades.UpgradeType.STACKS)) {
             case 1:
-                this.outputItemsPerJob += 48;
+                this.outputItemsPerJob += 64;
                 break;
             case 2:
-                this.outputItemsPerJob += 160;
+                this.outputItemsPerJob += 192;
                 break;
             case 3:
                 this.outputItemsPerJob += 384;
                 break;
             case 4:
-                this.outputItemsPerJob += 640;
+                this.outputItemsPerJob += 768;
                 break;
             case 5:
                 this.outputItemsPerJob += 1152;
@@ -357,13 +343,13 @@ public class TileBigCrystalCharger extends AENetworkTile implements IConfigManag
     }
 
     @Override
-    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+    public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
         return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+    public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return (T) this.inputInv;
         }
@@ -376,5 +362,10 @@ public class TileBigCrystalCharger extends AENetworkTile implements IConfigManag
 
     private boolean hasWork() {
         return !ItemHandlerUtil.isEmpty(this.inputInv);
+    }
+
+    @Override
+    public IItemDefinition getBlock() {
+        return CrazyAE.definitions().blocks().bigCrystalCharger();
     }
 }

@@ -2,7 +2,7 @@ package dev.beecube31.crazyae2.common.tile.networking;
 
 import appeng.api.AEApi;
 import appeng.api.config.*;
-import appeng.api.implementations.IUpgradeableHost;
+import appeng.api.definitions.IItemDefinition;
 import appeng.api.networking.GridFlags;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.energy.IEnergySource;
@@ -26,7 +26,6 @@ import appeng.me.GridAccessException;
 import appeng.me.helpers.MachineSource;
 import appeng.parts.automation.BlockUpgradeInventory;
 import appeng.parts.automation.UpgradeInventory;
-import appeng.tile.grid.AENetworkInvTile;
 import appeng.tile.inventory.AppEngInternalInventory;
 import appeng.util.ConfigManager;
 import appeng.util.IConfigManagerHost;
@@ -40,6 +39,8 @@ import appeng.util.inv.WrapperFilteredItemHandler;
 import appeng.util.inv.filter.AEItemFilters;
 import com.google.common.base.Preconditions;
 import dev.beecube31.crazyae2.common.interfaces.ICrazyAEUpgradeInventory;
+import dev.beecube31.crazyae2.common.interfaces.upgrades.IUpgradesInfoProvider;
+import dev.beecube31.crazyae2.common.tile.base.CrazyAENetworkInvOCTile;
 import dev.beecube31.crazyae2.core.CrazyAE;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
@@ -55,7 +56,7 @@ import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TileImprovedIOPort extends AENetworkInvTile implements IUpgradeableHost, IConfigManagerHost, IGridTickable {
+public class TileImprovedIOPort extends CrazyAENetworkInvOCTile implements IUpgradesInfoProvider, IConfigManagerHost, IGridTickable {
     private static final int NUMBER_OF_CELL_SLOTS = 12;
     private static final int NUMBER_OF_UPGRADE_SLOTS = 3;
 
@@ -76,6 +77,7 @@ public class TileImprovedIOPort extends AENetworkInvTile implements IUpgradeable
     private boolean isActive = false;
 
     public TileImprovedIOPort() {
+        this.getProxy().setIdlePowerUsage(64.0);
         this.getProxy().setFlags(GridFlags.REQUIRE_CHANNEL);
         this.manager = new ConfigManager(this);
         this.manager.registerSetting(Settings.REDSTONE_CONTROLLED, RedstoneMode.IGNORE);
@@ -399,6 +401,7 @@ public class TileImprovedIOPort extends AENetworkInvTile implements IUpgradeable
 
                             if (possible > 0) {
                                 itemsToMove -= possible;
+                                this.addCompletedOperations(possible);
                                 didStuff = true;
                             }
 
@@ -468,5 +471,10 @@ public class TileImprovedIOPort extends AENetworkInvTile implements IUpgradeable
                 drops.add(stackInSlot);
             }
         }
+    }
+
+    @Override
+    public IItemDefinition getBlock() {
+        return CrazyAE.definitions().blocks().ioPortImp();
     }
 }

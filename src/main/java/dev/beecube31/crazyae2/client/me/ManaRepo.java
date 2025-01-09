@@ -2,8 +2,8 @@ package dev.beecube31.crazyae2.client.me;
 
 import appeng.api.storage.data.IAEItemStack;
 import appeng.api.storage.data.IItemList;
-import appeng.client.gui.widgets.IScrollSource;
 import appeng.core.Api;
+import dev.beecube31.crazyae2.common.interfaces.gui.IScrollSrc;
 import dev.beecube31.crazyae2.core.api.storage.IManaStorageChannel;
 
 import java.util.ArrayList;
@@ -11,13 +11,13 @@ import java.util.ArrayList;
 public class ManaRepo {
     private final IItemList<IAEItemStack> list = Api.INSTANCE.storage().getStorageChannel(IManaStorageChannel.class).createList();
     private final ArrayList<IAEItemStack> view = new ArrayList<>();
-    private final IScrollSource src;
+    private final IScrollSrc src;
 
     private int rowSize = 9;
 
     private boolean hasPower;
 
-    public ManaRepo(IScrollSource src) {
+    public ManaRepo(IScrollSrc src) {
         this.src = src;
     }
 

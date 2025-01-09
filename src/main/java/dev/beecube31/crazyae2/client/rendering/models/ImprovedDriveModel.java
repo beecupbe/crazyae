@@ -1,9 +1,9 @@
 package dev.beecube31.crazyae2.client.rendering.models;
 
 import appeng.block.storage.DriveSlotState;
-import appeng.client.render.model.DriveBakedModel;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
+import dev.beecube31.crazyae2.client.rendering.models.baked.ImprovedDriveBakedModel;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormat;
@@ -23,12 +23,15 @@ public class ImprovedDriveModel implements IModel {
 
     private static final ResourceLocation MODEL_BASE = new ResourceLocation("crazyae:block/driveimp_base");
 
-    private static final Map<DriveSlotState, ResourceLocation> MODELS_CELLS = ImmutableMap.of(
-            DriveSlotState.EMPTY, new ResourceLocation("appliedenergistics2:block/drive_cell_empty"),
-            DriveSlotState.OFFLINE, new ResourceLocation("appliedenergistics2:block/drive_cell_off"),
-            DriveSlotState.ONLINE, new ResourceLocation("appliedenergistics2:block/drive_cell_on"),
-            DriveSlotState.TYPES_FULL, new ResourceLocation("appliedenergistics2:block/drive_cell_types_full"),
-            DriveSlotState.FULL, new ResourceLocation("appliedenergistics2:block/drive_cell_full"));
+    private static final Map<DriveSlotState, ResourceLocation> MODELS_CELLS = ImmutableMap.<DriveSlotState, ResourceLocation>builder()
+            .put(DriveSlotState.EMPTY, new ResourceLocation("crazyae:block/drive_cells/drive_cell_empty"))
+            .put(DriveSlotState.OFFLINE, new ResourceLocation("crazyae:block/drive_cells/drive_cell_off"))
+            .put(DriveSlotState.ONLINE, new ResourceLocation("crazyae:block/drive_cells/drive_cell_on"))
+            .put(DriveSlotState.TYPES_FULL, new ResourceLocation("crazyae:block/drive_cells/drive_cell_types_full"))
+            .put(DriveSlotState.FULL, new ResourceLocation("crazyae:block/drive_cells/drive_cell_full"))
+            .put(DriveSlotState.NO_CONTENTS, new ResourceLocation("crazyae:block/drive_cells/drive_cell_no_contents"))
+            .build();
+
 
     @Override
     public Collection<ResourceLocation> getDependencies() {
@@ -57,7 +60,7 @@ public class ImprovedDriveModel implements IModel {
         }
 
         IBakedModel bakedBase = baseModel.bake(state, format, bakedTextureGetter);
-        return new DriveBakedModel(bakedBase, cellModels);
+        return new ImprovedDriveBakedModel(bakedBase, cellModels);
     }
 
     @Override

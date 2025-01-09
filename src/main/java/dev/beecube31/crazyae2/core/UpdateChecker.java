@@ -17,7 +17,7 @@ import java.net.URL;
 public class UpdateChecker {
 
     private final UpdateCheckThread thread;
-    private int delay = 40;
+    private int delay = 50;
     private boolean playerNotified = false;
 
     public UpdateChecker() {
@@ -34,23 +34,22 @@ public class UpdateChecker {
             this.delay--;
             return;
         }
-        if (!this.playerNotified && this.thread.isComplete()) {
+        if (!this.playerNotified && this.thread.shouldNotify()) {
             this.playerNotified = true;
             MinecraftForge.EVENT_BUS.unregister(this);
-            CrazyAE.logger().info(this.thread.getVersion());
-            CrazyAE.logger().info(ModVersion.get());
             if (this.thread.getVersion().equals(ModVersion.get())) {
-                CrazyAE.logger().info("[Update Checker] - Mod is up to date");
                 return;
             }
-
-            CrazyAE.logger().info("[Update Checker] - Update found: {} : {}", this.thread.getVersion(), this.thread.getDownload());
 
             if (FMLCommonHandler.instance().getEffectiveSide().isClient()) {
                 TextComponentBase updateString = new TextComponentString(CrazyAEGuiText.DOWNLOAD_LINK.getLocalWithSpaceAtEnd());
                 updateString.getStyle().setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, this.thread.getDownload()));
 
-                Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new TextComponentString(CrazyAEGuiText.UPDATE_FOUND.getLocalWithSpaceAtEnd() + this.thread.getVersion()));
+                Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new TextComponentString(
+                        CrazyAEGuiText.UPDATE_FOUND.getLocalWithSpaceAtEnd()
+                        + this.thread.getVersion()
+                        + this.thread.getDescription()
+                ));
                 Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(updateString);
                 Minecraft.getMinecraft().ingameGUI.getChatGUI().printChatMessage(new TextComponentString(CrazyAEGuiText.DISABLE_UPDATES_TIP.getLocalWithSpaceAtEnd()));
             }
@@ -58,14 +57,15 @@ public class UpdateChecker {
     }
 
     public static class UpdateCheckThread extends Thread {
-
         private String version = null;
+        private String desc = "";
         private boolean complete = false;
+        private boolean shouldNotify = false;
 
         private String download = null;
 
         public void run() {
-            CrazyAE.logger().info("[Update Checker] - Starting update thread.");
+            CrazyAE.logger().info("[Update Checker] - Checking for update...");
             try {
                 URL versionURL = new URL("https://raw.githubusercontent.com/beecupbe/crazyae/refs/heads/master/version.txt");
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(versionURL.openStream()));
@@ -77,6 +77,12 @@ public class UpdateChecker {
                             this.version = value;
                             continue;
                         }
+
+                        if (line.contains("desc")) {
+                            this.desc = value;
+                            continue;
+                        }
+
                         if (line.contains("link")) {
                             this.download = value;
                         }
@@ -84,15 +90,32 @@ public class UpdateChecker {
                 }
                 if (this.download != null && this.version != null) {
                     this.complete = true;
+
+                    if (this.version.equals(ModVersion.get())) {
+                        CrazyAE.logger().info("[Update Checker] - Mod is up to date");
+                        return;
+                    }
+
+                    this.shouldNotify = true;
+                    CrazyAE.logger().info("[Update Checker] - Update found: {} : {}", this.version, this.download);
                 }
+
                 CrazyAE.logger().info("[Update Checker] - Check success. Actual version: {}", getVersion());
             } catch (Exception e) {
-                CrazyAE.logger().warn("[Update Checker] - Check Failed: {}", e.getMessage());
+                CrazyAE.logger().warn("[Update Checker] - Check failed: {}", e.getMessage());
             }
         }
 
         public String getVersion() {
             return this.version;
+        }
+
+        public String getDescription() {
+            return this.desc;
+        }
+
+        public boolean shouldNotify() {
+            return this.shouldNotify;
         }
 
 
@@ -105,5 +128,4 @@ public class UpdateChecker {
         }
 
     }
-
 }

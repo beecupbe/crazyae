@@ -29,8 +29,8 @@
       "data": 3
     },
     "q": {
-      "item": "crazyae:material",
-      "data": 17
+      "type": "crazyae:material",
+      "name": "mana_processor"
     }
   }
 }

@@ -2,6 +2,7 @@ package dev.beecube31.crazyae2.common.tile.networking;
 
 import appeng.api.AEApi;
 import appeng.api.config.Upgrades;
+import appeng.api.definitions.IItemDefinition;
 import appeng.api.definitions.IMaterials;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.crafting.ICraftingPatternDetails;
@@ -26,7 +27,7 @@ import appeng.util.inv.IInventoryDestination;
 import appeng.util.inv.InvOperation;
 import dev.beecube31.crazyae2.common.duality.PatternsInterfaceDuality;
 import dev.beecube31.crazyae2.common.interfaces.IChangeablePriorityHost;
-import dev.beecube31.crazyae2.common.interfaces.ICrazyAEPatternsInterface;
+import dev.beecube31.crazyae2.common.interfaces.ICrazyAEInterfaceHost;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiBridge;
 import dev.beecube31.crazyae2.core.CrazyAE;
 import io.netty.buffer.ByteBuf;
@@ -47,7 +48,7 @@ import java.io.IOException;
 import java.util.EnumSet;
 import java.util.List;
 
-public class TilePatternsInterface extends AENetworkInvTile implements IGridTickable, IInventoryDestination, ICrazyAEPatternsInterface, IChangeablePriorityHost {
+public class TilePatternsInterface extends AENetworkInvTile implements IGridTickable, IInventoryDestination, ICrazyAEInterfaceHost, IChangeablePriorityHost {
 
     private final PatternsInterfaceDuality duality = new PatternsInterfaceDuality(this.getProxy(), this);
 
@@ -334,5 +335,10 @@ public class TilePatternsInterface extends AENetworkInvTile implements IGridTick
                 player.sendMessage(PlayerMessages.MissingPatternsToEncode.get());
             }
         }
+    }
+
+    @Override
+    public IItemDefinition getBlock() {
+        return CrazyAE.definitions().blocks().patternsInterface();
     }
 }

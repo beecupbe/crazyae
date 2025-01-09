@@ -1,12 +1,12 @@
 package dev.beecube31.crazyae2.client.gui.widgets;
 
-import appeng.client.gui.widgets.ITooltip;
+import dev.beecube31.crazyae2.common.interfaces.gui.ITooltipObj;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
-public class TooltipArea extends GuiButton implements ITooltip {
+public class TooltipArea extends GuiButton implements ITooltipObj {
     private final String tooltipMessageLocal;
 
     public TooltipArea(final int id, final int posX, final int posY, final int width, final int height, final String msg) {
@@ -20,14 +20,13 @@ public class TooltipArea extends GuiButton implements ITooltip {
 
     @Override
     public void drawButton(final @NotNull Minecraft par1Minecraft, final int par2, final int par3, final float partial) {
-        if (this.visible) {
-            par1Minecraft.getTextureManager().bindTexture(new ResourceLocation("crazyae", "textures/guis/tooltip.png"));
-            this.mouseDragged(par1Minecraft, par2, par3);
-        }
+        this.mouseDragged(par1Minecraft, par2, par3);
     }
 
+    @Override public void playPressSound(SoundHandler soundHandlerIn) {}
+
     @Override
-    public String getMessage() {
+    public String getTooltipMsg() {
         return this.tooltipMessageLocal;
     }
 

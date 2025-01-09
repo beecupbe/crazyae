@@ -1,0 +1,17 @@
+{
+  "result": {
+    "item": "crazyae:fluixilized_block"
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "ccc",
+    "ccc",
+    "ccc"
+  ],
+  "key": {
+    "c": {
+      "type": "material",
+      "name": "fluixilized_ingot"
+    }
+  }
+}

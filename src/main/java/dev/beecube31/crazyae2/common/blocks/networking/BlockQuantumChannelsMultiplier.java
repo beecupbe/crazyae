@@ -26,7 +26,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class BlockQuantumChannelsMultiplier extends AEBaseTileBlock implements ICustomCollision {
-
     enum State implements IStringSerializable {
         OFF,
         ON,

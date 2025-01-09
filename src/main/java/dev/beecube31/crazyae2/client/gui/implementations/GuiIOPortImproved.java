@@ -7,9 +7,9 @@ import appeng.api.config.RedstoneMode;
 import appeng.api.config.Settings;
 import appeng.api.definitions.IDefinitions;
 import appeng.client.gui.widgets.GuiImgButton;
-import appeng.core.sync.network.NetworkHandler;
-import appeng.core.sync.packets.PacketConfigButton;
 import dev.beecube31.crazyae2.common.containers.ContainerIOPortImproved;
+import dev.beecube31.crazyae2.common.networking.network.NetworkHandler;
+import dev.beecube31.crazyae2.common.networking.packets.orig.PacketConfigButton;
 import dev.beecube31.crazyae2.common.tile.networking.TileImprovedIOPort;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -25,6 +25,7 @@ public class GuiIOPortImproved extends GuiCrazyAEUpgradeable {
     public GuiIOPortImproved(final InventoryPlayer inventoryPlayer, final TileImprovedIOPort te) {
         super(new ContainerIOPortImproved(inventoryPlayer, te));
         this.ySize = 175;
+        this.setDisableDrawTileName(true);
     }
 
     @Override
@@ -40,6 +41,7 @@ public class GuiIOPortImproved extends GuiCrazyAEUpgradeable {
 
     @Override
     public void drawFG(final int offsetX, final int offsetY, final int mouseX, final int mouseY) {
+        super.drawFG(offsetX, offsetY, mouseX, mouseY);
         if (this.redstoneMode != null) {
             this.redstoneMode.set(this.cvb.getRedStoneMode());
         }

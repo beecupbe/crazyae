@@ -2,14 +2,15 @@ package dev.beecube31.crazyae2.client.gui.implementations;
 
 import appeng.api.config.Settings;
 import appeng.api.config.YesNo;
-import appeng.client.gui.widgets.GuiTabButton;
 import appeng.client.gui.widgets.GuiToggleButton;
 import appeng.core.localization.GuiText;
-import appeng.core.sync.network.NetworkHandler;
-import appeng.core.sync.packets.PacketConfigButton;
+import dev.beecube31.crazyae2.client.gui.sprites.StateSprite;
+import dev.beecube31.crazyae2.client.gui.widgets.OptionSideButton;
 import dev.beecube31.crazyae2.common.containers.ContainerPatternsInterface;
-import dev.beecube31.crazyae2.common.interfaces.ICrazyAEPatternsInterface;
+import dev.beecube31.crazyae2.common.interfaces.ICrazyAEInterfaceHost;
+import dev.beecube31.crazyae2.common.networking.network.NetworkHandler;
 import dev.beecube31.crazyae2.common.networking.packets.PacketSwitchGuis;
+import dev.beecube31.crazyae2.common.networking.packets.orig.PacketConfigButton;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiBridge;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiText;
 import net.minecraft.client.gui.GuiButton;
@@ -20,31 +21,50 @@ import java.io.IOException;
 
 public class GuiPatternsInterface extends GuiCrazyAEUpgradeable {
 
-    private GuiTabButton priority;
+    private OptionSideButton priority;
     private GuiToggleButton interfaceMode;
 
-    public GuiPatternsInterface(final InventoryPlayer inventoryPlayer, final ICrazyAEPatternsInterface te) {
+    public GuiPatternsInterface(final InventoryPlayer inventoryPlayer, final ICrazyAEInterfaceHost te) {
         super(new ContainerPatternsInterface(inventoryPlayer, te));
         this.ySize = 256;
+        this.setDisableDrawInventoryString(true);
     }
 
     @Override
     protected void addButtons() {
-        this.priority = new GuiTabButton(this.guiLeft + 154, this.guiTop, 2 + 4 * 16, GuiText.Priority.getLocal(), this.itemRender);
+        this.priority = new OptionSideButton(
+                this.guiLeft + 174,
+                this.guiTop,
+                StateSprite.QUARTZ_WRENCH,
+                GuiText.Priority.getLocal(),
+                "",
+                this.itemRender,
+                this.getGuiHue(),
+                this.getTextHue(),
+                0,
+                OptionSideButton.ButtonType.DEFAULT
+        );
         this.buttonList.add(this.priority);
 
-        this.interfaceMode = new GuiToggleButton(this.guiLeft - 18, this.guiTop + 26, 84, 85, GuiText.InterfaceTerminal.getLocal(), GuiText.InterfaceTerminalHint.getLocal());
+        this.interfaceMode = new GuiToggleButton(
+                this.guiLeft - 18,
+                this.guiTop + 26,
+                84,
+                85,
+                GuiText.InterfaceTerminal.getLocal(), GuiText.InterfaceTerminalHint.getLocal()
+        );
         this.buttonList.add(this.interfaceMode);
     }
 
     @Override
     public void drawFG(final int offsetX, final int offsetY, final int mouseX, final int mouseY) {
-
+        super.drawFG(offsetX, offsetY, mouseX, mouseY);
         if (this.interfaceMode != null) {
             this.interfaceMode.setState(((ContainerPatternsInterface) this.cvb).getInterfaceTerminalMode() == YesNo.YES);
         }
 
-        this.fontRenderer.drawString(this.getGuiDisplayName(CrazyAEGuiText.PATTERN_INTERFACE.getLocal()), 8, 6, 4210752);
+        this.drawString(this.getGuiDisplayName(CrazyAEGuiText.PATTERN_INTERFACE.getLocal()), 8, 6);
+        this.getTextHue().endDrawHue();
     }
 
     @Override

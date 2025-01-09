@@ -2,8 +2,9 @@ package dev.beecube31.crazyae2.common.tile.crafting;
 
 import appeng.api.AEApi;
 import appeng.api.config.*;
+import appeng.api.definitions.IItemDefinition;
 import appeng.api.implementations.ICraftingPatternItem;
-import appeng.api.implementations.IUpgradeableHost;
+import appeng.api.implementations.tiles.ICraftingMachine;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.crafting.*;
 import appeng.api.networking.events.MENetworkCraftingPatternChange;
@@ -21,37 +22,53 @@ import appeng.api.util.AECableType;
 import appeng.api.util.AEPartLocation;
 import appeng.api.util.DimensionalCoord;
 import appeng.api.util.IConfigManager;
+import appeng.core.localization.GuiText;
+import appeng.helpers.ICustomNameObject;
 import appeng.helpers.ItemStackHelper;
 import appeng.me.GridAccessException;
 import appeng.me.helpers.MachineSource;
 import appeng.parts.automation.BlockUpgradeInventory;
 import appeng.parts.automation.UpgradeInventory;
-import appeng.tile.grid.AENetworkInvTile;
 import appeng.tile.inventory.AppEngInternalInventory;
 import appeng.util.ConfigManager;
 import appeng.util.IConfigManagerHost;
+import appeng.util.InventoryAdaptor;
 import appeng.util.Platform;
 import appeng.util.inv.InvOperation;
 import appeng.util.item.AEItemStack;
 import com.google.common.base.Preconditions;
 import dev.beecube31.crazyae2.common.interfaces.ICrazyAEUpgradeInventory;
+import dev.beecube31.crazyae2.common.interfaces.IGridHostMonitorable;
+import dev.beecube31.crazyae2.common.interfaces.crafting.IFastCraftingHandler;
+import dev.beecube31.crazyae2.common.interfaces.upgrades.IUpgradesInfoProvider;
+import dev.beecube31.crazyae2.common.sync.CrazyAEGuiText;
+import dev.beecube31.crazyae2.common.tile.base.CrazyAENetworkInvOCTile;
 import dev.beecube31.crazyae2.core.CrazyAE;
+import gregtech.api.block.machines.BlockMachine;
+import gregtech.api.metatileentity.MetaTileEntity;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 
 import java.io.IOException;
 import java.util.*;
 
-public class TileImprovedMAC extends AENetworkInvTile implements IUpgradeableHost, IConfigManagerHost, IGridTickable, ICraftingMedium, ICraftingProvider {
+public class TileImprovedMAC extends CrazyAENetworkInvOCTile implements IConfigManagerHost, IGridTickable, ICraftingMedium, ICraftingProvider, IUpgradesInfoProvider, IFastCraftingHandler, IGridHostMonitorable {
 
-    private final int maxQueueSize = 320;
+    private final int maxQueueSize = 160;
     private int itemsToSendPerTick = 8;
 
     private final AppEngInternalInventory patternsInv = new AppEngInternalInventory(this, 45, 1);
@@ -63,7 +80,7 @@ public class TileImprovedMAC extends AENetworkInvTile implements IUpgradeableHos
 
     private int priority = 1;
     private List<ICraftingPatternDetails> craftingList = null;
-    private List<IAEItemStack> itemsToSend = new ArrayList<>();
+    private final List<IAEItemStack> itemsToSend = new ArrayList<>();
 
     public TileImprovedMAC() {
         final Block assembler = CrazyAE.definitions().blocks().improvedMolecularAssembler().maybeBlock().orElse(null);
@@ -71,7 +88,7 @@ public class TileImprovedMAC extends AENetworkInvTile implements IUpgradeableHos
 
         this.settings = new ConfigManager(this);
         this.settings.registerSetting(Settings.REDSTONE_CONTROLLED, RedstoneMode.IGNORE);
-        this.getProxy().setIdlePowerUsage(4.0);
+        this.getProxy().setIdlePowerUsage(32.0);
         this.upgrades = new BlockUpgradeInventory(assembler, this, this.getUpgradeSlots());
 
     }
@@ -83,7 +100,15 @@ public class TileImprovedMAC extends AENetworkInvTile implements IUpgradeableHos
     @Override
     public boolean pushPattern(final ICraftingPatternDetails patternDetails, final InventoryCrafting table) {
         if (this.cached && this.itemsToSend.size() < this.maxQueueSize) {
-            return this.dispatchJob(table, patternDetails);
+            return this.dispatchJob(patternDetails);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean fastPushPattern(final ICraftingPatternDetails patternDetails) {
+        if (this.cached && this.itemsToSend.size() < this.maxQueueSize) {
+            return this.dispatchJob(patternDetails);
         }
         return false;
     }
@@ -186,7 +211,6 @@ public class TileImprovedMAC extends AENetworkInvTile implements IUpgradeableHos
         return this.patternsInv;
     }
 
-
     @Override
     public void onChangeInventory(final IItemHandler inv, final int slot, final InvOperation mc, final ItemStack removed, final ItemStack added) {
         if (inv == this.patternsInv && (!removed.isEmpty() || !added.isEmpty())) {
@@ -223,22 +247,37 @@ public class TileImprovedMAC extends AENetworkInvTile implements IUpgradeableHos
 
     private void checkUpgrades() {
         switch (this.getInstalledCustomUpgrades(dev.beecube31.crazyae2.common.registration.definitions.Upgrades.UpgradeType.STACKS)) {
+            default:
+                this.itemsToSendPerTick = 8;
+                break;
             case 1:
                 this.itemsToSendPerTick = 16;
                 break;
             case 2:
-                this.itemsToSendPerTick = 48;
+                this.itemsToSendPerTick = 32;
                 break;
             case 3:
-                this.itemsToSendPerTick = 96;
+                this.itemsToSendPerTick = 64;
                 break;
             case 4:
-                this.itemsToSendPerTick = 192;
+                this.itemsToSendPerTick = 128;
                 break;
             case 5:
-                this.itemsToSendPerTick = 320;
+                this.itemsToSendPerTick = 160;
                 break;
         }
+    }
+
+    public boolean acceptPatternFromTerm(ItemStack pattern) {
+        for (int i = 0; i < this.patternsInv.getSlots(); i++) {
+            ItemStack is = this.patternsInv.getStackInSlot(i);
+            if (is.isEmpty()) {
+                this.patternsInv.setStackInSlot(i, pattern.copy());
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void pushItemsOut() {
@@ -252,6 +291,7 @@ public class TileImprovedMAC extends AENetworkInvTile implements IUpgradeableHos
 
                 if (overflow == null) {
                     storage.injectItems(iaeItemStack, Actionable.MODULATE, this.actionSource);
+                    this.addCompletedOperations(iaeItemStack.getStackSize());
                     iterator.remove();
                 } else {
                     if (overflow.getStackSize() == iaeItemStack.getStackSize()) {
@@ -260,6 +300,7 @@ public class TileImprovedMAC extends AENetworkInvTile implements IUpgradeableHos
 
                     final IAEItemStack item = iaeItemStack.setStackSize(iaeItemStack.getStackSize() - overflow.getStackSize());
                     storage.injectItems(item, Actionable.MODULATE, this.actionSource);
+                    this.addCompletedOperations(item.getStackSize());
                     iterator.remove();
                     this.itemsToSend.add(item);
                 }
@@ -384,18 +425,18 @@ public class TileImprovedMAC extends AENetworkInvTile implements IUpgradeableHos
 
         if (this.getWorld().provider.getWorldTime() % 2 == 0) {
             this.checkUpgrades();
+        }
+
+        if (!this.itemsToSend.isEmpty()) {
             this.pushItemsOut();
         }
 
         return TickRateModulation.URGENT;
     }
 
-    private boolean dispatchJob(InventoryCrafting ic, ICraftingPatternDetails details) {
+    private boolean dispatchJob(ICraftingPatternDetails details) {
         if (details != null) {
             IAEItemStack output = details.getPrimaryOutput();
-
-//            AELog.log(Level.INFO, output.toString());
-
             this.itemsToSend.add(output);
             return true;
         }
@@ -408,6 +449,9 @@ public class TileImprovedMAC extends AENetworkInvTile implements IUpgradeableHos
         if (Platform.isServer()) {
             this.updateCraftingList();
             this.notifyPatternsChanged();
+            if (!this.itemsToSend.isEmpty()) {
+                this.pushItemsOut();
+            }
         }
     }
 
@@ -434,5 +478,35 @@ public class TileImprovedMAC extends AENetworkInvTile implements IUpgradeableHos
                 craftingTracker.addCraftingOption(this, details);
             }
         }
+    }
+
+    @Override
+    public IItemDefinition getBlock() {
+        return CrazyAE.definitions().blocks().improvedMolecularAssembler();
+    }
+
+    @Override
+    public long getSortValue() {
+        return (long)this.getPos().getZ() << 24 ^ (long)this.getPos().getX() << 8 ^ this.getPos().getY();
+    }
+
+    @Override
+    public BlockPos getTEPos() {
+        return this.getPos();
+    }
+
+    @Override
+    public int getDim() {
+        return this.getWorld().provider.getDimension();
+    }
+
+    @Override
+    public IItemHandler getPatternsInv() {
+        return this.getInternalInventory();
+    }
+
+    @Override
+    public String getName() {
+        return CrazyAEGuiText.IMPROVED_MAC_GUI.getLocal();
     }
 }

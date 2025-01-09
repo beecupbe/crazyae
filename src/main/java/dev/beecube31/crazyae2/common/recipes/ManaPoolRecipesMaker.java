@@ -10,17 +10,17 @@ import javax.annotation.Nonnegative;
 import javax.annotation.Nonnull;
 
 public class ManaPoolRecipesMaker {
-
-
     public static void make(@Nonnull ItemStack output, @Nonnull Object input, @Nonnegative int mana) {
         BotaniaAPI.manaInfusionRecipes.add(new RecipeManaInfusion(output, input, mana));
     }
 
     public static void init() {
-        if (CrazyAE.definitions().materials().manaProcessor().isEnabled()) {
-            make(CrazyAE.definitions().materials().manaProcessor().maybeStack(1).orElse(ItemStack.EMPTY),
+        CrazyAE.definitions().materials().manaProcessor().maybeStack(1).ifPresent(manaProcessor -> {
+            make(
+                    manaProcessor,
                     AEApi.instance().definitions().materials().engProcessor().maybeStack(1).orElse(ItemStack.EMPTY),
-                    1000);
-        }
+                    1000
+            );
+        });
     }
 }

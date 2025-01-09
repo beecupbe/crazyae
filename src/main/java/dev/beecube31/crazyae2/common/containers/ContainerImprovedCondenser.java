@@ -2,27 +2,26 @@ package dev.beecube31.crazyae2.common.containers;
 
 import appeng.api.config.CondenserOutput;
 import appeng.api.config.Settings;
-import appeng.container.AEBaseContainer;
-import appeng.container.guisync.GuiSync;
-import appeng.container.interfaces.IProgressProvider;
-import appeng.container.slot.SlotOutput;
-import appeng.container.slot.SlotRestrictedInput;
 import appeng.util.Platform;
-import dev.beecube31.crazyae2.common.containers.slot.RestrictedSlot;
+import dev.beecube31.crazyae2.common.containers.base.CrazyAEBaseContainer;
+import dev.beecube31.crazyae2.common.containers.base.slot.RestrictedSlot;
+import dev.beecube31.crazyae2.common.containers.base.slot.SlotOutput;
+import dev.beecube31.crazyae2.common.containers.guisync.GuiSync;
+import dev.beecube31.crazyae2.common.interfaces.gui.ICrazyAEProgressProvider;
 import dev.beecube31.crazyae2.common.tile.misc.TileImprovedCondenser;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IContainerListener;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 
-public class ContainerImprovedCondenser extends AEBaseContainer implements IProgressProvider {
+public class ContainerImprovedCondenser extends CrazyAEBaseContainer implements ICrazyAEProgressProvider {
 
     private final TileImprovedCondenser condenser;
-    @GuiSync(0)
+    @GuiSync(10)
     public long requiredEnergy = 0;
-    @GuiSync(1)
+    @GuiSync(11)
     public long storedPower = 0;
-    @GuiSync(2)
+    @GuiSync(12)
     public CondenserOutput output = CondenserOutput.TRASH;
     private final ItemStack prevStack = ItemStack.EMPTY;
     private final IItemHandler inv;
@@ -35,17 +34,17 @@ public class ContainerImprovedCondenser extends AEBaseContainer implements IProg
 
         for (int x = 0; x < 5; x++) {
             for (int j = 0; j < 5; j++) {
-                this.addSlotToContainer(new SlotRestrictedInput(SlotRestrictedInput.PlacableItemType.TRASH, inv, j + x * 5, 8 + x * 18, 13 + j * 18, ip));
+                this.addSlotToContainer(new RestrictedSlot(RestrictedSlot.PlaceableItemType.TRASH, inv, j + x * 5, 8 + x * 18, 13 + j * 18, ip));
             }
         }
 
         for (int i = 0; i < 2; i++) {
             for (int y = 0; y < 2; y++) {
-                this.addSlotToContainer(new SlotOutput(inv, (y + i * 2) + 25, 134 + i * 18, 40 + y * 18, -1));
+                this.addSlotToContainer(new SlotOutput(inv, (y + i * 2) + 25, 134 + i * 18, 40 + y * 18, null));
             }
         }
         this.addSlotToContainer(
-                (new RestrictedSlot(RestrictedSlot.PlacableItemType.STORAGE_COMPONENT, inv, 29, 134, 13, ip)).setStackLimit(1));
+                (new RestrictedSlot(RestrictedSlot.PlaceableItemType.STORAGE_COMPONENT, inv, 29, 134, 13, ip)).setStackLimit(1));
 
         this.bindPlayerInventory(ip, 0, 197 - /* height of player inventory */82);
     }
@@ -61,10 +60,10 @@ public class ContainerImprovedCondenser extends AEBaseContainer implements IProg
             this.setOutput((CondenserOutput) this.condenser.getConfigManager().getSetting(Settings.CONDENSER_OUTPUT));
 
             for (final IContainerListener listener : this.listeners) {
-                for (int i = 24; i < 28; i++) {
+                for (int i = 25; i < 29; i++) {
                     ItemStack is = inv.getStackInSlot(i);
                     if (!ItemStack.areItemsEqual(is, prevStack)) {
-                        listener.sendSlotContents(this, i - 24, is);
+                        listener.sendSlotContents(this, i - 25, is);
                     }
                 }
             }

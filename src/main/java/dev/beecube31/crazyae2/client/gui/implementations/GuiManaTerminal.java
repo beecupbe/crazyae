@@ -6,20 +6,23 @@ import appeng.api.config.ViewItems;
 import appeng.api.storage.ITerminalHost;
 import appeng.api.storage.data.IAEItemStack;
 import appeng.api.util.IConfigManager;
-import appeng.client.gui.AEBaseMEGui;
 import appeng.client.gui.widgets.*;
 import appeng.core.localization.GuiText;
 import appeng.util.IConfigManagerHost;
+import dev.beecube31.crazyae2.client.gui.CrazyAEBaseGui;
+import dev.beecube31.crazyae2.client.gui.CrazyAEBaseMEGui;
+import dev.beecube31.crazyae2.client.gui.widgets.Scrollbar;
 import dev.beecube31.crazyae2.client.me.ManaRepo;
 import dev.beecube31.crazyae2.common.containers.ContainerManaTerminal;
-import dev.beecube31.crazyae2.common.containers.slot.InternalManaSlotME;
-import dev.beecube31.crazyae2.common.containers.slot.SlotManaME;
+import dev.beecube31.crazyae2.common.containers.base.slot.InternalManaSlotME;
+import dev.beecube31.crazyae2.common.containers.base.slot.SlotManaME;
+import dev.beecube31.crazyae2.common.interfaces.gui.IGuiElementsCallbackHandler;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiText;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiTooltip;
+import dev.beecube31.crazyae2.core.client.CrazyAEClientConfig;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.ClickType;
 import net.minecraft.inventory.Slot;
-import net.minecraft.util.ResourceLocation;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -27,7 +30,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
-public class GuiManaTerminal extends AEBaseMEGui implements ISortSource, IConfigManagerHost {
+public class GuiManaTerminal extends CrazyAEBaseMEGui implements ISortSource, IConfigManagerHost, IGuiElementsCallbackHandler {
     private final List<SlotManaME> meManaSlots = new LinkedList<>();
     private final ManaRepo repo;
     private final ContainerManaTerminal container;
@@ -45,8 +48,8 @@ public class GuiManaTerminal extends AEBaseMEGui implements ISortSource, IConfig
         this.terminal = te;
         this.xSize = 185;
         this.ySize = 222;
-        final GuiScrollbar scrollbar = new GuiScrollbar();
-        this.setScrollBar(scrollbar);
+        final Scrollbar scrollbar = new Scrollbar(this.getGuiHue(), this);
+        this.registerScrollSrc(scrollbar);
         this.repo = new ManaRepo(scrollbar);
         (this.container = (ContainerManaTerminal) this.inventorySlots).setGui(this);
     }
@@ -66,16 +69,32 @@ public class GuiManaTerminal extends AEBaseMEGui implements ISortSource, IConfig
             }
         }
         this.setScrollBar();
+
+        this.getGuiHue().setParams(
+                (float) CrazyAEClientConfig.getColorizerColorRed() / 255,
+                (float) CrazyAEClientConfig.getColorizerColorGreen() / 255,
+                (float) CrazyAEClientConfig.getColorizerColorBlue() / 255,
+                1.0F
+        );
+
+        this.getTextHue().setParams(
+                (float) CrazyAEClientConfig.getColorizerTextColorRed() / 255,
+                (float) CrazyAEClientConfig.getColorizerTextColorGreen() / 255,
+                (float) CrazyAEClientConfig.getColorizerTextColorBlue() / 255,
+                1.0F
+        );
     }
 
     @Override
     public void drawFG(int offsetX, int offsetY, int mouseX, int mouseY) {
-        this.fontRenderer.drawString(CrazyAEGuiText.MANA_TERMINAL.getLocal(), 8, 6, 4210752);
-        this.fontRenderer.drawString(GuiText.inventory.getLocal(), 8, this.ySize - 96 + 3, 4210752);
+        this.drawString(CrazyAEGuiText.MANA_TERMINAL.getLocal(), 8, 6);
+        this.drawString(GuiText.inventory.getLocal(), 8, this.ySize - 96 + 3);
+        this.getTextHue().endDrawHue();
     }
 
     @Override
     public void drawBG(int offsetX, int offsetY, int mouseX, int mouseY) {
+        super.drawBG(offsetX, offsetY, mouseX, mouseY);
         this.bindTexture(this.getBackground());
         final int x_width = 197;
         this.drawTexturedModalRect(offsetX, offsetY, 0, 0, x_width, 18);
@@ -85,11 +104,6 @@ public class GuiManaTerminal extends AEBaseMEGui implements ISortSource, IConfig
         }
 
         this.drawTexturedModalRect(offsetX, offsetY + 16 + 6 * 18, 0, 106 - 18 - 18, x_width, 99 + 77);
-    }
-
-    public void bindTexture(String file) {
-        ResourceLocation loc = new ResourceLocation("crazyae", "textures/" + file);
-        this.mc.getTextureManager().bindTexture(loc);
     }
 
     @Override
@@ -143,8 +157,10 @@ public class GuiManaTerminal extends AEBaseMEGui implements ISortSource, IConfig
     }
 
     private void setScrollBar() {
-        this.getScrollBar().setTop(18).setLeft(175).setHeight(this.rows * 18 - 2);
-        this.getScrollBar().setRange(0, (this.repo.size() + this.perRow - 1) / this.perRow - this.rows, Math.max(1, this.rows / 6));
+        if (this.getScrollSrcList().stream().findFirst().get() instanceof Scrollbar s) {
+            s.setTop(18).setLeft(175).setHeight(this.rows * 18 - 2);
+            s.setRange(0, 0, 0);
+        }
     }
 
     @Override
@@ -178,5 +194,19 @@ public class GuiManaTerminal extends AEBaseMEGui implements ISortSource, IConfig
 
     protected String getBackground() {
         return "guis/terminal.png";
+    }
+
+    @Override
+    public void onInteractionStart() {}
+
+    @Override
+    public void onInteractionUpdate() {}
+
+    @Override
+    public void onInteractionEnd() {}
+
+    @Override
+    public CrazyAEBaseGui getCallbackHandler() {
+        return this;
     }
 }

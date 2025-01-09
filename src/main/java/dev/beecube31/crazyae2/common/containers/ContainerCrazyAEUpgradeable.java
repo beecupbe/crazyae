@@ -1,20 +1,24 @@
 package dev.beecube31.crazyae2.common.containers;
 
 import appeng.api.config.*;
-import appeng.api.implementations.IUpgradeableHost;
 import appeng.api.implementations.guiobjects.IGuiItem;
 import appeng.api.parts.IPart;
 import appeng.api.util.IConfigManager;
-import appeng.container.AEBaseContainer;
-import appeng.container.guisync.GuiSync;
-import appeng.container.slot.*;
+import appeng.container.slot.IOptionalSlotHost;
 import appeng.items.contents.NetworkToolViewer;
 import appeng.items.tools.ToolNetworkTool;
 import appeng.parts.automation.PartExportBus;
 import appeng.tile.networking.TileCableBus;
 import appeng.util.Platform;
-import dev.beecube31.crazyae2.common.containers.slot.RestrictedSlot;
+import dev.beecube31.crazyae2.common.containers.base.CrazyAEBaseContainer;
+import dev.beecube31.crazyae2.common.containers.guisync.GuiSync;
+import dev.beecube31.crazyae2.common.containers.base.slot.OptionalSlotFake;
+import dev.beecube31.crazyae2.common.containers.base.slot.OptionalSlotFakeTypeOnly;
+import dev.beecube31.crazyae2.common.containers.base.slot.RestrictedSlot;
+import dev.beecube31.crazyae2.common.containers.base.slot.SlotFakeTypeOnly;
 import dev.beecube31.crazyae2.common.interfaces.mana.IManaLinkableDevice;
+import dev.beecube31.crazyae2.common.interfaces.upgrades.IUpgradesInfoProvider;
+import dev.beecube31.crazyae2.core.CrazyAE;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -24,9 +28,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 
-public class ContainerCrazyAEUpgradeable extends AEBaseContainer implements IOptionalSlotHost {
+public class ContainerCrazyAEUpgradeable extends CrazyAEBaseContainer implements IOptionalSlotHost {
 
-    private final IUpgradeableHost upgradeable;
+    private final IUpgradesInfoProvider upgradeable;
     @GuiSync(0)
     public RedstoneMode rsMode = RedstoneMode.IGNORE;
     @GuiSync(1)
@@ -35,12 +39,33 @@ public class ContainerCrazyAEUpgradeable extends AEBaseContainer implements IOpt
     public YesNo cMode = YesNo.NO;
     @GuiSync(6)
     public SchedulingMode schedulingMode = SchedulingMode.DEFAULT;
+
+    public IManaLinkableDevice manaDevice;
+
+    @GuiSync(9)
+    public boolean isThisManaDevice = false;
+    @GuiSync(10)
+    public int manaDevicePosX;
+    @GuiSync(11)
+    public int manaDevicePosY;
+    @GuiSync(12)
+    public int manaDevicePosZ;
+    @GuiSync(13)
+    public boolean manaDeviceLinked;
+
     private int tbSlot;
     private NetworkToolViewer tbInventory;
 
-    public ContainerCrazyAEUpgradeable(final InventoryPlayer ip, final IUpgradeableHost te) {
+    protected int myOffsetX = 0;
+
+    public ContainerCrazyAEUpgradeable(final InventoryPlayer ip, final IUpgradesInfoProvider te) {
         super(ip, (TileEntity) (te instanceof TileEntity ? te : null), (IPart) (te instanceof IPart ? te : null));
         this.upgradeable = te;
+
+        if (te instanceof IManaLinkableDevice) {
+            this.manaDevice = (IManaLinkableDevice) te;
+            this.isThisManaDevice = true;
+        }
 
         World w = null;
         int xCoord = 0;
@@ -76,8 +101,8 @@ public class ContainerCrazyAEUpgradeable extends AEBaseContainer implements IOpt
         if (this.hasToolbox()) {
             for (int v = 0; v < 3; v++) {
                 for (int u = 0; u < 3; u++) {
-                    this.addSlotToContainer((new SlotRestrictedInput(SlotRestrictedInput.PlacableItemType.UPGRADES, this.tbInventory
-                            .getInternalInventory(), u + v * 3, 186 + u * 18, this.getHeight() - 82 + v * 18, this.getInventoryPlayer())).setPlayerSide());
+                    this.addSlotToContainer((new RestrictedSlot(RestrictedSlot.PlaceableItemType.UPGRADES, this.tbInventory
+                            .getInternalInventory(), u + v * 3, 187 + u * 18, this.getHeight() - 82 + v * 18, this.getInventoryPlayer())).setPlayerSide());
                 }
             }
         }
@@ -85,6 +110,14 @@ public class ContainerCrazyAEUpgradeable extends AEBaseContainer implements IOpt
         this.setupConfig();
 
         this.bindPlayerInventory(ip, 0, this.getHeight() - /* height of player inventory */82);
+    }
+
+    public void setMyOffsetX(int v) {
+        this.myOffsetX = v;
+    }
+
+    public void addMyOffsetX(int v) {
+        this.myOffsetX += v;
     }
 
     public boolean hasToolbox() {
@@ -127,24 +160,28 @@ public class ContainerCrazyAEUpgradeable extends AEBaseContainer implements IOpt
         final IItemHandler upgrades = this.getUpgradeable().getInventoryByName("upgrades");
         if (this.availableUpgrades() > 0) {
             this.addSlotToContainer(
-                    (new RestrictedSlot(RestrictedSlot.PlacableItemType.UPGRADES, upgrades, 0, 187, 8, this.getInventoryPlayer()))
-                            .setNotDraggable());
+                    (new RestrictedSlot(RestrictedSlot.PlaceableItemType.UPGRADES, upgrades, 0, this.isPatternInterface() ? 223 : 187 + this.myOffsetX, 8, this.getInventoryPlayer()))
+                            .setStackLimit(1).setNotDraggable());
         }
         if (this.availableUpgrades() > 1) {
             this.addSlotToContainer(
-                    (new RestrictedSlot(RestrictedSlot.PlacableItemType.UPGRADES, upgrades, 1, 187, 8 + 18, this.getInventoryPlayer()))
-                            .setNotDraggable());
+                    (new RestrictedSlot(RestrictedSlot.PlaceableItemType.UPGRADES, upgrades, 1, this.isPatternInterface() ? 223 : 187 + this.myOffsetX, 8 + 18, this.getInventoryPlayer()))
+                            .setStackLimit(1).setNotDraggable());
         }
         if (this.availableUpgrades() > 2) {
             this.addSlotToContainer(
-                    (new RestrictedSlot(RestrictedSlot.PlacableItemType.UPGRADES, upgrades, 2, 187, 8 + 18 * 2, this.getInventoryPlayer()))
-                            .setNotDraggable());
+                    (new RestrictedSlot(RestrictedSlot.PlaceableItemType.UPGRADES, upgrades, 2, this.isPatternInterface() ? 223 : 187 + this.myOffsetX, 8 + 18 * 2, this.getInventoryPlayer()))
+                            .setStackLimit(1).setNotDraggable());
         }
         if (this.availableUpgrades() > 3) {
             this.addSlotToContainer(
-                    (new RestrictedSlot(RestrictedSlot.PlacableItemType.UPGRADES, upgrades, 3, 187, 8 + 18 * 3, this.getInventoryPlayer()))
-                            .setNotDraggable());
+                    (new RestrictedSlot(RestrictedSlot.PlaceableItemType.UPGRADES, upgrades, 3, this.isPatternInterface() ? 223 : 187 + this.myOffsetX, 8 + 18 * 3, this.getInventoryPlayer()))
+                            .setStackLimit(1).setNotDraggable());
         }
+    }
+
+    protected boolean isPatternInterface() {
+        return false;
     }
 
     protected boolean supportCapacity() {
@@ -162,6 +199,13 @@ public class ContainerCrazyAEUpgradeable extends AEBaseContainer implements IOpt
         if (Platform.isServer()) {
             final IConfigManager cm = this.getUpgradeable().getConfigManager();
             this.loadSettingsFromHost(cm);
+
+            if (this.manaDevice != null) {
+                this.manaDevicePosX = this.manaDevice.getLinkedPoolPosX();
+                this.manaDevicePosY = this.manaDevice.getLinkedPoolPosY();
+                this.manaDevicePosZ = this.manaDevice.getLinkedPoolPosZ();
+                this.manaDeviceLinked = this.manaDevice.hasLinkedPool();
+            }
         }
 
         this.checkToolbox();
@@ -250,7 +294,31 @@ public class ContainerCrazyAEUpgradeable extends AEBaseContainer implements IOpt
         this.schedulingMode = schedulingMode;
     }
 
-    protected IUpgradeableHost getUpgradeable() {
+    public IUpgradesInfoProvider getUpgradeable() {
         return this.upgradeable;
+    }
+
+    public IManaLinkableDevice getManaDevice() {
+        return this.manaDevice;
+    }
+
+    public boolean isThisManaDevice() {
+        return this.isThisManaDevice;
+    }
+
+    public int getManaDevicePoolPosX() {
+        return this.manaDevicePosX;
+    }
+
+    public int getManaDevicePoolPosY() {
+        return this.manaDevicePosY;
+    }
+
+    public int getManaDevicePoolPosZ() {
+        return this.manaDevicePosZ;
+    }
+
+    public boolean manaDeviceHasPool() {
+        return this.manaDeviceLinked;
     }
 }

@@ -1,0 +1,47 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "minecraft:item_exists",
+          "item": "botania:pool"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "botania:manaresource"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:crafting_accelerator_16x"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "item": "crazyae:mechanical_manapool"
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "gxg",
+    "aea",
+    "gxg"
+  ],
+  "key": {
+    "g": {
+      "item": "botania:manaresource",
+      "data": 14
+    },
+    "e": {
+      "item": "botania:pool",
+      "data": 0
+    },
+    "x": {
+      "item": "botania:manaresource",
+      "data": 7
+    },
+    "a": {
+      "item": "crazyae:crafting_accelerator_16x"
+    }
+  }
+}

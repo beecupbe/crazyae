@@ -2,7 +2,7 @@ package dev.beecube31.crazyae2.common.tile.networking;
 
 import appeng.api.AEApi;
 import appeng.api.config.*;
-import appeng.api.implementations.IUpgradeableHost;
+import appeng.api.definitions.IItemDefinition;
 import appeng.api.networking.GridFlags;
 import appeng.api.networking.events.MENetworkCraftingCpuChange;
 import appeng.api.util.*;
@@ -17,6 +17,7 @@ import appeng.util.Platform;
 import appeng.util.inv.IAEAppEngInventory;
 import appeng.util.inv.InvOperation;
 import appeng.util.inv.WrapperChainedItemHandler;
+import dev.beecube31.crazyae2.common.interfaces.upgrades.IUpgradesInfoProvider;
 import dev.beecube31.crazyae2.core.CrazyAE;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.item.ItemStack;
@@ -27,12 +28,13 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.io.IOException;
 import java.util.*;
 
-public class TileCraftingUnitsCombiner extends TileCraftingTile implements IConfigManagerHost, IUpgradeableHost, IAEAppEngInventory {
+public class TileCraftingUnitsCombiner extends TileCraftingTile implements IConfigManagerHost, IUpgradesInfoProvider, IAEAppEngInventory {
 
     private CraftingCPUCluster cluster;
     private CraftingCPUCalculator calc = new CraftingCPUCalculator(this);
@@ -54,7 +56,7 @@ public class TileCraftingUnitsCombiner extends TileCraftingTile implements IConf
 
 
     public TileCraftingUnitsCombiner() {
-        this.getProxy().setIdlePowerUsage(16.0);
+        this.getProxy().setIdlePowerUsage(1024.0);
         this.getProxy().setFlags(GridFlags.REQUIRE_CHANNEL);
         this.getProxy().setVisualRepresentation(CrazyAE.definitions().blocks()
                 .craftingUnitsCombiner().maybeStack(1).orElse(ItemStack.EMPTY));
@@ -205,6 +207,7 @@ public class TileCraftingUnitsCombiner extends TileCraftingTile implements IConf
     }
 
     @Override
+    @NotNull
     public AECableType getCableConnectionType(final AEPartLocation dir) {
         return AECableType.COVERED;
     }
@@ -311,8 +314,6 @@ public class TileCraftingUnitsCombiner extends TileCraftingTile implements IConf
                 }
             }
         }
-
-        this.getProxy().setIdlePowerUsage((storageItemsAmt + acceleratorItemsAmt) * 2);
     }
 
     @Override
@@ -342,16 +343,21 @@ public class TileCraftingUnitsCombiner extends TileCraftingTile implements IConf
     }
 
     @Override
-    public boolean hasCapability(Capability<?> capability, @Nullable EnumFacing facing) {
+    public boolean hasCapability(@NotNull Capability<?> capability, @Nullable EnumFacing facing) {
         return capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public <T> T getCapability(Capability<T> capability, @Nullable EnumFacing facing) {
+    public <T> T getCapability(@NotNull Capability<T> capability, @Nullable EnumFacing facing) {
         if (capability == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
             return (T) this.combinedInv;
         }
         return super.getCapability(capability, facing);
+    }
+
+    @Override
+    public IItemDefinition getBlock() {
+        return CrazyAE.definitions().blocks().craftingUnitsCombiner();
     }
 }

@@ -3,6 +3,8 @@ package dev.beecube31.crazyae2.mixins.features.botania.jei;
 import mezz.jei.api.recipe.IRecipeWrapper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
@@ -12,6 +14,7 @@ import vazkii.botania.client.integration.jei.manapool.ManaPoolRecipeWrapper;
 
 import javax.annotation.Nonnull;
 
+@SideOnly(Side.CLIENT)
 @Mixin(value = ManaPoolRecipeWrapper.class, remap = false)
 public abstract class MixinManaPoolRecipeWrapper implements IRecipeWrapper {
 

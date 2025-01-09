@@ -7,16 +7,18 @@ import appeng.api.definitions.IItems;
 import appeng.bootstrap.components.IPostInitComponent;
 import appeng.core.AEConfig;
 import appeng.core.features.ItemDefinition;
+import dev.beecube31.crazyae2.client.rendering.*;
 import dev.beecube31.crazyae2.common.features.Features;
-import dev.beecube31.crazyae2.common.items.ManaConnector;
-import dev.beecube31.crazyae2.common.items.QuantumWirelessBooster;
+import dev.beecube31.crazyae2.common.items.*;
 import dev.beecube31.crazyae2.common.items.cells.DenseFluidCell;
 import dev.beecube31.crazyae2.common.items.cells.DenseItemCell;
 import dev.beecube31.crazyae2.common.items.cells.ImprovedPortableCell;
 import dev.beecube31.crazyae2.common.items.cells.ManaItemCell;
 import dev.beecube31.crazyae2.common.items.internal.ManaAsAEStack;
+import dev.beecube31.crazyae2.common.items.patterns.*;
 import dev.beecube31.crazyae2.common.registration.registry.Registry;
 import dev.beecube31.crazyae2.common.registration.registry.interfaces.Definitions;
+import dev.beecube31.crazyae2.integrations.jei.JEIPlugin;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.item.ItemStack;
 
@@ -25,6 +27,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 
+@SuppressWarnings("unused")
 public class Items implements Definitions<IItemDefinition> {
 	private final Object2ObjectOpenHashMap<String, IItemDefinition> byId = new Object2ObjectOpenHashMap<>();
 	private final IItemDefinition storageCell256k;
@@ -64,8 +67,17 @@ public class Items implements Definitions<IItemDefinition> {
 
 	private final IItemDefinition quantumWirelessBooster;
 	private final IItemDefinition manaConnector;
+//	private final IItemDefinition patternsUSBStick;
 
 	private final IItemDefinition manaAsAEStack;
+
+	private final IItemDefinition elventradeEncodedPattern;
+	private final IItemDefinition manapoolEncodedPattern;
+	private final IItemDefinition petalEncodedPattern;
+	private final IItemDefinition puredaisyEncodedPattern;
+	private final IItemDefinition runealtarEncodedPattern;
+
+	private final IItemDefinition colorizer;
 
 
 	public Items(Registry registry) {
@@ -73,6 +85,49 @@ public class Items implements Definitions<IItemDefinition> {
 				.features(Features.MANA_BUSES)
 				.ifModPresent("botania")
 				.build());
+
+//		this.patternsUSBStick = this.registerById(registry.item("patterns_usb_stick", PatternsUSBStick::new)
+//				.features(Features.STUB)
+//				.build());
+
+		this.colorizer = this.registerById(registry.item("gui_colorizer", Colorizer::new)
+				.features(Features.STUB)
+				.build());
+
+
+
+		this.elventradeEncodedPattern = this.registerById(registry.item("elventrade_encoded_pattern", ElventradeEncodedPattern::new)
+				.features(Features.STUB)
+				.rendering(new ElventradeEncodedPatternRendering())
+				.ifModPresent("botania")
+				.build());
+
+		this.manapoolEncodedPattern = this.registerById(registry.item("manapool_encoded_pattern", ManapoolEncodedPattern::new)
+				.features(Features.STUB)
+				.rendering(new ManapoolEncodedPatternRendering())
+				.ifModPresent("botania")
+				.build());
+
+		this.petalEncodedPattern = this.registerById(registry.item("petal_encoded_pattern", PetalEncodedPattern::new)
+				.features(Features.STUB)
+				.rendering(new PetalEncodedPatternRendering())
+				.ifModPresent("botania")
+				.build());
+
+		this.puredaisyEncodedPattern = this.registerById(registry.item("puredaisy_encoded_pattern", PuredaisyEncodedPattern::new)
+				.features(Features.STUB)
+				.rendering(new PuredaisyEncodedPatternRendering())
+				.ifModPresent("botania")
+				.build());
+
+		this.runealtarEncodedPattern = this.registerById(registry.item("runealtar_encoded_pattern", RunealtarEncodedPattern::new)
+				.features(Features.STUB)
+				.rendering(new RunealtarEncodedPatternRendering())
+				.ifModPresent("botania")
+				.build());
+
+
+
 
 		this.storageCell256k = this.registerById(registry.item("storage_cell_256k", () -> new DenseItemCell(Materials.MaterialType.CELL_PART_256K, 256 * 1024, 4D))
 				.features(Features.DENSE_CELLS)
@@ -215,14 +270,15 @@ public class Items implements Definitions<IItemDefinition> {
 				.build());
 
 		this.quantumWirelessBooster = this.registerById(registry.item("quantum_wireless_booster", QuantumWirelessBooster::new)
-				.features(Features.QUANTUM_WIRELESS_BOOSTER)
+				.features(Features.STUB)
 				.build());
 
-		this.manaAsAEStack = this.registerById(registry.item("mana_as_aestack", ManaAsAEStack::new)
-				.ifModPresent("botania")
-				.features(Features.MANA_BUSES, Features.MANA_TERM, Features.MANA_CELLS, Features.MANA_DENSE_CELLS, Features.MEGA_MANA_DENSE_CELLS)
-				.hide()
-				.build());
+		JEIPlugin.hideItemFromJEI(this.manaAsAEStack = this.registerById(registry.item("mana_as_aestack", ManaAsAEStack::new)
+								.ifModPresent("botania")
+								.features(Features.MANA_BUSES, Features.MANA_TERM, Features.MANA_CELLS, Features.MANA_DENSE_CELLS, Features.MEGA_MANA_DENSE_CELLS)
+								.hide()
+								.build())
+		);
 
 		registry.addBootstrapComponent((IPostInitComponent) r -> {
 			IItems enabledItems = AEApi.instance().definitions().items();
@@ -438,5 +494,33 @@ public class Items implements Definitions<IItemDefinition> {
 
 	public IItemDefinition manaAsAEStack() {
 		return this.manaAsAEStack;
+	}
+
+	public IItemDefinition elventradeEncodedPattern() {
+		return this.elventradeEncodedPattern;
+	}
+
+	public IItemDefinition manapoolEncodedPattern() {
+		return this.manapoolEncodedPattern;
+	}
+
+	public IItemDefinition petalEncodedPattern() {
+		return this.petalEncodedPattern;
+	}
+
+	public IItemDefinition runealtarEncodedPattern() {
+		return this.runealtarEncodedPattern;
+	}
+
+	public IItemDefinition colorizer() {
+		return this.colorizer;
+	}
+
+//	public IItemDefinition patternsUSBStick() {
+//		return this.patternsUSBStick;
+//	}
+
+	public IItemDefinition puredaisyEncodedPattern() {
+		return this.puredaisyEncodedPattern;
 	}
 }

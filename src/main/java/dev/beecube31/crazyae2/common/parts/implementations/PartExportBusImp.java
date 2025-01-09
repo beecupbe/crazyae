@@ -2,6 +2,7 @@ package dev.beecube31.crazyae2.common.parts.implementations;
 
 import appeng.api.AEApi;
 import appeng.api.config.*;
+import appeng.api.definitions.IItemDefinition;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.crafting.ICraftingGrid;
 import appeng.api.networking.crafting.ICraftingLink;
@@ -34,6 +35,7 @@ import com.google.common.primitives.Ints;
 import dev.beecube31.crazyae2.Tags;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiBridge;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiHandler;
+import dev.beecube31.crazyae2.core.CrazyAE;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -315,5 +317,8 @@ public class PartExportBusImp extends CrazyAEPartSharedBus implements ICraftingR
             return MODELS_OFF;
         }
     }
-
+    @Override
+    public IItemDefinition getBlock() {
+        return CrazyAE.definitions().parts().improvedExportBus();
+    }
 }
