@@ -6,10 +6,12 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "features.cellinformation.MixinApiClientHelper",
-    "aefixes.crafting.MixinCraftingCPUClusterGG",
+    "aefixes.crafting.MixinCraftingCPUCluster",
     "aefixes.crafting.MixinPatternHelper",
     "aefixes.crafting.MixinNetworkMonitor",
-    "core.AccessorDualityInterface"
+    "core.AccessorDualityInterface",
+    "features.patternterm.fastplace.MixinGuiPatternTerm",
+    "features.patternterm.fastplace.AccessorContainerPatternEncoder"
   ],
   "client": [],
   "server": []
