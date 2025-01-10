@@ -7,15 +7,12 @@ import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.ISubtypeRegistry;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @mezz.jei.api.JEIPlugin
-@SideOnly(Side.CLIENT)
 public class JEIPlugin implements IModPlugin {
     public static IJeiRuntime runtime;
     public static CrazyAEGuiHandler aeGuiHandler;

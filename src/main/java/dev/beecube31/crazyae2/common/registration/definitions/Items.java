@@ -21,6 +21,7 @@ import dev.beecube31.crazyae2.common.registration.registry.interfaces.Definition
 import dev.beecube31.crazyae2.integrations.jei.JEIPlugin;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.Loader;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -273,12 +274,15 @@ public class Items implements Definitions<IItemDefinition> {
 				.features(Features.STUB)
 				.build());
 
-		JEIPlugin.hideItemFromJEI(this.manaAsAEStack = this.registerById(registry.item("mana_as_aestack", ManaAsAEStack::new)
-								.ifModPresent("botania")
-								.features(Features.MANA_BUSES, Features.MANA_TERM, Features.MANA_CELLS, Features.MANA_DENSE_CELLS, Features.MEGA_MANA_DENSE_CELLS)
-								.hide()
-								.build())
-		);
+		this.manaAsAEStack = this.registerById(registry.item("mana_as_aestack", ManaAsAEStack::new)
+				.ifModPresent("botania")
+				.features(Features.MANA_BUSES, Features.MANA_TERM, Features.MANA_CELLS, Features.MANA_DENSE_CELLS, Features.MEGA_MANA_DENSE_CELLS)
+				.hide()
+				.build());
+
+		if (Loader.isModLoaded("jei")) {
+			JEIPlugin.hideItemFromJEI(this.manaAsAEStack);
+		}
 
 		registry.addBootstrapComponent((IPostInitComponent) r -> {
 			IItems enabledItems = AEApi.instance().definitions().items();

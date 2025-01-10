@@ -7,13 +7,10 @@ import net.minecraftforge.common.config.Property;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = Tags.MODID)
 @Config(modid = Tags.MODID, name = "crazyae-client", category = "client")
-@SideOnly(Side.CLIENT)
 public final class CrazyAEClientConfig extends Configuration {
 
     private static Configuration config;

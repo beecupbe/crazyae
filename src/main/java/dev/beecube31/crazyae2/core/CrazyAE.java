@@ -4,6 +4,7 @@ import appeng.api.features.IRegistryContainer;
 import appeng.api.networking.IGridCacheRegistry;
 import appeng.container.implementations.ContainerMEPortableCell;
 import appeng.core.Api;
+import appeng.util.Platform;
 import dev.beecube31.crazyae2.Tags;
 import dev.beecube31.crazyae2.common.features.Features;
 import dev.beecube31.crazyae2.common.items.cells.ImprovedPortableCell;
@@ -11,10 +12,10 @@ import dev.beecube31.crazyae2.common.networking.CrazyAENetworkHandler;
 import dev.beecube31.crazyae2.common.networking.network.NetworkHandler;
 import dev.beecube31.crazyae2.common.registration.Registration;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiHandler;
-import dev.beecube31.crazyae2.core.cache.impl.GridChannelBoostersCache;
 import dev.beecube31.crazyae2.core.cache.IGridChannelBoostersCache;
+import dev.beecube31.crazyae2.core.cache.impl.GridChannelBoostersCache;
 import dev.beecube31.crazyae2.core.client.CrazyAEClientConfig;
-import dev.beecube31.crazyae2.core.helpers.ClientHelper;
+import dev.beecube31.crazyae2.core.helpers.Helper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
@@ -24,6 +25,7 @@ import net.minecraftforge.common.config.Property;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
+import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -47,8 +49,8 @@ import java.io.File;
 public class CrazyAE {
 	public static CrazyAE instance;
 
-	@SideOnly(Side.CLIENT)
-	private static final ClientHelper clientHelper = new ClientHelper();
+	@SidedProxy(clientSide = "dev.beecube31.crazyae2.core.helpers.ClientHelper", serverSide = "dev.beecube31.crazyae2.core.helpers.ServerHelper", modId = Tags.MODID)
+	public static Helper proxy;
 
 	private static FeatureManager featureManager;
 	private final Logger logger = LogManager.getLogger(Tags.MODID.toUpperCase());
@@ -90,18 +92,21 @@ public class CrazyAE {
 		this.registration = new Registration();
 
 		CrazyAE.instance = this;
-		CrazyAEClientConfig.init(
-				new Configuration(
-						new File(
-								event.getModConfigurationDirectory().getPath(),
-								"crazyae-client.cfg"
-						)
-				)
-		);
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, this.crazyAEGuiHandler = new CrazyAEGuiHandler());
 
-		clientHelper.preinit();
+		if (Platform.isClient()) {
+			CrazyAE.proxy.preinit();
+			CrazyAEClientConfig.init(
+					new Configuration(
+							new File(
+									event.getModConfigurationDirectory().getPath(),
+									"crazyae-client.cfg"
+							)
+					)
+			);
+		}
+
 
 		MinecraftForge.EVENT_BUS.register(instance);
 
@@ -112,7 +117,7 @@ public class CrazyAE {
 	public void init(FMLInitializationEvent event) {
 		this.registration.init(event);
 
-		clientHelper.init();
+		CrazyAE.proxy.init();
 
 		if (!CrazyAEConfig.disableUpdatesCheck) {
 			MinecraftForge.EVENT_BUS.register(new UpdateChecker());
@@ -132,7 +137,7 @@ public class CrazyAE {
 			this.icon = CrazyAE.definitions().items().storageCell1MB().maybeStack(1).orElse(ItemStack.EMPTY);
 		}
 
-		clientHelper.postinit();
+		CrazyAE.proxy.postinit();
 
 		NetworkHandler.init("CrazyAE");
 		this.registration.postInit(event);

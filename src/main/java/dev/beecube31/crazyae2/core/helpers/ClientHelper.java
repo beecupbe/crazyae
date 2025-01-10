@@ -5,7 +5,7 @@ import dev.beecube31.crazyae2.core.CrazyAE;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
 
-public class ClientHelper {
+public class ClientHelper implements Helper {
 
     public void preinit() {
         MinecraftForge.EVENT_BUS.register(this);
