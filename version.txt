@@ -1,3 +1,3 @@
-version:v0.4.0.1
+version:v0.4.0.2
 link:https://www.curseforge.com/minecraft/mc-mods/crazyae/files/all?showAlphaFiles=show
-desc: - fix serverside crashes
+desc: - fix logger spamming
