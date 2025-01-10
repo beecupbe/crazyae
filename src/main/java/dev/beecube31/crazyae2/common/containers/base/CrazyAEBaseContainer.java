@@ -479,7 +479,6 @@ public abstract class CrazyAEBaseContainer extends Container {
                 }
             }
 
-            CrazyAE.logger().info("action {}", action.name());
             final ItemStack hand = player.inventory.getItemStack();
 
             switch (action) {

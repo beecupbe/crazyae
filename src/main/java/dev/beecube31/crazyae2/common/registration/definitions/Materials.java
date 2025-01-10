@@ -333,11 +333,11 @@ public class Materials implements DamagedDefinitions<DamagedItemDefinition, Mate
 		MANA_PART_1GB("mana_part_1gb", Features.MEGA_MANA_DENSE_CELLS),
 		MANA_PART_2GB("mana_part_2gb", Features.MEGA_MANA_DENSE_CELLS),
 
-		ELVENTRADE_BLANK_PATTERN("elventrade_blank_pattern", Features.STUB),
-		MANAPOOL_BLANK_PATTERN("manapool_blank_pattern", Features.STUB),
-		PETAL_BLANK_PATTERN("petal_blank_pattern", Features.STUB),
-		PUREDAISY_BLANK_PATTERN("puredaisy_blank_pattern", Features.STUB),
-		RUNEALTAR_BLANK_PATTERN("runealtar_blank_pattern", Features.STUB),
+		ELVENTRADE_BLANK_PATTERN("elventrade_blank_pattern", Features.BOTANIA_MECHANICAL_BLOCKS),
+		MANAPOOL_BLANK_PATTERN("manapool_blank_pattern", Features.BOTANIA_MECHANICAL_BLOCKS),
+		PETAL_BLANK_PATTERN("petal_blank_pattern", Features.BOTANIA_MECHANICAL_BLOCKS),
+		PUREDAISY_BLANK_PATTERN("puredaisy_blank_pattern", Features.BOTANIA_MECHANICAL_BLOCKS),
+		RUNEALTAR_BLANK_PATTERN("runealtar_blank_pattern", Features.BOTANIA_MECHANICAL_BLOCKS),
 
 		FLUIXILIZED_INGOT("fluixilized_ingot", Features.STUB);
 
