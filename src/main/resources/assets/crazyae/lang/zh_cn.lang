@@ -70,13 +70,31 @@ item.crazyae.material.cell_part_fluid_256mb.name=§b256MB§r-ME流体存储组�
 item.crazyae.material.cell_part_fluid_1gb.name=§11GB§r-ME流体存储组件
 item.crazyae.material.cell_part_fluid_2gb.name=§d2GB§r-ME流体存储组件
 
+item.crazyae.material.fluixilized_ingot.name=§5强化福鲁伊克斯水晶§r
+
 
 #Items
 item.crazyae.quantum_wireless_booster.name=量子无线信号增幅器
 item.crazyae.material.quantum_processor.name=量子处理器
 item.crazyae.material.mana_processor.name=魔力处理器
 item.crazyae.mana_connector.name=魔力连接器
-tooltip.crazyae.quantum_wireless_booster_desc.name=这个物品的功能仍在开发中
+item.crazyae.gui_colorizer.name=调色工具
+
+
+item.crazyae.material.elventrade_blank_pattern.name=精灵交易空白样板
+item.crazyae.material.manapool_blank_pattern.name=魔力灌注空白样板
+item.crazyae.material.petal_blank_pattern.name=花瓣炼制空白样板
+item.crazyae.material.runealtar_blank_pattern.name=符文祭坛空白样板
+item.crazyae.material.puredaisy_blank_pattern.name=白雏活化空白样板
+
+item.crazyae.elventrade_encoded_pattern.name=精灵交易编码样板
+item.crazyae.manapool_encoded_pattern.name=魔力灌注编码样板
+item.crazyae.petal_encoded_pattern.name=花瓣炼制编码样板
+item.crazyae.runealtar_encoded_pattern.name=符文祭坛编码样板
+item.crazyae.puredaisy_encoded_pattern.name=白雏活化编码样板
+
+
+tooltip.crazyae.colorizer_desc.name=用于调整本模组的Gui与文本颜色。
 tooltip.crazyae.mana_connector_desc.name=将魔力池连接到ME魔力输入/输出总线
 tooltip.crazyae.linked_with_mana_pool_at_pos.name=已绑定至 x=%s, y=%s, z=%s
 tooltip.crazyae.mana_connector_lets_connect_to_bus.name=Shift+右键 ME魔力输入/输出总线以建立连接
@@ -140,6 +158,17 @@ tile.crazyae.patterns_interface.name=§8ME样板接口§r
 tile.crazyae.improved_condenser.name=§6增强型物质聚合器§r
 
 tile.crazyae.quantum_channels_multiplier.name=量子频道增幅器
+tile.crazyae.quantum_channels_multiplier_creative.name=创造量子频道增幅器
+
+tile.crazyae.quantum_wap.name=量子无线访问点
+
+
+tile.crazyae.mechanical_elventrade.name=精灵交易处理仓
+tile.crazyae.mechanical_manapool.name=魔力灌注处理仓
+tile.crazyae.mechanical_runealtar.name=符文祭坛处理仓
+tile.crazyae.mechanical_petal.name=花瓣炼制处理仓
+tile.crazyae.mechanical_puredaisy.name=白雏活化处理仓
+
 
 #Resource
 
@@ -167,6 +196,21 @@ gui.crazyae.link_with_mana_connector.name=此总线需要使用
 gui.crazyae.link_with_mana_connector2.name="魔力连接器"
 gui.crazyae.link_with_mana_connector3.name=将其连接到魔力池
 gui.crazyae.linked_with_mana_pool.name=连接到 х=%s y=%s z=%s
+gui.crazyae.mana_amt_to_max.name=魔力池存储的魔力:
+
+gui.crazyae.gui_colorizer_gui.name=Gui颜色
+gui.crazyae.gui_colorizer_text.name=文本颜色
+
+gui.crazyae.open_pattern_storage.name=样板存放处
+
+gui.crazyae.mechanical_elventrade.name=精灵交易处理仓
+gui.crazyae.mechanical_manapool.name=魔力灌注处理仓
+gui.crazyae.mechanical_runealtar.name=符文祭坛处理仓
+gui.crazyae.mechanical_petal.name=花瓣炼制处理仓
+gui.crazyae.mechanical_puredaisy.name=白雏活化处理仓
+
+gui.crazyae.patterns_inv_gui.name=样板存放处
+
 
 # GUI's Tooltip
 
@@ -174,6 +218,25 @@ gui.tooltip.crazyae.cu_place_all_accelerators_here.name=并行处理单元插槽
 gui.tooltip.crazyae.cu_place_all_crafting_storages_here.name=合成存储器插槽
 
 gui.tooltip.crazyae.progress.name=进度:
+
+gui.crazyae.colorizer_gui_gui_to_text.name=调整文本颜色
+gui.crazyae.colorizer_gui_text_to_gui.name=调整Gui颜色
+
+gui.crazyae.copy_to_clipboard.name=复制
+gui.crazyae.paste_from_clipboard.name=粘贴
+
+gui.crazyae.restore_defaults.name=恢复默认
+
+gui.crazyae.button_pattern_fast_place.name=编码样板并将其直接放入\n %s
+
+gui.crazyae.checkbox_qwap_text.name=从任何维度访问
+
+gui.crazyae.highlight_mana_block.name=高亮魔力池
+gui.crazyae.mana_block_highlighted_in.name=魔力池被高亮于 x=%s y=%s z=%s
+gui.crazyae.mana_block_highlighted_in_another_dimension_with_pos.name=魔力池位于另一个维度 %s (%s) x=%s y=%s z=%s, 无法被高亮
+gui.crazyae.mana_block_highlighted_in_another_dimension.name=魔力池位于另一个维度，无法被高亮
+gui.crazyae.colorizing_disabled.name=配置文件已禁用调色功能
+
 
 #Tooltips
 
@@ -212,3 +275,9 @@ gui.tooltip.crazyae.stored_mana.name=魔力储量: %s
 gui.crazyae.update_found.name=[CrazyAE] §l发现新版本:§r
 gui.crazyae.download_link.name=[CrazyAE] §o点击此处打开下载页面.§r
 gui.crazyae.disable_updates_tip.name=[CrazyAE] 此外,您可以在 CrazyAE 的配置中禁用更新检查
+
+
+tooltip.crazyae.require_mana_per_job.name=消耗魔力 %s/次
+tooltip.crazyae.require_mana_per_tick.name=消耗魔力 %s/t
+tooltip.crazyae.require_ae_per_job.name=消耗AE能源 %s/次
+tooltip.crazyae.require_ae_per_tick.name=消耗AE能源 %s/t
