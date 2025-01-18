@@ -227,7 +227,7 @@ gui.crazyae.paste_from_clipboard.name=粘贴
 
 gui.crazyae.restore_defaults.name=恢复默认
 
-gui.crazyae.button_pattern_fast_place.name=编码样板并将其直接放入\n %s
+gui.crazyae.button_pattern_fast_place.name=编码样板并将其直接放入\n%s
 
 gui.crazyae.checkbox_qwap_text.name=从任何维度访问
 
