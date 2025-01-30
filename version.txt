@@ -1,3 +1,3 @@
 version:v0.4.0.3
 link:https://www.curseforge.com/minecraft/mc-mods/crazyae/files/all?showAlphaFiles=show
-desc: - fixed bug with DualityInterface.sameGrid()
+desc: - fixed bug with DualityInterface.sameGrid(), updated zh-cn translation
