@@ -5,7 +5,8 @@
 	"textures": {
 		"4": "crazyae:block/mechanical/runic_altar_top",
 		"5": "crazyae:block/mechanical/runic_altar_side",
-		"color": "crazyae:block/mechanical/magenta_concrete_powder"
+		"color": "crazyae:block/mechanical/magenta_concrete_powder",
+		"particle": "crazyae:block/mechanical/runic_altar_top"
 	},
 	"elements": [
 		{

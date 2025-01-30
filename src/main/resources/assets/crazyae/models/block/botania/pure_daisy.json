@@ -5,7 +5,8 @@
 	"textures": {
 		"2": "crazyae:block/mechanical/stone_top_bottom",
 		"4": "crazyae:block/mechanical/white_tulip",
-		"color": "crazyae:block/mechanical/magenta_concrete_powder"
+		"color": "crazyae:block/mechanical/magenta_concrete_powder",
+		"particle": "crazyae:block/mechanical/white_tulip"
 	},
 	"elements": [
 		{

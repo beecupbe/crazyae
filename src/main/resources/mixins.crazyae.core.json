@@ -9,7 +9,6 @@
     "aefixes.crafting.MixinCraftingCPUCluster",
     "aefixes.crafting.MixinPatternHelper",
     "aefixes.crafting.MixinNetworkMonitor",
-    "core.AccessorDualityInterface",
     "features.patternterm.fastplace.MixinGuiPatternTerm",
     "features.patternterm.fastplace.AccessorContainerPatternEncoder"
   ],

@@ -1,3 +1,3 @@
-version:v0.4.0.2
+version:v0.4.0.3
 link:https://www.curseforge.com/minecraft/mc-mods/crazyae/files/all?showAlphaFiles=show
-desc: - fix logger spamming
+desc: - fixed bug with DualityInterface.sameGrid()
