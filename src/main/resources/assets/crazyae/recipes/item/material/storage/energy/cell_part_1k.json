@@ -1,0 +1,53 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "minecraft:item_exists",
+          "item": "appliedenergistics2:quartz_glass"
+        },
+        {
+          "type": "crazyae:material_exists",
+          "name": "energy_part_1k"
+        },
+        {
+          "type": "appliedenergistics2:material_exists",
+          "material": "material.engineering_processor"
+        },
+        {
+          "type": "appliedenergistics2:material_exists",
+          "material": "material.cell1k_part"
+        },
+        {
+          "type": "crazyae:material_exists",
+          "name": "energy_processor"
+        },
+        {
+          "type": "appliedenergistics2:material_exists",
+          "material": "material.matter_ball"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "type": "material",
+    "name": "energy_part_1k"
+  },
+  "type": "crazyae:shaped_recipe",
+  "pattern": [
+    " a ",
+    "aca",
+    " a "
+  ],
+  "key": {
+    "c": {
+      "type": "crazyae:material",
+      "name": "energy_processor"
+    },
+    "a": {
+      "type": "forge:ore_dict",
+      "ore": "dustRedstone"
+    }
+  }
+}

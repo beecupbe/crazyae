@@ -1,6 +1,8 @@
 package dev.beecube31.crazyae2.client.gui.slot;
 
+import dev.beecube31.crazyae2.client.gui.components.ComponentHue;
 import dev.beecube31.crazyae2.common.interfaces.gui.ITooltipObj;
+import dev.beecube31.crazyae2.core.client.CrazyAEClientConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,10 +13,23 @@ public abstract class CustomSlot extends Gui implements ITooltipObj {
     protected final int y;
     protected final int id;
 
+    private final ComponentHue slotHue = new ComponentHue();
+
     public CustomSlot(int id, int x, int y) {
         this.x = x;
         this.y = y;
         this.id = id;
+
+        this.slotHue.setParams(
+                (float) CrazyAEClientConfig.getColorizerColorRed() / 255,
+                (float) CrazyAEClientConfig.getColorizerColorGreen() / 255,
+                (float) CrazyAEClientConfig.getColorizerColorBlue() / 255,
+                1.0F
+        );
+    }
+
+    public ComponentHue getSlotHue() {
+        return this.slotHue;
     }
 
     public int getId() {

@@ -5,6 +5,10 @@
       "values": [
         {
           "type": "minecraft:item_exists",
+          "item": "botania:manaresource"
+        },
+        {
+          "type": "minecraft:item_exists",
           "item": "appliedenergistics2:quartz_glass"
         },
         {
@@ -17,7 +21,7 @@
         },
         {
           "type": "appliedenergistics2:material_exists",
-          "material": "material.cell64k_part"
+          "material": "material.cell1k_part"
         },
         {
           "type": "crazyae:material_exists",

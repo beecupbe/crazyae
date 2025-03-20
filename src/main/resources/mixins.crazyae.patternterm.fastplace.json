@@ -5,9 +5,10 @@
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "features.patternterm.fastplace.AccessorContainerPatternEncoder",
+    "features.patternterm.fastplace.AccessorContainerPatternEncoder"
+  ],
+  "client": [
     "features.patternterm.fastplace.MixinGuiPatternTerm"
   ],
-  "client": [],
   "server": []
 }

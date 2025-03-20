@@ -1,0 +1,62 @@
+{
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "crazyae:part_exists",
+          "name": "mana_terminal"
+        },
+        {
+          "type": "crazyae:material_exists",
+          "name": "mana_part_1k"
+        },
+        {
+          "type": "crazyae:material_exists",
+          "name": "mana_part_256k"
+        },
+        {
+          "type": "crazyae:material_exists",
+          "name": "mana_part_16mb"
+        }
+      ]
+    },
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "minecraft:item_exists",
+          "item": "botania:manaresource"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "type": "part",
+    "name": "mana_terminal"
+  },
+  "type": "crazyae:shaped_recipe",
+  "pattern": [
+    "pqp",
+    "mtm",
+    "pqp"
+  ],
+  "key": {
+    "p": {
+      "item": "botania:manaresource",
+      "data": 8
+    },
+    "q": {
+      "type": "crazyae:material",
+      "name": "mana_processor"
+    },
+    "m": {
+      "item": "botania:manaresource",
+      "data": 7
+    },
+    "t": {
+      "type": "appliedenergistics2:part",
+      "part": "part.terminal"
+    }
+  }
+}

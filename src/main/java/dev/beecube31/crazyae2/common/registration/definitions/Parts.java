@@ -27,6 +27,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.apache.commons.lang3.ArrayUtils;
 
 import java.lang.reflect.Constructor;
 import java.util.*;
@@ -44,7 +45,17 @@ public class Parts implements Definitions<CrazyAEDamagedItemDefinition> {
 	private final CrazyAEDamagedItemDefinition manaImportBus;
 	private final CrazyAEDamagedItemDefinition manaExportBus;
 
+	private final CrazyAEDamagedItemDefinition energyImportBus;
+	private final CrazyAEDamagedItemDefinition energyExportBus;
+
 	private final CrazyAEDamagedItemDefinition manaTerm;
+
+	private final CrazyAEDamagedItemDefinition energyTerminal;
+
+	//private final CrazyAEDamagedItemDefinition partDrive;
+
+	private final CrazyAEDamagedItemDefinition partPatternsInterface;
+	private final CrazyAEDamagedItemDefinition partPerfectInterface;
 
 
 	public Parts(Registry registry) {
@@ -69,6 +80,15 @@ public class Parts implements Definitions<CrazyAEDamagedItemDefinition> {
 		this.manaExportBus = this.createPart(this.itemPart, PartType.MANA_EXPORT_BUS);
 
 		this.manaTerm = this.createPart(this.itemPart, PartType.MANA_TERM);
+		this.energyTerminal = this.createPart(this.itemPart, PartType.ENERGY_TERM);
+
+		//this.partDrive = this.createPart(this.itemPart, PartType.PART_DRIVE);
+
+		this.partPatternsInterface = this.createPart(this.itemPart, PartType.PART_PATTERNS_IFACE);
+		this.partPerfectInterface = this.createPart(this.itemPart, PartType.PART_PERFECT_IFACE);
+
+		this.energyImportBus = this.createPart(this.itemPart, PartType.ENERGY_IMPORT_BUS);
+		this.energyExportBus = this.createPart(this.itemPart, PartType.ENERGY_EXPORT_BUS);
 	}
 
 	public CrazyAEDamagedItemDefinition improvedImportBus() {
@@ -95,8 +115,32 @@ public class Parts implements Definitions<CrazyAEDamagedItemDefinition> {
 		return this.manaExportBus;
 	}
 
+	public CrazyAEDamagedItemDefinition energyExportBus() {
+		return this.energyExportBus;
+	}
+
+	public CrazyAEDamagedItemDefinition energyImportBus() {
+		return this.energyImportBus;
+	}
+
 	public CrazyAEDamagedItemDefinition manaTerminal() {
 		return this.manaTerm;
+	}
+
+	public CrazyAEDamagedItemDefinition energyTerminal() {
+		return this.energyTerminal;
+	}
+
+//	public CrazyAEDamagedItemDefinition partDrive() {
+//		return this.partDrive;
+//	}
+
+	public CrazyAEDamagedItemDefinition perfectInterface() {
+		return this.partPerfectInterface;
+	}
+
+	public CrazyAEDamagedItemDefinition patternsInterface() {
+		return this.partPatternsInterface;
 	}
 
 	public static Optional<PartType> getById(int itemDamage) {
@@ -125,7 +169,17 @@ public class Parts implements Definitions<CrazyAEDamagedItemDefinition> {
 		MANA_IMPORT_BUS("mana_import_bus", PartManaImportBus.class, Features.MANA_BUSES),
 		MANA_EXPORT_BUS("mana_export_bus", PartManaExportBus.class, Features.MANA_BUSES),
 
-		MANA_TERM("mana_terminal", PartManaTerminal.class, Features.MANA_TERM);
+		MANA_TERM("mana_terminal", PartManaTerminal.class, Features.MANA_TERM),
+
+		ENERGY_IMPORT_BUS("energy_import_bus", PartEnergyImportBus.class, Features.ENERGY_BUSES),
+		ENERGY_EXPORT_BUS("energy_export_bus", PartEnergyExportBus.class, Features.ENERGY_BUSES),
+		ENERGY_TERM("energy_terminal", PartEnergyTerminal.class, Features.ENERGY_TERM),
+
+		PART_DRIVE("part_drive", PartDrive.class, Features.PART_DRIVE),
+
+		PART_PERFECT_IFACE("part_perfect_iface", PartPerfectInterface.class, Features.PERFECT_INTERFACE),
+		PART_PATTERNS_IFACE("part_patterns_iface", PartPatternsInterface.class, Features.PATTERNS_INTERFACE);
+
 
 
 		private static Int2ObjectLinkedOpenHashMap<PartType> cachedValues;
@@ -136,16 +190,27 @@ public class Parts implements Definitions<CrazyAEDamagedItemDefinition> {
 		private final Set<ResourceLocation> models;
 		private Constructor<? extends IPart> constructor;
 		private GuiText extraName;
-		private final Features features;
+		private final Features[] features;
 		private List<ModelResourceLocation> itemModels;
 
-		PartType(String id, Class<? extends IPart> clazz, Features features) {
+		PartType(String id, Class<? extends IPart> clazz, Features... features) {
 			this.id = id;
 			this.clazz = clazz;
 			this.baseDamage = this.ordinal();
-			this.features = features;
+			this.features = ArrayUtils.add(features, Features.PARTS);
 
-			this.enabled = features.isEnabled();
+			boolean enabled = false;
+			for (Features f : features) {
+				if (f.isEnabled()) {
+					if (f.getRequiredModid() != null && !Loader.isModLoaded(f.getRequiredModid())) {
+						continue;
+					}
+					enabled = true;
+				}
+			}
+
+			this.enabled = enabled;
+
 			if (this.enabled) {
 				// Only load models if the part is enabled, otherwise we also run into class-loading issues while
 				// scanning for annotations
@@ -188,14 +253,11 @@ public class Parts implements Definitions<CrazyAEDamagedItemDefinition> {
 			return ImmutableList.of(modelFromBaseName(baseName));
 		}
 
-		public Features getFeature() {
+		public Features[] getFeature() {
 			return this.features;
 		}
 
 		public boolean isEnabled() {
-			if (this.features.getRequiredModid() != null && !Loader.isModLoaded(this.features.getRequiredModid())) {
-				return false;
-			}
 			return this.enabled;
 		}
 

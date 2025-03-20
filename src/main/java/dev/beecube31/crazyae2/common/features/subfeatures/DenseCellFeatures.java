@@ -26,7 +26,7 @@ public enum DenseCellFeatures implements ISubFeature {
 
 	@Nullable
 	@Override
-	public String getMixins() {
+	public String getMixin() {
 		return null;
 	}
 }

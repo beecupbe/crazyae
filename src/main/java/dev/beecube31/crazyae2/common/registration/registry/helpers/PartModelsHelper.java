@@ -22,7 +22,7 @@ public class PartModelsHelper {
 		List<ResourceLocation> locations = new ArrayList<>();
 
 		// Check all static fields for used models
-		var fields = clazz.getDeclaredFields();
+		var fields = clazz.getFields();
 		for (var field : fields) {
 			if (field.getAnnotation(PartModels.class) == null) {
 				continue;
@@ -46,7 +46,7 @@ public class PartModelsHelper {
 		}
 
 		// Check all static methods for the annotation
-		for (var method : clazz.getDeclaredMethods()) {
+		for (var method : clazz.getMethods()) {
 			if (method.getAnnotation(PartModels.class) == null) {
 				continue;
 			}

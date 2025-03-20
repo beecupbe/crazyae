@@ -7,6 +7,7 @@ import mezz.jei.api.IModPlugin;
 import mezz.jei.api.IModRegistry;
 import mezz.jei.api.ISubtypeRegistry;
 import mezz.jei.api.recipe.IRecipeCategoryRegistration;
+import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -33,7 +34,8 @@ public class JEIPlugin implements IModPlugin {
         registry.addGhostIngredientHandler(aeGuiHandler.getGuiContainerClass(), aeGuiHandler);
 
         disabledItems.forEach(item -> {
-            registry.getJeiHelpers().getIngredientBlacklist().addIngredientToBlacklist(item.maybeStack(1).get());
+            if (item.isEnabled())
+                registry.getJeiHelpers().getIngredientBlacklist().addIngredientToBlacklist(item.maybeStack(1).orElse(ItemStack.EMPTY));
         });
 
 //        registry.getRecipeTransferRegistry().addRecipeTransferHandler(new RecipeTransferHandler<>(ContainerMechanicalBotaniaTileBase.class), Constants.UNIVERSAL_RECIPE_TRANSFER_UID);

@@ -88,7 +88,7 @@ public class PartExportBusImp extends CrazyAEPartSharedBus implements ICraftingR
 
     @Override
     protected TickRateModulation doBusWork() {
-        if (!this.getProxy().isActive() || !this.canDoBusWork()) {
+        if (!this.canDoBusWork()) {
             return TickRateModulation.IDLE;
         }
 

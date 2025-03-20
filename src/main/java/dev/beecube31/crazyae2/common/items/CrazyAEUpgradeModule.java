@@ -14,6 +14,7 @@ import dev.beecube31.crazyae2.common.interfaces.ICrazyAEUpgradeHost;
 import dev.beecube31.crazyae2.common.interfaces.ICrazyAEUpgradeModule;
 import dev.beecube31.crazyae2.common.registration.definitions.Upgrades;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,6 +32,7 @@ import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -94,6 +96,18 @@ public class CrazyAEUpgradeModule extends AEBaseItem implements ICrazyAEUpgradeM
 				if (!textList.contains(name)) {
 					textList.add(name);
 				}
+			}
+
+			Collator locale = Collator.getInstance(
+					Minecraft
+						.getMinecraft()
+						.getLanguageManager()
+						.getCurrentLanguage()
+						.getJavaLocale()
+			);
+
+			if (locale != null) {
+				textList.sort(locale);
 			}
 
 			lines.addAll(textList);

@@ -8,8 +8,6 @@ import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-import java.awt.*;
-
 @SuppressWarnings("unused")
 @Mod.EventBusSubscriber(modid = Tags.MODID)
 @Config(modid = Tags.MODID, name = "crazyae")
@@ -41,6 +39,10 @@ public final class CrazyAEConfig extends Configuration {
     @Config.Name("cellFluidTypesAmt")
     @Config.RangeInt(min = 1)
     public static int cellFluidTypesAmt = 15;
+
+    @Config.Comment("Disable tiers system for EF Devices.")
+    @Config.Name("disableTiersForEFDevices")
+    public static boolean disableTiersForEFMachines = false;
 
 
     //SolarPanels

@@ -32,7 +32,9 @@ dependencies {
     implementation rfg.deobf("curse.maven:botania-225643:3330934")
     implementation fileTree('lib')
     implementation rfg.deobf('curse.maven:hwyla-253449:2568751')
-    implementation rfg.deobf('mcjty.theoneprobe:TheOneProbe-1.12:1.12-1.4.28-17')
     implementation rfg.deobf("curse.maven:extrabotany-299086:3112313")
     implementation rfg.deobf("curse.maven:botaniverse-944656:4945200")
+    implementation rfg.deobf("curse.maven:industrial-upgrade-372007:6237087")
+    implementation rfg.deobf("curse.maven:cofh-core-69162:2920433")
+    implementation rfg.deobf("curse.maven:botania-tweaks-295114:3092102")
 }

@@ -1,5 +1,6 @@
 package dev.beecube31.crazyae2.common.networking.packets;
 
+import appeng.core.sync.GuiBridge;
 import appeng.core.sync.network.INetworkInfo;
 import dev.beecube31.crazyae2.common.containers.base.ContainerOpenContext;
 import dev.beecube31.crazyae2.common.containers.base.CrazyAEBaseContainer;
@@ -14,17 +15,24 @@ import net.minecraft.tileentity.TileEntity;
 
 
 public class PacketSwitchGuis extends CrazyAEPacket {
-    private final CrazyAEGuiBridge newGui;
+    private final Object newGui;
 
     public PacketSwitchGuis(final ByteBuf stream) {
         this.newGui = CrazyAEGuiBridge.values()[stream.readInt()];
     }
 
-    public PacketSwitchGuis(final CrazyAEGuiBridge newGui) {
+    public PacketSwitchGuis(final Object newGui) {
         this.newGui = newGui;
         final ByteBuf data = Unpooled.buffer();
         data.writeInt(this.getPacketID());
-        data.writeInt(newGui.ordinal());
+        if (newGui instanceof GuiBridge aeGui) {
+            data.writeInt(aeGui.ordinal());
+        } else if (newGui instanceof CrazyAEGuiBridge crazyAeGui) {
+            data.writeInt(crazyAeGui.ordinal());
+        } else {
+            throw new IllegalArgumentException("Gui must be located in GuiBridge or CrazyAEGuiBridge : " + newGui);
+        }
+
         this.configureWrite(data);
     }
 

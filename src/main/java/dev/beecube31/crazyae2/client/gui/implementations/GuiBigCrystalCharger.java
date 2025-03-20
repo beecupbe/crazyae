@@ -1,5 +1,6 @@
 package dev.beecube31.crazyae2.client.gui.implementations;
 
+import dev.beecube31.crazyae2.client.gui.sprites.Sprite;
 import dev.beecube31.crazyae2.client.gui.widgets.ProgressBar;
 import dev.beecube31.crazyae2.common.containers.ContainerBigCrystalCharger;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiText;
@@ -34,7 +35,10 @@ public class GuiBigCrystalCharger extends GuiCrazyAEUpgradeable {
                 ProgressBar.Direction.VERTICAL,
                 CrazyAEGuiTooltip.PROGRESS.getLocal(),
                 0,
-                this.getGuiHue()
+                this.getGuiHue(),
+                Sprite.PROGRESS_BAR_FILLED,
+                null,
+                false
         );
 
         this.buttonList.add(this.pb);

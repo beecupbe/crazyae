@@ -1,13 +1,18 @@
 package dev.beecube31.crazyae2.common.parts.implementations;
 
+import appeng.api.AEApi;
 import appeng.api.config.RedstoneMode;
 import appeng.api.config.Upgrades;
 import appeng.api.networking.GridFlags;
 import appeng.api.networking.ticking.IGridTickable;
 import appeng.api.networking.ticking.TickRateModulation;
+import appeng.api.storage.IMEMonitor;
+import appeng.api.storage.channels.IItemStorageChannel;
+import appeng.api.storage.data.IAEItemStack;
 import appeng.me.GridAccessException;
 import appeng.tile.inventory.AppEngInternalAEInventory;
 import appeng.util.InventoryAdaptor;
+import dev.beecube31.crazyae2.core.api.storage.energy.IEnergyStorageChannel;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -69,6 +74,34 @@ public abstract class CrazyAEPartSharedBus extends CrazyAEPartUpgradeable implem
         return InventoryAdaptor.getAdaptor(target, this.getSide().getFacing().getOpposite());
     }
 
+    protected TileEntity getVictim() {
+        final TileEntity self = this.getHost().getTile();
+
+        return this.getTileEntity(self, self.getPos().offset(this.getSide().getFacing()));
+    }
+
+    protected IMEMonitor<IAEItemStack> getEnergyInv() {
+        try {
+            return this.getProxy()
+                    .getStorage()
+                    .getInventory(AEApi.instance().storage().getStorageChannel(IEnergyStorageChannel.class));
+
+        } catch (GridAccessException ignored) {}
+
+        return null;
+    }
+
+    protected IMEMonitor<IAEItemStack> getItemsInv() {
+        try {
+            return this.getProxy()
+                    .getStorage()
+                    .getInventory(AEApi.instance().storage().getStorageChannel(IItemStorageChannel.class));
+
+        } catch (GridAccessException ignored) {}
+
+        return null;
+    }
+
     private TileEntity getTileEntity(final TileEntity self, final BlockPos pos) {
         final World w = self.getWorld();
 
@@ -98,6 +131,40 @@ public abstract class CrazyAEPartSharedBus extends CrazyAEPartUpgradeable implem
         }
 
         return items;
+    }
+
+    protected int calculateEnergyToSend() {
+        int energy = 32;
+
+        switch (this.getInstalledUpgrades(dev.beecube31.crazyae2.common.registration.definitions.Upgrades.UpgradeType.STACKS)) {
+            case 1 -> energy = 2048;
+            case 2 -> energy = 131072;
+            case 3 -> energy = 8388608;
+            case 4 -> energy = Integer.MAX_VALUE;
+        }
+
+        if (this.getInstalledUpgrades(dev.beecube31.crazyae2.common.registration.definitions.Upgrades.UpgradeType.ADVANCED_SPEED) > 0) {
+            energy += 32768;
+        }
+
+        return energy;
+    }
+
+    protected int calculateEFEnergyToSend() {
+        int energy = 32;
+
+        switch (this.getInstalledUpgrades(dev.beecube31.crazyae2.common.registration.definitions.Upgrades.UpgradeType.STACKS)) {
+            case 1 -> energy = 2048;
+            case 2 -> energy = 32768;
+            case 3 -> energy = 524288;
+            case 4 -> energy = 33554432;
+        }
+
+        if (this.getInstalledUpgrades(dev.beecube31.crazyae2.common.registration.definitions.Upgrades.UpgradeType.ADVANCED_SPEED) > 0) {
+            energy += 32768;
+        }
+
+        return energy;
     }
 
     protected int calculateManaIterations() {

@@ -1,0 +1,61 @@
+{
+  "conditions": [
+    {
+      "type": "forge:or",
+      "values": [
+        {
+          "type": "crazyae:part_exists",
+          "name": "energy_terminal"
+        },
+        {
+          "type": "crazyae:material_exists",
+          "name": "mana_part_1k"
+        },
+        {
+          "type": "crazyae:material_exists",
+          "name": "mana_part_256k"
+        },
+        {
+          "type": "crazyae:material_exists",
+          "name": "mana_part_16mb"
+        }
+      ]
+    },
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "minecraft:item_exists",
+          "item": "botania:manaresource"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "type": "part",
+    "name": "energy_terminal"
+  },
+  "type": "crazyae:shaped_recipe",
+  "pattern": [
+    "pqp",
+    "mtm",
+    "pqp"
+  ],
+  "key": {
+    "p": {
+      "item": "appliedenergistics2:fluix_block"
+    },
+    "q": {
+      "type": "crazyae:material",
+      "name": "energy_processor"
+    },
+    "m": {
+      "type": "forge:ore_dict",
+      "ore": "blockRedstone"
+    },
+    "t": {
+      "type": "appliedenergistics2:part",
+      "part": "part.terminal"
+    }
+  }
+}

@@ -47,6 +47,7 @@ public class CrazyAEItemDefinitionBuilder implements ICrazyAEItemBuilder {
 
 	private String requiredMod;
 	private String bannedMod;
+	private boolean forceDisable = false;
 
 
 	private boolean hidden;
@@ -105,6 +106,12 @@ public class CrazyAEItemDefinitionBuilder implements ICrazyAEItemBuilder {
 		return this;
 	}
 
+	@Override
+	public ICrazyAEItemBuilder setDisabled() {
+		this.forceDisable = true;
+		return this;
+	}
+
 	@SideOnly(Side.CLIENT)
 	private void customizeForClient(ItemRenderingCustomizer callback) {
 		callback.customize(this.itemRendering);
@@ -118,7 +125,7 @@ public class CrazyAEItemDefinitionBuilder implements ICrazyAEItemBuilder {
 
 	@Override
 	public ItemDefinition build() {
-		if (this.features != null && Arrays.stream(this.features).noneMatch(IFeature::isEnabled)) {
+		if ((this.features != null && Arrays.stream(this.features).noneMatch(IFeature::isEnabled)) || this.forceDisable) {
 			return new ItemDefinition(this.registryName, null);
 		}
 

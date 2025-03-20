@@ -1,7 +1,10 @@
 package dev.beecube31.crazyae2.common.features;
 
-import dev.beecube31.crazyae2.common.features.subfeatures.*;
+import dev.beecube31.crazyae2.common.features.subfeatures.DenseCellFeatures;
 import dev.beecube31.crazyae2.common.features.subfeatures.ISubFeature;
+import dev.beecube31.crazyae2.common.features.subfeatures.MegaDenseCellFeatures;
+import dev.beecube31.crazyae2.common.features.subfeatures.UpgradeFeatures;
+import dev.beecube31.crazyae2.common.util.FeatureSet;
 import net.minecraftforge.fml.common.Loader;
 
 import javax.annotation.Nullable;
@@ -10,34 +13,81 @@ import java.util.EnumSet;
 public enum Features implements IFeature {
 	STUB,
 
-	UPGRADES(EnumSet.allOf(UpgradeFeatures.class), "upgrades"),
-	DENSE_CELLS(EnumSet.allOf(DenseCellFeatures.class)),
-	MEGA_DENSE_CELLS(EnumSet.allOf(MegaDenseCellFeatures.class)),
+	UPGRADES(
+			new FeatureSet().add(EnumSet.allOf(UpgradeFeatures.class)).add("upgrades").add("mixin:upgrades")
+	),
+	DENSE_CELLS(
+			new FeatureSet().add(EnumSet.allOf(DenseCellFeatures.class))
+	),
+	MEGA_DENSE_CELLS(
+			new FeatureSet().add(EnumSet.allOf(MegaDenseCellFeatures.class))
+	),
 
-	MANA_CELLS("manastorage", "botania"),
-	MANA_DENSE_CELLS("manastorage", "botania"),
-	MEGA_MANA_DENSE_CELLS("manastorage", "botania"),
-	MANA_TERM("manastorage", "botania"),
-	BOTANIA_MECHANICAL_BLOCKS(false, "botania"),
-	BOTANIA_JEI_INTEGRATION("botaniajei", "botania"),
+	PARTS(),
+
+	ENERGY_TERM(),
 
 	PORTABLE_DENSE_CELLS,
 	IMPROVED_DRIVE,
 	IMPROVED_IO_PORT,
 	BIG_CRYSTAL_CHARGER,
-	CRAFTING_UNITS_COMBINER("cu.combiner"),
 	IMPROVED_GRINDSTONE_CRANK,
 	IMPROVED_BUSES,
-	MANA_BUSES(false, "botania"),
 	IMPROVED_ENERGY_CELLS,
 	SOLAR_PANELS,
-	QUANTUM_CHANNELS_MULTIPLIER("qcm"),
-	PATTERNS_INTERFACE("patterns.interface"),
+	PART_DRIVE,
+	PERFECT_INTERFACE(
+			new FeatureSet().add("mixin:perfect.interface")
+	),
+	ENERGY_BUSES,
 
-//	QUANTUM_WIRELESS_ACCESS_POINT("qwap"),
+	IMPROVED_MOLECULAR_ASSEMBLER(
+			new FeatureSet().add("mixin:patternterm.fastplace")
+	),
+	MANA_CELLS(
+			new FeatureSet().add("mixin:manastorage").add("modid:botania")
+	),
+	MANA_DENSE_CELLS(
+			new FeatureSet().add("mixin:manastorage").add("modid:botania")
+	),
+	MEGA_MANA_DENSE_CELLS(
+			new FeatureSet().add("mixin:manastorage").add("modid:botania")
+	),
+	MANA_TERM(
+			new FeatureSet().add("mixin:manastorage").add("modid:botania")
+	),
+	BOTANIA_MECHANICAL_BLOCKS(
+			new FeatureSet().add("modid:botania")
+	),
+	BOTANIA_JEI_INTEGRATION(
+			new FeatureSet().add("mixin:botaniajei").add("modid:botania")
+	),
 
-	DENSE_CPU_COPROCESSORS("dense.coprocessor"),
-	MEGA_DENSE_CPU_COPROCESSORS("dense.coprocessor");
+
+	ENERGY_CELLS(),
+	ENERGY_DENSE_CELLS(),
+	MEGA_ENERGY_DENSE_CELLS(),
+
+	CRAFTING_UNITS_COMBINER(
+			new FeatureSet().add("mixin:cu.combiner")
+	),
+
+	MANA_BUSES(
+			new FeatureSet().add("modid:botania")
+	),
+	QUANTUM_CHANNELS_MULTIPLIER(
+			new FeatureSet().add("mixin:qcm")
+	),
+	PATTERNS_INTERFACE(
+			new FeatureSet().add("mixin:patterns.interface")
+	),
+
+	DENSE_CPU_COPROCESSORS(
+			new FeatureSet().add("mixin:patterns.interface")
+	),
+	MEGA_DENSE_CPU_COPROCESSORS(
+			new FeatureSet().add("mixin:dense.coprocessor")
+	);
 
 	private String[] mixins;
 	private String modid;
@@ -46,30 +96,27 @@ public enum Features implements IFeature {
 
 	Features() {}
 
-	Features(String mixins) {
+	Features(FeatureSet attribs) {
 		this();
-		this.mixins = new String[]{ mixins };
-	}
 
-	Features(String mixins, String modid) {
-		this();
-		this.modid = modid;
-		this.mixins = new String[]{ mixins };
-	}
+		for (Object obj : attribs.get()) {
+			if (obj instanceof String attrib) {
+				if (attrib.contains("mixin:")) {
+					this.mixins = new String[]{attrib.substring(6)};
+				}
 
-	Features(boolean stub, String modid) {
-		this();
-		this.modid = modid;
-	}
+				if (attrib.contains("modid:")) {
+					this.modid = attrib.substring(6);
+				}
 
-	Features(EnumSet<? extends ISubFeature> subFeatures) {
-		this.subFeatures = subFeatures;
-	}
+				return;
+			}
 
-	Features(EnumSet<? extends ISubFeature> subFeatures, String mixins) {
-		this(subFeatures);
+			if (obj instanceof EnumSet attrib) {
+				this.subFeatures = attrib;
+			}
 
-		this.mixins = new String[]{ mixins };
+		}
 	}
 
 	public boolean isEnabled() {

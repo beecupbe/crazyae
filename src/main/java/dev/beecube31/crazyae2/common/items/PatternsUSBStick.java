@@ -45,7 +45,7 @@ public class PatternsUSBStick extends AEBaseItem implements ICrazyAEGuiItem<Patt
     }
 
     @Override
-    public PatternsUSBStickObj getGuiObject(ItemStack is, World w) {
+    public PatternsUSBStickObj getGuiObject(ItemStack is, World w, BlockPos pos) {
         return new PatternsUSBStickObj(is);
     }
 }

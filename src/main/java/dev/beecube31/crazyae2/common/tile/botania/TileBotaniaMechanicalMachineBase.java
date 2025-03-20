@@ -9,7 +9,6 @@ import appeng.api.networking.crafting.ICraftingMedium;
 import appeng.api.networking.crafting.ICraftingPatternDetails;
 import appeng.api.networking.crafting.ICraftingProvider;
 import appeng.api.networking.crafting.ICraftingProviderHelper;
-import appeng.api.networking.energy.IEnergyGrid;
 import appeng.api.networking.events.MENetworkCraftingPatternChange;
 import appeng.api.networking.events.MENetworkEventSubscribe;
 import appeng.api.networking.events.MENetworkPowerStatusChange;
@@ -26,7 +25,6 @@ import appeng.api.util.AEPartLocation;
 import appeng.api.util.DimensionalCoord;
 import appeng.api.util.IConfigManager;
 import appeng.me.GridAccessException;
-import appeng.parts.automation.UpgradeInventory;
 import appeng.tile.inventory.AppEngInternalInventory;
 import appeng.util.ConfigManager;
 import appeng.util.IConfigManagerHost;
@@ -34,12 +32,14 @@ import appeng.util.Platform;
 import appeng.util.inv.InvOperation;
 import appeng.util.inv.filter.IAEItemFilter;
 import appeng.util.item.AEItemStack;
-import dev.beecube31.crazyae2.common.interfaces.ICrazyAEUpgradeInventory;
 import dev.beecube31.crazyae2.common.interfaces.crafting.IFastCraftingHandler;
 import dev.beecube31.crazyae2.common.interfaces.device.mechanical.IBotaniaMechanicalDevice;
 import dev.beecube31.crazyae2.common.interfaces.upgrades.IUpgradesInfoProvider;
+import dev.beecube31.crazyae2.common.parts.implementations.CrazyAEBlockUpgradeInv;
 import dev.beecube31.crazyae2.common.tile.base.CrazyAENetworkInvOCTile;
+import dev.beecube31.crazyae2.common.util.AEUtils;
 import dev.beecube31.crazyae2.common.util.NBTUtils;
+import dev.beecube31.crazyae2.common.util.inv.CrazyAEInternalInv;
 import dev.beecube31.crazyae2.core.CrazyAE;
 import dev.beecube31.crazyae2.core.api.storage.IManaStorageChannel;
 import io.netty.buffer.ByteBuf;
@@ -53,19 +53,22 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
 public abstract class TileBotaniaMechanicalMachineBase extends CrazyAENetworkInvOCTile implements IBotaniaMechanicalDevice, IUpgradesInfoProvider, IConfigManagerHost, IGridTickable, ICraftingMedium, ICraftingProvider, IFastCraftingHandler {
 
     protected List<ICraftingPatternDetails> craftingList = null;
     protected List<CraftingTask> queueMap = new ArrayList<>();
-    protected AppEngInternalInventory craftingInputInv;
-    protected AppEngInternalInventory craftingOutputInv;
+    protected CrazyAEInternalInv craftingInputInv;
+    protected CrazyAEInternalInv craftingOutputInv;
     protected final AppEngInternalInventory internalPatternsStorageInv = new AppEngInternalInventory(this, 45);
     protected final AppEngInternalInventory patternsInv = new AppEngInternalInventory(this, 2);
     protected final AppEngInternalInventory findSlot = new AppEngInternalInventory(this, 1, 1);
     protected final IConfigManager settings;
-    protected UpgradeInventory upgrades;
+    protected CrazyAEBlockUpgradeInv upgrades;
     protected boolean isPowered = false;
     protected boolean cached = false;
     protected IActionSource actionSource;
@@ -99,7 +102,7 @@ public abstract class TileBotaniaMechanicalMachineBase extends CrazyAENetworkInv
     }
 
     public int getInstalledCustomUpgrades(dev.beecube31.crazyae2.common.registration.definitions.Upgrades.UpgradeType u) {
-        return ((ICrazyAEUpgradeInventory) this.upgrades).getInstalledUpgrades(u);
+        return this.upgrades.getInstalledUpgrades(u);
     }
 
     @Override
@@ -357,7 +360,6 @@ public abstract class TileBotaniaMechanicalMachineBase extends CrazyAENetworkInv
 
     protected boolean tryUseMana(int amt) {
         try {
-            final IEnergyGrid energyGrid = this.getProxy().getEnergy();
             final IMEMonitor<IAEItemStack> inv = this.getProxy()
                     .getStorage()
                     .getInventory(
@@ -367,9 +369,9 @@ public abstract class TileBotaniaMechanicalMachineBase extends CrazyAENetworkInv
                     .maybeStack(amt).orElse(ItemStack.EMPTY));
 
             if (item != null && item.getStackSize() == amt) {
-                IAEItemStack simulate = Platform.poweredExtraction(energyGrid, inv, item, this.actionSource, Actionable.SIMULATE);
+                IAEItemStack simulate = AEUtils.extractFromME(inv, item, this.actionSource, Actionable.SIMULATE);
                 if (simulate != null && simulate.getStackSize() == amt) {
-                    Platform.poweredExtraction(energyGrid, inv, item, this.actionSource, Actionable.MODULATE);
+                    AEUtils.extractFromME(inv, item, this.actionSource, Actionable.MODULATE);
                     return true;
                 }
             }
@@ -559,6 +561,42 @@ public abstract class TileBotaniaMechanicalMachineBase extends CrazyAENetworkInv
         private final int requiredMana;
 
         public RuneAltarCraftingTask(
+                IAEItemStack[] taskItems,
+                int progress,
+                int requiredMana
+        ) {
+            super(taskItems, progress);
+            this.requiredMana = requiredMana;
+        }
+
+        @Override
+        public int getRequiredMana() {
+            return requiredMana;
+        }
+    }
+
+    public static class TeraplateCraftingTask extends CraftingTask implements IManaTask {
+        private final int requiredMana;
+
+        public TeraplateCraftingTask(
+                IAEItemStack[] taskItems,
+                int progress,
+                int requiredMana
+        ) {
+            super(taskItems, progress);
+            this.requiredMana = requiredMana;
+        }
+
+        @Override
+        public int getRequiredMana() {
+            return requiredMana;
+        }
+    }
+
+    public static class BreweryCraftingTask extends CraftingTask implements IManaTask {
+        private final int requiredMana;
+
+        public BreweryCraftingTask(
                 IAEItemStack[] taskItems,
                 int progress,
                 int requiredMana

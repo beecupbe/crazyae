@@ -10,17 +10,12 @@ import dev.beecube31.crazyae2.client.rendering.*;
 import dev.beecube31.crazyae2.common.blocks.BlockDenseCraftingUnit;
 import dev.beecube31.crazyae2.common.blocks.botania.*;
 import dev.beecube31.crazyae2.common.blocks.crafting.BlockImprovedMAC;
-import dev.beecube31.crazyae2.common.blocks.energycells.BlockAdvancedEnergyCell;
-import dev.beecube31.crazyae2.common.blocks.energycells.BlockImprovedEnergyCell;
-import dev.beecube31.crazyae2.common.blocks.energycells.BlockPerfectEnergyCell;
+import dev.beecube31.crazyae2.common.blocks.energycells.*;
 import dev.beecube31.crazyae2.common.blocks.grindstone.BlockImprovedCrank;
 import dev.beecube31.crazyae2.common.blocks.materials.BlockFluxilized;
 import dev.beecube31.crazyae2.common.blocks.misc.BlockImprovedCondenser;
 import dev.beecube31.crazyae2.common.blocks.networking.*;
-import dev.beecube31.crazyae2.common.blocks.solars.BlockPanelAdvanced;
-import dev.beecube31.crazyae2.common.blocks.solars.BlockPanelBasic;
-import dev.beecube31.crazyae2.common.blocks.solars.BlockPanelImproved;
-import dev.beecube31.crazyae2.common.blocks.solars.BlockPanelPerfect;
+import dev.beecube31.crazyae2.common.blocks.solars.*;
 import dev.beecube31.crazyae2.common.blocks.storage.BlockDriveImproved;
 import dev.beecube31.crazyae2.common.features.Features;
 import dev.beecube31.crazyae2.common.features.subfeatures.DenseCellFeatures;
@@ -31,16 +26,11 @@ import dev.beecube31.crazyae2.common.registration.registry.rendering.CrazyAEDens
 import dev.beecube31.crazyae2.common.tile.TileDenseCraftingUnit;
 import dev.beecube31.crazyae2.common.tile.botania.*;
 import dev.beecube31.crazyae2.common.tile.crafting.TileImprovedMAC;
-import dev.beecube31.crazyae2.common.tile.energycells.TileAdvancedEnergyCell;
-import dev.beecube31.crazyae2.common.tile.energycells.TileImprovedEnergyCell;
-import dev.beecube31.crazyae2.common.tile.energycells.TilePerfectEnergyCell;
+import dev.beecube31.crazyae2.common.tile.energycells.*;
 import dev.beecube31.crazyae2.common.tile.grindstone.TileImprovedCrank;
 import dev.beecube31.crazyae2.common.tile.misc.TileImprovedCondenser;
 import dev.beecube31.crazyae2.common.tile.networking.*;
-import dev.beecube31.crazyae2.common.tile.solars.TileEnergyPanelAdvanced;
-import dev.beecube31.crazyae2.common.tile.solars.TileEnergyPanelBasic;
-import dev.beecube31.crazyae2.common.tile.solars.TileEnergyPanelImproved;
-import dev.beecube31.crazyae2.common.tile.solars.TileEnergyPanelPerfect;
+import dev.beecube31.crazyae2.common.tile.solars.*;
 import dev.beecube31.crazyae2.common.tile.storage.TileImprovedDrive;
 import net.minecraft.util.ResourceLocation;
 
@@ -86,15 +76,17 @@ public class Blocks {
 	private final IBlockDefinition fluixilizedBlock;
 
 	private final ITileDefinition patternsInterface;
+	private final ITileDefinition perfectInterface;
 	private final ITileDefinition quantumChannelMultiplier;
 	private final ITileDefinition quantumChannelMultiplierCreative;
-
 
 	private final ITileDefinition elventradeMechanical;
 	private final ITileDefinition manapoolMechanical;
 	private final ITileDefinition petalMechanical;
 	private final ITileDefinition runealtarMechanical;
 	private final ITileDefinition puredaisyMechanical;
+	private final ITileDefinition teraplateMechanical;
+	private final ITileDefinition breweryMechanical;
 
 	public Blocks(Registry registry) {
 		this.craftingStorage256k = registry.block("crafting_storage_256k", () -> new BlockDenseCraftingUnit(BlockDenseCraftingUnit.DenseCraftingUnitType.STORAGE_256K))
@@ -218,7 +210,6 @@ public class Blocks {
 				.build();
 
 
-
 		this.energyCellImproved = registry.block("improved_energy_cell", BlockImprovedEnergyCell::new)
 				.features(Features.IMPROVED_ENERGY_CELLS)
 				.item(ItemEnergyCells::new)
@@ -243,6 +234,7 @@ public class Blocks {
 
 
 		this.fastMAC = registry.block("improved_molecular_assembler", BlockImprovedMAC::new)
+				.features(Features.IMPROVED_MOLECULAR_ASSEMBLER)
 				.tileEntity(new TileEntityDefinition(TileImprovedMAC.class))
 				.build();
 
@@ -296,6 +288,11 @@ public class Blocks {
 				.tileEntity(new TileEntityDefinition(TilePatternsInterface.class))
 				.build();
 
+		this.perfectInterface = registry.block("perfect_interface", BlockPerfectInterface::new)
+				.features(Features.PERFECT_INTERFACE)
+				.tileEntity(new TileEntityDefinition(TilePerfectInterface.class))
+				.build();
+
 		this.quantumChannelMultiplier = registry.block("quantum_channels_multiplier", BlockQuantumChannelsMultiplier::new)
 				.features(Features.QUANTUM_CHANNELS_MULTIPLIER)
 				.tileEntity(new TileEntityDefinition(TileQuantumChannelsBooster.class))
@@ -310,24 +307,39 @@ public class Blocks {
 
 
 		this.elventradeMechanical = registry.block("mechanical_elventrade", BlockMechanicalElventrade::new)
+				.ifModPresent("botania")
 				.features(Features.BOTANIA_MECHANICAL_BLOCKS)
 				.tileEntity(new TileEntityDefinition(TileMechanicalElventrade.class))
 				.build();
 		this.manapoolMechanical = registry.block("mechanical_manapool", BlockMechanicalManapool::new)
+				.ifModPresent("botania")
 				.features(Features.BOTANIA_MECHANICAL_BLOCKS)
 				.tileEntity(new TileEntityDefinition(TileMechanicalManapool.class))
 				.build();
 		this.runealtarMechanical = registry.block("mechanical_runealtar", BlockMechanicalRunealtar::new)
+				.ifModPresent("botania")
 				.features(Features.BOTANIA_MECHANICAL_BLOCKS)
 				.tileEntity(new TileEntityDefinition(TileMechanicalRunealtar.class))
 				.build();
 		this.petalMechanical = registry.block("mechanical_petal", BlockMechanicalPetal::new)
+				.ifModPresent("botania")
 				.features(Features.BOTANIA_MECHANICAL_BLOCKS)
 				.tileEntity(new TileEntityDefinition(TileMechanicalPetal.class))
 				.build();
 		this.puredaisyMechanical = registry.block("mechanical_puredaisy", BlockMechanicalPuredaisy::new)
+				.ifModPresent("botania")
 				.features(Features.BOTANIA_MECHANICAL_BLOCKS)
 				.tileEntity(new TileEntityDefinition(TileMechanicalPuredaisy.class))
+				.build();
+		this.teraplateMechanical = registry.block("mechanical_teraplate", BlockMechanicalTeraplate::new)
+				.ifModPresent("botania")
+				.features(Features.BOTANIA_MECHANICAL_BLOCKS)
+				.tileEntity(new TileEntityDefinition(TileMechanicalTerraplate.class))
+				.build();
+		this.breweryMechanical = registry.block("mechanical_brewery", BlockMechanicalBrewery::new)
+				.ifModPresent("botania")
+				.features(Features.BOTANIA_MECHANICAL_BLOCKS)
+				.tileEntity(new TileEntityDefinition(TileMechanicalBrewery.class))
 				.build();
 
 
@@ -360,6 +372,15 @@ public class Blocks {
 	public ITileDefinition mechanicalPuredaisy() {
 		return this.puredaisyMechanical;
 	}
+
+	public ITileDefinition mechanicalTeraplate() {
+		return this.teraplateMechanical;
+	}
+
+	public ITileDefinition mechanicalBrewery() {
+		return this.breweryMechanical;
+	}
+
 
 	public ITileDefinition mechanicalPetal() {
 		return this.petalMechanical;
@@ -489,6 +510,10 @@ public class Blocks {
 
 	public ITileDefinition patternsInterface() {
 		return this.patternsInterface;
+	}
+
+	public ITileDefinition perfectInterface() {
+		return this.perfectInterface;
 	}
 
 	public IBlockDefinition fluixilizedBlock() {

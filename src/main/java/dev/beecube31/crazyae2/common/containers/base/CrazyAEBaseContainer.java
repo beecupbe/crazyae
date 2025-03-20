@@ -167,16 +167,18 @@ public abstract class CrazyAEBaseContainer extends Container {
 
         if (host != null) {
             final IGridNode gn = host.getActionableNode();
-            final IGrid g = gn.getGrid();
-            if (requirePower) {
-                final IEnergyGrid eg = g.getCache(IEnergyGrid.class);
-                if (!eg.isNetworkPowered()) {
-                    return false;
+            if (gn != null) {
+                final IGrid g = gn.getGrid();
+                if (requirePower) {
+                    final IEnergyGrid eg = g.getCache(IEnergyGrid.class);
+                    if (!eg.isNetworkPowered()) {
+                        return false;
+                    }
                 }
-            }
 
-            final ISecurityGrid sg = g.getCache(ISecurityGrid.class);
-            return sg.hasPermission(this.getInventoryPlayer().player, perm);
+                final ISecurityGrid sg = g.getCache(ISecurityGrid.class);
+                return sg.hasPermission(this.getInventoryPlayer().player, perm);
+            }
         }
 
         return false;
@@ -247,7 +249,7 @@ public abstract class CrazyAEBaseContainer extends Container {
             s.setContainer(this);
             return super.addSlotToContainer(newSlot);
         } else {
-            throw new IllegalArgumentException("Trying to add [" + newSlot + "] to CrazyAE Container instead of CrazyAESlot.");
+            throw new IllegalArgumentException("Trying to add [" + newSlot + "] in [" + this.getClass() + "] to CrazyAE Container instead of CrazyAESlot.");
         }
     }
 

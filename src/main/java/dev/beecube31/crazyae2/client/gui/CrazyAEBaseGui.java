@@ -17,15 +17,15 @@ import com.google.common.base.Stopwatch;
 import com.google.common.collect.Lists;
 import dev.beecube31.crazyae2.client.gui.components.ComponentHue;
 import dev.beecube31.crazyae2.client.gui.slot.CustomSlot;
+import dev.beecube31.crazyae2.client.gui.slot.SlotTooltip;
 import dev.beecube31.crazyae2.common.containers.base.CrazyAEBaseContainer;
 import dev.beecube31.crazyae2.common.containers.base.slot.*;
-import dev.beecube31.crazyae2.common.interfaces.gui.IColorizeableSlot;
-import dev.beecube31.crazyae2.common.interfaces.gui.IScrollSrc;
-import dev.beecube31.crazyae2.common.interfaces.gui.ITooltipObj;
+import dev.beecube31.crazyae2.common.interfaces.gui.*;
 import dev.beecube31.crazyae2.common.networking.network.NetworkHandler;
 import dev.beecube31.crazyae2.common.networking.packets.orig.PacketInventoryAction;
 import dev.beecube31.crazyae2.common.networking.packets.orig.PacketSwapSlots;
 import dev.beecube31.crazyae2.core.client.CrazyAEClientConfig;
+import dev.beecube31.crazyae2.core.client.CrazyAEClientHandler;
 import mezz.jei.api.gui.IGhostIngredientHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -49,7 +49,6 @@ import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidUtil;
-import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
@@ -66,7 +65,6 @@ import java.util.List;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-import static dev.beecube31.crazyae2.integrations.jei.JEIPlugin.aeGuiHandler;
 import static dev.beecube31.crazyae2.integrations.jei.JEIPlugin.runtime;
 
 @MouseTweaksIgnore
@@ -91,6 +89,8 @@ public abstract class CrazyAEBaseGui extends GuiContainer {
     private final ComponentHue guiHue = new ComponentHue();
     private final ComponentHue textHue = new ComponentHue(ComponentHue.DEFAULT_TEXT_COLOR);
     private boolean enableColorizing = CrazyAEClientConfig.isColorizingEnabled();
+
+    public CustomSlot hoveredClientSlot;
 
     public CrazyAEBaseGui(final Container container) {
         super(container);
@@ -168,6 +168,7 @@ public abstract class CrazyAEBaseGui extends GuiContainer {
     public void drawScreen(final int mouseX, final int mouseY, final float partialTicks) {
         super.drawDefaultBackground();
         super.drawScreen(mouseX, mouseY, partialTicks);
+        this.hoveredClientSlot = null;
         GlStateManager.pushMatrix();
         GlStateManager.translate(this.guiLeft, this.guiTop, 0.0F);
         GlStateManager.enableDepth();
@@ -243,34 +244,6 @@ public abstract class CrazyAEBaseGui extends GuiContainer {
         return Collections.emptyList();
     }
 
-//    @Optional.Method(modid = "jei")
-//    void bookmarkedJEIghostItem(final int mouseX, final int mouseY) {
-//        if (!isJeiGhostItem) {
-//            bookmarkedIngredient = runtime.getBookmarkOverlay().getIngredientUnderMouse();
-//        }
-//
-//        if (bookmarkedIngredient != null) {
-//            hoveredIngredientTargets = aeGuiHandler.getTargets(this, bookmarkedIngredient, false);
-//            ItemStack dragItem = ItemStack.EMPTY;
-//            if (!hoveredIngredientTargets.isEmpty()) {
-//                if (isShiftKeyDown() && Mouse.isButtonDown(0) && this.lastClicked.elapsed(TimeUnit.MILLISECONDS) > 200) {
-//                    this.lastClicked = Stopwatch.createStarted();
-//                    aeGuiHandler.getTargets(this, bookmarkedIngredient, true);
-//                } else if (Mouse.isButtonDown(0) && this.lastClicked.elapsed(TimeUnit.MILLISECONDS) > 200) {
-//                    this.lastClicked = Stopwatch.createStarted();
-//                    if (bookmarkedIngredient instanceof ItemStack) {
-//                        dragItem = ((ItemStack) bookmarkedIngredient);
-//                    } else if (bookmarkedIngredient instanceof FluidStack) {
-//                        dragItem = FluidUtil.getFilledBucket(((FluidStack) bookmarkedIngredient));
-//                    }
-//                    mc.player.inventory.setItemStack(dragItem.copy());
-//                    this.isJeiGhostItem = true;
-//                }
-//                drawTargets(mouseX, mouseY);
-//            }
-//        }
-//    }
-
     private void drawTargets(int mouseX, int mouseY) {
         GlStateManager.disableLighting();
         for (IGhostIngredientHandler.Target target : hoveredIngredientTargets) {
@@ -288,7 +261,7 @@ public abstract class CrazyAEBaseGui extends GuiContainer {
     }
 
     protected void drawGuiSlot(CustomSlot slot, int mouseX, int mouseY, float partialTicks) {
-        if (slot.isSlotEnabled()) {
+        if (slot.isSlotEnabled() && !(slot instanceof SlotTooltip)) {
             final int left = slot.xPos();
             final int top = slot.yPos();
             final int right = left + slot.getWidth();
@@ -310,15 +283,25 @@ public abstract class CrazyAEBaseGui extends GuiContainer {
         final int x = tooltip.xPos(); // ((GuiImgButton) c).x;
         int y = tooltip.yPos(); // ((GuiImgButton) c).y;
 
-        if (x < mouseX && x + tooltip.getWidth() > mouseX && tooltip.isVisible()) {
-            if (y < mouseY && y + tooltip.getHeight() > mouseY) {
+        if (x <= mouseX && x + tooltip.getWidth() >= mouseX && tooltip.isVisible()) {
+            if (y <= mouseY && y + tooltip.getHeight() >= mouseY) {
                 if (y < 15) {
                     y = 15;
                 }
 
+                if (tooltip instanceof CustomSlot c) this.hoveredClientSlot = c;
+
                 final String msg = tooltip.getTooltipMsg();
                 if (msg != null) {
                     this.drawTooltip(x + (mouseX - tooltip.xPos()), y + (mouseY - tooltip.yPos()), msg);
+                    if (tooltip instanceof ITooltipIconsObj j) {
+                        for (Map.Entry<ItemStack, Integer> e : j.getTooltipIcons().entrySet()) {
+                            ItemStack is = e.getKey();
+                            int v = e.getValue();
+
+                            CrazyAEClientHandler.drawItemIntoTooltip(is, v, x + (mouseX - tooltip.xPos()) + 1, Math.max(y + (mouseY - tooltip.yPos()), 1));
+                        }
+                    }
                 }
             }
         }
@@ -388,6 +371,14 @@ public abstract class CrazyAEBaseGui extends GuiContainer {
             this.textHue.drawString(str, x, y, this.fontRenderer);
         } else {
             this.fontRenderer.drawString(str, x, y, ComponentHue.DEFAULT_TEXT_COLOR);
+        }
+    }
+
+    protected void drawCenteredString(String str, int x, int y) {
+        if (this.enableColorizing) {
+            this.textHue.drawCenteredText(str, x, y, this.fontRenderer);
+        } else {
+            this.textHue.drawCenteredText(str, x, y, ComponentHue.DEFAULT_TEXT_COLOR, this.fontRenderer);
         }
     }
 

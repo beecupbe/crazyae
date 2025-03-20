@@ -7,9 +7,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public interface ICrazyAEGuiItem<T extends IGuiItemObject> {
-	T getGuiObject(ItemStack is, World w);
+	T getGuiObject(ItemStack is, World w, BlockPos pos);
 
 	default T getGuiObject(ItemStack is, World w, BlockPos bp, AEPartLocation side) {
-		return this.getGuiObject(is, w);
+		return this.getGuiObject(is, w, bp);
 	}
 }

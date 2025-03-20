@@ -202,9 +202,7 @@ public class BlockQuantumChannelsMultiplier extends AEBaseTileBlock implements I
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced) {
         final int qmc = CrazyAEConfig.QCMBoostAmt;
-        tooltip.add(CrazyAETooltip.QCM_DESC.getLocal());
-        tooltip.add(String.format(CrazyAETooltip.QCM_DESC1.getLocal(), qmc / 4));
-        tooltip.add(String.format(CrazyAETooltip.QCM_DESC2.getLocal(), qmc, qmc * 256));
+        tooltip.add(String.format(CrazyAETooltip.QCM_DESC.getLocal(), qmc / 4, qmc, qmc * 256));
 
         super.addInformation(stack, player, tooltip, advanced);
     }

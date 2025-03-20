@@ -1,0 +1,60 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "minecraft:item_exists",
+          "item": "appliedenergistics2:quartz_glass"
+        },
+        {
+          "type": "crazyae:material_exists",
+          "name": "energy_part_64mb"
+        },
+        {
+          "type": "appliedenergistics2:material_exists",
+          "material": "material.calculation_processor"
+        },
+        {
+          "type": "crazyae:material_exists",
+          "name": "cell_part_64mb"
+        },
+        {
+          "type": "crazyae:material_exists",
+          "name": "energy_part_16mb"
+        },
+        {
+          "type": "appliedenergistics2:material_exists",
+          "material": "material.matter_ball"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "type": "material",
+    "name": "energy_part_64mb"
+  },
+  "type": "crazyae:shaped_recipe",
+  "pattern": [
+    "aba",
+    "cdc",
+    "aca"
+  ],
+  "key": {
+    "b": {
+      "type": "appliedenergistics2:part",
+      "part": "material.matter_ball"
+    },
+    "c": {
+      "type": "crazyae:material",
+      "name": "energy_part_16mb"
+    },
+    "d": {
+      "type": "forge:ore_dict",
+      "ore": "blockRedstone"
+    },
+    "a": {
+      "item": "appliedenergistics2:fluix_block"
+    }
+  }
+}

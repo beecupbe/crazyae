@@ -6,7 +6,7 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "features.botania.manacells.MixinApiStorages",
-    "features.botania.manacells.terminal.MixinPacketMEInventoryUpdate"
+    "features.botania.manacells.MixinPacketMEInventoryUpdate"
   ],
   "client": [],
   "server": []

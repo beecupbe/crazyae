@@ -3,9 +3,9 @@ package dev.beecube31.crazyae2.common.features.subfeatures;
 import org.jetbrains.annotations.Nullable;
 
 public enum UpgradeFeatures implements ISubFeature {
-	STACKS("Enable Stacks Card", null),
-	IMPROVED_SPEED_UPGRADE("Enable Improved Speed Card", null),
-	ADVANCED_SPEED_UPGRADE("Enable Advanced Speed Card", null);
+	STACKS("Enable Stacks Card", "upgrades"),
+	IMPROVED_SPEED_UPGRADE("Enable Improved Speed Card", "upgrades"),
+	ADVANCED_SPEED_UPGRADE("Enable Advanced Speed Card", "upgrades");
 
 
 	private final String description;
@@ -31,7 +31,7 @@ public enum UpgradeFeatures implements ISubFeature {
 
 	@Nullable
 	@Override
-	public String getMixins() {
+	public String getMixin() {
 		return this.mixins;
 	}
 }

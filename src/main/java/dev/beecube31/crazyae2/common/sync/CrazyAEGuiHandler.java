@@ -3,6 +3,8 @@ package dev.beecube31.crazyae2.common.sync;
 import appeng.api.parts.IPartHost;
 import appeng.api.util.AEPartLocation;
 import appeng.client.gui.GuiNull;
+import appeng.core.AppEng;
+import appeng.core.sync.GuiBridge;
 import appeng.core.sync.GuiHostType;
 import appeng.util.Platform;
 import baubles.api.BaublesApi;
@@ -21,7 +23,41 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class CrazyAEGuiHandler implements IGuiHandler {
-	public static void openGUI(@Nonnull final EntityPlayer p, @Nullable final TileEntity tile, @Nonnull final AEPartLocation side, @Nonnull final CrazyAEGuiBridge type) {
+//	public static void openGUI(@Nonnull final EntityPlayer p, @Nullable final TileEntity tile, @Nonnull final AEPartLocation side, @Nonnull final CrazyAEGuiBridge type) {
+//		if (Platform.isClient()) {
+//			return;
+//		}
+//
+//		int x;
+//		var y = 0;
+//		var z = Integer.MIN_VALUE;
+//
+//		if (tile != null) {
+//			x = tile.getPos().getX();
+//			y = tile.getPos().getY();
+//			z = tile.getPos().getZ();
+//		} else {
+//			x = p.inventory.currentItem;
+//		}
+//
+//		CrazyAE.logger().info("1 {}",(type.getHostType().isItem() && tile == null) || type.hasPermissions(tile, x, y, z, side, p));
+//		if ((type.getHostType().isItem() && tile == null) || type.hasPermissions(tile, x, y, z, side, p)) {
+//			CrazyAE.logger().info("2 {}",(tile == null && type.getHostType() == GuiHostType.ITEM));
+//			CrazyAE.logger().info("3 {}",(tile == null || type.getHostType() == GuiHostType.ITEM));
+//			if (tile == null && type.getHostType() == GuiHostType.ITEM) {
+//				p.openGui(CrazyAE.instance, type.ordinal() << 4, p.getEntityWorld(), x, 0, 0);
+//			} else if (tile == null || type.getHostType() == GuiHostType.ITEM) {
+//				if (tile != null) {
+//					p.openGui(CrazyAE.instance, type.ordinal() << 4 | side.ordinal() | (1 << 3), p.getEntityWorld(), x, y, z);
+//				} else {
+//					p.openGui(CrazyAE.instance, type.ordinal() << 4, p.getEntityWorld(), x, y, z);
+//				}
+//			} else {
+//				p.openGui(CrazyAE.instance, type.ordinal() << 4 | side.ordinal(), tile.getWorld(), x, y, z);
+//			}
+//		}
+//	}
+	public static void openGUI(@Nonnull final EntityPlayer p, @Nullable final TileEntity tile, @Nonnull final AEPartLocation side, @Nonnull final Object type) {
 		if (Platform.isClient()) {
 			return;
 		}
@@ -38,18 +74,36 @@ public class CrazyAEGuiHandler implements IGuiHandler {
 			x = p.inventory.currentItem;
 		}
 
-		if ((type.getHostType().isItem() && tile == null) || type.hasPermissions(tile, x, y, z, side, p)) {
-			if (tile == null && type.getHostType() == GuiHostType.ITEM) {
-				p.openGui(CrazyAE.instance, type.ordinal() << 4, p.getEntityWorld(), x, 0, 0);
-			} else if (tile == null || type.getHostType() == GuiHostType.ITEM) {
-				if (tile != null) {
-					p.openGui(CrazyAE.instance, type.ordinal() << 4 | side.ordinal() | (1 << 3), p.getEntityWorld(), x, y, z);
+		if (type instanceof GuiBridge aeGui) {
+			if ((aeGui.getType().isItem() && tile == null) || aeGui.hasPermissions(tile, x, y, z, side, p)) {
+				if (tile == null && aeGui.getType() == GuiHostType.ITEM) {
+					p.openGui(AppEng.instance(), aeGui.ordinal() << 4, p.getEntityWorld(), x, 0, 0);
+				} else if (tile == null || aeGui.getType() == GuiHostType.ITEM) {
+					if (tile != null) {
+						p.openGui(AppEng.instance(), aeGui.ordinal() << 4 | side.ordinal() | (1 << 3), p.getEntityWorld(), x, y, z);
+					} else {
+						p.openGui(AppEng.instance(), aeGui.ordinal() << 4, p.getEntityWorld(), x, y, z);
+					}
 				} else {
-					p.openGui(CrazyAE.instance, type.ordinal() << 4, p.getEntityWorld(), x, y, z);
+					p.openGui(AppEng.instance(), aeGui.ordinal() << 4 | side.ordinal(), tile.getWorld(), x, y, z);
 				}
-			} else {
-				p.openGui(CrazyAE.instance, type.ordinal() << 4 | side.ordinal(), tile.getWorld(), x, y, z);
 			}
+		} else if (type instanceof CrazyAEGuiBridge crazyAeGui) {
+			if ((crazyAeGui.getHostType().isItem() && tile == null) || crazyAeGui.hasPermissions(tile, x, y, z, side, p)) {
+				if (tile == null && crazyAeGui.getHostType() == GuiHostType.ITEM) {
+					p.openGui(CrazyAE.instance, crazyAeGui.ordinal() << 4, p.getEntityWorld(), x, 0, 0);
+				} else if (tile == null || crazyAeGui.getHostType() == GuiHostType.ITEM) {
+					if (tile != null) {
+						p.openGui(CrazyAE.instance, crazyAeGui.ordinal() << 4 | side.ordinal() | (1 << 3), p.getEntityWorld(), x, y, z);
+					} else {
+						p.openGui(CrazyAE.instance, crazyAeGui.ordinal() << 4, p.getEntityWorld(), x, y, z);
+					}
+				} else {
+					p.openGui(CrazyAE.instance, crazyAeGui.ordinal() << 4 | side.ordinal(), tile.getWorld(), x, y, z);
+				}
+			}
+		} else {
+			throw new IllegalArgumentException("Gui must be located in GuiBridge or CrazyAEGuiBridge : " + type);
 		}
 	}
 
@@ -67,10 +121,10 @@ public class CrazyAEGuiHandler implements IGuiHandler {
 					myItem = CrazyAEGuiBridge.getGuiObject(it, player, w, x, y, z, side);
 				} else if (y == 0 && x >= 0 && x < player.inventory.mainInventory.size()) {
 					it = player.inventory.getStackInSlot(x);
-					myItem = CrazyAEGuiBridge.getGuiObject(it, w);
+					myItem = CrazyAEGuiBridge.getGuiObject(it, w, new BlockPos(x, y, z));
 				} else if (y == 1 && z == Integer.MIN_VALUE) {
 					it = BaublesApi.getBaublesHandler(player).getStackInSlot(x);
-					myItem = CrazyAEGuiBridge.getGuiObject(it, w);
+					myItem = CrazyAEGuiBridge.getGuiObject(it, w, new BlockPos(x, y, z));
 				} else {
 					return new ContainerNull();
 				}
@@ -125,10 +179,10 @@ public class CrazyAEGuiHandler implements IGuiHandler {
 					myItem = CrazyAEGuiBridge.getGuiObject(it, player, w, x, y, z, side);
 				} else if (y == 0 && x >= 0 && x < player.inventory.mainInventory.size()) {
 					it = player.inventory.getStackInSlot(x);
-					myItem = CrazyAEGuiBridge.getGuiObject(it, w);
+					myItem = CrazyAEGuiBridge.getGuiObject(it, w, new BlockPos(x, y, z));
 				} else if (y == 1 && z == Integer.MIN_VALUE) {
 					it = BaublesApi.getBaublesHandler(player).getStackInSlot(x);
-					myItem = CrazyAEGuiBridge.getGuiObject(it, w);
+					myItem = CrazyAEGuiBridge.getGuiObject(it, w, new BlockPos(x, y, z));
 				} else {
 					return new GuiNull(new ContainerNull());
 				}

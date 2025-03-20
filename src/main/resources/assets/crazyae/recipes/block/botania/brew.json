@@ -1,0 +1,50 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "minecraft:item_exists",
+          "item": "botania:brewery"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "botania:manaresource"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:mechanical_brewery"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:crafting_accelerator_16x"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "item": "crazyae:mechanical_brewery"
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "gxg",
+    "aea",
+    "gxg"
+  ],
+  "key": {
+    "g": {
+      "item": "botania:livingrock",
+      "data": 0
+    },
+    "e": {
+      "item": "botania:brewery"
+    },
+    "x": {
+      "item": "botania:storage",
+      "data": 0
+    },
+    "a": {
+      "item": "crazyae:crafting_accelerator_16x"
+    }
+  }
+}

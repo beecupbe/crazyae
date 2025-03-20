@@ -7,6 +7,7 @@ public enum CrazyAETooltip {
     NOT_DEFINED,
 
     SHIFT_FOR_DETAILS,
+    CTRL_FOR_PRECISE_DETAILS,
     ENCODED_BY,
     AUTO_PICKUP,
     AUTO_PICKUP_TIP,
@@ -44,8 +45,6 @@ public enum CrazyAETooltip {
     LINKED_WITH_MANA_POOL_AT_POS,
 
     QCM_DESC,
-    QCM_DESC1,
-    QCM_DESC2,
 
     COLORIZER_DESC,
     USB_PATTERNS_STICK_DESC,

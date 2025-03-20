@@ -1,0 +1,44 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "crazyae:part_exists",
+          "name": "part_patterns_iface"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:patterns_interface"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:crafting_accelerator_4x"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "appliedenergistics2:interface"
+        },
+        {
+          "type": "crazyae:upgrade_exists",
+          "name": "stacks"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "item": "crazyae:patterns_interface"
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "   ",
+    " a ",
+    "   "
+  ],
+  "key": {
+    "a": {
+      "type": "crazyae:part",
+      "name": "part_patterns_iface"
+    }
+  }
+}

@@ -13,8 +13,8 @@ import dev.beecube31.crazyae2.common.registration.registry.Registry;
 import dev.beecube31.crazyae2.common.registration.registry.interfaces.DamagedDefinitions;
 import dev.beecube31.crazyae2.common.registration.registry.rendering.CrazyAEDamagedItemRendering;
 import dev.beecube31.crazyae2.common.registration.registry.rendering.CrazyAEIModelProvider;
-import dev.beecube31.crazyae2.common.registration.upgrades.UpgradeInfo;
 import dev.beecube31.crazyae2.common.registration.upgrades.UpgradesInfoProvider;
+import dev.beecube31.crazyae2.common.util.FeatureSet;
 import dev.beecube31.crazyae2.core.CrazyAE;
 import it.unimi.dsi.fastutil.ints.Int2ObjectLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
@@ -23,6 +23,7 @@ import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -48,951 +49,57 @@ public class Upgrades implements DamagedDefinitions<DamagedItemDefinition, Upgra
 		this.stackUpgrade = this.createUpgrade(this.upgrade, UpgradeType.STACKS);
 		if (this.stackUpgrade.isEnabled()) {
 			registry.addBootstrapComponent((IPostInitComponent) r -> {
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().ioPortImp(), new UpgradeInfo(
-						new UpgradeInfo.LevelInfo[]{
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK
-										},
-										new double[]{2048 * 32}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK
-										},
-										new double[]{2048 * 512}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK
-										},
-										new double[]{2048 * 4096}
-								)
-						},
-						UpgradeType.STACKS,
-						new UpgradeInfo.LevelInfo(
-								new UpgradeInfo.UpgradeType[]{
-										UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK
-								},
-								new double[]{2048}
-						)
-				));
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().improvedImportBus(), new UpgradeInfo(
-						new UpgradeInfo.LevelInfo[]{
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK
-										},
-										new double[]{8 * 96}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK
-										},
-										new double[]{8 * 192}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK
-										},
-										new double[]{8 * 384}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK
-										},
-										new double[]{8 * 512}
-								)
-						},
-						UpgradeType.STACKS,
-						new UpgradeInfo.LevelInfo(
-								new UpgradeInfo.UpgradeType[]{
-										UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK
-								},
-								new double[]{256}
-						)
-				));
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().improvedExportBus(), new UpgradeInfo(
-						new UpgradeInfo.LevelInfo[]{
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK
-										},
-										new double[]{8 * 96}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK
-										},
-										new double[]{8 * 192}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK
-										},
-										new double[]{8 * 384}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK
-										},
-										new double[]{8 * 512}
-								)
-						},
-						UpgradeType.STACKS,
-						new UpgradeInfo.LevelInfo(
-								new UpgradeInfo.UpgradeType[]{
-										UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK
-								},
-								new double[]{256}
-						)
-				));
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().improvedImportFluidBus(), new UpgradeInfo(
-						new UpgradeInfo.LevelInfo[]{
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_FLUIDS_PER_TICK
-										},
-										new double[]{4000 * 8}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_FLUIDS_PER_TICK
-										},
-										new double[]{8000 * 16}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_FLUIDS_PER_TICK
-										},
-										new double[]{16000 * 24}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_FLUIDS_PER_TICK
-										},
-										new double[]{32000 * 32}
-								)
-						},
-						UpgradeType.STACKS,
-						new UpgradeInfo.LevelInfo(
-								new UpgradeInfo.UpgradeType[]{
-										UpgradeInfo.UpgradeType.MORE_FLUIDS_PER_TICK
-								},
-								new double[]{8000}
-						)
-				));
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().improvedExportFluidBus(), new UpgradeInfo(
-						new UpgradeInfo.LevelInfo[]{
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_FLUIDS_PER_TICK
-										},
-										new double[]{4000 * 8}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_FLUIDS_PER_TICK
-										},
-										new double[]{8000 * 16}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_FLUIDS_PER_TICK
-										},
-										new double[]{16000 * 24}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_FLUIDS_PER_TICK
-										},
-										new double[]{32000 * 32}
-								)
-						},
-						UpgradeType.STACKS,
-						new UpgradeInfo.LevelInfo(
-								new UpgradeInfo.UpgradeType[]{
-										UpgradeInfo.UpgradeType.MORE_FLUIDS_PER_TICK
-								},
-								new double[]{8000}
-						)
-				));
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().improvedMolecularAssembler(), new UpgradeInfo(
-						new UpgradeInfo.LevelInfo[]{
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK
-										},
-										new double[]{16}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK
-										},
-										new double[]{48}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK
-										},
-										new double[]{96}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK
-										},
-										new double[]{192}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK
-										},
-										new double[]{320}
-								)
-						},
-						UpgradeType.STACKS,
-						new UpgradeInfo.LevelInfo(
-								new UpgradeInfo.UpgradeType[]{
-										UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK
-								},
-								new double[]{8}
-						)
-				));
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().bigCrystalCharger(), new UpgradeInfo(
-						new UpgradeInfo.LevelInfo[]{
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK
-										},
-										new double[]{64}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK
-										},
-										new double[]{192}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK
-										},
-										new double[]{384}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK
-										},
-										new double[]{768}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK
-										},
-										new double[]{1152}
-								)
-						},
-						UpgradeType.STACKS,
-						new UpgradeInfo.LevelInfo(
-								new UpgradeInfo.UpgradeType[]{
-										UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK
-								},
-								new double[]{1}
-						)
-				));
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().manaImportBus(), new UpgradeInfo(
-						new UpgradeInfo.LevelInfo[]{
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_MANA_PER_TICK
-										},
-										new double[]{256 * 64}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_MANA_PER_TICK
-										},
-										new double[]{256 * 512}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_MANA_PER_TICK
-										},
-										new double[]{256 * 2048}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_MANA_PER_TICK
-										},
-										new double[]{256 * 8192}
-								)
-						},
-						UpgradeType.STACKS,
-						new UpgradeInfo.LevelInfo(
-								new UpgradeInfo.UpgradeType[]{
-										UpgradeInfo.UpgradeType.MORE_MANA_PER_TICK
-								},
-								new double[]{32}
-						)
-				));
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().manaExportBus(), new UpgradeInfo(
-						new UpgradeInfo.LevelInfo[]{
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_MANA_PER_TICK
-										},
-										new double[]{256 * 64}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_MANA_PER_TICK
-										},
-										new double[]{256 * 512}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_MANA_PER_TICK
-										},
-										new double[]{256 * 2048}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_MANA_PER_TICK
-										},
-										new double[]{256 * 8192}
-								)
-						},
-						UpgradeType.STACKS,
-						new UpgradeInfo.LevelInfo(
-								new UpgradeInfo.UpgradeType[]{
-										UpgradeInfo.UpgradeType.MORE_MANA_PER_TICK
-								},
-								new double[]{32}
-						)
-				));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().ioPortImp(), new FeatureSet().add("stacks:3").add("more_items_per_tick").add("2048;65536;1048576;8388608"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().improvedImportBus(), new FeatureSet().add("stacks:4").add("more_items_per_tick").add("256;1024;1792;3328;4352"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().improvedExportBus(), new FeatureSet().add("stacks:4").add("more_items_per_tick").add("256;1024;1792;3328;4352"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().improvedImportFluidBus(), new FeatureSet().add("stacks:4").add("more_fluid_per_tick").add("8000;40000;136000;392000;1032000"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().improvedExportFluidBus(), new FeatureSet().add("stacks:4").add("more_fluid_per_tick").add("8000;40000;136000;392000;1032000"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().improvedMolecularAssembler(), new FeatureSet().add("stacks:5").add("more_operations_per_tick").add("8;16;32;64;128;160"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().bigCrystalCharger(), new FeatureSet().add("stacks:5").add("more_operations_per_job").add("1;64;192;384;768;1152"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().manaImportBus(), new FeatureSet().add("stacks:4").add("more_items_per_tick").add("256;16384;131328;524544;2097408"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().manaExportBus(), new FeatureSet().add("stacks:4").add("more_items_per_tick").add("256;16384;131328;524544;2097408"));
 
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().mechanicalElventrade(), new UpgradeInfo(
-						new UpgradeInfo.LevelInfo[]{
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK,
-												UpgradeInfo.UpgradeType.TASKS_STORAGE_CAPACITY,
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{8, 8, 10}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK,
-												UpgradeInfo.UpgradeType.TASKS_STORAGE_CAPACITY,
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{24, 24, 25}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK,
-												UpgradeInfo.UpgradeType.TASKS_STORAGE_CAPACITY,
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{48, 48, 50}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK,
-												UpgradeInfo.UpgradeType.TASKS_STORAGE_CAPACITY,
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{192, 192, 100}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK,
-												UpgradeInfo.UpgradeType.TASKS_STORAGE_CAPACITY,
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{320, 320, 100}
-								)
-						},
-						UpgradeType.STACKS,
-						new UpgradeInfo.LevelInfo(
-								new UpgradeInfo.UpgradeType[]{
-										UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK,
-										UpgradeInfo.UpgradeType.TASKS_STORAGE_CAPACITY,
-										UpgradeInfo.UpgradeType.WORK_SPEED
-								},
-								new double[]{1, 1, 1}
-						)
-				));
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().mechanicalManapool(), new UpgradeInfo(
-						new UpgradeInfo.LevelInfo[]{
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK,
-												UpgradeInfo.UpgradeType.TASKS_STORAGE_CAPACITY,
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{8, 8, 10}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK,
-												UpgradeInfo.UpgradeType.TASKS_STORAGE_CAPACITY,
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{24, 24, 25}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK,
-												UpgradeInfo.UpgradeType.TASKS_STORAGE_CAPACITY,
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{48, 48, 50}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK,
-												UpgradeInfo.UpgradeType.TASKS_STORAGE_CAPACITY,
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{192, 192, 100}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK,
-												UpgradeInfo.UpgradeType.TASKS_STORAGE_CAPACITY,
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{320, 320, 100}
-								)
-						},
-						UpgradeType.STACKS,
-						new UpgradeInfo.LevelInfo(
-								new UpgradeInfo.UpgradeType[]{
-										UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK,
-										UpgradeInfo.UpgradeType.TASKS_STORAGE_CAPACITY,
-										UpgradeInfo.UpgradeType.WORK_SPEED
-								},
-								new double[]{1, 1, 1}
-						)
-				));
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().mechanicalPetal(), new UpgradeInfo(
-						new UpgradeInfo.LevelInfo[]{
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK,
-												UpgradeInfo.UpgradeType.TASKS_STORAGE_CAPACITY,
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{8, 8, 10}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK,
-												UpgradeInfo.UpgradeType.TASKS_STORAGE_CAPACITY,
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{24, 24, 25}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK,
-												UpgradeInfo.UpgradeType.TASKS_STORAGE_CAPACITY,
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{48, 48, 50}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK,
-												UpgradeInfo.UpgradeType.TASKS_STORAGE_CAPACITY,
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{192, 192, 100}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK,
-												UpgradeInfo.UpgradeType.TASKS_STORAGE_CAPACITY,
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{320, 320, 100}
-								)
-						},
-						UpgradeType.STACKS,
-						new UpgradeInfo.LevelInfo(
-								new UpgradeInfo.UpgradeType[]{
-										UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK,
-										UpgradeInfo.UpgradeType.TASKS_STORAGE_CAPACITY,
-										UpgradeInfo.UpgradeType.WORK_SPEED
-								},
-								new double[]{1, 1, 1}
-						)
-				));
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().mechanicalPuredaisy(), new UpgradeInfo(
-						new UpgradeInfo.LevelInfo[]{
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK,
-												UpgradeInfo.UpgradeType.TASKS_STORAGE_CAPACITY,
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{8, 8, 10}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK,
-												UpgradeInfo.UpgradeType.TASKS_STORAGE_CAPACITY,
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{24, 24, 25}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK,
-												UpgradeInfo.UpgradeType.TASKS_STORAGE_CAPACITY,
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{48, 48, 50}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK,
-												UpgradeInfo.UpgradeType.TASKS_STORAGE_CAPACITY,
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{192, 192, 100}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK,
-												UpgradeInfo.UpgradeType.TASKS_STORAGE_CAPACITY,
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{320, 320, 100}
-								)
-						},
-						UpgradeType.STACKS,
-						new UpgradeInfo.LevelInfo(
-								new UpgradeInfo.UpgradeType[]{
-										UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK,
-										UpgradeInfo.UpgradeType.TASKS_STORAGE_CAPACITY,
-										UpgradeInfo.UpgradeType.WORK_SPEED
-								},
-								new double[]{1, 1, 1}
-						)
-				));
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().mechanicalRunealtar(), new UpgradeInfo(
-						new UpgradeInfo.LevelInfo[]{
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK,
-												UpgradeInfo.UpgradeType.TASKS_STORAGE_CAPACITY,
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{8, 8, 10}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK,
-												UpgradeInfo.UpgradeType.TASKS_STORAGE_CAPACITY,
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{24, 24, 25}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK,
-												UpgradeInfo.UpgradeType.TASKS_STORAGE_CAPACITY,
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{48, 48, 50}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK,
-												UpgradeInfo.UpgradeType.TASKS_STORAGE_CAPACITY,
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{192, 192, 100}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK,
-												UpgradeInfo.UpgradeType.TASKS_STORAGE_CAPACITY,
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{320, 320, 100}
-								)
-						},
-						UpgradeType.STACKS,
-						new UpgradeInfo.LevelInfo(
-								new UpgradeInfo.UpgradeType[]{
-										UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK,
-										UpgradeInfo.UpgradeType.TASKS_STORAGE_CAPACITY,
-										UpgradeInfo.UpgradeType.WORK_SPEED
-								},
-								new double[]{1, 1, 1}
-						)
-				));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().energyImportBus(), new FeatureSet().add("stacks:4").add("more_items_per_tick").add("32;2048;32768;524288;33554432"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().energyExportBus(), new FeatureSet().add("stacks:4").add("more_items_per_tick").add("32;2048;32768;524288;33554432"));
+
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().mechanicalElventrade(), new FeatureSet().add("stacks:5").add("more_items_per_tick").add("1;8;24;48;192;320").add("more_tasks_in_job").add("1;8;24;48;192;320").add("more_operations_per_tick").add("1;10;25;50;100;100"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().mechanicalManapool(), new FeatureSet().add("stacks:5").add("more_items_per_tick").add("1;8;24;48;192;320").add("more_tasks_in_job").add("1;8;24;48;192;320").add("more_operations_per_tick").add("1;10;25;50;100;100"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().mechanicalPetal(), new FeatureSet().add("stacks:5").add("more_items_per_tick").add("1;8;24;48;192;320").add("more_tasks_in_job").add("1;8;24;48;192;320").add("more_operations_per_tick").add("1;10;25;50;100;100"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().mechanicalPuredaisy(), new FeatureSet().add("stacks:5").add("more_items_per_tick").add("1;8;24;48;192;320").add("more_tasks_in_job").add("1;8;24;48;192;320").add("more_operations_per_tick").add("1;10;25;50;100;100"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().mechanicalRunealtar(), new FeatureSet().add("stacks:5").add("more_items_per_tick").add("1;8;24;48;192;320").add("more_tasks_in_job").add("1;8;24;48;192;320").add("more_operations_per_tick").add("1;10;25;50;100;100"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().mechanicalBrewery(), new FeatureSet().add("stacks:5").add("more_items_per_tick").add("1;8;24;48;192;320").add("more_tasks_in_job").add("1;8;24;48;192;320").add("more_operations_per_tick").add("1;10;25;50;100;100"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().mechanicalTeraplate(), new FeatureSet().add("stacks:5").add("more_items_per_tick").add("1;8;24;48;192;320").add("more_tasks_in_job").add("1;8;24;48;192;320").add("more_operations_per_tick").add("1;10;25;50;100;100"));
 			});
 		}
 
 		this.improvedSpeedUpgrade = this.createUpgrade(this.upgrade, UpgradeType.IMPROVED_SPEED);
 		if (this.improvedSpeedUpgrade.isEnabled()) {
 			registry.addBootstrapComponent((IPostInitComponent) r -> {
-				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().blocks().bigCrystalCharger(), new UpgradeInfo(
-						new UpgradeInfo.LevelInfo[]{
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{10}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{15}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{25}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{50}
-								)
-						},
-						UpgradeType.IMPROVED_SPEED,
-						new UpgradeInfo.LevelInfo(
-								new UpgradeInfo.UpgradeType[]{
-										UpgradeInfo.UpgradeType.WORK_SPEED
-								},
-								new double[]{1}
-						)
-				));
+				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().blocks().bigCrystalCharger(), new FeatureSet().add("imp:5").add("more_operations_per_tick").add("1;10;15;25;40;60"));
 
+				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalElventrade(), new FeatureSet().add("imp:4").add("more_operations_per_tick").add("1;2;5;10;15;20"));
+				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalManapool(), new FeatureSet().add("imp:4").add("more_operations_per_tick").add("1;2;5;10;15;20"));
+				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalPetal(), new FeatureSet().add("imp:4").add("more_operations_per_tick").add("1;2;5;10;15;20"));
+				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalPuredaisy(), new FeatureSet().add("imp:4").add("more_operations_per_tick").add("1;2;5;10;15;20"));
+				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalRunealtar(), new FeatureSet().add("imp:4").add("more_operations_per_tick").add("1;2;5;10;15;20"));
+				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalBrewery(), new FeatureSet().add("imp:4").add("more_operations_per_tick").add("1;2;5;10;15;20"));
+				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalTeraplate(), new FeatureSet().add("imp:4").add("more_operations_per_tick").add("1;2;5;10;15;20"));
 
-				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalElventrade(), new UpgradeInfo(
-						new UpgradeInfo.LevelInfo[]{
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{2}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{5}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{10}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{15}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{20}
-								)
-						},
-						UpgradeType.IMPROVED_SPEED,
-						new UpgradeInfo.LevelInfo(
-								new UpgradeInfo.UpgradeType[]{
-										UpgradeInfo.UpgradeType.WORK_SPEED
-								},
-								new double[]{1}
-						)
-				));
-				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalManapool(), new UpgradeInfo(
-						new UpgradeInfo.LevelInfo[]{
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{2}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{5}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{10}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{15}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{20}
-								)
-						},
-						UpgradeType.IMPROVED_SPEED,
-						new UpgradeInfo.LevelInfo(
-								new UpgradeInfo.UpgradeType[]{
-										UpgradeInfo.UpgradeType.WORK_SPEED
-								},
-								new double[]{1}
-						)
-				));
-				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalRunealtar(), new UpgradeInfo(
-						new UpgradeInfo.LevelInfo[]{
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{2}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{5}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{10}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{15}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{20}
-								)
-						},
-						UpgradeType.IMPROVED_SPEED,
-						new UpgradeInfo.LevelInfo(
-								new UpgradeInfo.UpgradeType[]{
-										UpgradeInfo.UpgradeType.WORK_SPEED
-								},
-								new double[]{1}
-						)
-				));
-				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalPetal(), new UpgradeInfo(
-						new UpgradeInfo.LevelInfo[]{
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{2}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{5}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{10}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{15}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{20}
-								)
-						},
-						UpgradeType.IMPROVED_SPEED,
-						new UpgradeInfo.LevelInfo(
-								new UpgradeInfo.UpgradeType[]{
-										UpgradeInfo.UpgradeType.WORK_SPEED
-								},
-								new double[]{1}
-						)
-				));
-				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalPuredaisy(), new UpgradeInfo(
-						new UpgradeInfo.LevelInfo[]{
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{2}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{5}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{10}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{15}
-								),
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{20}
-								)
-						},
-						UpgradeType.IMPROVED_SPEED,
-						new UpgradeInfo.LevelInfo(
-								new UpgradeInfo.UpgradeType[]{
-										UpgradeInfo.UpgradeType.WORK_SPEED
-								},
-								new double[]{1}
-						)
-				));
 			});
 		}
 
 		this.advancedSpeedUpgrade = this.createUpgrade(this.upgrade, UpgradeType.ADVANCED_SPEED);
 		if (this.advancedSpeedUpgrade.isEnabled()) {
 			registry.addBootstrapComponent((IPostInitComponent) r -> {
-				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().blocks().bigCrystalCharger(), new UpgradeInfo(
-						new UpgradeInfo.LevelInfo[]{
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK
-										},
-										new double[]{64}
-								)
-						},
-						UpgradeType.ADVANCED_SPEED,
-						new UpgradeInfo.LevelInfo(
-								new UpgradeInfo.UpgradeType[]{
-										UpgradeInfo.UpgradeType.MORE_ITEMS_PER_TICK
-								},
-								new double[]{1}
-						)
-				));
+				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().blocks().bigCrystalCharger(), new FeatureSet().add("adv:1").add("more_operations_per_tick").add("1;100"));
 
-
-				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalElventrade(), new UpgradeInfo(
-						new UpgradeInfo.LevelInfo[]{
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{100}
-								)
-						},
-						UpgradeType.ADVANCED_SPEED,
-						new UpgradeInfo.LevelInfo(
-								new UpgradeInfo.UpgradeType[]{
-										UpgradeInfo.UpgradeType.WORK_SPEED
-								},
-								new double[]{1}
-						)
-				));
-				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalRunealtar(), new UpgradeInfo(
-						new UpgradeInfo.LevelInfo[]{
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{100}
-								)
-						},
-						UpgradeType.ADVANCED_SPEED,
-						new UpgradeInfo.LevelInfo(
-								new UpgradeInfo.UpgradeType[]{
-										UpgradeInfo.UpgradeType.WORK_SPEED
-								},
-								new double[]{1}
-						)
-				));
-				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalPuredaisy(), new UpgradeInfo(
-						new UpgradeInfo.LevelInfo[]{
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{100}
-								)
-						},
-						UpgradeType.ADVANCED_SPEED,
-						new UpgradeInfo.LevelInfo(
-								new UpgradeInfo.UpgradeType[]{
-										UpgradeInfo.UpgradeType.WORK_SPEED
-								},
-								new double[]{1}
-						)
-				));
-				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalPetal(), new UpgradeInfo(
-						new UpgradeInfo.LevelInfo[]{
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{100}
-								)
-						},
-						UpgradeType.ADVANCED_SPEED,
-						new UpgradeInfo.LevelInfo(
-								new UpgradeInfo.UpgradeType[]{
-										UpgradeInfo.UpgradeType.WORK_SPEED
-								},
-								new double[]{1}
-						)
-				));
-				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalManapool(), new UpgradeInfo(
-						new UpgradeInfo.LevelInfo[]{
-								new UpgradeInfo.LevelInfo(
-										new UpgradeInfo.UpgradeType[]{
-												UpgradeInfo.UpgradeType.WORK_SPEED
-										},
-										new double[]{100}
-								)
-						},
-						UpgradeType.ADVANCED_SPEED,
-						new UpgradeInfo.LevelInfo(
-								new UpgradeInfo.UpgradeType[]{
-										UpgradeInfo.UpgradeType.WORK_SPEED
-								},
-								new double[]{1}
-						)
-				));
+				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalElventrade(), new FeatureSet().add("adv:1").add("more_operations_per_tick").add("1;100"));
+				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalManapool(), new FeatureSet().add("adv:1").add("more_operations_per_tick").add("1;100"));
+				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalPetal(), new FeatureSet().add("adv:1").add("more_operations_per_tick").add("1;100"));
+				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalPuredaisy(), new FeatureSet().add("adv:1").add("more_operations_per_tick").add("1;100"));
+				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalRunealtar(), new FeatureSet().add("adv:1").add("more_operations_per_tick").add("1;100"));
+				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalBrewery(), new FeatureSet().add("adv:1").add("more_operations_per_tick").add("1;100"));
+				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalTeraplate(), new FeatureSet().add("adv:1").add("more_operations_per_tick").add("1;100"));
 			});
 		}
 
@@ -1005,6 +112,8 @@ public class Upgrades implements DamagedDefinitions<DamagedItemDefinition, Upgra
 			appeng.api.config.Upgrades.REDSTONE.registerItem(CrazyAE.definitions().parts().improvedImportFluidBus(), 1);
 			appeng.api.config.Upgrades.REDSTONE.registerItem(CrazyAE.definitions().parts().manaImportBus(), 1);
 			appeng.api.config.Upgrades.REDSTONE.registerItem(CrazyAE.definitions().parts().manaExportBus(), 1);
+			appeng.api.config.Upgrades.REDSTONE.registerItem(CrazyAE.definitions().parts().energyImportBus(), 1);
+			appeng.api.config.Upgrades.REDSTONE.registerItem(CrazyAE.definitions().parts().energyExportBus(), 1);
 
 			appeng.api.config.Upgrades.CAPACITY.registerItem(CrazyAE.definitions().parts().improvedExportBus(), 2);
 			appeng.api.config.Upgrades.CAPACITY.registerItem(CrazyAE.definitions().parts().improvedImportBus(), 2);
@@ -1090,6 +199,27 @@ public class Upgrades implements DamagedDefinitions<DamagedItemDefinition, Upgra
 			return cachedValues;
 		}
 
+		@SuppressWarnings("deprecation")
+		public String getLocalizedCardType() {
+			switch (this) {
+				default -> {
+					return "INVALID_CARD_TYPE";
+				}
+
+				case STACKS -> {
+					return I18n.translateToLocal("item.crazyae.upgrade.stacks.name");
+				}
+
+				case IMPROVED_SPEED -> {
+					return I18n.translateToLocal("item.crazyae.upgrade.improved_speed.name");
+				}
+
+				case ADVANCED_SPEED -> {
+					return I18n.translateToLocal("item.crazyae.upgrade.advanced_speed.name");
+				}
+			}
+		}
+
 		public String getId() {
 			return this.id;
 		}
@@ -1146,14 +276,15 @@ public class Upgrades implements DamagedDefinitions<DamagedItemDefinition, Upgra
 			return this.supportedMax;
 		}
 
-		public void registerItem(IItemDefinition item, UpgradeInfo inf) {
+		public void registerItem(IItemDefinition item, FeatureSet inf) {
 			if (item != null) {
-				item.maybeStack(1).ifPresent((is) -> {
-                    this.supportedMax.put(is, inf.getLevelsInfo().size());
-					UpgradesInfoProvider.addUpgradeInfo(
-							item,
-							inf
-					);
+				item.maybeStack(1).ifPresent(is -> {
+					List<UpgradesFeatureSetParser.FeatureEntry> entry = UpgradesFeatureSetParser.parse(inf);
+
+					for (UpgradesFeatureSetParser.FeatureEntry e : entry) {
+						this.supportedMax.put(is, e.upgradesCount);
+						UpgradesInfoProvider.addUpgradeInfo(item, e);
+					}
 				});
 			}
 		}
@@ -1186,6 +317,84 @@ public class Upgrades implements DamagedDefinitions<DamagedItemDefinition, Upgra
 		public boolean isEnabled() {
 			return this.enabled;
 		}
+	}
+
+	public static class UpgradesFeatureSetParser {
+		public static class FeatureEntry {
+			public Upgrades.UpgradeType upgradeType;
+			public int upgradesCount;
+			public String type;
+			public int[] values;
+
+			public FeatureEntry(Upgrades.UpgradeType upgradeType, int upgradesCount, String type, int[] values) {
+				this.upgradeType = upgradeType;
+				this.upgradesCount = upgradesCount;
+				this.type = type;
+				this.values = values;
+			}
+		}
+
+		public static List<FeatureEntry> parse(FeatureSet fs) {
+			List<Object> set = new ArrayList<>(fs.get());
+
+			if (set.size() < 3) {
+				throw new IllegalArgumentException("Invalid FeatureSet syntax");
+			}
+
+			String upgradeToken = set.get(0).toString();
+			UpgradeType upgradeType;
+			int upgradesCount;
+
+			if (upgradeToken.contains(":")) {
+				String[] parts = upgradeToken.split(":", 2);
+				switch (parts[0]) {
+					default -> {
+						throw new IllegalArgumentException("Invalid FeatureSet syntax");
+					}
+
+					case "stacks" -> {
+						upgradeType = UpgradeType.STACKS;
+					}
+
+					case "imp" -> {
+						upgradeType = UpgradeType.IMPROVED_SPEED;
+					}
+
+					case "adv" -> {
+						upgradeType = UpgradeType.ADVANCED_SPEED;
+					}
+				}
+				try {
+					upgradesCount = Integer.parseInt(parts[1]);
+				} catch (NumberFormatException e) {
+					throw new IllegalArgumentException("Invalid FeatureSet syntax");
+				}
+			} else {
+				throw new IllegalArgumentException("Invalid FeatureSet syntax");
+			}
+
+			List<FeatureEntry> entries = new ArrayList<>();
+
+			for (int i = 1; i < set.size() - 1; i += 2) {
+				String property = set.get(i).toString();
+				String numericToken = set.get(i + 1).toString();
+
+				String[] numParts = numericToken.split(";");
+				int[] values = new int[numParts.length];
+				for (int j = 0; j < numParts.length; j++) {
+					try {
+						values[j] = Integer.parseInt(numParts[j]);
+					} catch (NumberFormatException e) {
+						throw new IllegalArgumentException("Current FeatureSet accepts only integer values");
+					}
+				}
+
+				FeatureEntry entry = new FeatureEntry(upgradeType, upgradesCount, property, values);
+				entries.add(entry);
+			}
+			return entries;
+		}
+
 	}
 
 }

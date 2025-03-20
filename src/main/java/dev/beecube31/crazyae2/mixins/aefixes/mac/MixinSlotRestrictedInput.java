@@ -27,7 +27,7 @@ public abstract class MixinSlotRestrictedInput extends AppEngSlot {
             remap = false,
             cancellable = true
     )
-    private void patchOwnPatterns(ItemStack i, CallbackInfoReturnable<Boolean> cir) {
+    private void crazyae$isItemValid(ItemStack i, CallbackInfoReturnable<Boolean> cir) {
         if (i.getItem() instanceof ItemCustomEncodedPatternBase) {
             cir.setReturnValue(false);
         }

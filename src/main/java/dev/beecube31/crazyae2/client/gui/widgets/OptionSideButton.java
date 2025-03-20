@@ -89,49 +89,41 @@ public class OptionSideButton extends GuiButton implements ITooltipObj {
             this.hovered = x >= this.x && y >= this.y && x < this.x + this.width && y < this.y + this.height;
 
             switch (this.type) {
-                case DEFAULT -> {
-                    this.drawTexturedModalRect(
-                            this.x,
-                            this.y,
-                            StateSprite.OPTION_SIDE_BUTTON.getTextureX(),
-                            StateSprite.OPTION_SIDE_BUTTON.getTextureY(),
-                            StateSprite.OPTION_SIDE_BUTTON.getSizeX(),
-                            StateSprite.OPTION_SIDE_BUTTON.getSizeY()
-                    );
-                }
+                case DEFAULT -> this.drawTexturedModalRect(
+                        this.x,
+                        this.y,
+                        StateSprite.OPTION_SIDE_BUTTON.getTextureX(),
+                        StateSprite.OPTION_SIDE_BUTTON.getTextureY(),
+                        StateSprite.OPTION_SIDE_BUTTON.getSizeX(),
+                        StateSprite.OPTION_SIDE_BUTTON.getSizeY()
+                );
 
-                case NO_TOP -> {
-                    this.drawTexturedModalRect(
-                            this.x,
-                            this.y,
-                            StateSprite.OPTION_SIDE_BUTTON_NO_TOP.getTextureX(),
-                            StateSprite.OPTION_SIDE_BUTTON_NO_TOP.getTextureY(),
-                            StateSprite.OPTION_SIDE_BUTTON_NO_TOP.getSizeX(),
-                            StateSprite.OPTION_SIDE_BUTTON_NO_TOP.getSizeY()
-                    );
-                }
+                case NO_TOP -> this.drawTexturedModalRect(
+                        this.x,
+                        this.y,
+                        StateSprite.OPTION_SIDE_BUTTON_NO_TOP.getTextureX(),
+                        StateSprite.OPTION_SIDE_BUTTON_NO_TOP.getTextureY(),
+                        StateSprite.OPTION_SIDE_BUTTON_NO_TOP.getSizeX(),
+                        StateSprite.OPTION_SIDE_BUTTON_NO_TOP.getSizeY()
+                );
 
-                case NO_BOTTOM -> {
-                    this.drawTexturedModalRect(
-                            this.x,
-                            this.y,
-                            StateSprite.OPTION_SIDE_BUTTON_NO_BOTTOM.getTextureX(),
-                            StateSprite.OPTION_SIDE_BUTTON_NO_BOTTOM.getTextureY(),
-                            StateSprite.OPTION_SIDE_BUTTON_NO_BOTTOM.getSizeX(),
-                            StateSprite.OPTION_SIDE_BUTTON_NO_BOTTOM.getSizeY()
-                    );
-                }
+                case NO_BOTTOM -> this.drawTexturedModalRect(
+                        this.x,
+                        this.y,
+                        StateSprite.OPTION_SIDE_BUTTON_NO_BOTTOM.getTextureX(),
+                        StateSprite.OPTION_SIDE_BUTTON_NO_BOTTOM.getTextureY(),
+                        StateSprite.OPTION_SIDE_BUTTON_NO_BOTTOM.getSizeX(),
+                        StateSprite.OPTION_SIDE_BUTTON_NO_BOTTOM.getSizeY()
+                );
 
-                case NO_TOP_BOTTOM -> {
-                    this.drawTexturedModalRect(
-                            this.x,
-                            this.y,
-                            StateSprite.OPTION_SIDE_BUTTON_NO_TOP_BOTTOM.getTextureX(),
-                            StateSprite.OPTION_SIDE_BUTTON_NO_TOP_BOTTOM.getTextureY(),
-                            StateSprite.OPTION_SIDE_BUTTON_NO_TOP_BOTTOM.getSizeX(),
-                            StateSprite.OPTION_SIDE_BUTTON_NO_TOP_BOTTOM.getSizeY()
-                    );
-                }
+                case NO_TOP_BOTTOM -> this.drawTexturedModalRect(
+                        this.x,
+                        this.y,
+                        StateSprite.OPTION_SIDE_BUTTON_NO_TOP_BOTTOM.getTextureX(),
+                        StateSprite.OPTION_SIDE_BUTTON_NO_TOP_BOTTOM.getTextureY(),
+                        StateSprite.OPTION_SIDE_BUTTON_NO_TOP_BOTTOM.getSizeX(),
+                        StateSprite.OPTION_SIDE_BUTTON_NO_TOP_BOTTOM.getSizeY()
+                );
             }
 
             this.hue.endDrawHue();
@@ -224,6 +216,6 @@ public class OptionSideButton extends GuiButton implements ITooltipObj {
     }
 
     public enum ButtonType {
-        DEFAULT, NO_TOP, NO_BOTTOM, NO_TOP_BOTTOM;
+        DEFAULT, NO_TOP, NO_BOTTOM, NO_TOP_BOTTOM, ONLY_ICON;
     }
 }

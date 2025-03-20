@@ -18,8 +18,7 @@ public class InvTracker {
     public final BlockPos pos;
     public final int dim;
     public final int numUpgrades;
-    public final boolean isPatternInterface;
-    public final boolean isMAC;
+    public int forceSlots = 0;
 
 
     public InvTracker(final PatternsInterfaceDuality dual, final IItemHandler patterns, final String unlocalizedName) {
@@ -30,8 +29,6 @@ public class InvTracker {
         this.pos = dual.getLocation().getPos();
         this.dim = dual.getLocation().getWorld().provider.getDimension();
         this.numUpgrades = dual.getInstalledUpgrades(Upgrades.PATTERN_EXPANSION);
-        this.isPatternInterface = true;
-        this.isMAC = false;
     }
 
     public InvTracker(final DualityInterface dual, final IItemHandler patterns, final String unlocalizedName) {
@@ -42,8 +39,17 @@ public class InvTracker {
         this.pos = dual.getLocation().getPos();
         this.dim = dual.getLocation().getWorld().provider.getDimension();
         this.numUpgrades = dual.getInstalledUpgrades(Upgrades.PATTERN_EXPANSION);
-        this.isPatternInterface = false;
-        this.isMAC = false;
+    }
+
+    public InvTracker(final DualityInterface dual, int forceSlots, final IItemHandler patterns, final String unlocalizedName) {
+        this.server = patterns;
+        this.client = new AppEngInternalInventory(null, this.server.getSlots());
+        this.unlocalizedName = unlocalizedName;
+        this.sortBy = dual.getSortValue();
+        this.pos = dual.getLocation().getPos();
+        this.dim = dual.getLocation().getWorld().provider.getDimension();
+        this.numUpgrades = dual.getInstalledUpgrades(Upgrades.PATTERN_EXPANSION);
+        this.forceSlots = forceSlots;
     }
 
     public InvTracker(final IGridHostMonitorable mon, final boolean isMac, final IItemHandler patterns, final String unlocalizedName) {
@@ -54,7 +60,5 @@ public class InvTracker {
         this.pos = mon.getTEPos();
         this.dim = mon.getDim();
         this.numUpgrades = 0;
-        this.isPatternInterface = false;
-        this.isMAC = isMac;
     }
 }

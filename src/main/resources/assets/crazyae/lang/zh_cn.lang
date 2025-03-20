@@ -246,9 +246,7 @@ tooltip.crazyae.passive_generation_day.name=白天产出:
 tooltip.crazyae.passive_generation_night.name=夜晚产出:
 tooltip.crazyae.max_solar_capacity.name=最大存储
 
-tooltip.crazyae.qcm_desc.name=允许你增加线缆频道数
-tooltip.crazyae.qcm_desc1.name=每个量子频道增幅器将为普通线缆提供%s个通道
-tooltip.crazyae.qcm_desc2.name=为致密线缆提供%s个通道，耗能为%s AE/t
+tooltip.crazyae.qcm_desc.name=允许你增加线缆频道数\n每个量子频道增幅器将为普通线缆提供%s个通道\n为致密线缆提供%s个通道，耗能为%s AE/t
 
 tooltip.crazyae.auto_pickup.name=自动拾取:
 tooltip.crazyae.auto_pickup_how_to_enable.name=按 SHIFT+RMB 切换自动拾取模式

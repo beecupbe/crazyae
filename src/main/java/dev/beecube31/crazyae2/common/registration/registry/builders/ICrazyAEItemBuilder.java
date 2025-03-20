@@ -26,6 +26,8 @@ public interface ICrazyAEItemBuilder {
 
 	ICrazyAEItemBuilder dispenserBehavior(Supplier<IBehaviorDispenseItem> var1);
 
+	ICrazyAEItemBuilder setDisabled();
+
 	ItemDefinition build();
 
 	ICrazyAEItemBuilder hide();

@@ -2,7 +2,6 @@ package dev.beecube31.crazyae2.mixins.features.upgrades;
 
 import appeng.container.slot.SlotRestrictedInput;
 import dev.beecube31.crazyae2.common.items.CrazyAEUpgradeModule;
-import dev.beecube31.crazyae2.core.CrazyAE;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,10 +22,6 @@ public class MixinSlotRestrictedInput {
 	private void injectValidityCheck(ItemStack is, CallbackInfoReturnable<Boolean> cir) {
 		if (this.which == SlotRestrictedInput.PlacableItemType.UPGRADES) {
 			if (is.getItem() instanceof CrazyAEUpgradeModule niu && niu.getType(is) != null) {
-				cir.setReturnValue(true);
-			}
-		} else if (this.which == SlotRestrictedInput.PlacableItemType.RANGE_BOOSTER) {
-			if (CrazyAE.definitions().items().quantumWirelessBooster().isSameAs(is)) {
 				cir.setReturnValue(true);
 			}
 		}

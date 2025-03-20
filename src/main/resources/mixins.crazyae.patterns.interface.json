@@ -5,9 +5,10 @@
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "features.interfaceterm.MixinContainerInterfaceTerminal",
+    "features.interfaceterm.MixinContainerInterfaceTerminal"
+  ],
+  "client": [
     "features.interfaceterm.MixinGuiInterfaceTerminal"
   ],
-  "client": [],
   "server": []
 }

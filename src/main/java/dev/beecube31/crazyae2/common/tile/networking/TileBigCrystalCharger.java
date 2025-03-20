@@ -22,8 +22,6 @@ import appeng.api.util.DimensionalCoord;
 import appeng.api.util.IConfigManager;
 import appeng.me.GridAccessException;
 import appeng.me.helpers.MachineSource;
-import appeng.parts.automation.BlockUpgradeInventory;
-import appeng.parts.automation.UpgradeInventory;
 import appeng.tile.inventory.AppEngInternalInventory;
 import appeng.util.ConfigManager;
 import appeng.util.IConfigManagerHost;
@@ -33,8 +31,8 @@ import appeng.util.inv.IAEAppEngInventory;
 import appeng.util.inv.InvOperation;
 import appeng.util.item.AEItemStack;
 import com.google.common.base.Preconditions;
-import dev.beecube31.crazyae2.common.interfaces.ICrazyAEUpgradeInventory;
 import dev.beecube31.crazyae2.common.interfaces.upgrades.IUpgradesInfoProvider;
+import dev.beecube31.crazyae2.common.parts.implementations.CrazyAEBlockUpgradeInv;
 import dev.beecube31.crazyae2.common.tile.base.CrazyAENetworkOCTile;
 import dev.beecube31.crazyae2.core.CrazyAE;
 import io.netty.buffer.ByteBuf;
@@ -56,7 +54,7 @@ import java.util.List;
 public class TileBigCrystalCharger extends CrazyAENetworkOCTile implements IConfigManagerHost, IUpgradesInfoProvider, IAEAppEngInventory, IGridTickable {
     private static final int NUMBER_OF_UPGRADE_SLOTS = 5;
 
-    private final UpgradeInventory upgrades;
+    private final CrazyAEBlockUpgradeInv upgrades;
     private final IConfigManager manager;
 
     private final AppEngInternalInventory inputInv = new
@@ -89,7 +87,7 @@ public class TileBigCrystalCharger extends CrazyAENetworkOCTile implements IConf
         this.manager.registerSetting(Settings.FULLNESS_MODE, FullnessMode.EMPTY);
         this.manager.registerSetting(Settings.OPERATION_MODE, OperationMode.EMPTY);
 
-        this.upgrades = new BlockUpgradeInventory(charger, this, NUMBER_OF_UPGRADE_SLOTS);
+        this.upgrades = new CrazyAEBlockUpgradeInv(charger, this, NUMBER_OF_UPGRADE_SLOTS);
     }
 
     @Override
@@ -217,7 +215,7 @@ public class TileBigCrystalCharger extends CrazyAENetworkOCTile implements IConf
     }
 
     public int getInstalledCustomUpgrades(dev.beecube31.crazyae2.common.registration.definitions.Upgrades.UpgradeType u) {
-        return ((ICrazyAEUpgradeInventory) this.upgrades).getInstalledUpgrades(u);
+        return this.upgrades.getInstalledUpgrades(u);
     }
 
     @Override

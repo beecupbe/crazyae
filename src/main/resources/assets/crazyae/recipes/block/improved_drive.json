@@ -23,9 +23,9 @@
     },
     "type": "forge:ore_shaped",
     "pattern": [
-        "aba",
-        "c c",
-        "aba"
+            "aba",
+            "c c",
+            "aba"
     ],
     "key": {
         "b": {

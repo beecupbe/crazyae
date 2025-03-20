@@ -13,6 +13,10 @@
         },
         {
           "type": "minecraft:item_exists",
+          "item": "crazyae:mechanical_manapool"
+        },
+        {
+          "type": "minecraft:item_exists",
           "item": "crazyae:crafting_accelerator_16x"
         }
       ]

@@ -1,0 +1,46 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:perfect_interface"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:crafting_accelerator_16x"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "appliedenergistics2:interface"
+        },
+        {
+          "type": "crazyae:upgrade_exists",
+          "name": "stacks"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "item": "crazyae:perfect_interface"
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "dbd",
+    "bab",
+    "dbd"
+  ],
+  "key": {
+    "b": {
+      "item": "crazyae:crafting_accelerator_16x"
+    },
+    "d": {
+      "item": "appliedenergistics2:interface"
+    },
+    "a": {
+      "type": "crazyae:upgrade",
+      "name": "stacks"
+    }
+  }
+}

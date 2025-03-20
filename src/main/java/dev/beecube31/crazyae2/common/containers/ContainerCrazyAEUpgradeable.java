@@ -8,22 +8,21 @@ import appeng.container.slot.IOptionalSlotHost;
 import appeng.items.contents.NetworkToolViewer;
 import appeng.items.tools.ToolNetworkTool;
 import appeng.parts.automation.PartExportBus;
-import appeng.tile.networking.TileCableBus;
 import appeng.util.Platform;
+import com.google.common.base.Preconditions;
 import dev.beecube31.crazyae2.common.containers.base.CrazyAEBaseContainer;
-import dev.beecube31.crazyae2.common.containers.guisync.GuiSync;
 import dev.beecube31.crazyae2.common.containers.base.slot.OptionalSlotFake;
 import dev.beecube31.crazyae2.common.containers.base.slot.OptionalSlotFakeTypeOnly;
 import dev.beecube31.crazyae2.common.containers.base.slot.RestrictedSlot;
 import dev.beecube31.crazyae2.common.containers.base.slot.SlotFakeTypeOnly;
+import dev.beecube31.crazyae2.common.containers.guisync.GuiSync;
+import dev.beecube31.crazyae2.common.interfaces.IEnergyBus;
 import dev.beecube31.crazyae2.common.interfaces.mana.IManaLinkableDevice;
 import dev.beecube31.crazyae2.common.interfaces.upgrades.IUpgradesInfoProvider;
-import dev.beecube31.crazyae2.core.CrazyAE;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
@@ -60,6 +59,8 @@ public class ContainerCrazyAEUpgradeable extends CrazyAEBaseContainer implements
 
     public ContainerCrazyAEUpgradeable(final InventoryPlayer ip, final IUpgradesInfoProvider te) {
         super(ip, (TileEntity) (te instanceof TileEntity ? te : null), (IPart) (te instanceof IPart ? te : null));
+        Preconditions.checkNotNull(te);
+
         this.upgradeable = te;
 
         if (te instanceof IManaLinkableDevice) {
@@ -120,6 +121,10 @@ public class ContainerCrazyAEUpgradeable extends CrazyAEBaseContainer implements
         this.myOffsetX += v;
     }
 
+    public int getMyOffsetX() {
+        return this.myOffsetX;
+    }
+
     public boolean hasToolbox() {
         return this.tbInventory != null;
     }
@@ -131,11 +136,9 @@ public class ContainerCrazyAEUpgradeable extends CrazyAEBaseContainer implements
     protected void setupConfig() {
         this.setupUpgrades();
 
-        for (EnumFacing i : EnumFacing.VALUES) {
-            if (this.upgradeable.getTile() instanceof final TileCableBus p
-                    && p.getCableBus().getPart(i) instanceof IManaLinkableDevice) {
-                return;
-            }
+        if (this.upgradeable.getTile() instanceof IManaLinkableDevice ||
+                this.upgradeable.getTile() instanceof IEnergyBus) {
+            return;
         }
 
         final IItemHandler inv = this.getUpgradeable().getInventoryByName("config");
@@ -160,27 +163,27 @@ public class ContainerCrazyAEUpgradeable extends CrazyAEBaseContainer implements
         final IItemHandler upgrades = this.getUpgradeable().getInventoryByName("upgrades");
         if (this.availableUpgrades() > 0) {
             this.addSlotToContainer(
-                    (new RestrictedSlot(RestrictedSlot.PlaceableItemType.UPGRADES, upgrades, 0, this.isPatternInterface() ? 223 : 187 + this.myOffsetX, 8, this.getInventoryPlayer()))
+                    (new RestrictedSlot(RestrictedSlot.PlaceableItemType.UPGRADES, upgrades, 0, this.hasOptionSideButton() ? 223 : 187 + this.myOffsetX, 8, this.getInventoryPlayer()))
                             .setStackLimit(1).setNotDraggable());
         }
         if (this.availableUpgrades() > 1) {
             this.addSlotToContainer(
-                    (new RestrictedSlot(RestrictedSlot.PlaceableItemType.UPGRADES, upgrades, 1, this.isPatternInterface() ? 223 : 187 + this.myOffsetX, 8 + 18, this.getInventoryPlayer()))
+                    (new RestrictedSlot(RestrictedSlot.PlaceableItemType.UPGRADES, upgrades, 1, this.hasOptionSideButton() ? 223 : 187 + this.myOffsetX, 8 + 18, this.getInventoryPlayer()))
                             .setStackLimit(1).setNotDraggable());
         }
         if (this.availableUpgrades() > 2) {
             this.addSlotToContainer(
-                    (new RestrictedSlot(RestrictedSlot.PlaceableItemType.UPGRADES, upgrades, 2, this.isPatternInterface() ? 223 : 187 + this.myOffsetX, 8 + 18 * 2, this.getInventoryPlayer()))
+                    (new RestrictedSlot(RestrictedSlot.PlaceableItemType.UPGRADES, upgrades, 2, this.hasOptionSideButton() ? 223 : 187 + this.myOffsetX, 8 + 18 * 2, this.getInventoryPlayer()))
                             .setStackLimit(1).setNotDraggable());
         }
         if (this.availableUpgrades() > 3) {
             this.addSlotToContainer(
-                    (new RestrictedSlot(RestrictedSlot.PlaceableItemType.UPGRADES, upgrades, 3, this.isPatternInterface() ? 223 : 187 + this.myOffsetX, 8 + 18 * 3, this.getInventoryPlayer()))
+                    (new RestrictedSlot(RestrictedSlot.PlaceableItemType.UPGRADES, upgrades, 3, this.hasOptionSideButton() ? 223 : 187 + this.myOffsetX, 8 + 18 * 3, this.getInventoryPlayer()))
                             .setStackLimit(1).setNotDraggable());
         }
     }
 
-    protected boolean isPatternInterface() {
+    public boolean hasOptionSideButton() {
         return false;
     }
 

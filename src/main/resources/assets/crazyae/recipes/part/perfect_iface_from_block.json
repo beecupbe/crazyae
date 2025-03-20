@@ -1,0 +1,40 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "crazyae:part_exists",
+          "name": "part_perfect_iface"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:perfect_interface"
+        },
+        {
+          "type": "crazyae:part_exists",
+          "name": "part_perfect_iface"
+        },
+        {
+          "type": "crazyae:upgrade_exists",
+          "name": "stacks"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "type": "part",
+    "name": "part_perfect_iface"
+  },
+  "type": "crazyae:shaped_recipe",
+  "pattern": [
+    "   ",
+    " a ",
+    "   "
+  ],
+  "key": {
+    "a": {
+      "item": "crazyae:perfect_interface"
+    }
+  }
+}

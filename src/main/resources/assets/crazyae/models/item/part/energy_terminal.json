@@ -1,0 +1,9 @@
+{
+    "parent": "appliedenergistics2:item/part/display",
+    "textures": {
+        "front": "crazyae:part/mana_terminal/frame",
+        "front_bright": "crazyae:part/energy_terminal_bright",
+        "front_medium": "crazyae:part/energy_terminal_medium",
+        "front_dark": "crazyae:part/energy_terminal_dark"
+    }
+}

@@ -115,7 +115,7 @@ public class PartImportBusImp extends CrazyAEPartSharedBus implements IInventory
 
     @Override
     protected TickRateModulation doBusWork() {
-        if (!this.getProxy().isActive() || !this.canDoBusWork()) {
+        if (!this.canDoBusWork()) {
             return TickRateModulation.IDLE;
         }
 

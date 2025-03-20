@@ -1,7 +1,8 @@
 package dev.beecube31.crazyae2.client.gui.widgets;
 
 import dev.beecube31.crazyae2.client.gui.components.ComponentHue;
-import dev.beecube31.crazyae2.client.gui.sprites.StateSprite;
+import dev.beecube31.crazyae2.client.gui.sprites.ISpriteProvider;
+import dev.beecube31.crazyae2.common.interfaces.gui.ICheckboxProvider;
 import dev.beecube31.crazyae2.common.interfaces.gui.ITooltipObj;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
@@ -10,18 +11,27 @@ import org.jetbrains.annotations.NotNull;
 
 public class Checkbox extends GuiButton implements ITooltipObj {
     private boolean visible = true;
-    private boolean state;
+    private ICheckboxProvider state;
+    private int id;
     private String text;
+    private String texture;
 
     private final ComponentHue textHue;
 
-    public Checkbox(final int id, final int posX, final int posY, final int width, final int height, final boolean state, final String text, final ComponentHue textHue) {
+    private final ISpriteProvider spriteOn;
+    private final ISpriteProvider spriteOff;
+
+    public Checkbox(final int id, final int posX, final int posY, final int width, final int height, final ICheckboxProvider state, final String text, final ComponentHue textHue, String texture, ISpriteProvider spriteOn, ISpriteProvider spriteOff) {
         super(id, posX, posY, width, height, "");
+        this.id = id;
         this.x = posX;
         this.y = posY;
         this.state = state;
         this.text = text;
         this.textHue = textHue;
+        this.texture = texture;
+        this.spriteOn = spriteOn;
+        this.spriteOff = spriteOff;
     }
 
     @Override
@@ -31,15 +41,15 @@ public class Checkbox extends GuiButton implements ITooltipObj {
             par1Minecraft.fontRenderer.drawString(this.text, this.x + 18, this.y + 2, this.textHue.getIntColor());
             this.textHue.endDrawHue();
 
-            par1Minecraft.getTextureManager().bindTexture(new ResourceLocation("crazyae", "textures/guis/states.png"));
+            par1Minecraft.getTextureManager().bindTexture(new ResourceLocation("crazyae", texture));
 
             this.drawTexturedModalRect(
                     this.x,
                     this.y,
-                    this.state ? StateSprite.CHECKBOX_ON.getTextureX() : StateSprite.CHECKBOX_OFF.getTextureX(),
-                    this.state ? StateSprite.CHECKBOX_ON.getTextureY() : StateSprite.CHECKBOX_OFF.getTextureY(),
-                    this.state ? StateSprite.CHECKBOX_ON.getSizeX() : StateSprite.CHECKBOX_OFF.getSizeX(),
-                    this.state ? StateSprite.CHECKBOX_ON.getSizeY() : StateSprite.CHECKBOX_OFF.getSizeY()
+                    this.state.getCheckboxCurrentState(this.id) ? this.spriteOn.getTextureX() : this.spriteOff.getTextureX(),
+                    this.state.getCheckboxCurrentState(this.id) ? this.spriteOn.getTextureY() : this.spriteOff.getTextureY(),
+                    this.state.getCheckboxCurrentState(this.id) ? this.spriteOn.getSizeX() : this.spriteOff.getSizeX(),
+                    this.state.getCheckboxCurrentState(this.id) ? this.spriteOn.getSizeY() : this.spriteOff.getSizeY()
             );
 
             this.mouseDragged(par1Minecraft, par2, par3);
@@ -50,16 +60,12 @@ public class Checkbox extends GuiButton implements ITooltipObj {
         this.visible = visible;
     }
 
-    public void toggleState() {
-        this.state = !this.state;
-    }
-
-    public void setState(final boolean state) {
-        this.state = state;
-    }
-
     public boolean getState() {
-        return this.state;
+        return this.state.getCheckboxCurrentState();
+    }
+
+    public boolean getState(int idx) {
+        return this.state.getCheckboxCurrentState(idx);
     }
 
     public void setText(final String text) {

@@ -7,7 +7,9 @@ import appeng.core.Api;
 import appeng.util.Platform;
 import dev.beecube31.crazyae2.Tags;
 import dev.beecube31.crazyae2.common.features.Features;
-import dev.beecube31.crazyae2.common.items.cells.ImprovedPortableCell;
+import dev.beecube31.crazyae2.common.items.cells.handlers.CreativeEnergyCellHandler;
+import dev.beecube31.crazyae2.common.items.cells.handlers.CreativeManaCellHandler;
+import dev.beecube31.crazyae2.common.items.cells.storage.ImprovedPortableCell;
 import dev.beecube31.crazyae2.common.networking.CrazyAENetworkHandler;
 import dev.beecube31.crazyae2.common.networking.network.NetworkHandler;
 import dev.beecube31.crazyae2.common.registration.Registration;
@@ -123,10 +125,18 @@ public class CrazyAE {
 			MinecraftForge.EVENT_BUS.register(new UpdateChecker());
 		}
 
+		final Api api = Api.INSTANCE;
+		final IRegistryContainer registries = api.registries();
+		final IGridCacheRegistry gcr = registries.gridCache();
+
+		if (Features.MANA_CELLS.isEnabled() || Features.MANA_DENSE_CELLS.isEnabled() || Features.MEGA_MANA_DENSE_CELLS.isEnabled()) {
+			registries.cell().addCellHandler(new CreativeManaCellHandler());
+		}
+		if (Features.ENERGY_CELLS.isEnabled() || Features.ENERGY_DENSE_CELLS.isEnabled() || Features.MEGA_ENERGY_DENSE_CELLS.isEnabled()) {
+			registries.cell().addCellHandler(new CreativeEnergyCellHandler());
+		}
+
 		if (Features.QUANTUM_CHANNELS_MULTIPLIER.isEnabled()) {
-			final Api api = Api.INSTANCE;
-			final IRegistryContainer registries = api.registries();
-			final IGridCacheRegistry gcr = registries.gridCache();
 			gcr.registerGridCache(IGridChannelBoostersCache.class, GridChannelBoostersCache.class);
 		}
 	}

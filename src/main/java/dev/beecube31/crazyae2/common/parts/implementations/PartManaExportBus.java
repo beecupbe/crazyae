@@ -128,6 +128,10 @@ public class PartManaExportBus extends CrazyAEPartSharedBus implements IManaLink
 
     @Override
     protected TickRateModulation doBusWork() {
+        if (!this.canDoBusWork()) {
+            return TickRateModulation.IDLE;
+        }
+
         if (this.hasConnection && !this.getTile().getWorld().isRemote) {
             BlockPos pos = new BlockPos(this.connectionX, this.connectionY, this.connectionZ);
             final TileEntity te = this.getTile().getWorld().getTileEntity(pos);

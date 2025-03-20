@@ -5,6 +5,10 @@
       "values": [
         {
           "type": "minecraft:item_exists",
+          "item": "botania:manaresource"
+        },
+        {
+          "type": "minecraft:item_exists",
           "item": "crazyae:mana_cell_16mb"
         },
         {

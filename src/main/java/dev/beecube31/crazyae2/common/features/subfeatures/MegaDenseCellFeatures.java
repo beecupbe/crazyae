@@ -26,7 +26,7 @@ public enum MegaDenseCellFeatures implements ISubFeature {
 
 	@Nullable
 	@Override
-	public String getMixins() {
+	public String getMixin() {
 		return null;
 	}
 }

@@ -25,13 +25,12 @@ import appeng.util.inv.WrapperCursorItemHandler;
 import appeng.util.inv.WrapperFilteredItemHandler;
 import appeng.util.inv.WrapperRangeItemHandler;
 import appeng.util.inv.filter.IAEItemFilter;
-import dev.beecube31.crazyae2.common.duality.PatternsInterfaceDuality;
-import dev.beecube31.crazyae2.common.interfaces.ICrazyAEInterfaceHost;
 import dev.beecube31.crazyae2.common.interfaces.IGridHostMonitorable;
+import dev.beecube31.crazyae2.common.interfaces.gui.IPriHostExtender;
+import dev.beecube31.crazyae2.common.parts.implementations.PartPatternsInterface;
 import dev.beecube31.crazyae2.common.tile.crafting.TileImprovedMAC;
 import dev.beecube31.crazyae2.common.tile.networking.TilePatternsInterface;
 import dev.beecube31.crazyae2.common.util.InvTracker;
-import dev.beecube31.crazyae2.core.CrazyAE;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
@@ -39,7 +38,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.items.IItemHandler;
-import org.spongepowered.asm.mixin.*;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Unique;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -58,8 +60,6 @@ public abstract class MixinContainerInterfaceTerminal extends AEBaseContainer {
     @Shadow protected abstract boolean isDifferent(ItemStack a, ItemStack b);
 
     @Unique private final Map<IInterfaceHost, InvTracker> crazyae$diList = new HashMap<>();
-
-    @Unique private final Map<ICrazyAEInterfaceHost, InvTracker> crazyae$patternsDiList = new HashMap<>();
 
     @Unique private final Map<IGridHostMonitorable, InvTracker> crazyae$macDiList = new HashMap<>();
 
@@ -136,17 +136,39 @@ public abstract class MixinContainerInterfaceTerminal extends AEBaseContainer {
 
                 for (final IGridNode gn : this.grid.getMachines(TilePatternsInterface.class)) {
                     if (gn.isActive()) {
-                        final ICrazyAEInterfaceHost ih = (ICrazyAEInterfaceHost) gn.getMachine();
+                        final IInterfaceHost ih = (IInterfaceHost) gn.getMachine();
                         if (ih.getInterfaceDuality().getConfigManager().getSetting(Settings.INTERFACE_TERMINAL) == YesNo.NO) {
                             continue;
                         }
 
-                        final InvTracker t = this.crazyae$patternsDiList.get(ih);
+                        final InvTracker t = this.crazyae$diList.get(ih);
 
                         if (t == null) {
                             missing = true;
                         } else {
-                            final PatternsInterfaceDuality dual = ih.getInterfaceDuality();
+                            final DualityInterface dual = ih.getInterfaceDuality();
+                            if (!t.unlocalizedName.equals(dual.getTermName())) {
+                                missing = true;
+                            }
+                        }
+
+                        total++;
+                    }
+                }
+
+                for (final IGridNode gn : this.grid.getMachines(PartPatternsInterface.class)) {
+                    if (gn.isActive()) {
+                        final IInterfaceHost ih = (IInterfaceHost) gn.getMachine();
+                        if (ih.getInterfaceDuality().getConfigManager().getSetting(Settings.INTERFACE_TERMINAL) == YesNo.NO) {
+                            continue;
+                        }
+
+                        final InvTracker t = this.crazyae$diList.get(ih);
+
+                        if (t == null) {
+                            missing = true;
+                        } else {
+                            final DualityInterface dual = ih.getInterfaceDuality();
                             if (!t.unlocalizedName.equals(dual.getTermName())) {
                                 missing = true;
                             }
@@ -170,23 +192,14 @@ public abstract class MixinContainerInterfaceTerminal extends AEBaseContainer {
         }
 
 
-        if (total != this.crazyae$diList.size() + this.crazyae$patternsDiList.size() + this.crazyae$macDiList.size() || missing) {
+        if (total != this.crazyae$diList.size() + this.crazyae$macDiList.size() || missing) {
             this.regenList(this.data);
         } else {
             for (final Map.Entry<IInterfaceHost, InvTracker> en : this.crazyae$diList.entrySet()) {
                 final InvTracker inv = en.getValue();
                 for (int x = 0; x < inv.server.getSlots(); x++) {
                     if (this.isDifferent(inv.server.getStackInSlot(x), inv.client.getStackInSlot(x))) {
-                        this.crazyae$addItems(this.data, inv, x, 1);
-                    }
-                }
-            }
-
-            for (final Map.Entry<ICrazyAEInterfaceHost, InvTracker> en : this.crazyae$patternsDiList.entrySet()) {
-                final InvTracker inv = en.getValue();
-                for (int x = 0; x < inv.server.getSlots(); x++) {
-                    if (this.isDifferent(inv.server.getStackInSlot(x), inv.client.getStackInSlot(x))) {
-                        this.crazyae$addItems(this.data, inv, x, 1);
+                        this.crazyae$addItems(this.data, inv, x, inv.server.getSlots(), null);
                     }
                 }
             }
@@ -195,7 +208,7 @@ public abstract class MixinContainerInterfaceTerminal extends AEBaseContainer {
                 final InvTracker inv = en.getValue();
                 for (int x = 0; x < inv.server.getSlots(); x++) {
                     if (this.isDifferent(inv.server.getStackInSlot(x), inv.client.getStackInSlot(x))) {
-                        this.crazyae$addItems(this.data, inv, x, 1);
+                        this.crazyae$addItems(this.data, inv, x, inv.server.getSlots(), null);
                     }
                 }
             }
@@ -326,7 +339,6 @@ public abstract class MixinContainerInterfaceTerminal extends AEBaseContainer {
     private void regenList(final NBTTagCompound data) {
         this.crazyae$byId.clear();
         this.crazyae$diList.clear();
-        this.crazyae$patternsDiList.clear();
         this.crazyae$macDiList.clear();
 
 
@@ -351,10 +363,18 @@ public abstract class MixinContainerInterfaceTerminal extends AEBaseContainer {
                 }
 
                 for (final IGridNode gn : this.grid.getMachines(TilePatternsInterface.class)) {
-                    final ICrazyAEInterfaceHost ih = (ICrazyAEInterfaceHost) gn.getMachine();
-                    final PatternsInterfaceDuality dual = ih.getInterfaceDuality();
+                    final IInterfaceHost ih = (IInterfaceHost) gn.getMachine();
+                    final DualityInterface dual = ih.getInterfaceDuality();
                     if (gn.isActive() && dual.getConfigManager().getSetting(Settings.INTERFACE_TERMINAL) == YesNo.YES) {
-                        this.crazyae$patternsDiList.put(ih, new InvTracker(dual, dual.getPatterns(), dual.getTermName()));
+                        this.crazyae$diList.put(ih, new InvTracker(dual, dual.getPatterns(), dual.getTermName()));
+                    }
+                }
+
+                for (final IGridNode gn : this.grid.getMachines(PartPatternsInterface.class)) {
+                    final IPriHostExtender ih = (IPriHostExtender) gn.getMachine();
+                    final DualityInterface dual = ih.getInterfaceDuality();
+                    if (gn.isActive() && dual.getConfigManager().getSetting(Settings.INTERFACE_TERMINAL) == YesNo.YES) {
+                        this.crazyae$diList.put(ih, new InvTracker(dual, dual.getPatterns(), dual.getTermName()));
                     }
                 }
 
@@ -372,24 +392,18 @@ public abstract class MixinContainerInterfaceTerminal extends AEBaseContainer {
         for (final Map.Entry<IInterfaceHost, InvTracker> en : this.crazyae$diList.entrySet()) {
             final InvTracker inv = en.getValue();
             this.crazyae$byId.put(inv.which, inv);
-            this.crazyae$addItems(data, inv, 0, inv.server.getSlots());
-        }
-
-        for (final Map.Entry<ICrazyAEInterfaceHost, InvTracker> en : this.crazyae$patternsDiList.entrySet()) {
-            final InvTracker inv = en.getValue();
-            this.crazyae$byId.put(inv.which, inv);
-            this.crazyae$addItems(data, inv, 0, inv.server.getSlots());
+            this.crazyae$addItems(data, inv, 0, inv.server.getSlots(), null);
         }
 
         for (final Map.Entry<IGridHostMonitorable, InvTracker> en : this.crazyae$macDiList.entrySet()) {
             final InvTracker inv = en.getValue();
             this.crazyae$byId.put(inv.which, inv);
-            this.crazyae$addItems(data, inv, 0, inv.server.getSlots());
+            this.crazyae$addItems(data, inv, 0, inv.server.getSlots(), null);
         }
     }
 
     @Unique
-    private void crazyae$addItems(NBTTagCompound data, InvTracker inv, int offset, int length) {
+    private void crazyae$addItems(NBTTagCompound data, InvTracker inv, int offset, int length, IGridHostMonitorable mac) {
         String name = '=' + Long.toString(inv.which, 36);
         NBTTagCompound tag = data.getCompoundTag(name);
         if (tag.isEmpty()) {
@@ -398,8 +412,8 @@ public abstract class MixinContainerInterfaceTerminal extends AEBaseContainer {
             tag.setTag("pos", NBTUtil.createPosTag(inv.pos));
             tag.setInteger("dim", inv.dim);
             tag.setInteger("numUpgrades", inv.numUpgrades);
-            tag.setBoolean("isPatternInterface", inv.isPatternInterface);
-            tag.setBoolean("isMAC", inv.isMAC);
+            tag.setBoolean("isMAC", mac instanceof TileImprovedMAC);
+            tag.setInteger("patternsNum", length);
         }
 
         for (int x = 0; x < length; ++x) {

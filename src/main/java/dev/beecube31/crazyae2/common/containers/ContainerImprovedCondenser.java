@@ -2,6 +2,7 @@ package dev.beecube31.crazyae2.common.containers;
 
 import appeng.api.config.CondenserOutput;
 import appeng.api.config.Settings;
+import appeng.core.localization.GuiText;
 import appeng.util.Platform;
 import dev.beecube31.crazyae2.common.containers.base.CrazyAEBaseContainer;
 import dev.beecube31.crazyae2.common.containers.base.slot.RestrictedSlot;
@@ -73,13 +74,13 @@ public class ContainerImprovedCondenser extends CrazyAEBaseContainer implements 
     }
 
     @Override
-    public int getCurrentProgress() {
+    public double getCurrentProgress() {
         return (int) this.storedPower;
     }
 
     @Override
-    public int getMaxProgress() {
-        return (int) this.requiredEnergy;
+    public double getMaxProgress() {
+        return this.requiredEnergy;
     }
 
     public CondenserOutput getOutput() {
@@ -88,5 +89,15 @@ public class ContainerImprovedCondenser extends CrazyAEBaseContainer implements 
 
     private void setOutput(final CondenserOutput output) {
         this.output = output;
+    }
+
+    @Override
+    public String getTooltip(String title, boolean disableMaxProgress, int tooltipID) {
+        return title +
+                "\n" +
+                this.getCurrentProgress(tooltipID) +
+                GuiText.Of.getLocal() +
+                ' ' +
+                this.getMaxProgress(tooltipID);
     }
 }

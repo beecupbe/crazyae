@@ -1,7 +1,6 @@
 package dev.beecube31.crazyae2.common.containers.base.slot;
 
 import appeng.api.AEApi;
-import appeng.api.implementations.ICraftingPatternItem;
 import appeng.api.implementations.items.IStorageComponent;
 import appeng.api.implementations.items.IUpgradeModule;
 import appeng.block.crafting.ItemCraftingStorage;
@@ -62,6 +61,7 @@ public class RestrictedSlot extends CrazyAESlot {
         if (!this.isAllowEdit()) return false;
 
         return switch (this.which) {
+            case NONE -> false;
             case TRASH ->
                     !AEApi.instance().registries().cell().isCellHandled(i)
                     && !(
@@ -123,14 +123,15 @@ public class RestrictedSlot extends CrazyAESlot {
                     CrazyAE.definitions().materials().runealtarBlankPattern().isSameAs(i);
             case RUNEALTAR_ENCODED_PATTERN ->
                     CrazyAE.definitions().items().runealtarEncodedPattern().isSameAs(i);
-
+            case TERAPLATE_BLANK_PATTERN ->
+                    CrazyAE.definitions().materials().teraplateBlankPattern().isSameAs(i);
+            case BREWERY_BLANK_PATTERN ->
+                    CrazyAE.definitions().materials().breweryBlankPattern().isSameAs(i);
             case PUREDAISY_BLANK_PATTERN ->
                     CrazyAE.definitions().materials().puredaisyBlankPattern().isSameAs(i);
             case PUREDAISY_ENCODED_PATTERN ->
                     CrazyAE.definitions().items().puredaisyEncodedPattern().isSameAs(i);
 
-            case QUANTUM_WIRELESS_BOOSTERS ->
-                    CrazyAE.definitions().items().quantumWirelessBooster().isSameAs(i);
             case ELVENTRADE_BLANK_PATTERN ->
                     CrazyAE.definitions().materials().elventradeBlankPattern().isSameAs(i);
             case ELVENTRADE_ENCODED_PATTERN ->
@@ -154,6 +155,7 @@ public class RestrictedSlot extends CrazyAESlot {
     }
 
     public enum PlaceableItemType {
+        NONE(StateSprite.TRASH_SLOT),
         STORAGE_CELLS(StateSprite.STORAGE_CELLS_SLOT),
         ENCODED_PATTERN(StateSprite.PATTERNS_SLOT_OLD),
         TRASH(StateSprite.TRASH_SLOT),
@@ -170,12 +172,13 @@ public class RestrictedSlot extends CrazyAESlot {
         AE_UPGRADES(StateSprite.AE_UPGRADE_CARDS_SLOT),
         CRAZYAE_UPGRADES(StateSprite.CRAZYAE_UPGRADE_CARDS_SLOT),
         UPGRADES(StateSprite.CRAZYAE_UPGRADE_CARDS_SLOT),
-        QUANTUM_WIRELESS_BOOSTERS(StateSprite.QUANTUM_WIRELESS_BOOSTERS_SLOT),
 
 
         ELVENTRADE_BLANK_PATTERN(StateSprite.PATTERNS_SLOT_NEW),
         MANAPOOL_BLANK_PATTERN(StateSprite.PATTERNS_SLOT_NEW),
         RUNEALTAR_BLANK_PATTERN(StateSprite.PATTERNS_SLOT_NEW),
+        TERAPLATE_BLANK_PATTERN(StateSprite.PATTERNS_SLOT_NEW),
+        BREWERY_BLANK_PATTERN(StateSprite.PATTERNS_SLOT_NEW),
         PUREDAISY_BLANK_PATTERN(StateSprite.PATTERNS_SLOT_NEW),
         PETAL_BLANK_PATTERN(StateSprite.PATTERNS_SLOT_NEW),
 

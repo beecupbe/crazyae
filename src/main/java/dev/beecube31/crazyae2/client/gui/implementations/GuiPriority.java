@@ -3,15 +3,17 @@ package dev.beecube31.crazyae2.client.gui.implementations;
 import appeng.core.AEConfig;
 import appeng.core.AELog;
 import appeng.core.localization.GuiText;
+import appeng.core.sync.GuiBridge;
+import appeng.helpers.IPriorityHost;
 import dev.beecube31.crazyae2.client.gui.CrazyAEBaseGui;
 import dev.beecube31.crazyae2.client.gui.widgets.BasicButton;
 import dev.beecube31.crazyae2.client.gui.widgets.NumberTextField;
 import dev.beecube31.crazyae2.client.gui.widgets.OptionSideButton;
 import dev.beecube31.crazyae2.common.containers.ContainerPriority;
-import dev.beecube31.crazyae2.common.interfaces.IChangeablePriorityHost;
+import dev.beecube31.crazyae2.common.interfaces.gui.IPriHostGuiOverrider;
 import dev.beecube31.crazyae2.common.networking.network.NetworkHandler;
-import dev.beecube31.crazyae2.common.networking.packets.PacketUptadeTextField;
 import dev.beecube31.crazyae2.common.networking.packets.PacketSwitchGuis;
+import dev.beecube31.crazyae2.common.networking.packets.PacketUptadeTextField;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiBridge;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -33,9 +35,9 @@ public class GuiPriority extends CrazyAEBaseGui {
     private BasicButton minus100;
     private BasicButton minus1000;
 
-    private CrazyAEGuiBridge origGui;
+    private Object origGui;
 
-    public GuiPriority(final InventoryPlayer inventoryPlayer, final IChangeablePriorityHost te) {
+    public GuiPriority(final InventoryPlayer inventoryPlayer, final IPriorityHost te) {
         super(new ContainerPriority(inventoryPlayer, te));
         this.xSize += 26;
     }
@@ -61,7 +63,8 @@ public class GuiPriority extends CrazyAEBaseGui {
 
         final ContainerPriority con = ((ContainerPriority) this.inventorySlots);
         final ItemStack myIcon = con.getPriorityHost().getItemStackRepresentation();
-        this.origGui = con.getPriorityHost().getGuiBridge();
+        this.origGui = con.getPriorityHost() instanceof IPriHostGuiOverrider r
+                ? r.getOverrideGui() : con.getPriorityHost().getGuiBridge();
 
         if (this.origGui != null && !myIcon.isEmpty()) {
             this.buttonList.add(
@@ -108,7 +111,11 @@ public class GuiPriority extends CrazyAEBaseGui {
         super.actionPerformed(btn);
 
         if (btn == this.backBtn) {
-            NetworkHandler.instance().sendToServer(new PacketSwitchGuis(this.origGui));
+            if (this.origGui instanceof CrazyAEGuiBridge) {
+                NetworkHandler.instance().sendToServer(new PacketSwitchGuis(this.origGui));
+            } else {
+                appeng.core.sync.network.NetworkHandler.instance().sendToServer(new appeng.core.sync.packets.PacketSwitchGuis((GuiBridge) this.origGui));
+            }
         }
 
         final boolean isPlus = btn == this.plus1 || btn == this.plus10 || btn == this.plus100 || btn == this.plus1000;

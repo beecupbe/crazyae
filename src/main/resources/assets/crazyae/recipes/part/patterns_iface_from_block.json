@@ -1,0 +1,36 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "crazyae:part_exists",
+          "name": "part_patterns_iface"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:patterns_interface"
+        },
+        {
+          "type": "crazyae:part_exists",
+          "name": "part_patterns_iface"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "type": "part",
+    "name": "part_patterns_iface"
+  },
+  "type": "crazyae:shaped_recipe",
+  "pattern": [
+    "   ",
+    " a ",
+    "   "
+  ],
+  "key": {
+    "a": {
+      "item": "crazyae:patterns_interface"
+    }
+  }
+}

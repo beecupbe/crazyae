@@ -13,6 +13,10 @@
         },
         {
           "type": "minecraft:item_exists",
+          "item": "crazyae:mechanical_elventrade"
+        },
+        {
+          "type": "minecraft:item_exists",
           "item": "crazyae:crafting_accelerator_16x"
         }
       ]

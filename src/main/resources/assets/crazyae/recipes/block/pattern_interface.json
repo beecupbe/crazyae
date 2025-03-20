@@ -14,6 +14,10 @@
         {
           "type": "minecraft:item_exists",
           "item": "appliedenergistics2:interface"
+        },
+        {
+          "type": "crazyae:upgrade_exists",
+          "name": "improved_speed"
         }
       ]
     }
@@ -35,8 +39,8 @@
       "item": "appliedenergistics2:interface"
     },
     "a": {
-      "item": "crazyae:upgrade",
-      "data": 1
+      "type": "crazyae:upgrade",
+      "name": "improved_speed"
     }
   }
 }

@@ -9,10 +9,7 @@ import dev.beecube31.crazyae2.common.enums.BotaniaMechanicalDeviceType;
 import dev.beecube31.crazyae2.common.interfaces.device.mechanical.IBotaniaMechanicalDevice;
 import dev.beecube31.crazyae2.common.interfaces.upgrades.IUpgradesInfoProvider;
 import dev.beecube31.crazyae2.common.tile.botania.TileBotaniaMechanicalMachineBase;
-import dev.beecube31.crazyae2.common.tile.crafting.TileImprovedMAC;
-import dev.beecube31.crazyae2.core.CrazyAE;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
 
 public class ContainerBotaniaDevicePatternsInv extends ContainerCrazyAEUpgradeable {
@@ -34,12 +31,14 @@ public class ContainerBotaniaDevicePatternsInv extends ContainerCrazyAEUpgradeab
         for (int y = 0; y < 5; y++) {
             for (int x = 0; x < 9; x++) {
                 this.addSlotToContainer(new RestrictedSlot(
-                        this.type == BotaniaMechanicalDeviceType.ELVENTRADE ? RestrictedSlot.PlaceableItemType.ELVENTRADE_ENCODED_PATTERN
-                                : this.type == BotaniaMechanicalDeviceType.MANAPOOL ? RestrictedSlot.PlaceableItemType.MANAPOOL_ENCODED_PATTERN
-                                : this.type == BotaniaMechanicalDeviceType.PETAL ? RestrictedSlot.PlaceableItemType.PETAL_ENCODED_PATTERN
-                                : this.type == BotaniaMechanicalDeviceType.PUREDAISY ? RestrictedSlot.PlaceableItemType.PUREDAISY_ENCODED_PATTERN
-                                : this.type == BotaniaMechanicalDeviceType.RUNEALTAR ? RestrictedSlot.PlaceableItemType.RUNEALTAR_ENCODED_PATTERN
-                                : RestrictedSlot.PlaceableItemType.TRASH,
+                        this.type == BotaniaMechanicalDeviceType.ELVENTRADE ? RestrictedSlot.PlaceableItemType.ELVENTRADE_BLANK_PATTERN
+                                : this.type == BotaniaMechanicalDeviceType.MANAPOOL ? RestrictedSlot.PlaceableItemType.MANAPOOL_BLANK_PATTERN
+                                : this.type == BotaniaMechanicalDeviceType.PETAL ? RestrictedSlot.PlaceableItemType.PETAL_BLANK_PATTERN
+                                : this.type == BotaniaMechanicalDeviceType.PUREDAISY ? RestrictedSlot.PlaceableItemType.PUREDAISY_BLANK_PATTERN
+                                : this.type == BotaniaMechanicalDeviceType.RUNEALTAR ? RestrictedSlot.PlaceableItemType.RUNEALTAR_BLANK_PATTERN
+                                : this.type == BotaniaMechanicalDeviceType.TERAPLATE ? RestrictedSlot.PlaceableItemType.TERAPLATE_BLANK_PATTERN
+                                : this.type == BotaniaMechanicalDeviceType.BREWERY ? RestrictedSlot.PlaceableItemType.BREWERY_BLANK_PATTERN
+                                : RestrictedSlot.PlaceableItemType.NONE,
                         patternsHandler,
                         x + y * 9,
                         8 + x * 18,

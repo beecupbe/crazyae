@@ -27,7 +27,7 @@ public abstract class MixinCraftingGridCache {
     @Shadow public abstract void addLink(CraftingLink link);
 
     @Inject(method = "updateCPUClusters()V", at = @At("RETURN"), remap = false, cancellable = true)
-    private void injectUpdateCPUClusters(CallbackInfo ci) {
+    private void crazyae$updateCPUClusters(CallbackInfo ci) {
         for (Object cls: StreamSupport.stream(grid.getMachinesClasses().spliterator(), false).filter(TileCraftingUnitsCombiner.class::isAssignableFrom).toArray()) {
             for (final IGridNode cst : this.grid.getMachines((Class<? extends IGridHost>) cls)) {
                 final TileCraftingUnitsCombiner tile = (TileCraftingUnitsCombiner) cst.getMachine();

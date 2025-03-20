@@ -48,6 +48,7 @@ public class Materials implements DamagedDefinitions<DamagedItemDefinition, Mate
 
 	private final IItemDefinition quantumProcessor;
 	private final IItemDefinition manaProcessor;
+	private final IItemDefinition energyProcessor;
 
 	private final IItemDefinition manaPart1k;
 	private final IItemDefinition manaPart4k;
@@ -62,11 +63,27 @@ public class Materials implements DamagedDefinitions<DamagedItemDefinition, Mate
 	private final IItemDefinition manaPart1gb;
 	private final IItemDefinition manaPart2gb;
 
+	private final IItemDefinition energyPart1k;
+	private final IItemDefinition energyPart4k;
+	private final IItemDefinition energyPart16k;
+	private final IItemDefinition energyPart64k;
+	private final IItemDefinition energyPart256k;
+	private final IItemDefinition energyPart1mb;
+	private final IItemDefinition energyPart4mb;
+	private final IItemDefinition energyPart16mb;
+	private final IItemDefinition energyPart64mb;
+	private final IItemDefinition energyPart256mb;
+	private final IItemDefinition energyPart1gb;
+	private final IItemDefinition energyPart2gb;
+
+
 	private final IItemDefinition elventradeBlankPattern;
 	private final IItemDefinition manapoolBlankPattern;
 	private final IItemDefinition petalBlankPattern;
 	private final IItemDefinition puredaisyBlankPattern;
 	private final IItemDefinition runealtarBlankPattern;
+	private final IItemDefinition teraplateBlankPattern;
+	private final IItemDefinition breweryBlankPattern;
 
 
 	private final IItemDefinition fluixilizedIngot;
@@ -116,12 +133,28 @@ public class Materials implements DamagedDefinitions<DamagedItemDefinition, Mate
 		this.manaPart1gb = this.createMaterial(this.material, MaterialType.MANA_PART_1GB);
 		this.manaPart2gb = this.createMaterial(this.material, MaterialType.MANA_PART_2GB);
 
-
 		this.elventradeBlankPattern = this.createMaterial(this.material, MaterialType.ELVENTRADE_BLANK_PATTERN);
 		this.manapoolBlankPattern = this.createMaterial(this.material, MaterialType.MANAPOOL_BLANK_PATTERN);
 		this.petalBlankPattern = this.createMaterial(this.material, MaterialType.PETAL_BLANK_PATTERN);
 		this.puredaisyBlankPattern = this.createMaterial(this.material, MaterialType.PUREDAISY_BLANK_PATTERN);
 		this.runealtarBlankPattern = this.createMaterial(this.material, MaterialType.RUNEALTAR_BLANK_PATTERN);
+
+		this.energyPart1k = this.createMaterial(this.material, MaterialType.ENERGY_PART_1K);
+		this.energyPart4k = this.createMaterial(this.material, MaterialType.ENERGY_PART_4K);
+		this.energyPart16k = this.createMaterial(this.material, MaterialType.ENERGY_PART_16K);
+		this.energyPart64k = this.createMaterial(this.material, MaterialType.ENERGY_PART_64K);
+		this.energyPart256k = this.createMaterial(this.material, MaterialType.ENERGY_PART_256K);
+		this.energyPart1mb = this.createMaterial(this.material, MaterialType.ENERGY_PART_1MB);
+		this.energyPart4mb = this.createMaterial(this.material, MaterialType.ENERGY_PART_4MB);
+		this.energyPart16mb = this.createMaterial(this.material, MaterialType.ENERGY_PART_16MB);
+		this.energyPart64mb = this.createMaterial(this.material, MaterialType.ENERGY_PART_64MB);
+		this.energyPart256mb = this.createMaterial(this.material, MaterialType.ENERGY_PART_256MB);
+		this.energyPart1gb = this.createMaterial(this.material, MaterialType.ENERGY_PART_1GB);
+		this.energyPart2gb = this.createMaterial(this.material, MaterialType.ENERGY_PART_2GB);
+		this.teraplateBlankPattern = this.createMaterial(this.material, MaterialType.TERAPLATE_BLANK_PATTERN);
+		this.breweryBlankPattern = this.createMaterial(this.material, MaterialType.BREWERY_BLANK_PATTERN);
+
+		this.energyProcessor = this.createMaterial(this.material, MaterialType.ENERGY_PROCESSOR);
 	}
 
 
@@ -200,12 +233,64 @@ public class Materials implements DamagedDefinitions<DamagedItemDefinition, Mate
 		return this.manaPart2gb;
 	}
 
+	public IItemDefinition energyPart1k() {
+		return this.energyPart1k;
+	}
+
+	public IItemDefinition energyPart4k() {
+		return this.energyPart4k;
+	}
+
+	public IItemDefinition energyPart16k() {
+		return this.energyPart16k;
+	}
+
+	public IItemDefinition energyPart64k() {
+		return this.energyPart64k;
+	}
+
+	public IItemDefinition energyPart256k() {
+		return this.energyPart256k;
+	}
+
+	public IItemDefinition energyPart1mb() {
+		return this.energyPart1mb;
+	}
+
+	public IItemDefinition energyPart4mb() {
+		return this.energyPart4mb;
+	}
+
+	public IItemDefinition energyPart16mb() {
+		return this.energyPart16mb;
+	}
+
+	public IItemDefinition energyPart64mb() {
+		return this.energyPart64mb;
+	}
+
+	public IItemDefinition energyPart256mb() {
+		return this.energyPart256mb;
+	}
+
+	public IItemDefinition energyPart1gb() {
+		return this.energyPart1gb;
+	}
+
+	public IItemDefinition energyPart2gb() {
+		return this.energyPart2gb;
+	}
+
 	public IItemDefinition quantumProcessor() {
 		return this.quantumProcessor;
 	}
 
 	public IItemDefinition manaProcessor() {
 		return this.manaProcessor;
+	}
+
+	public IItemDefinition energyProcessor() {
+		return this.energyProcessor;
 	}
 
 	public IItemDefinition cellPart256K() {
@@ -281,6 +366,14 @@ public class Materials implements DamagedDefinitions<DamagedItemDefinition, Mate
 		return this.runealtarBlankPattern;
 	}
 
+	public IItemDefinition teraplateBlankPattern() {
+		return this.teraplateBlankPattern;
+	}
+
+	public IItemDefinition breweryBlankPattern() {
+		return this.breweryBlankPattern;
+	}
+
 	public IItemDefinition manapoolBlankPattern() {
 		return this.manapoolBlankPattern;
 	}
@@ -320,26 +413,44 @@ public class Materials implements DamagedDefinitions<DamagedItemDefinition, Mate
 		QUANTUM_PROCESSOR("quantum_processor", Features.STUB),
 		MANA_PROCESSOR("mana_processor", Features.STUB, "botania"),
 
-		MANA_PART_1K("mana_part_1k", Features.MANA_CELLS),
-		MANA_PART_4K("mana_part_4k", Features.MANA_CELLS),
-		MANA_PART_16K("mana_part_16k", Features.MANA_CELLS),
-		MANA_PART_64K("mana_part_64k", Features.MANA_CELLS),
-		MANA_PART_256K("mana_part_256k", Features.MANA_DENSE_CELLS),
-		MANA_PART_1MB("mana_part_1mb", Features.MANA_DENSE_CELLS),
-		MANA_PART_4MB("mana_part_4mb", Features.MANA_DENSE_CELLS),
-		MANA_PART_16MB("mana_part_16mb", Features.MANA_DENSE_CELLS),
-		MANA_PART_64MB("mana_part_64mb", Features.MEGA_MANA_DENSE_CELLS),
-		MANA_PART_256MB("mana_part_256mb", Features.MEGA_MANA_DENSE_CELLS),
-		MANA_PART_1GB("mana_part_1gb", Features.MEGA_MANA_DENSE_CELLS),
-		MANA_PART_2GB("mana_part_2gb", Features.MEGA_MANA_DENSE_CELLS),
+		MANA_PART_1K("mana_part_1k", Features.MANA_CELLS, "botania"),
+		MANA_PART_4K("mana_part_4k", Features.MANA_CELLS, "botania"),
+		MANA_PART_16K("mana_part_16k", Features.MANA_CELLS, "botania"),
+		MANA_PART_64K("mana_part_64k", Features.MANA_CELLS, "botania"),
+		MANA_PART_256K("mana_part_256k", Features.MANA_DENSE_CELLS, "botania"),
+		MANA_PART_1MB("mana_part_1mb", Features.MANA_DENSE_CELLS, "botania"),
+		MANA_PART_4MB("mana_part_4mb", Features.MANA_DENSE_CELLS,"botania"),
+		MANA_PART_16MB("mana_part_16mb", Features.MANA_DENSE_CELLS, "botania"),
+		MANA_PART_64MB("mana_part_64mb", Features.MEGA_MANA_DENSE_CELLS, "botania"),
+		MANA_PART_256MB("mana_part_256mb", Features.MEGA_MANA_DENSE_CELLS, "botania"),
+		MANA_PART_1GB("mana_part_1gb", Features.MEGA_MANA_DENSE_CELLS, "botania"),
+		MANA_PART_2GB("mana_part_2gb", Features.MEGA_MANA_DENSE_CELLS, "botania"),
 
-		ELVENTRADE_BLANK_PATTERN("elventrade_blank_pattern", Features.BOTANIA_MECHANICAL_BLOCKS),
-		MANAPOOL_BLANK_PATTERN("manapool_blank_pattern", Features.BOTANIA_MECHANICAL_BLOCKS),
-		PETAL_BLANK_PATTERN("petal_blank_pattern", Features.BOTANIA_MECHANICAL_BLOCKS),
-		PUREDAISY_BLANK_PATTERN("puredaisy_blank_pattern", Features.BOTANIA_MECHANICAL_BLOCKS),
-		RUNEALTAR_BLANK_PATTERN("runealtar_blank_pattern", Features.BOTANIA_MECHANICAL_BLOCKS),
+		ELVENTRADE_BLANK_PATTERN("elventrade_blank_pattern", Features.BOTANIA_MECHANICAL_BLOCKS, "botania"),
+		MANAPOOL_BLANK_PATTERN("manapool_blank_pattern", Features.BOTANIA_MECHANICAL_BLOCKS, "botania"),
+		PETAL_BLANK_PATTERN("petal_blank_pattern", Features.BOTANIA_MECHANICAL_BLOCKS, "botania"),
+		PUREDAISY_BLANK_PATTERN("puredaisy_blank_pattern", Features.BOTANIA_MECHANICAL_BLOCKS, "botania"),
+		RUNEALTAR_BLANK_PATTERN("runealtar_blank_pattern", Features.BOTANIA_MECHANICAL_BLOCKS, "botania"),
 
-		FLUIXILIZED_INGOT("fluixilized_ingot", Features.STUB);
+		FLUIXILIZED_INGOT("fluixilized_ingot", Features.STUB),
+
+		ENERGY_PART_1K("energy_part_1k", Features.ENERGY_CELLS),
+		ENERGY_PART_4K("energy_part_4k", Features.ENERGY_CELLS),
+		ENERGY_PART_16K("energy_part_16k", Features.ENERGY_CELLS),
+		ENERGY_PART_64K("energy_part_64k", Features.ENERGY_CELLS),
+		ENERGY_PART_256K("energy_part_256k", Features.ENERGY_DENSE_CELLS),
+		ENERGY_PART_1MB("energy_part_1mb", Features.ENERGY_DENSE_CELLS),
+		ENERGY_PART_4MB("energy_part_4mb", Features.ENERGY_DENSE_CELLS),
+		ENERGY_PART_16MB("energy_part_16mb", Features.ENERGY_DENSE_CELLS),
+		ENERGY_PART_64MB("energy_part_64mb", Features.MEGA_ENERGY_DENSE_CELLS),
+		ENERGY_PART_256MB("energy_part_256mb", Features.MEGA_ENERGY_DENSE_CELLS),
+		ENERGY_PART_1GB("energy_part_1gb", Features.MEGA_ENERGY_DENSE_CELLS),
+		ENERGY_PART_2GB("energy_part_2gb", Features.MEGA_ENERGY_DENSE_CELLS),
+
+		ENERGY_PROCESSOR("energy_processor", Features.STUB),
+
+		TERAPLATE_BLANK_PATTERN("teraplate_blank_pattern", Features.BOTANIA_MECHANICAL_BLOCKS, "botania"),
+		BREWERY_BLANK_PATTERN("brewery_blank_pattern", Features.BOTANIA_MECHANICAL_BLOCKS, "botania");
 
 
 		private static Int2ObjectLinkedOpenHashMap<MaterialType> cachedValues;
@@ -356,7 +467,7 @@ public class Materials implements DamagedDefinitions<DamagedItemDefinition, Mate
 
 		MaterialType(String id, Features features) {
 			this.id = id;
-			this.modid = null;
+			this.modid = features.getRequiredModid();
 			this.features = features;
 			this.translationKey = "item." + Tags.MODID + ".material." + id;
 			this.model = new ModelResourceLocation(new ResourceLocation(Tags.MODID, "material/" + id), "inventory");

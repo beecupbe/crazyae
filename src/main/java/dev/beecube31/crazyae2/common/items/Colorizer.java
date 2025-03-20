@@ -46,7 +46,7 @@ public class Colorizer extends AEBaseItem implements ICrazyAEGuiItem<ColorizerOb
     }
 
     @Override
-    public ColorizerObj getGuiObject(ItemStack is, World w) {
+    public ColorizerObj getGuiObject(ItemStack is, World w, BlockPos pos) {
         return new ColorizerObj(is);
     }
 }

@@ -1,3 +1,4 @@
+#PARSE_ESCAPES
 # Corresponding Version: CrazyAE-v0.3
 # 対応バージョン: CrazyAE-v0.3
 
@@ -185,9 +186,7 @@ tooltip.crazyae.passive_generation_day.name=昼の発電量:
 tooltip.crazyae.passive_generation_night.name=夜の発電量:
 tooltip.crazyae.max_solar_capacity.name=容量
 
-tooltip.crazyae.qcm_desc.name=ケーブルの容量を増やすことができます。例:
-tooltip.crazyae.qcm_desc1.name=各量子マルチプライヤーは通常ケーブルに対して%s個のチャンネルを、
-tooltip.crazyae.qcm_desc2.name=高密度ケーブルには%s個のチャンネルを%s AE/tのコストで追加する。
+tooltip.crazyae.qcm_desc.name=ケーブルの容量を増やすことができます。例:\n各量子マルチプライヤーは通常ケーブルに対して%s個のチャンネルを、\n高密度ケーブルには%s個のチャンネルを%s AE/tのコストで追加する。
 
 tooltip.crazyae.auto_pickup.name=自動回収は
 tooltip.crazyae.auto_pickup_how_to_enable.name=SHIFT+RMBを押す毎に自動回収を切り替え

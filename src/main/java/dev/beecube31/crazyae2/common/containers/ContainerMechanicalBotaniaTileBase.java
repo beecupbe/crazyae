@@ -44,7 +44,7 @@ public abstract class ContainerMechanicalBotaniaTileBase extends ContainerCrazyA
         this.tile.encodePattern();
     }
 
-    public TileBotaniaMechanicalMachineBase getBotaniaTE() {
+    public TileBotaniaMechanicalMachineBase getTile() {
         return this.tile;
     }
 

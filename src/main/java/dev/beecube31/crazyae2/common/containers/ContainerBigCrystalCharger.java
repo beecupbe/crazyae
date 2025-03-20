@@ -1,6 +1,9 @@
 package dev.beecube31.crazyae2.common.containers;
 
-import appeng.api.config.*;
+import appeng.api.config.RedstoneMode;
+import appeng.api.config.SecurityPermissions;
+import appeng.api.config.Settings;
+import appeng.core.localization.GuiText;
 import appeng.util.Platform;
 import dev.beecube31.crazyae2.common.containers.base.slot.RestrictedSlot;
 import dev.beecube31.crazyae2.common.containers.base.slot.SlotOutput;
@@ -75,12 +78,22 @@ public class ContainerBigCrystalCharger extends ContainerCrazyAEUpgradeable impl
     }
 
     @Override
-    public int getCurrentProgress() {
+    public double getCurrentProgress() {
         return this.craftProgress;
     }
 
     @Override
-    public int getMaxProgress() {
+    public double getMaxProgress() {
         return 100;
+    }
+
+    @Override
+    public String getTooltip(String title, boolean disableMaxProgress, int tooltipID) {
+        return title +
+                "\n" +
+                this.getCurrentProgress(tooltipID) +
+                GuiText.Of.getLocal() +
+                ' ' +
+                this.getMaxProgress(tooltipID);
     }
 }

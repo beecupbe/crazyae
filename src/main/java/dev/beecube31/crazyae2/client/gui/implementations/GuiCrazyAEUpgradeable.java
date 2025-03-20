@@ -23,12 +23,12 @@ import dev.beecube31.crazyae2.common.interfaces.upgrades.IUpgradesInfoProvider;
 import dev.beecube31.crazyae2.common.networking.network.NetworkHandler;
 import dev.beecube31.crazyae2.common.networking.packets.orig.PacketConfigButton;
 import dev.beecube31.crazyae2.common.networking.packets.orig.PacketInventoryAction;
-import dev.beecube31.crazyae2.common.parts.implementations.PartExportBusImp;
-import dev.beecube31.crazyae2.common.parts.implementations.PartImportBusImp;
-import dev.beecube31.crazyae2.common.parts.implementations.PartManaExportBus;
-import dev.beecube31.crazyae2.common.parts.implementations.PartManaImportBus;
+import dev.beecube31.crazyae2.common.parts.implementations.*;
+import dev.beecube31.crazyae2.common.registration.upgrades.UpgradesInfoProvider;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiText;
+import dev.beecube31.crazyae2.common.sync.CrazyAEGuiTooltip;
 import dev.beecube31.crazyae2.common.tile.networking.TilePatternsInterface;
+import dev.beecube31.crazyae2.common.tile.networking.TilePerfectInterface;
 import dev.beecube31.crazyae2.common.util.BlockUtils;
 import mezz.jei.api.gui.IGhostIngredientHandler.Target;
 import net.minecraft.client.gui.GuiButton;
@@ -52,6 +52,7 @@ import java.util.List;
 import java.util.*;
 
 import static appeng.client.render.BlockPosHighlighter.hilightBlock;
+import static dev.beecube31.crazyae2.core.client.CrazyAEClientHandler.ICON_INDENTATION;
 
 public class GuiCrazyAEUpgradeable extends CrazyAEBaseGui implements IJEIGhostIngredients {
     private final Map<Target<?>, Object> mapTargetSlot = new HashMap<>();
@@ -67,6 +68,9 @@ public class GuiCrazyAEUpgradeable extends CrazyAEBaseGui implements IJEIGhostIn
 
     protected boolean disableDrawTileName = false;
     protected boolean disableDrawInventoryString = false;
+
+    protected Map<ItemStack, Integer> upgradesTooltipIcons = null;
+    protected String upgradeTooltipStr = null;
 
     protected int myOffsetX = 0;
 
@@ -91,27 +95,32 @@ public class GuiCrazyAEUpgradeable extends CrazyAEBaseGui implements IJEIGhostIn
     public void initGui() {
         super.initGui();
         this.addButtons();
+
+//        if (CrazyAEClientConfig.isAdvancedTooltipsEnabled()) {
+//            this.addUpgradesTooltip();
+//        }
     }
 
-//    @Override
-//    protected void renderToolTip(ItemStack stack, int x, int y) {
-//        if (stack.getItem() instanceof CrazyAEUpgradeModule module) {
-//            FontRenderer font = stack.getItem().getFontRenderer(stack);
-//            net.minecraftforge.fml.client.config.GuiUtils.preItemToolTip(stack);
-//
-//            List<String> str = CrazyAEClientHandler.onTooltipDrawing(module, stack, this.cvb.getUpgradeable().getBlock());
-//            if (str == null || str.isEmpty()) {
-//                super.renderToolTip(stack, x, y);
-//                return;
-//            }
-//
-//            this.drawHoveringText(str, x, y, (font == null ? fontRenderer : font));
-//            net.minecraftforge.fml.client.config.GuiUtils.postItemToolTip();
-//            return;
-//        }
-//
-//        super.renderToolTip(stack, x, y);
-//    }
+    protected void addUpgradesTooltip() {
+        List<dev.beecube31.crazyae2.common.registration.definitions.Upgrades.UpgradesFeatureSetParser.FeatureEntry> entrys = UpgradesInfoProvider.getUpgradeInfo(this.cvb.getUpgradeable().getBlock());
+
+        if (!entrys.isEmpty()) {
+            StringBuilder str = new StringBuilder();
+            this.upgradesTooltipIcons = new HashMap<>();
+            str.append(CrazyAEGuiTooltip.THIS_DEVICE_SUPPORTS.getLocal());
+
+            dev.beecube31.crazyae2.common.registration.definitions.Upgrades.UpgradesFeatureSetParser.FeatureEntry lastEntry = null;
+            for (dev.beecube31.crazyae2.common.registration.definitions.Upgrades.UpgradesFeatureSetParser.FeatureEntry e : entrys) {
+                if (lastEntry != null && lastEntry.upgradeType == e.upgradeType) continue;
+
+                lastEntry = e;
+                this.upgradesTooltipIcons.put(e.upgradeType.stack(1), this.upgradesTooltipIcons.size() + 1);
+                str.append(ICON_INDENTATION).append(e.upgradesCount).append("x ").append(e.upgradeType.getLocalizedCardType()).append("\n");
+            }
+
+            this.upgradeTooltipStr = str.toString();
+        }
+    }
 
     @Override
     public List<Rectangle> getJEIExclusionArea() {
@@ -235,6 +244,47 @@ public class GuiCrazyAEUpgradeable extends CrazyAEBaseGui implements IJEIGhostIn
         if (this.schedulingMode != null) {
             this.schedulingMode.set(this.cvb.getSchedulingMode());
         }
+
+//        if (CrazyAEClientConfig.isAdvancedTooltipsEnabled() && this.upgradesTooltipIcons != null && this.upgradeTooltipStr != null) {
+//            int[] guiSize = CrazyAEClientHandler.getCurrentGuiSize(this.mc);
+//            int[] tooltipPos = CrazyAEClientHandler.getTooltipPos(
+//                    Collections.singletonList(this.upgradeTooltipStr),
+//                    mouseX,
+//                    mouseY,
+//                    guiSize[0],
+//                    guiSize[1],
+//                    -1,
+//                    this.mc.fontRenderer
+//            );
+//
+//            if (tooltipPos != null) {
+//                int x = offsetX + (this.cvb.hasOptionSideButton() ? 223 : 187) + this.cvb.getMyOffsetX();
+//                int y = offsetY + 8 + 18 * this.cvb.availableUpgrades();
+//                if (x <= mouseX && x + 18 >= mouseX) {
+//                    if (8 <= mouseY && 8 + y >= mouseY) {
+//                        CrazyAEClientHandler.drawTooltip(
+//                                ItemStack.EMPTY,
+//                                Collections.singletonList(this.upgradeTooltipStr),
+//                                mouseX,
+//                                mouseY,
+//                                guiSize[0],
+//                                guiSize[1],
+//                                -1,
+//                                this.mc.fontRenderer
+//                        );
+//
+//                        for (Map.Entry<ItemStack, Integer> e : upgradesTooltipIcons.entrySet()) {
+//                            CrazyAEClientHandler.drawItemIntoTooltip(
+//                                    e.getKey(),
+//                                    e.getValue(),
+//                                    mouseX,
+//                                    mouseY
+//                            );
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
 
     @Override
@@ -331,7 +381,7 @@ public class GuiCrazyAEUpgradeable extends CrazyAEBaseGui implements IJEIGhostIn
     }
 
     protected boolean drawPatternsInterfaceOutputSlots() {
-        return this.bc instanceof TilePatternsInterface;
+        return this.bc instanceof TilePatternsInterface || this.bc instanceof PartPatternsInterface || this.bc instanceof TilePerfectInterface || this.bc instanceof PartPerfectInterface;
     }
 
     protected CrazyAEGuiText getName() {
@@ -340,6 +390,8 @@ public class GuiCrazyAEUpgradeable extends CrazyAEBaseGui implements IJEIGhostIn
                 : this.bc instanceof TilePatternsInterface ? CrazyAEGuiText.PATTERN_INTERFACE
                 : this.bc instanceof PartManaImportBus ? CrazyAEGuiText.MANA_IMPORT_BUS
                 : this.bc instanceof PartManaExportBus ? CrazyAEGuiText.MANA_EXPORT_BUS
+                : this.bc instanceof PartEnergyImportBus ? CrazyAEGuiText.ENERGY_IMPORT_BUS
+                : this.bc instanceof PartEnergyExportBus ? CrazyAEGuiText.ENERGY_EXPORT_BUS
                 : CrazyAEGuiText.NOT_DEFINED;
     }
 

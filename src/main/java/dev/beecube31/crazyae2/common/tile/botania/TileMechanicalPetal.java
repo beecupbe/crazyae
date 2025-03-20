@@ -6,12 +6,12 @@ import appeng.api.networking.crafting.ICraftingPatternDetails;
 import appeng.api.networking.ticking.TickRateModulation;
 import appeng.api.storage.data.IAEItemStack;
 import appeng.me.helpers.MachineSource;
-import appeng.parts.automation.BlockUpgradeInventory;
 import appeng.tile.inventory.AppEngInternalInventory;
-import com.aeternal.botaniverse.common.item.materials.ItemMoreRune;
 import com.google.common.base.Preconditions;
 import dev.beecube31.crazyae2.common.enums.BotaniaMechanicalDeviceType;
+import dev.beecube31.crazyae2.common.parts.implementations.CrazyAEBlockUpgradeInv;
 import dev.beecube31.crazyae2.common.util.NBTUtils;
+import dev.beecube31.crazyae2.common.util.inv.CrazyAEInternalInv;
 import dev.beecube31.crazyae2.core.CrazyAE;
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
@@ -23,7 +23,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import vazkii.botania.api.BotaniaAPI;
 import vazkii.botania.api.recipe.RecipePetals;
-import vazkii.botania.common.item.material.ItemRune;
 
 import javax.annotation.Nonnull;
 import java.util.ArrayList;
@@ -33,13 +32,13 @@ public class TileMechanicalPetal extends TileBotaniaMechanicalMachineBase {
     public TileMechanicalPetal() {
         super();
 
-        this.craftingInputInv = new AppEngInternalInventory(this, 16, 64);
-        (this.craftingOutputInv = new AppEngInternalInventory(this, 1, 64)).setFilter(new DisabledFilter());
+        this.craftingInputInv = new CrazyAEInternalInv(this, 16, 64);
+        (this.craftingOutputInv = new CrazyAEInternalInv(this, 1, 64)).setFilter(new DisabledFilter());
 
         this.actionSource = new MachineSource(this);
         final Block block = CrazyAE.definitions().blocks().mechanicalPetal().maybeBlock().orElse(null);
         Preconditions.checkNotNull(block);
-        this.upgrades = new BlockUpgradeInventory(block, this, this.getUpgradeSlots());
+        this.upgrades = new CrazyAEBlockUpgradeInv(block, this, this.getUpgradeSlots());
     }
 
     @Override

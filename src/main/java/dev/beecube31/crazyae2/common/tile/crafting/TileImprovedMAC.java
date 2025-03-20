@@ -4,9 +4,11 @@ import appeng.api.AEApi;
 import appeng.api.config.*;
 import appeng.api.definitions.IItemDefinition;
 import appeng.api.implementations.ICraftingPatternItem;
-import appeng.api.implementations.tiles.ICraftingMachine;
 import appeng.api.networking.IGridNode;
-import appeng.api.networking.crafting.*;
+import appeng.api.networking.crafting.ICraftingMedium;
+import appeng.api.networking.crafting.ICraftingPatternDetails;
+import appeng.api.networking.crafting.ICraftingProvider;
+import appeng.api.networking.crafting.ICraftingProviderHelper;
 import appeng.api.networking.events.MENetworkCraftingPatternChange;
 import appeng.api.networking.events.MENetworkEventSubscribe;
 import appeng.api.networking.events.MENetworkPowerStatusChange;
@@ -22,49 +24,38 @@ import appeng.api.util.AECableType;
 import appeng.api.util.AEPartLocation;
 import appeng.api.util.DimensionalCoord;
 import appeng.api.util.IConfigManager;
-import appeng.core.localization.GuiText;
-import appeng.helpers.ICustomNameObject;
 import appeng.helpers.ItemStackHelper;
 import appeng.me.GridAccessException;
 import appeng.me.helpers.MachineSource;
-import appeng.parts.automation.BlockUpgradeInventory;
-import appeng.parts.automation.UpgradeInventory;
 import appeng.tile.inventory.AppEngInternalInventory;
 import appeng.util.ConfigManager;
 import appeng.util.IConfigManagerHost;
-import appeng.util.InventoryAdaptor;
 import appeng.util.Platform;
 import appeng.util.inv.InvOperation;
 import appeng.util.item.AEItemStack;
 import com.google.common.base.Preconditions;
-import dev.beecube31.crazyae2.common.interfaces.ICrazyAEUpgradeInventory;
 import dev.beecube31.crazyae2.common.interfaces.IGridHostMonitorable;
 import dev.beecube31.crazyae2.common.interfaces.crafting.IFastCraftingHandler;
 import dev.beecube31.crazyae2.common.interfaces.upgrades.IUpgradesInfoProvider;
+import dev.beecube31.crazyae2.common.parts.implementations.CrazyAEBlockUpgradeInv;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiText;
 import dev.beecube31.crazyae2.common.tile.base.CrazyAENetworkInvOCTile;
 import dev.beecube31.crazyae2.core.CrazyAE;
-import gregtech.api.block.machines.BlockMachine;
-import gregtech.api.metatileentity.MetaTileEntity;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
-import net.minecraft.block.state.IBlockState;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 
 public class TileImprovedMAC extends CrazyAENetworkInvOCTile implements IConfigManagerHost, IGridTickable, ICraftingMedium, ICraftingProvider, IUpgradesInfoProvider, IFastCraftingHandler, IGridHostMonitorable {
 
@@ -73,7 +64,7 @@ public class TileImprovedMAC extends CrazyAENetworkInvOCTile implements IConfigM
 
     private final AppEngInternalInventory patternsInv = new AppEngInternalInventory(this, 45, 1);
     private final IConfigManager settings;
-    private final UpgradeInventory upgrades;
+    private final CrazyAEBlockUpgradeInv upgrades;
     private boolean isPowered = false;
     private boolean cached = false;
     private final IActionSource actionSource = new MachineSource(this);
@@ -89,7 +80,7 @@ public class TileImprovedMAC extends CrazyAENetworkInvOCTile implements IConfigM
         this.settings = new ConfigManager(this);
         this.settings.registerSetting(Settings.REDSTONE_CONTROLLED, RedstoneMode.IGNORE);
         this.getProxy().setIdlePowerUsage(32.0);
-        this.upgrades = new BlockUpgradeInventory(assembler, this, this.getUpgradeSlots());
+        this.upgrades = new CrazyAEBlockUpgradeInv(assembler, this, this.getUpgradeSlots());
 
     }
 
@@ -381,7 +372,7 @@ public class TileImprovedMAC extends CrazyAENetworkInvOCTile implements IConfigM
     }
 
     public int getInstalledCustomUpgrades(dev.beecube31.crazyae2.common.registration.definitions.Upgrades.UpgradeType u) {
-        return ((ICrazyAEUpgradeInventory) this.upgrades).getInstalledUpgrades(u);
+        return this.upgrades.getInstalledUpgrades(u);
     }
 
     private void notifyPatternsChanged() {

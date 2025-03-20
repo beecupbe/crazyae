@@ -16,6 +16,12 @@ import static appeng.helpers.ItemStackHelper.stackWriteToNBT;
 
 public class NBTUtils {
 
+    public static NBTTagCompound openNbtDataNullable(final ItemStack i) {
+        NBTTagCompound compound = i.getTagCompound();
+        i.setTagCompound(compound);
+        return compound;
+    }
+
     public static NBTBase createItemTag(final ItemStack i) {
         final NBTTagCompound c = new NBTTagCompound();
 
@@ -60,6 +66,12 @@ public class NBTUtils {
         } else if (details instanceof TileBotaniaMechanicalMachineBase.RuneAltarCraftingTask k) {
             nbt.setInteger("manaReq", k.getRequiredMana());
             return "runealtar";
+        } else if (details instanceof TileBotaniaMechanicalMachineBase.TeraplateCraftingTask k) {
+            nbt.setInteger("manaReq", k.getRequiredMana());
+            return "teraplate";
+        } else if (details instanceof TileBotaniaMechanicalMachineBase.BreweryCraftingTask k) {
+            nbt.setInteger("manaReq", k.getRequiredMana());
+            return "brewery";
         } else if (details instanceof TileBotaniaMechanicalMachineBase.CraftingTask) {
             return "default";
         }
@@ -96,6 +108,16 @@ public class NBTUtils {
 
                     case "runealtar" -> {
                         TileBotaniaMechanicalMachineBase.CraftingTask task = new TileBotaniaMechanicalMachineBase.RuneAltarCraftingTask(inputs, progressAmt, tag.getInteger("manaReq"));
+                        queueMap.add(task);
+                    }
+
+                    case "teraplate" -> {
+                        TileBotaniaMechanicalMachineBase.CraftingTask task = new TileBotaniaMechanicalMachineBase.TeraplateCraftingTask(inputs, progressAmt, tag.getInteger("manaReq"));
+                        queueMap.add(task);
+                    }
+
+                    case "brewery" -> {
+                        TileBotaniaMechanicalMachineBase.CraftingTask task = new TileBotaniaMechanicalMachineBase.BreweryCraftingTask(inputs, progressAmt, tag.getInteger("manaReq"));
                         queueMap.add(task);
                     }
 

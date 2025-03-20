@@ -5,17 +5,18 @@ import appeng.api.config.Settings;
 import appeng.api.config.YesNo;
 import appeng.api.util.IConfigManager;
 import appeng.container.slot.IOptionalSlotHost;
+import appeng.helpers.DualityInterface;
+import appeng.helpers.IInterfaceHost;
 import dev.beecube31.crazyae2.common.containers.base.slot.OptionalSlotRestrictedInput;
 import dev.beecube31.crazyae2.common.containers.base.slot.RestrictedSlot;
 import dev.beecube31.crazyae2.common.containers.base.slot.SlotOversized;
 import dev.beecube31.crazyae2.common.containers.guisync.GuiSync;
-import dev.beecube31.crazyae2.common.duality.PatternsInterfaceDuality;
-import dev.beecube31.crazyae2.common.interfaces.ICrazyAEInterfaceHost;
+import dev.beecube31.crazyae2.common.interfaces.upgrades.IUpgradesInfoProvider;
 import net.minecraft.entity.player.InventoryPlayer;
 
 public class ContainerPatternsInterface extends ContainerCrazyAEUpgradeable implements IOptionalSlotHost {
 
-    private final PatternsInterfaceDuality myDuality;
+    private final DualityInterface myDuality;
 
     @GuiSync(3)
     public YesNo bMode = YesNo.NO;
@@ -23,8 +24,9 @@ public class ContainerPatternsInterface extends ContainerCrazyAEUpgradeable impl
     @GuiSync(4)
     public YesNo iTermMode = YesNo.YES;
 
-    public ContainerPatternsInterface(final InventoryPlayer ip, final ICrazyAEInterfaceHost te) {
-        super(ip, te.getInterfaceDuality().getHost());
+    public ContainerPatternsInterface(final InventoryPlayer ip, final IInterfaceHost te) {
+        super(ip, te instanceof IUpgradesInfoProvider r ? r : null);
+        //super(ip, (IUpgradesInfoProvider) te.getInterfaceDuality().getTile());
 
         this.myDuality = te.getInterfaceDuality();
 
@@ -52,7 +54,7 @@ public class ContainerPatternsInterface extends ContainerCrazyAEUpgradeable impl
     }
 
     @Override
-    protected boolean isPatternInterface() {
+    public boolean hasOptionSideButton() {
         return true;
     }
 
@@ -69,7 +71,7 @@ public class ContainerPatternsInterface extends ContainerCrazyAEUpgradeable impl
 
     @Override
     protected void loadSettingsFromHost(final IConfigManager cm) {
-        this.setBlockingMode();
+        this.setBlockingMode((YesNo) cm.getSetting(Settings.BLOCK));
         this.setInterfaceTerminalMode((YesNo) cm.getSetting(Settings.INTERFACE_TERMINAL));
     }
 
@@ -77,8 +79,8 @@ public class ContainerPatternsInterface extends ContainerCrazyAEUpgradeable impl
         return this.bMode;
     }
 
-    private void setBlockingMode() {
-        this.bMode = YesNo.NO;
+    private void setBlockingMode(final YesNo bMode) {
+        this.bMode = bMode;
     }
 
     public YesNo getInterfaceTerminalMode() {

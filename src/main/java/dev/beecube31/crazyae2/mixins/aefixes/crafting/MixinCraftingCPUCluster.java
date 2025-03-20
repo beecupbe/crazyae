@@ -46,7 +46,7 @@ public abstract class MixinCraftingCPUCluster implements IAECluster, ICraftingCP
             method = "executeCrafting",
             at = @At(value = "INVOKE", target = "Lappeng/api/networking/crafting/ICraftingPatternDetails;isValidItemForSlot(ILnet/minecraft/item/ItemStack;Lnet/minecraft/world/World;)Z")
     )
-    private boolean injectItemValidation(ICraftingPatternDetails instance, int i, ItemStack itemStack, World world, @Local LocalRef<Boolean> found, @Local IAEItemStack fuzz) {
+    private boolean crazyae$injectItemValidation(ICraftingPatternDetails instance, int i, ItemStack itemStack, World world, @Local LocalRef<Boolean> found, @Local IAEItemStack fuzz) {
         final IAEItemStack ais = this.inventory.extractItems(fuzz, Actionable.MODULATE, this.machineSrc);
         this.postChange(ais, this.machineSrc);
         this.items.add(ais);
@@ -59,7 +59,7 @@ public abstract class MixinCraftingCPUCluster implements IAECluster, ICraftingCP
             method = "executeCrafting",
             at = @At(value = "INVOKE", target = "Lappeng/util/Platform;getContainerItem(Lnet/minecraft/item/ItemStack;)Lnet/minecraft/item/ItemStack;", ordinal = 0)
     )
-    private ItemStack injectContainerItemGetter(ItemStack stackInSlot) {
+    private ItemStack crazyae$injectContainerItemGetter(ItemStack stackInSlot) {
         if (this.items != null && !this.items.isEmpty()) {
             for (IAEItemStack item : this.items) {
                 if (item != null) {

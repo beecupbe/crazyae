@@ -4,11 +4,9 @@ import appeng.api.config.RedstoneMode;
 import appeng.api.config.Settings;
 import appeng.client.gui.widgets.GuiImgButton;
 import dev.beecube31.crazyae2.common.containers.ContainerBotaniaDevicePatternsInv;
-import dev.beecube31.crazyae2.common.containers.ContainerFastMAC;
 import dev.beecube31.crazyae2.common.enums.BotaniaMechanicalDeviceType;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiText;
 import dev.beecube31.crazyae2.common.tile.botania.TileBotaniaMechanicalMachineBase;
-import dev.beecube31.crazyae2.common.tile.crafting.TileImprovedMAC;
 import net.minecraft.entity.player.InventoryPlayer;
 
 public class GuiBotaniaDevicePatternsInv extends GuiCrazyAEUpgradeable {
@@ -19,7 +17,7 @@ public class GuiBotaniaDevicePatternsInv extends GuiCrazyAEUpgradeable {
     public GuiBotaniaDevicePatternsInv(final InventoryPlayer inventoryPlayer, final TileBotaniaMechanicalMachineBase te) {
         super(new ContainerBotaniaDevicePatternsInv(inventoryPlayer, te));
         this.type = te.getType();
-        this.ySize = 197;
+        this.ySize = 199;
         this.container = (ContainerBotaniaDevicePatternsInv) this.inventorySlots;
         this.setDisableDrawInventoryString(true);
     }

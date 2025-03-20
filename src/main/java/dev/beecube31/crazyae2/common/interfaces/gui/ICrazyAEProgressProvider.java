@@ -1,15 +1,17 @@
 package dev.beecube31.crazyae2.common.interfaces.gui;
 
 public interface ICrazyAEProgressProvider {
-    int getCurrentProgress();
+    double getCurrentProgress();
 
-    default int getCurrentProgress(int index) {
+    default double getCurrentProgress(int index) {
         return getCurrentProgress();
     }
 
-    int getMaxProgress();
+    double getMaxProgress();
 
-    default int getMaxProgress(int index) {
+    default double getMaxProgress(int index) {
         return getMaxProgress();
     }
+
+    String getTooltip(String title, boolean disableMaxProgress, int tooltipID);
 }

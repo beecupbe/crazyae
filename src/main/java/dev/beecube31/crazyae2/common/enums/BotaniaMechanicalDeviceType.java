@@ -10,5 +10,10 @@ public enum BotaniaMechanicalDeviceType {
     PUREDAISY(
     ),
     RUNEALTAR(
-    );
+    ),
+    TERAPLATE(
+    ),
+    BREWERY(
+    )
+    ;
 }

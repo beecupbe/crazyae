@@ -23,6 +23,8 @@ public final class CrazyAEClientConfig extends Configuration {
     private static int colorizerTextColorBlue = 0;
 
     private static boolean isColorizingEnabled = true;
+    //private static boolean isAdvancedTooltipsEnabled = true;
+
 
     public static void init(Configuration configuration) {
         if (config == null) {
@@ -43,6 +45,7 @@ public final class CrazyAEClientConfig extends Configuration {
         colorizerTextColorGreen = getIntKey(CATEGORY_CLIENT, "colorizerTextColorGreen", colorizerTextColorGreen, 0, 255, "Text green color for the Gui colorizer.").getInt();
         colorizerTextColorBlue = getIntKey(CATEGORY_CLIENT, "colorizerTextColorBlue", colorizerTextColorBlue, 0, 255, "Text blue color for the Gui colorizer.").getInt();
         isColorizingEnabled = getBooleanKey(CATEGORY_CLIENT, "isColorizingEnabled", isColorizingEnabled, "Enable GUI & Text colorizing?").getBoolean();
+        //isAdvancedTooltipsEnabled = getBooleanKey(CATEGORY_CLIENT, "isAdvancedTooltipsEnabled", isAdvancedTooltipsEnabled, "Enable advanced tooltips with icons for AE2 and CrazyAE?").getBoolean();
 
         config.save();
     }
@@ -80,6 +83,10 @@ public final class CrazyAEClientConfig extends Configuration {
     public static boolean isColorizingEnabled() {
         return isColorizingEnabled;
     }
+
+//    public static boolean isAdvancedTooltipsEnabled() {
+//        return isAdvancedTooltipsEnabled;
+//    }
 
     public static int getColorizerColorRed() {
         return colorizerColorRed;

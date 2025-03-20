@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 @IFMLLoadingPlugin.MCVersion(ForgeVersion.mcVersion)
-@IFMLLoadingPlugin.Name("CrazyAE-MixinsCore")
+@IFMLLoadingPlugin.Name("CrazyAEPlugin")
 @Optional.Interface(iface = "zone.rong.mixinbooter.ILateMixinLoader", modid = "mixinbooter")
 public class CrazyAEMixinsCore implements IFMLLoadingPlugin, ILateMixinLoader {
 
@@ -56,6 +56,9 @@ public class CrazyAEMixinsCore implements IFMLLoadingPlugin, ILateMixinLoader {
 		mixins.add(String.format(MIXIN_PATH, "core"));
 		mixins.add(String.format(MIXIN_PATH, "aefixes"));
 
+		if (Loader.isModLoaded("thermaldynamics")) {
+			mixins.add(String.format(MIXIN_PATH, "thermal.dynamics.fix"));
+		}
 
 
 		for (var feature : Features.values()) {
@@ -76,7 +79,7 @@ public class CrazyAEMixinsCore implements IFMLLoadingPlugin, ILateMixinLoader {
 				for (var subFeature : subFeatures) {
 					if (!subFeature.isEnabled()) continue;
 
-					var subFeatureMixins = subFeature.getMixins();
+					var subFeatureMixins = subFeature.getMixin();
 					if (subFeatureMixins != null) {
 						mixins.add(String.format(MIXIN_PATH, subFeatureMixins));
 					}

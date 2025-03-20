@@ -2,12 +2,13 @@ package dev.beecube31.crazyae2.client.gui.implementations;
 
 import appeng.api.config.Settings;
 import appeng.api.config.YesNo;
+import appeng.client.gui.widgets.GuiImgButton;
 import appeng.client.gui.widgets.GuiToggleButton;
 import appeng.core.localization.GuiText;
+import appeng.helpers.IInterfaceHost;
 import dev.beecube31.crazyae2.client.gui.sprites.StateSprite;
 import dev.beecube31.crazyae2.client.gui.widgets.OptionSideButton;
 import dev.beecube31.crazyae2.common.containers.ContainerPatternsInterface;
-import dev.beecube31.crazyae2.common.interfaces.ICrazyAEInterfaceHost;
 import dev.beecube31.crazyae2.common.networking.network.NetworkHandler;
 import dev.beecube31.crazyae2.common.networking.packets.PacketSwitchGuis;
 import dev.beecube31.crazyae2.common.networking.packets.orig.PacketConfigButton;
@@ -22,9 +23,10 @@ import java.io.IOException;
 public class GuiPatternsInterface extends GuiCrazyAEUpgradeable {
 
     private OptionSideButton priority;
+    private GuiImgButton BlockMode;
     private GuiToggleButton interfaceMode;
 
-    public GuiPatternsInterface(final InventoryPlayer inventoryPlayer, final ICrazyAEInterfaceHost te) {
+    public GuiPatternsInterface(final InventoryPlayer inventoryPlayer, final IInterfaceHost te) {
         super(new ContainerPatternsInterface(inventoryPlayer, te));
         this.ySize = 256;
         this.setDisableDrawInventoryString(true);
@@ -46,6 +48,9 @@ public class GuiPatternsInterface extends GuiCrazyAEUpgradeable {
         );
         this.buttonList.add(this.priority);
 
+        this.BlockMode = new GuiImgButton(this.guiLeft - 18, this.guiTop + 8, Settings.BLOCK, YesNo.NO);
+        this.buttonList.add(this.BlockMode);
+
         this.interfaceMode = new GuiToggleButton(
                 this.guiLeft - 18,
                 this.guiTop + 26,
@@ -58,9 +63,12 @@ public class GuiPatternsInterface extends GuiCrazyAEUpgradeable {
 
     @Override
     public void drawFG(final int offsetX, final int offsetY, final int mouseX, final int mouseY) {
-        super.drawFG(offsetX, offsetY, mouseX, mouseY);
         if (this.interfaceMode != null) {
             this.interfaceMode.setState(((ContainerPatternsInterface) this.cvb).getInterfaceTerminalMode() == YesNo.YES);
+        }
+
+        if (this.BlockMode != null) {
+            this.BlockMode.set(((ContainerPatternsInterface) this.cvb).getBlockingMode());
         }
 
         this.drawString(this.getGuiDisplayName(CrazyAEGuiText.PATTERN_INTERFACE.getLocal()), 8, 6);
@@ -89,6 +97,10 @@ public class GuiPatternsInterface extends GuiCrazyAEUpgradeable {
 
         if (btn == this.interfaceMode) {
             NetworkHandler.instance().sendToServer(new PacketConfigButton(Settings.INTERFACE_TERMINAL, backwards));
+        }
+
+        if (btn == this.BlockMode) {
+            NetworkHandler.instance().sendToServer(new PacketConfigButton(this.BlockMode.getSetting(), backwards));
         }
     }
 

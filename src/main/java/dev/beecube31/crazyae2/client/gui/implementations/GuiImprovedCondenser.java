@@ -4,6 +4,7 @@ import appeng.api.config.Settings;
 import appeng.client.gui.widgets.GuiImgButton;
 import appeng.core.localization.GuiText;
 import dev.beecube31.crazyae2.client.gui.CrazyAEBaseGui;
+import dev.beecube31.crazyae2.client.gui.sprites.Sprite;
 import dev.beecube31.crazyae2.client.gui.widgets.ProgressBar;
 import dev.beecube31.crazyae2.common.containers.ContainerImprovedCondenser;
 import dev.beecube31.crazyae2.common.networking.network.NetworkHandler;
@@ -51,7 +52,10 @@ public class GuiImprovedCondenser extends CrazyAEBaseGui {
                 ProgressBar.Direction.VERTICAL,
                 GuiText.StoredEnergy.getLocal(),
                 0,
-                this.getGuiHue()
+                this.getGuiHue(),
+                Sprite.PROGRESS_BAR_FILLED,
+                null,
+                false
         );
 
         this.mode = new GuiImgButton(114 + this.guiLeft, 13 + this.guiTop, Settings.CONDENSER_OUTPUT, this.cvc.getOutput());

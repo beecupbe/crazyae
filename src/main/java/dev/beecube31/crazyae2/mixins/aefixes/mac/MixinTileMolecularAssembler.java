@@ -29,7 +29,7 @@ public abstract class MixinTileMolecularAssembler extends AENetworkInvTile imple
             remap = false,
             cancellable = true
     )
-    private void injectToPacketAnimation(IGridNode node, int ticksSinceLastCall, CallbackInfoReturnable<TickRateModulation> cir) {
+    private void crazyae$tickingRequest(IGridNode node, int ticksSinceLastCall, CallbackInfoReturnable<TickRateModulation> cir) {
         if (CrazyAEClientConfig.aeFixes.disableMolecularAssemblerCraftingAnimation) {
             this.saveChanges();
             this.updateSleepiness();

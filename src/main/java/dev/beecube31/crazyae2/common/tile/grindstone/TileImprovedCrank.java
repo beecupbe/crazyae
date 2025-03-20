@@ -20,7 +20,7 @@ import java.util.List;
 
 public class TileImprovedCrank extends CrazyAEOCTile implements ICustomCollision, ITickable {
 
-    private final int ticksPerRotation = 18;
+    private final int ticksPerRotation = 15;
     private float visibleRotation = 0;
 
     private int hits = 0;
@@ -82,11 +82,10 @@ public class TileImprovedCrank extends CrazyAEOCTile implements ICustomCollision
             return false;
         }
 
-        if (this.rotation < 5) {
+        if (this.rotation <= 0) {
             final ICrankable g = this.getGrinder();
             if (g != null) {
                 if (g.canTurn()) {
-                    this.hits = 0;
                     this.rotation += this.ticksPerRotation;
                     this.markForUpdate();
                     return true;

@@ -4,6 +4,10 @@
       "type": "forge:or",
       "values": [
         {
+          "type": "crazyae:part_exists",
+          "name": "mana_import_bus"
+        },
+        {
           "type": "crazyae:material_exists",
           "name": "mana_part_1k"
         },

@@ -122,6 +122,10 @@ public class PartManaImportBus extends CrazyAEPartSharedBus implements IManaLink
 
     @Override
     protected TickRateModulation doBusWork() {
+        if (!this.canDoBusWork()) {
+            return TickRateModulation.IDLE;
+        }
+
         final int MANA_BUFFER = this.calculateManaToSend();
 
         if (this.hasConnection && !this.getTile().getWorld().isRemote) {

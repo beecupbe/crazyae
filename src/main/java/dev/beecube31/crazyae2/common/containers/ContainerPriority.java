@@ -2,10 +2,10 @@ package dev.beecube31.crazyae2.common.containers;
 
 import appeng.api.config.SecurityPermissions;
 import appeng.api.parts.IPart;
+import appeng.helpers.IPriorityHost;
 import appeng.util.Platform;
 import dev.beecube31.crazyae2.common.containers.base.CrazyAEBaseContainer;
 import dev.beecube31.crazyae2.common.containers.guisync.GuiSync;
-import dev.beecube31.crazyae2.common.interfaces.IChangeablePriorityHost;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -15,14 +15,14 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class ContainerPriority extends CrazyAEBaseContainer {
 
-    private final IChangeablePriorityHost priHost;
+    private final IPriorityHost priHost;
 
     @SideOnly(Side.CLIENT)
     private GuiTextField textField;
     @GuiSync(2)
     public long PriorityValue = -1;
 
-    public ContainerPriority(final InventoryPlayer ip, final IChangeablePriorityHost te) {
+    public ContainerPriority(final InventoryPlayer ip, final IPriorityHost te) {
         super(ip, (TileEntity) (te instanceof TileEntity ? te : null), (IPart) (te instanceof IPart ? te : null));
         this.priHost = te;
     }
@@ -59,7 +59,7 @@ public class ContainerPriority extends CrazyAEBaseContainer {
         super.onUpdate(field, oldValue, newValue);
     }
 
-    public IChangeablePriorityHost getPriorityHost() {
+    public IPriorityHost getPriorityHost() {
         return this.priHost;
     }
 }

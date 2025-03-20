@@ -4,6 +4,10 @@
       "type": "forge:and",
       "values": [
         {
+          "type": "crazyae:part_exists",
+          "name": "improved_import_fluid_bus"
+        },
+        {
           "type": "appliedenergistics2:part_exists",
           "part": "part.fluid_import_bus"
         },

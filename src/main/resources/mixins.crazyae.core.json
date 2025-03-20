@@ -5,13 +5,19 @@
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "features.cellinformation.MixinApiClientHelper",
     "aefixes.crafting.MixinCraftingCPUCluster",
-    "aefixes.crafting.MixinPatternHelper",
     "aefixes.crafting.MixinNetworkMonitor",
-    "features.patternterm.fastplace.MixinGuiPatternTerm",
-    "features.patternterm.fastplace.AccessorContainerPatternEncoder"
+    "features.patternterm.fastplace.AccessorContainerPatternEncoder",
+    "features.energycells.MixinApiStorages",
+    "features.terminals.MixinPacketMEInventoryUpdate",
+    "core.MixinInterfaceDuality",
+    "core.MixinCellWorkbench",
+    "core.MixinDriveWatcher",
+    "core.MixinAEBasePart"
   ],
-  "client": [],
+  "client": [
+    "features.cellinformation.MixinApiClientHelper",
+    "features.patternterm.fastplace.MixinGuiPatternTerm"
+  ],
   "server": []
 }

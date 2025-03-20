@@ -13,5 +13,5 @@ public interface ISubFeature extends IFeature {
 	void setEnabled(boolean enabled);
 
 	@Nullable
-	String getMixins();
+	String getMixin();
 }

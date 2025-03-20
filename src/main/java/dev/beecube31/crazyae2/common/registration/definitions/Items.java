@@ -9,21 +9,24 @@ import appeng.core.AEConfig;
 import appeng.core.features.ItemDefinition;
 import dev.beecube31.crazyae2.client.rendering.*;
 import dev.beecube31.crazyae2.common.features.Features;
-import dev.beecube31.crazyae2.common.items.*;
-import dev.beecube31.crazyae2.common.items.cells.DenseFluidCell;
-import dev.beecube31.crazyae2.common.items.cells.DenseItemCell;
-import dev.beecube31.crazyae2.common.items.cells.ImprovedPortableCell;
-import dev.beecube31.crazyae2.common.items.cells.ManaItemCell;
+import dev.beecube31.crazyae2.common.items.Colorizer;
+import dev.beecube31.crazyae2.common.items.ManaConnector;
+import dev.beecube31.crazyae2.common.items.QuantumWirelessBooster;
+import dev.beecube31.crazyae2.common.items.cells.energy.MultiEnergyItemCell;
+import dev.beecube31.crazyae2.common.items.cells.energy.MultiEnergyItemCreativeCell;
+import dev.beecube31.crazyae2.common.items.cells.storage.*;
+import dev.beecube31.crazyae2.common.items.internal.InternalStubItem;
 import dev.beecube31.crazyae2.common.items.internal.ManaAsAEStack;
+import dev.beecube31.crazyae2.common.items.internal.energy.*;
 import dev.beecube31.crazyae2.common.items.patterns.*;
 import dev.beecube31.crazyae2.common.registration.registry.Registry;
 import dev.beecube31.crazyae2.common.registration.registry.interfaces.Definitions;
-import dev.beecube31.crazyae2.integrations.jei.JEIPlugin;
+import dev.beecube31.crazyae2.core.CrazyAESidedHandler;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.fml.common.Loader;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
@@ -53,6 +56,22 @@ public class Items implements Definitions<IItemDefinition> {
 	private final IItemDefinition manaCell1gb;
 	private final IItemDefinition manaCell2gb;
 
+	private final IItemDefinition energyCell1k;
+	private final IItemDefinition energyCell4k;
+	private final IItemDefinition energyCell16k;
+	private final IItemDefinition energyCell64k;
+	private final IItemDefinition energyCell256k;
+	private final IItemDefinition energyCell1mb;
+	private final IItemDefinition energyCell4mb;
+	private final IItemDefinition energyCell16mb;
+	private final IItemDefinition energyCell64mb;
+	private final IItemDefinition energyCell256mb;
+	private final IItemDefinition energyCell1gb;
+	private final IItemDefinition energyCell2gb;
+
+	private final IItemDefinition creativeManaCell;
+	private final IItemDefinition creativeEnergyCell;
+
 	private final IItemDefinition improvedPortableCell;
 	private final IItemDefinition advancedPortableCell;
 	private final IItemDefinition perfectPortableCell;
@@ -71,14 +90,23 @@ public class Items implements Definitions<IItemDefinition> {
 //	private final IItemDefinition patternsUSBStick;
 
 	private final IItemDefinition manaAsAEStack;
+	private final IItemDefinition EFEnergyAsAeStack;
+	private final IItemDefinition FEEnergyAsAeStack;
+	private final IItemDefinition EUEnergyAsAeStack;
+	private final IItemDefinition SEEnergyAsAeStack;
+	private final IItemDefinition QEEnergyAsAeStack;
+
 
 	private final IItemDefinition elventradeEncodedPattern;
 	private final IItemDefinition manapoolEncodedPattern;
 	private final IItemDefinition petalEncodedPattern;
 	private final IItemDefinition puredaisyEncodedPattern;
 	private final IItemDefinition runealtarEncodedPattern;
+	private final IItemDefinition teraplateEncodedPattern;
+	private final IItemDefinition breweryEncodedPattern;
 
 	private final IItemDefinition colorizer;
+	private final IItemDefinition advNetTool;
 
 
 	public Items(Registry registry) {
@@ -95,35 +123,52 @@ public class Items implements Definitions<IItemDefinition> {
 				.features(Features.STUB)
 				.build());
 
+		this.advNetTool = this.registerById(registry.item("adv_net_tool", InternalStubItem::new)
+				.features(Features.STUB)
+				.setDisabled()
+				.build());
+
 
 
 		this.elventradeEncodedPattern = this.registerById(registry.item("elventrade_encoded_pattern", ElventradeEncodedPattern::new)
-				.features(Features.STUB)
+				.features(Features.BOTANIA_MECHANICAL_BLOCKS)
 				.rendering(new ElventradeEncodedPatternRendering())
 				.ifModPresent("botania")
 				.build());
 
 		this.manapoolEncodedPattern = this.registerById(registry.item("manapool_encoded_pattern", ManapoolEncodedPattern::new)
-				.features(Features.STUB)
+				.features(Features.BOTANIA_MECHANICAL_BLOCKS)
 				.rendering(new ManapoolEncodedPatternRendering())
 				.ifModPresent("botania")
 				.build());
 
 		this.petalEncodedPattern = this.registerById(registry.item("petal_encoded_pattern", PetalEncodedPattern::new)
-				.features(Features.STUB)
+				.features(Features.BOTANIA_MECHANICAL_BLOCKS)
 				.rendering(new PetalEncodedPatternRendering())
 				.ifModPresent("botania")
 				.build());
 
 		this.puredaisyEncodedPattern = this.registerById(registry.item("puredaisy_encoded_pattern", PuredaisyEncodedPattern::new)
-				.features(Features.STUB)
+				.features(Features.BOTANIA_MECHANICAL_BLOCKS)
 				.rendering(new PuredaisyEncodedPatternRendering())
 				.ifModPresent("botania")
 				.build());
 
 		this.runealtarEncodedPattern = this.registerById(registry.item("runealtar_encoded_pattern", RunealtarEncodedPattern::new)
-				.features(Features.STUB)
+				.features(Features.BOTANIA_MECHANICAL_BLOCKS)
 				.rendering(new RunealtarEncodedPatternRendering())
+				.ifModPresent("botania")
+				.build());
+
+		this.teraplateEncodedPattern = this.registerById(registry.item("teraplate_encoded_pattern", TeraplateEncodedPattern::new)
+				.features(Features.BOTANIA_MECHANICAL_BLOCKS)
+				.rendering(new TeraplateEncodedPatternRendering())
+				.ifModPresent("botania")
+				.build());
+
+		this.breweryEncodedPattern = this.registerById(registry.item("brewery_encoded_pattern", BreweryEncodedPattern::new)
+				.features(Features.BOTANIA_MECHANICAL_BLOCKS)
+				.rendering(new BreweryEncodedPatternRendering())
 				.ifModPresent("botania")
 				.build());
 
@@ -223,7 +268,65 @@ public class Items implements Definitions<IItemDefinition> {
 				.ifModPresent("botania")
 				.features(Features.MEGA_MANA_DENSE_CELLS)
 				.build());
+		
 
+		this.energyCell1k = this.registerById(registry.item("energy_cell_1k", () -> new MultiEnergyItemCell(Materials.MaterialType.ENERGY_PART_1K, 1024, 1D))
+				.features(Features.ENERGY_CELLS)
+				.build());
+
+		this.energyCell4k = this.registerById(registry.item("energy_cell_4k", () -> new MultiEnergyItemCell(Materials.MaterialType.ENERGY_PART_4K, 4 * 1024, 2D))
+				.features(Features.ENERGY_CELLS)
+				.build());
+
+		this.energyCell16k = this.registerById(registry.item("energy_cell_16k", () -> new MultiEnergyItemCell(Materials.MaterialType.ENERGY_PART_16K, 16 * 1024, 3D))
+				.features(Features.ENERGY_CELLS)
+				.build());
+
+		this.energyCell64k = this.registerById(registry.item("energy_cell_64k", () -> new MultiEnergyItemCell(Materials.MaterialType.ENERGY_PART_64K, 64 * 1024, 4D))
+				.features(Features.ENERGY_CELLS)
+				.build());
+
+		this.energyCell256k = this.registerById(registry.item("energy_cell_256k", () -> new MultiEnergyItemCell(Materials.MaterialType.ENERGY_PART_256K, 256 * 1024, 4D))
+				.features(Features.ENERGY_DENSE_CELLS)
+				.build());
+
+		this.energyCell1mb = this.registerById(registry.item("energy_cell_1mb", () -> new MultiEnergyItemCell(Materials.MaterialType.ENERGY_PART_1MB, 1024 * 1024, 6D))
+				.features(Features.ENERGY_DENSE_CELLS)
+				.build());
+
+		this.energyCell4mb = this.registerById(registry.item("energy_cell_4mb", () -> new MultiEnergyItemCell(Materials.MaterialType.ENERGY_PART_4MB, 4096 * 1024, 8D))
+				.features(Features.ENERGY_DENSE_CELLS)
+				.build());
+
+		this.energyCell16mb = this.registerById(registry.item("energy_cell_16mb", () -> new MultiEnergyItemCell(Materials.MaterialType.ENERGY_PART_16MB, 16384 * 1024, 12D))
+				.features(Features.ENERGY_DENSE_CELLS)
+				.build());
+
+		this.energyCell64mb = this.registerById(registry.item("energy_cell_64mb", () -> new MultiEnergyItemCell(Materials.MaterialType.ENERGY_PART_64MB, 65536 * 1024, 24D))
+				.features(Features.MEGA_ENERGY_DENSE_CELLS)
+				.build());
+
+		this.energyCell256mb = this.registerById(registry.item("energy_cell_256mb", () -> new MultiEnergyItemCell(Materials.MaterialType.ENERGY_PART_256MB, 262144 * 1024, 40D))
+				.features(Features.MEGA_ENERGY_DENSE_CELLS)
+				.build());
+
+		this.energyCell1gb = this.registerById(registry.item("energy_cell_1gb", () -> new MultiEnergyItemCell(Materials.MaterialType.ENERGY_PART_1GB, 1048576 * 1024, 52D))
+				.features(Features.MEGA_ENERGY_DENSE_CELLS)
+				.build());
+
+		this.energyCell2gb = this.registerById(registry.item("energy_cell_2gb", () -> new MultiEnergyItemCell(Materials.MaterialType.ENERGY_PART_2GB, Integer.MAX_VALUE, 64D))
+				.features(Features.MEGA_ENERGY_DENSE_CELLS)
+				.build());
+
+
+
+		this.creativeManaCell = this.registerById(registry.item("creative_mana_cell", ManaItemCreativeCell::new)
+				.ifModPresent("botania")
+				.features(Features.MANA_CELLS, Features.MANA_DENSE_CELLS, Features.MEGA_MANA_DENSE_CELLS)
+				.build());
+		this.creativeEnergyCell = this.registerById(registry.item("creative_energy_cell", MultiEnergyItemCreativeCell::new)
+				.features(Features.ENERGY_CELLS, Features.ENERGY_DENSE_CELLS, Features.MEGA_ENERGY_DENSE_CELLS)
+				.build());
 
 
 		this.improvedPortableCell = this.registerById(registry.item("improved_portable_cell", () -> new ImprovedPortableCell(AEConfig.instance().getPortableCellBattery() * 4, 1024 * 1024, 1, 2D))
@@ -272,6 +375,7 @@ public class Items implements Definitions<IItemDefinition> {
 
 		this.quantumWirelessBooster = this.registerById(registry.item("quantum_wireless_booster", QuantumWirelessBooster::new)
 				.features(Features.STUB)
+				.hide()
 				.build());
 
 		this.manaAsAEStack = this.registerById(registry.item("mana_as_aestack", ManaAsAEStack::new)
@@ -280,9 +384,29 @@ public class Items implements Definitions<IItemDefinition> {
 				.hide()
 				.build());
 
-		if (Loader.isModLoaded("jei")) {
-			JEIPlugin.hideItemFromJEI(this.manaAsAEStack);
-		}
+		this.EFEnergyAsAeStack = this.registerById(registry.item("ef_energy_as_aestack", EFEnergyAsAEStack::new)
+				.ifModPresent("industrialupgrade")
+				.hide()
+				.build());
+
+		this.EUEnergyAsAeStack = this.registerById(registry.item("eu_energy_as_aestack", EUEnergyAsAEStack::new)
+				.ifModPresent("ic2")
+				.hide()
+				.build());
+
+		this.FEEnergyAsAeStack = this.registerById(registry.item("fe_energy_as_aestack", FEEnergyAsAEStack::new)
+				.hide()
+				.build());
+
+		this.QEEnergyAsAeStack = this.registerById(registry.item("qe_energy_as_aestack", QEEnergyAsAEStack::new)
+				.ifModPresent("industrialupgrade")
+				.hide()
+				.build());
+
+		this.SEEnergyAsAeStack = this.registerById(registry.item("se_energy_as_aestack", SEEnergyAsAEStack::new)
+				.ifModPresent("industrialupgrade")
+				.hide()
+				.build());
 
 		registry.addBootstrapComponent((IPostInitComponent) r -> {
 			IItems enabledItems = AEApi.instance().definitions().items();
@@ -329,6 +453,8 @@ public class Items implements Definitions<IItemDefinition> {
 				}
 			}
         });
+
+		CrazyAESidedHandler.checkAvailableEnergyTypes(this.energyItemsList());
 	}
 
 	private static void mirrorCellUpgrades(Function<ItemStack, Boolean> predicate, IItemDefinition[] cells) {
@@ -412,6 +538,62 @@ public class Items implements Definitions<IItemDefinition> {
 		return this.manaCell2gb;
 	}
 
+	public IItemDefinition energyCell1k() {
+		return this.energyCell1k;
+	}
+
+	public IItemDefinition energyCell4k() {
+		return this.energyCell4k;
+	}
+
+	public IItemDefinition energyCell16k() {
+		return this.energyCell16k;
+	}
+
+	public IItemDefinition energyCell64k() {
+		return this.energyCell64k;
+	}
+
+	public IItemDefinition energyCell256k() {
+		return this.energyCell256k;
+	}
+
+	public IItemDefinition energyCell1MB() {
+		return this.energyCell1mb;
+	}
+
+	public IItemDefinition energyCell4MB() {
+		return this.energyCell4mb;
+	}
+
+	public IItemDefinition energyCell16MB() {
+		return this.energyCell16mb;
+	}
+
+	public IItemDefinition energyCell64MB() {
+		return this.energyCell64mb;
+	}
+
+	public IItemDefinition efCell256MB() {
+		return this.energyCell256mb;
+	}
+
+	public IItemDefinition energyCell1GB() {
+		return this.energyCell1gb;
+	}
+
+	public IItemDefinition energyCell2GB() {
+		return this.energyCell2gb;
+	}
+
+	public IItemDefinition creativeManaCell() {
+		return this.creativeManaCell;
+	}
+
+	public IItemDefinition creativeEnergyCell() {
+		return this.creativeEnergyCell;
+	}
+
 	public IItemDefinition storageCell256K() {
 		return this.storageCell256k;
 	}
@@ -488,16 +670,40 @@ public class Items implements Definitions<IItemDefinition> {
 		return this.fluidCell2gb;
 	}
 
-	public IItemDefinition quantumWirelessBooster() {
-		return this.quantumWirelessBooster;
-	}
-
 	public IItemDefinition manaConnector() {
 		return this.manaConnector;
 	}
 
 	public IItemDefinition manaAsAEStack() {
 		return this.manaAsAEStack;
+	}
+
+	public IItemDefinition EFEnergyAsAeStack() {
+		return this.EFEnergyAsAeStack;
+	}
+
+	public IItemDefinition FEEnergyAsAeStack() {
+		return this.FEEnergyAsAeStack;
+	}
+
+	public IItemDefinition EUEnergyAsAeStack() {
+		return this.EUEnergyAsAeStack;
+	}
+
+	public List<IItemDefinition> energyItemsList() {
+		return Arrays.asList(this.FEEnergyAsAeStack, this.EFEnergyAsAeStack, this.SEEnergyAsAeStack, this.QEEnergyAsAeStack, this.EUEnergyAsAeStack);
+	}
+
+	public List<IItemDefinition> energyIUItemsList() {
+		return Arrays.asList(this.EFEnergyAsAeStack, this.SEEnergyAsAeStack, this.QEEnergyAsAeStack);
+	}
+
+	public IItemDefinition QEEnergyAsAeStack() {
+		return this.QEEnergyAsAeStack;
+	}
+
+	public IItemDefinition SEEnergyAsAeStack() {
+		return this.SEEnergyAsAeStack;
 	}
 
 	public IItemDefinition elventradeEncodedPattern() {
@@ -516,8 +722,21 @@ public class Items implements Definitions<IItemDefinition> {
 		return this.runealtarEncodedPattern;
 	}
 
+	public IItemDefinition teraplateEncodedPattern() {
+		return this.teraplateEncodedPattern;
+	}
+
+	public IItemDefinition breweryEncodedPattern() {
+		return this.breweryEncodedPattern;
+	}
+
+
 	public IItemDefinition colorizer() {
 		return this.colorizer;
+	}
+
+	public IItemDefinition advNetTool() {
+		return this.advNetTool;
 	}
 
 //	public IItemDefinition patternsUSBStick() {

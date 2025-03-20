@@ -1,0 +1,44 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "crazyae:part_exists",
+          "name": "energy_import_bus"
+        },
+        {
+          "type": "appliedenergistics2:part_exists",
+          "part": "part.import_bus"
+        },
+        {
+          "type": "appliedenergistics2:material_exists",
+          "material": "material.annihilation_core"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "type": "part",
+    "name": "energy_import_bus"
+  },
+  "type": "crazyae:shaped_recipe",
+  "pattern": [
+    "   ",
+    "iqi",
+    "qfq"
+  ],
+  "key": {
+    "i": {
+      "type": "appliedenergistics2:part",
+      "part": "part.import_bus"
+    },
+    "q": {
+      "type": "crazyae:material",
+      "name": "energy_processor"
+    },
+    "f": {
+      "item": "crazyae:fluixilized_block"
+    }
+  }
+}

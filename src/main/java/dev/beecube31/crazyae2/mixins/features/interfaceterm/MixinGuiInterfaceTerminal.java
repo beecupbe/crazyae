@@ -11,7 +11,6 @@ import appeng.client.me.ClientDCInternalInv;
 import appeng.client.me.SlotDisconnected;
 import appeng.core.AEConfig;
 import appeng.core.localization.GuiText;
-import appeng.helpers.DualityInterface;
 import com.google.common.collect.HashMultimap;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.renderer.GlStateManager;
@@ -20,11 +19,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTUtil;
 import net.minecraft.util.math.BlockPos;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import org.spongepowered.asm.mixin.*;
 
 import java.util.*;
 
 @Mixin(value = GuiInterfaceTerminal.class, remap = false, priority = 990)
+@SideOnly(Side.CLIENT)
 public abstract class MixinGuiInterfaceTerminal extends AEBaseGui {
 
     @Shadow @Final private HashMap<Long, ClientDCInternalInv> byId;
@@ -271,12 +273,12 @@ public abstract class MixinGuiInterfaceTerminal extends AEBaseGui {
                 try {
                     final long id = Long.parseLong(oKey.substring(1), Character.MAX_RADIX);
                     final NBTTagCompound invData = in.getCompoundTag(oKey);
-                    final ClientDCInternalInv current = this.crazyae$getById(invData.getBoolean("isPatternInterface"), invData.getBoolean("isMAC"), id, invData.getLong("sortBy"), invData.getString("un"));
+                    final ClientDCInternalInv current = this.crazyae$getById(invData.getInteger("patternsNum"), id, invData.getLong("sortBy"), invData.getString("un"));
 
                     blockPosHashMap.put(current, NBTUtil.getPosFromTag(invData.getCompoundTag("pos")));
                     dimHashMap.put(current, invData.getInteger("dim"));
                     numUpgradesMap.put(current, invData.getInteger("numUpgrades"));
-                    crazyae$patterns.put(current, invData.getBoolean("isPatternInterface"));
+                    crazyae$patterns.put(current, !invData.getBoolean("isMAC") && invData.getInteger("patternsNum") == 72);
                     crazyae$macs.put(current, invData.getBoolean("isMAC"));
 
                     for (int x = 0; x < current.getInventory().getSlots(); x++) {
@@ -401,10 +403,10 @@ public abstract class MixinGuiInterfaceTerminal extends AEBaseGui {
     }
 
     @Unique
-    private ClientDCInternalInv crazyae$getById(final boolean isPatternInterface, final boolean isMAC, final long id, final long sortBy, final String string) {
+    private ClientDCInternalInv crazyae$getById(final int length, final long id, final long sortBy, final String string) {
         ClientDCInternalInv o = this.byId.get(id);
         if (o == null) {
-            this.byId.put(id, o = new ClientDCInternalInv(isPatternInterface ? 72 : isMAC ? 45 : DualityInterface.NUMBER_OF_PATTERN_SLOTS, id, sortBy, string));
+            this.byId.put(id, o = new ClientDCInternalInv(length, id, sortBy, string));
             this.refreshList = true;
         }
         return o;

@@ -9,6 +9,8 @@ import appeng.core.features.registries.cell.CreativeCellHandler;
 import appeng.me.GridAccessException;
 import appeng.me.helpers.MachineSource;
 import appeng.me.storage.MEInventoryHandler;
+import dev.beecube31.crazyae2.common.items.cells.handlers.CreativeEnergyCellHandler;
+import dev.beecube31.crazyae2.common.items.cells.handlers.CreativeManaCellHandler;
 import dev.beecube31.crazyae2.common.tile.storage.TileImprovedDrive;
 import net.minecraft.item.ItemStack;
 
@@ -47,7 +49,7 @@ public class DriveWatcherImproved<T extends IAEStack<T>> extends MEInventoryHand
                 this.drive.blinkCell(this.getSlot());
                 this.oldStatus = newStatus;
             }
-            if (this.drive.getProxy().isActive() && !(handler instanceof CreativeCellHandler)) {
+            if (this.drive.getProxy().isActive() && !(handler instanceof CreativeEnergyCellHandler || handler instanceof CreativeManaCellHandler)) {
                 try {
                     this.drive.getProxy().getStorage().postAlterationOfStoredItems(this.getChannel(), Collections.singletonList(input.copy().setStackSize(input.getStackSize() - (remainder == null ? 0 : remainder.getStackSize()))), this.source);
                 } catch (GridAccessException e) {

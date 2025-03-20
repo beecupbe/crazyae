@@ -6,7 +6,8 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "aefixes.mac.MixinTileMolecularAssembler",
-    "aefixes.mac.MixinSlotRestrictedInput"
+    "aefixes.mac.MixinSlotRestrictedInput",
+    "aefixes.extra.MixinQuartzGrowthAccelerator"
   ],
   "client": [],
   "server": []

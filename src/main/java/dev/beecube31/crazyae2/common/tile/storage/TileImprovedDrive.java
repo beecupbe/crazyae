@@ -12,6 +12,8 @@ import appeng.api.storage.data.IAEStack;
 import appeng.api.util.AECableType;
 import appeng.api.util.AEPartLocation;
 import appeng.api.util.DimensionalCoord;
+import appeng.core.sync.GuiBridge;
+import appeng.helpers.IPriorityHost;
 import appeng.me.GridAccessException;
 import appeng.me.helpers.MachineSource;
 import appeng.tile.grid.AENetworkInvTile;
@@ -19,9 +21,10 @@ import appeng.tile.inventory.AppEngCellInventory;
 import appeng.util.Platform;
 import appeng.util.inv.InvOperation;
 import appeng.util.inv.filter.IAEItemFilter;
-import dev.beecube31.crazyae2.common.interfaces.IChangeablePriorityHost;
+import dev.beecube31.crazyae2.common.interfaces.gui.IPriHostGuiOverrider;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiBridge;
 import dev.beecube31.crazyae2.common.util.DriveWatcherImproved;
+import dev.beecube31.crazyae2.core.CrazyAE;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -30,7 +33,7 @@ import net.minecraftforge.items.IItemHandler;
 import java.io.IOException;
 import java.util.*;
 
-public class TileImprovedDrive extends AENetworkInvTile implements IChestOrDrive, IChangeablePriorityHost {
+public class TileImprovedDrive extends AENetworkInvTile implements IChestOrDrive, IPriorityHost, IPriHostGuiOverrider {
 
 
     private static final int CELL_COUNT = 35;
@@ -318,11 +321,16 @@ public class TileImprovedDrive extends AENetworkInvTile implements IChestOrDrive
 
     @Override
     public ItemStack getItemStackRepresentation() {
-        return AEApi.instance().definitions().blocks().drive().maybeStack(1).orElse(ItemStack.EMPTY);
+        return CrazyAE.definitions().blocks().improvedDrive().maybeStack(1).orElse(ItemStack.EMPTY);
     }
 
     @Override
-    public CrazyAEGuiBridge getGuiBridge() {
+    public GuiBridge getGuiBridge() {
+        return GuiBridge.GUI_Handler; // ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+    }
+
+    @Override
+    public CrazyAEGuiBridge getOverrideGui() {
         return CrazyAEGuiBridge.IMPROVED_DRIVE;
     }
 }

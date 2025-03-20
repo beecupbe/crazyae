@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class MixinNetworkToolViewer {
 
 	@Inject(method = "allowInsert", at = @At("RETURN"), cancellable = true, remap = false)
-	private void patchUpgrades(IItemHandler inv, int slot, ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
+	private void crazyae$injectOwnUpgrades(IItemHandler inv, int slot, ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
 		if (stack.getItem() instanceof CrazyAEUpgradeModule) {
 			cir.setReturnValue(true);
 		}

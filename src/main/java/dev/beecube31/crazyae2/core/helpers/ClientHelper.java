@@ -31,6 +31,14 @@ public class ClientHelper implements Helper {
         CrazyAE.definitions().items().puredaisyEncodedPattern().maybeItem().ifPresent(pattern -> {
             Minecraft.getMinecraft().getItemColors().registerItemColorHandler(PuredaisyEncodedPatternBakedModel.PATTERN_ITEM_COLOR_HANDLER, pattern);
         });
+
+        CrazyAE.definitions().items().teraplateEncodedPattern().maybeItem().ifPresent(pattern -> {
+            Minecraft.getMinecraft().getItemColors().registerItemColorHandler(TeraplateEncodedPatternBakedModel.PATTERN_ITEM_COLOR_HANDLER, pattern);
+        });
+
+        CrazyAE.definitions().items().breweryEncodedPattern().maybeItem().ifPresent(pattern -> {
+            Minecraft.getMinecraft().getItemColors().registerItemColorHandler(BreweryEncodedPatternBakedModel.PATTERN_ITEM_COLOR_HANDLER, pattern);
+        });
     }
 
     public void postinit() {

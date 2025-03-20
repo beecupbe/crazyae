@@ -39,11 +39,16 @@ public class OptionalAEFluidSlot extends AEFluidSlot {
     public void drawBackground(int guileft, int guitop) {
         GlStateManager.enableBlend();
         if (this.isSlotEnabled()) {
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            this.getSlotHue().drawHue();
         } else {
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 0.4F);
+            this.getSlotHue().setAlpha(0.4F);
         }
+        this.getSlotHue().drawHue();
+
         this.drawTexturedModalRect(guileft + this.xPos() - 1, guitop + this.yPos() - 1, this.srcX - 1, this.srcY - 1, this.getWidth() + 2,
                 this.getHeight() + 2);
+
+        this.getSlotHue().setAlpha(1.0F);
+        this.getSlotHue().endDrawHue();
     }
 }

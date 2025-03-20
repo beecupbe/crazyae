@@ -10,16 +10,18 @@ import appeng.api.storage.ITerminalHost;
 import appeng.api.util.AEPartLocation;
 import appeng.api.util.DimensionalCoord;
 import appeng.core.sync.GuiHostType;
+import appeng.helpers.IInterfaceHost;
+import appeng.helpers.IPriorityHost;
 import appeng.helpers.WirelessTerminalGuiObject;
 import appeng.util.Platform;
 import dev.beecube31.crazyae2.client.gui.CrazyAEBaseGui;
 import dev.beecube31.crazyae2.common.containers.*;
 import dev.beecube31.crazyae2.common.containers.base.CrazyAEBaseContainer;
-import dev.beecube31.crazyae2.common.interfaces.IChangeablePriorityHost;
 import dev.beecube31.crazyae2.common.interfaces.ICrazyAEGuiItem;
 import dev.beecube31.crazyae2.common.interfaces.upgrades.IUpgradesInfoProvider;
 import dev.beecube31.crazyae2.common.items.ColorizerObj;
 import dev.beecube31.crazyae2.common.items.PatternsUSBStickObj;
+import dev.beecube31.crazyae2.common.parts.implementations.PartDrive;
 import dev.beecube31.crazyae2.common.parts.implementations.fluid.CrazyAEPartSharedFluidBus;
 import dev.beecube31.crazyae2.common.tile.botania.*;
 import dev.beecube31.crazyae2.common.tile.crafting.TileImprovedMAC;
@@ -27,7 +29,6 @@ import dev.beecube31.crazyae2.common.tile.misc.TileImprovedCondenser;
 import dev.beecube31.crazyae2.common.tile.networking.TileBigCrystalCharger;
 import dev.beecube31.crazyae2.common.tile.networking.TileCraftingUnitsCombiner;
 import dev.beecube31.crazyae2.common.tile.networking.TileImprovedIOPort;
-import dev.beecube31.crazyae2.common.tile.networking.TilePatternsInterface;
 import dev.beecube31.crazyae2.common.tile.storage.TileImprovedDrive;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -45,7 +46,7 @@ import java.lang.reflect.Constructor;
 public enum CrazyAEGuiBridge {
 	STUB(),
 
-	GUI_PRIORITY(IChangeablePriorityHost.class, ContainerPriority.class,  GuiHostType.WORLD, SecurityPermissions.BUILD),
+	GUI_PRIORITY(IPriorityHost.class, ContainerPriority.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
 
 	IMPROVED_MOLECULAR_ASSEMBLER(TileImprovedMAC.class, ContainerFastMAC.class, GuiHostType.WORLD, null),
 	IMPROVED_DRIVE(TileImprovedDrive.class, ContainerDriveImproved.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
@@ -53,18 +54,27 @@ public enum CrazyAEGuiBridge {
 	CRAFTING_UNITS_COMBINER(TileCraftingUnitsCombiner.class, ContainerCraftingUnitsCombiner.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
 	BIG_CRYSTAL_CHARGER(TileBigCrystalCharger.class, ContainerBigCrystalCharger.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
 	IMPROVED_BUS(IUpgradesInfoProvider.class, ContainerCrazyAEUpgradeable.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
+	ENERGY_BUS(IUpgradesInfoProvider.class, ContainerEnergyBus.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
 	IMPROVED_FLUID_BUSES(CrazyAEPartSharedFluidBus.class, ContainerImprovedFluidBuses.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
 	IMPROVED_CONDENSER(TileImprovedCondenser.class, ContainerImprovedCondenser.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
-	PATTERN_INTERFACE(TilePatternsInterface.class, ContainerPatternsInterface.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
+	PATTERN_INTERFACE(IInterfaceHost.class, ContainerPatternsInterface.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
+	PERFECT_INTERFACE(IInterfaceHost.class, ContainerPerfectInterface.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
+
 	GUI_MANA_TERMINAL(ITerminalHost.class, ContainerManaTerminal.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
+	GUI_ENERGY_TERMINAL(ITerminalHost.class, ContainerEnergyTerminal.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
+	GUI_DRIVE_PART(PartDrive.class, ContainerPartDrive.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
+
 
 	GUI_ELVENTRADE_MECHANICAL(TileMechanicalElventrade.class, ContainerElventradeMechanical.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
 	GUI_MANAPOOL_MECHANICAL(TileMechanicalManapool.class, ContainerManapoolMechanical.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
 	GUI_PETAL_MECHANICAL(TileMechanicalPetal.class, ContainerPetalMechanical.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
 	GUI_PUREDAISY_MECHANICAL(TileMechanicalPuredaisy.class, ContainerPuredaisyMechanical.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
 	GUI_RUNEALTAR_MECHANICAL(TileMechanicalRunealtar.class, ContainerRunealtarMechanical.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
+	GUI_TERAPLATE_MECHANICAL(TileMechanicalTerraplate.class, ContainerTeraplateMechanical.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
+	GUI_BREWERY_MECHANICAL(TileMechanicalBrewery.class, ContainerBreweryMechanical.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
 
 	GUI_MECHANICAL_DEVICE_PATTERN_INV(TileBotaniaMechanicalMachineBase.class, ContainerBotaniaDevicePatternsInv.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
+	GUI_ENERGY_BUS_SETTINGS(IUpgradesInfoProvider.class, ContainerEnergyBusSettings.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
 
 	//Item GUIs
 	GUI_ITEM_COLORIZER_GUI(ColorizerObj.class, ContainerColorizerGui.class, GuiHostType.ITEM, SecurityPermissions.BUILD),
@@ -81,8 +91,12 @@ public enum CrazyAEGuiBridge {
 	@SideOnly(Side.CLIENT)
 	private Class<? super CrazyAEBaseGui> clientGuiClass;
 
-	CrazyAEGuiBridge(Class<?> clazz, Class<? extends CrazyAEBaseContainer> containerClass, GuiHostType hostType,
-					 SecurityPermissions securityPermissions) {
+	CrazyAEGuiBridge(
+			Class<?> clazz,
+			Class<? extends CrazyAEBaseContainer> containerClass,
+			GuiHostType hostType,
+			SecurityPermissions securityPermissions
+	) {
 		this.hostType = hostType;
 		this.securityPermissions = securityPermissions;
 		this.clazz = clazz;
@@ -128,10 +142,10 @@ public enum CrazyAEGuiBridge {
 		return null;
 	}
 
-	static Object getGuiObject(final ItemStack it, final World w) {
+	static Object getGuiObject(final ItemStack it, final World w, BlockPos pos) {
 		if (!it.isEmpty()) {
 			if (it.getItem() instanceof ICrazyAEGuiItem<?> ngi) {
-				return ngi.getGuiObject(it, w);
+				return ngi.getGuiObject(it, w, pos);
 			}
 		}
 
@@ -220,13 +234,11 @@ public enum CrazyAEGuiBridge {
 		}
 	}
 
-	public boolean hasPermissions(final TileEntity te, final int x, final int y, final int z,
-	                              final AEPartLocation side, final EntityPlayer player) {
+	public boolean hasPermissions(final TileEntity te, final int x, final int y, final int z, final AEPartLocation side, final EntityPlayer player) {
 		final var w = player.getEntityWorld();
 		final var pos = new BlockPos(x, y, z);
 
-		if (Platform.hasPermissions(te != null ? new DimensionalCoord(te) : new DimensionalCoord(player.world, pos),
-			player)) {
+		if (Platform.hasPermissions(te != null ? new DimensionalCoord(te) : new DimensionalCoord(player.world, pos), player)) {
 			if (this.hostType.isItem()) {
 				final var it = player.inventory.getCurrentItem();
 				if (!it.isEmpty() && it.getItem() instanceof ICrazyAEGuiItem) {

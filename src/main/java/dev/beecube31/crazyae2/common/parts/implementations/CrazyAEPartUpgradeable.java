@@ -3,13 +3,10 @@ package dev.beecube31.crazyae2.common.parts.implementations;
 import appeng.api.config.RedstoneMode;
 import appeng.api.config.Upgrades;
 import appeng.api.util.IConfigManager;
-import appeng.parts.automation.StackUpgradeInventory;
-import appeng.parts.automation.UpgradeInventory;
 import appeng.util.ConfigManager;
 import appeng.util.IConfigManagerHost;
 import appeng.util.inv.IAEAppEngInventory;
 import appeng.util.inv.InvOperation;
-import dev.beecube31.crazyae2.common.interfaces.ICrazyAEUpgradeInventory;
 import dev.beecube31.crazyae2.common.parts.CrazyAEBasePartState;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
@@ -18,11 +15,11 @@ import java.util.List;
 
 public abstract class CrazyAEPartUpgradeable extends CrazyAEBasePartState implements IAEAppEngInventory, IConfigManagerHost {
     private final IConfigManager manager;
-    private final UpgradeInventory upgrades;
+    protected final CrazyAEStackUpgradeInv upgrades;
 
     public CrazyAEPartUpgradeable(final ItemStack is) {
         super(is);
-        this.upgrades = new StackUpgradeInventory(this.getItemStack(), this, this.getUpgradeSlots());
+        this.upgrades = new CrazyAEStackUpgradeInv(this.getItemStack(), this, this.getUpgradeSlots());
         this.manager = new ConfigManager(this);
     }
 
@@ -83,7 +80,7 @@ public abstract class CrazyAEPartUpgradeable extends CrazyAEBasePartState implem
     }
 
     public int getInstalledUpgrades(final dev.beecube31.crazyae2.common.registration.definitions.Upgrades.UpgradeType u) {
-        return ((ICrazyAEUpgradeInventory) this.upgrades).getInstalledUpgrades(u);
+        return this.upgrades.getInstalledUpgrades(u);
     }
 
     @Override

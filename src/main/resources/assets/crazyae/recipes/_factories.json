@@ -1,11 +1,13 @@
 {
   "conditions": {
     "part_exists": "dev.beecube31.crazyae2.common.recipes.factories.conditions.PartExists",
-    "material_exists": "dev.beecube31.crazyae2.common.recipes.factories.conditions.MaterialExists"
+    "material_exists": "dev.beecube31.crazyae2.common.recipes.factories.conditions.MaterialExists",
+    "upgrade_exists": "dev.beecube31.crazyae2.common.recipes.factories.conditions.UpgradeExists"
   },
   "ingredients": {
     "part": "dev.beecube31.crazyae2.common.recipes.factories.ingredients.PartFactory",
-    "material": "dev.beecube31.crazyae2.common.recipes.factories.ingredients.MaterialFactory"
+    "material": "dev.beecube31.crazyae2.common.recipes.factories.ingredients.MaterialFactory",
+    "upgrade": "dev.beecube31.crazyae2.common.recipes.factories.ingredients.UpgradeFactory"
   },
   "recipes": {
     "shaped_recipe": "dev.beecube31.crazyae2.common.recipes.factories.recipes.ShapedRecipeFactory"

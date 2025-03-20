@@ -1,6 +1,9 @@
 package dev.beecube31.crazyae2.client.gui.sprites;
 
-public enum StateSprite {
+import dev.beecube31.crazyae2.Tags;
+import net.minecraft.util.ResourceLocation;
+
+public enum StateSprite implements ISpriteProvider {
     WHITE_ARROW_RIGHT(0, 16, 16),
     WHITE_ARROW_DOWN(16, 16, 16),
     WHITE_ARROW_LEFT(32, 16, 16),
@@ -10,6 +13,10 @@ public enum StateSprite {
     OPTION_SIDE_BUTTON_NO_TOP(9, 26, 25),
     OPTION_SIDE_BUTTON_NO_BOTTOM(7, 26, 25),
     OPTION_SIDE_BUTTON_NO_TOP_BOTTOM(11, 26, 25),
+
+    HOVER_OPTION_SIDE_BUTTON(40, 32, 32),
+    HOVER_OPTION_SIDE_BUTTON_SELECTED(42, 32, 32),
+    HOVER_OPTION_SIDE_BUTTON_HOVERED(44, 32, 32),
 
 
     SELECT(64, 16, 16),
@@ -46,6 +53,8 @@ public enum StateSprite {
     PETAL_ENCODED_PATTERN(37, 16, 16),
     PUREDAISY_ENCODED_PATTERN(38, 16, 16),
     RUNEALTAR_ENCODED_PATTERN(39, 16, 16),
+    BREWERY_ENCODED_PATTERN(53, 16, 16),
+    TERAPLATE_ENCODED_PATTERN(54, 16, 16),
 
     REDSTONE_CARD_MODE_ALWAYS_ACTIVE(49, 16, 16),
     REDSTONE_CARD_MODE_ACTIVE_WITHOUT_SIGNAL(50, 16, 16),
@@ -78,6 +87,7 @@ public enum StateSprite {
     BIOMETRIC_CARDS_SLOT(15 + 16 * 14, 16, 16),
 
     FIND_SLOT(14 + 16 * 14, 16, 16),
+    BREW(254, 16, 16),
 
     INSCRIBER_TOP_BOTTOM_INGREDIENT_SLOT(14 + 16 * 2, 16, 16),
     INGOT_SLOT(14 + 16 * 3, 16, 16),
@@ -96,6 +106,10 @@ public enum StateSprite {
 
     CHECKBOX_ON(16 * 15 + 1, 15, 15),
     CHECKBOX_OFF(16 * 15 + 2, 15, 15),
+
+    CHECKBOX_V2_ON(229, 21, 21),
+    CHECKBOX_V2_OFF(227, 21, 21),
+
 
     SLIDER(16 * 15, 8, 13);
 
@@ -137,5 +151,13 @@ public enum StateSprite {
 
     public int getSizeY() {
         return sizeY;
+    }
+
+    public String getTextureStr() {
+        return "guis/states.png";
+    }
+
+    public ResourceLocation getTexture() {
+        return new ResourceLocation(Tags.MODID, "textures/" + this.getTextureStr());
     }
 }

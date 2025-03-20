@@ -1,0 +1,35 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:energy_cell_64mb"
+        },
+        {
+          "type": "appliedenergistics2:material_exists",
+          "material": "material.empty_storage_cell"
+        },
+        {
+          "type": "crazyae:material_exists",
+          "name": "energy_part_64mb"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "item": "crazyae:energy_cell_64mb"
+  },
+  "type": "forge:ore_shapeless",
+  "ingredients": [
+    {
+      "type": "appliedenergistics2:part",
+      "part": "material.empty_storage_cell"
+    },
+    {
+      "type": "crazyae:material",
+      "name": "energy_part_64mb"
+    }
+  ]
+}

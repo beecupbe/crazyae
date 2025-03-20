@@ -12,6 +12,19 @@ item.crazyae.storage_cell_256mb.name=§b256MB§r ME Storage Cell
 item.crazyae.storage_cell_1gb.name=§11GB§r ME Storage Cell
 item.crazyae.storage_cell_2gb.name=§d2GB§r ME Storage Cell
 
+item.crazyae.energy_cell_1k.name=§61k§r Energy Cell
+item.crazyae.energy_cell_4k.name=§e4k§r Energy Cell
+item.crazyae.energy_cell_16k.name=§a16k§r Energy Cell
+item.crazyae.energy_cell_64k.name=§b64k§r Energy Cell
+item.crazyae.energy_cell_256k.name=§c256k§r Energy Cell
+item.crazyae.energy_cell_1mb.name=§61MB§r Energy Cell
+item.crazyae.energy_cell_4mb.name=§e4MB§r Energy Cell
+item.crazyae.energy_cell_16mb.name=§a16MB§r Energy Cell
+item.crazyae.energy_cell_64mb.name=§264MB§r Energy Cell
+item.crazyae.energy_cell_256mb.name=§b256MB§r Energy Cell
+item.crazyae.energy_cell_1gb.name=§11GB§r Energy Cell
+item.crazyae.energy_cell_2gb.name=§d2GB§r Energy Cell
+
 item.crazyae.mana_cell_1k.name=§61k§r ME Mana Cell
 item.crazyae.mana_cell_4k.name=§e4k§r ME Mana Cell
 item.crazyae.mana_cell_16k.name=§a16k§r ME Mana Cell
@@ -48,6 +61,19 @@ item.crazyae.material.cell_part_256mb.name=§b256MB§r ME Storage Component
 item.crazyae.material.cell_part_1gb.name=§11GB§r ME Storage Component
 item.crazyae.material.cell_part_2gb.name=§d2GB§r ME Storage Component
 
+item.crazyae.material.energy_part_1k.name=§61k§r Energy Component
+item.crazyae.material.energy_part_4k.name=§e4k§r Energy Component
+item.crazyae.material.energy_part_16k.name=§a16k§r Energy Component
+item.crazyae.material.energy_part_64k.name=§b64k§r Energy Component
+item.crazyae.material.energy_part_256k.name=§c256k§r Energy Component
+item.crazyae.material.energy_part_1mb.name=§61MB§r Energy Component
+item.crazyae.material.energy_part_4mb.name=§e4MB§r Energy Component
+item.crazyae.material.energy_part_16mb.name=§a16MB§r Energy Component
+item.crazyae.material.energy_part_64mb.name=§264MB§r Energy Component
+item.crazyae.material.energy_part_256mb.name=§b256MB§r Energy Component
+item.crazyae.material.energy_part_1gb.name=§11GB§r Energy Component
+item.crazyae.material.energy_part_2gb.name=§d2GB§r Energy Component
+
 item.crazyae.material.mana_part_1k.name=§61k§r ME Mana Component
 item.crazyae.material.mana_part_4k.name=§e4k§r ME Mana Component
 item.crazyae.material.mana_part_16k.name=§a16k§r ME Mana Component
@@ -77,6 +103,7 @@ item.crazyae.material.fluixilized_ingot.name=§5Fluixilized Crystal§r
 item.crazyae.quantum_wireless_booster.name=Quantum Wireless Booster
 item.crazyae.material.quantum_processor.name=Quantum Processor
 item.crazyae.material.mana_processor.name=Mana Processor
+item.crazyae.material.energy_processor.name=Energy Processor
 item.crazyae.mana_connector.name=Mana Connector
 item.crazyae.gui_colorizer.name=Gui Colorizer
 
@@ -86,12 +113,19 @@ item.crazyae.material.manapool_blank_pattern.name=Mana Pool Blank Pattern
 item.crazyae.material.petal_blank_pattern.name=Petal Blank Pattern
 item.crazyae.material.runealtar_blank_pattern.name=Rune Altar Blank Pattern
 item.crazyae.material.puredaisy_blank_pattern.name=Pure Daisy Blank Pattern
+item.crazyae.material.teraplate_blank_pattern.name=Agglomeration Plate Blank Pattern
+item.crazyae.material.brewery_blank_pattern.name=Brewery Blank Pattern
 
 item.crazyae.elventrade_encoded_pattern.name=Elven Trade Encoded Pattern
 item.crazyae.manapool_encoded_pattern.name=Mana Pool Encoded Pattern
 item.crazyae.petal_encoded_pattern.name=Petal Encoded Pattern
 item.crazyae.runealtar_encoded_pattern.name=Rune Altar Encoded Pattern
 item.crazyae.puredaisy_encoded_pattern.name=Pure Daisy Encoded Pattern
+item.crazyae.teraplate_encoded_pattern.name=Agglomeration Plate Blank Pattern
+item.crazyae.brewery_encoded_pattern.name=Brewery Blank Pattern
+
+item.crazyae.creative_mana_cell.name=Creative ME Mana Cell
+item.crazyae.creative_energy_cell.name=Creative ME Energy Cell
 
 
 tooltip.crazyae.colorizer_desc.name=Allows to change Gui/Text colors in CrazyAE Guis.
@@ -111,6 +145,17 @@ item.crazyae.part.improved_import_fluid_bus.name=ME Improved Fluid Import Bus
 item.crazyae.part.mana_import_bus.name=ME Mana Import Bus
 item.crazyae.part.mana_export_bus.name=ME Mana Export Bus
 item.crazyae.part.mana_term.name=ME Mana Terminal
+
+item.crazyae.part.energy_term.name=ME Energy Terminal
+item.crazyae.part.part_drive.name=ME Drive
+item.crazyae.part.patterns_iface.name=§8ME Patterns Interface§r
+item.crazyae.part.perfect_iface.name=§cME Perfect Interface§r
+
+item.crazyae.part.energy_export_bus.name=ME Energy Export Bus
+item.crazyae.part.energy_import_bus.name=ME Energy Import Bus
+
+item.crazyae.part.part_patterns_iface.name=§8ME Patterns Interface§r
+item.crazyae.part.part_perfect_iface.name=§cME Perfect Interface§r
 
 
 # Upgrades
@@ -154,13 +199,13 @@ tile.crazyae.advanced_solar_panel.name=§dME Advanced Solar Panel§r
 tile.crazyae.perfect_solar_panel.name=§cME Perfect Solar Panel§r
 
 tile.crazyae.patterns_interface.name=§8ME Patterns Interface§r
+tile.crazyae.perfect_interface.name=§cME Perfect Interface§r
+
 
 tile.crazyae.improved_condenser.name=§6Improved Condenser§r
 
 tile.crazyae.quantum_channels_multiplier.name=Quantum Channels Multiplier
-tile.crazyae.quantum_channels_multiplier_creative.name=Creative Quantum Channels Multiplier
-
-tile.crazyae.quantum_wap.name=Quantum Wireless Access Point
+tile.crazyae.quantum_channels_multiplier_creative.name=Creative Infinite Channels Source
 
 
 tile.crazyae.mechanical_elventrade.name=Mechanical Elven Trade
@@ -168,6 +213,8 @@ tile.crazyae.mechanical_manapool.name=Mechanical Mana Pool
 tile.crazyae.mechanical_runealtar.name=Mechanical Rune Altar
 tile.crazyae.mechanical_petal.name=Mechanical Petal
 tile.crazyae.mechanical_puredaisy.name=Mechanical Pure Daisy
+tile.crazyae.mechanical_teraplate.name=Mechanical Agglomeration Plate
+tile.crazyae.mechanical_brewery.name=Mechanical Brewery
 
 
 #Resource
@@ -187,10 +234,17 @@ gui.crazyae.imp_fluid_import_bus.name=Improved ME Fluid Import Bus
 gui.crazyae.imp_fluid_export_bus.name=Improved ME Fluid Export Bus
 
 gui.crazyae.pattern_interface.name=ME Patterns Interface
+gui.crazyae.perfect_interface.name=ME Perfect Interface
 
 gui.crazyae.mana_terminal.name=ME Mana Terminal
 gui.crazyae.mana_import_bus.name=ME Mana Import Bus
 gui.crazyae.mana_export_bus.name=ME Mana Export Bus
+
+gui.crazyae.energy_terminal.name=ME Energy Terminal
+gui.crazyae.energy_import_bus.name=ME Energy Import Bus
+gui.crazyae.energy_export_bus.name=ME Energy Export Bus
+
+gui.crazyae.energy_settings_page.name=Maximum amount of energy per tick:
 
 gui.crazyae.link_with_mana_connector.name=This bus needs to be linked
 gui.crazyae.link_with_mana_connector2.name=to the mana block with the
@@ -208,9 +262,24 @@ gui.crazyae.mechanical_manapool.name=Mechanical Mana Pool
 gui.crazyae.mechanical_runealtar.name=Mechanical Rune Altar
 gui.crazyae.mechanical_petal.name=Mechanical Petal
 gui.crazyae.mechanical_puredaisy.name=Mechanical Pure Daisy
+gui.crazyae.mechanical_teraplate.name=Mechanical Agglomeration Plate
+gui.crazyae.mechanical_brewery.name=Mechanical Brewery
 
 gui.crazyae.patterns_inv_gui.name=Patterns storage
 
+gui.crazyae.ef_energy.name=EF Energy
+gui.crazyae.fe_energy.name=FE/RF Energy
+gui.crazyae.se_energy.name=SE Energy
+gui.crazyae.qe_energy.name=QE Energy
+gui.crazyae.eu_energy.name=EU Energy
+
+
+gui.crazyae.energy_used.name=Energy used
+gui.crazyae.items_used.name=Items used
+gui.crazyae.mana_used.name=Mana used
+gui.crazyae.fluid_used.name=Fluid used
+
+gui.crazyae.used.name=used
 
 # GUI's Tooltip
 
@@ -219,8 +288,11 @@ gui.tooltip.crazyae.cu_place_all_crafting_storages_here.name=Slots for crafting 
 
 gui.tooltip.crazyae.progress.name=Progress:
 
+gui.tooltip.crazyae.this_device_supports.name=This device supports:\n
+
 gui.crazyae.colorizer_gui_gui_to_text.name=Open Text Colorizer
 gui.crazyae.colorizer_gui_text_to_gui.name=Open Gui Colorizer
+gui.crazyae.open_energy_settings_page.name=Settings
 
 gui.crazyae.copy_to_clipboard.name=Copy to clipboard
 gui.crazyae.paste_from_clipboard.name=Paste from clipboard
@@ -241,19 +313,18 @@ gui.crazyae.colorizing_disabled.name=Colorizing is disabled in your config file.
 #Tooltips
 
 tooltip.crazyae.shift_for_details.name=Hold Shift for details
+tooltip.crazyae.ctrl_for_precise_details.name=Hold Ctrl for precise item count
 
 tooltip.crazyae.passive_generation_day.name=Generation at day:
 tooltip.crazyae.passive_generation_night.name=Generation at night:
 tooltip.crazyae.max_solar_capacity.name=Capacity
 
-tooltip.crazyae.qcm_desc.name=Allows you to increase cable capacity. Example:
-tooltip.crazyae.qcm_desc1.name=Each Quantum Multiplier will give %s channels for a normal cables
-tooltip.crazyae.qcm_desc2.name=and %s channels for a dense cables, at a cost of %s AE/t.
-
+tooltip.crazyae.qcm_desc.name=Allows you to increase cable capacity:\nEach Quantum Multiplier will give %s channels for a normal cables\nand %s channels for a dense cables, at a cost of %s AE/t.
 tooltip.crazyae.auto_pickup.name=Auto pickup is
 tooltip.crazyae.auto_pickup_how_to_enable.name=Press SHIFT+RMB to toggle auto pickup.
 tooltip.crazyae.auto_pickup_tip.name=Configuration made in the Cell Workbench will be used as filter.
 
+gui.tooltip.crazyae.energy_cell_formatting_hint.name=To configure a cell in Cell Workbench, place any energy wire\nof the type you want to configure the cell with.
 
 tooltip.crazyae.enabled_lowercase.name=enabled
 tooltip.crazyae.disabled_lowercase.name=disabled
@@ -267,8 +338,19 @@ tooltip.crazyae.mana_connector_clear.name=Mana Connector has been cleared.
 #Internal
 
 item.crazyae.mana_as_aestack.name=Mana
+item.crazyae.ef_energy_as_aestack.name=EF Energy
+item.crazyae.fe_energy_as_aestack.name=FE/RF Energy
+item.crazyae.se_energy_as_aestack.name=SE Energy
+item.crazyae.qe_energy_as_aestack.name=QE Energy
+item.crazyae.eu_energy_as_aestack.name=EU Energy
 gui.tooltip.crazyae.mana.name=Mana
+gui.tooltip.crazyae.ef_energy.name=EF Energy
+gui.tooltip.crazyae.fe_energy.name=FE/RF Energy
+gui.tooltip.crazyae.se_energy.name=SE Energy
+gui.tooltip.crazyae.qe_energy.name=QE Energy
 gui.tooltip.crazyae.stored_mana.name=Mana stored: %s
+gui.tooltip.crazyae.stored_item.name=%s stored: %s
+gui.tooltip.crazyae.stored.name=Stored:
 
 #Misc
 

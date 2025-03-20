@@ -11,11 +11,24 @@ public enum CrazyAEGuiTooltip {
 
     MANA,
     STORED_MANA,
+    STORED_ITEM,
+    STORED,
 
     PROGRESS,
+    SEND_ALL_ENERGY_TO_ME,
+
+    ENERGY_CELL_FORMATTING_HINT,
+
+    FE_ENERGY,
+    EF_ENERGY,
+    SE_ENERGY,
+    QE_ENERGY,
+    NE_ENERGY,
 
     QUEUED_ITEMS,
-    PROGRESS_PER_TICK;
+    PROGRESS_PER_TICK,
+
+    THIS_DEVICE_SUPPORTS;
 
     private final String root;
 

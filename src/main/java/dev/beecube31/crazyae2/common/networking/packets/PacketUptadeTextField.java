@@ -3,6 +3,7 @@ package dev.beecube31.crazyae2.common.networking.packets;
 import appeng.core.sync.network.INetworkInfo;
 import dev.beecube31.crazyae2.common.containers.ContainerColorizerGui;
 import dev.beecube31.crazyae2.common.containers.ContainerColorizerText;
+import dev.beecube31.crazyae2.common.containers.ContainerEnergyBusSettings;
 import dev.beecube31.crazyae2.common.containers.ContainerPriority;
 import dev.beecube31.crazyae2.common.networking.CrazyAEPacket;
 import io.netty.buffer.ByteBuf;
@@ -49,6 +50,11 @@ public class PacketUptadeTextField extends CrazyAEPacket {
 
         if (this.Name.equals("PriorityHost.Priority") && c instanceof final ContainerPriority pc) {
             pc.setPriority(Integer.parseInt(this.Value), player);
+            return;
+        }
+
+        if (this.Name.equals("EnergyHost.Config") && c instanceof final ContainerEnergyBusSettings s) {
+            s.setSettings(Long.parseLong(this.Value), player);
             return;
         }
 

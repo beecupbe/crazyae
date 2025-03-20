@@ -6,6 +6,7 @@ import appeng.core.AEConfig;
 import appeng.core.features.AEFeature;
 import dev.beecube31.crazyae2.common.recipes.InscriberRecipesMaker;
 import dev.beecube31.crazyae2.common.recipes.ManaPoolRecipesMaker;
+import dev.beecube31.crazyae2.common.recipes.botania.RecipeRepo;
 import dev.beecube31.crazyae2.common.recipes.handlers.DisassembleRecipe;
 import dev.beecube31.crazyae2.common.registration.definitions.*;
 import dev.beecube31.crazyae2.common.registration.registry.Registry;
@@ -66,6 +67,12 @@ public class Registration {
 
 		if (Loader.isModLoaded("botania")) {
 			ManaPoolRecipesMaker.init();
+
+			if (Loader.isModLoaded("botania_tweaks")) {
+				RecipeRepo.copyFromBotaniaTweaks();
+			} else {
+				RecipeRepo.addDefaultTerrasteelRecipe();
+			}
 		}
 	}
 

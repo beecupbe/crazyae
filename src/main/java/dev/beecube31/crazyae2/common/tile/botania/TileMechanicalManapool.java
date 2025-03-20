@@ -6,12 +6,13 @@ import appeng.api.networking.crafting.ICraftingPatternDetails;
 import appeng.api.networking.ticking.TickRateModulation;
 import appeng.api.storage.data.IAEItemStack;
 import appeng.me.helpers.MachineSource;
-import appeng.parts.automation.BlockUpgradeInventory;
 import appeng.tile.inventory.AppEngInternalInventory;
 import appeng.util.inv.InvOperation;
 import com.google.common.base.Preconditions;
 import dev.beecube31.crazyae2.common.enums.BotaniaMechanicalDeviceType;
+import dev.beecube31.crazyae2.common.parts.implementations.CrazyAEBlockUpgradeInv;
 import dev.beecube31.crazyae2.common.util.NBTUtils;
+import dev.beecube31.crazyae2.common.util.inv.CrazyAEInternalInv;
 import dev.beecube31.crazyae2.common.util.patterns.crafting.ManapoolCraftingPatternDetails;
 import dev.beecube31.crazyae2.core.CrazyAE;
 import net.minecraft.block.Block;
@@ -36,13 +37,13 @@ public class TileMechanicalManapool extends TileBotaniaMechanicalMachineBase {
     public TileMechanicalManapool() {
         super();
 
-        this.craftingInputInv = new AppEngInternalInventory(this, 2, 64);
-        (this.craftingOutputInv = new AppEngInternalInventory(this, 1, 64)).setFilter(new DisabledFilter());
+        this.craftingInputInv = new CrazyAEInternalInv(this, 2, 64);
+        (this.craftingOutputInv = new CrazyAEInternalInv(this, 1, 64)).setFilter(new DisabledFilter());
 
         this.actionSource = new MachineSource(this);
         final Block block = CrazyAE.definitions().blocks().mechanicalManapool().maybeBlock().orElse(null);
         Preconditions.checkNotNull(block);
-        this.upgrades = new BlockUpgradeInventory(block, this, this.getUpgradeSlots());
+        this.upgrades = new CrazyAEBlockUpgradeInv(block, this, this.getUpgradeSlots());
     }
 
     @Override
