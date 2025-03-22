@@ -24,4 +24,9 @@
 - AE2 Unofficial Extended Life
 - MixinBooter
 
--> https://www.curseforge.com/minecraft/mc-mods/crazyae <-
+# CraftTweaker support:
+### Agglomeration Plate: 
+- mods.crazyae.Agglomeration.addRecipe(output, input1, input2, input3, requiredMana)
+
+
+### -> https://www.curseforge.com/minecraft/mc-mods/crazyae <-
