@@ -11,6 +11,8 @@ import com.denfop.items.transport.ItemQCable;
 import com.denfop.items.transport.ItemSCable;
 import com.denfop.items.transport.ItemUniversalCable;
 import com.denfop.tiles.base.TileEntityBlock;
+import crafttweaker.CraftTweakerAPI;
+import crafttweaker.api.item.IItemStack;
 import dev.beecube31.crazyae2.core.CrazyAE;
 import dev.beecube31.crazyae2.core.CrazyAESidedHandler;
 import ic2.core.item.block.ItemBlockTileEntity;
@@ -82,6 +84,18 @@ public class Utils {
 
     public static int getTierFromPower(double power) {
         return power <= 0.0 ? 0 : Math.min(30, (int)Math.ceil(Math.log(power / 8.0) / Math.log(4.0)));
+    }
+
+    public static ItemStack getItemStack(IItemStack item) {
+        if(item == null)
+            return ItemStack.EMPTY;
+
+        Object internal = item.getInternal();
+        if(!(internal instanceof ItemStack)) {
+            CraftTweakerAPI.logError("Not a valid item stack: " + item);
+            throw new IllegalArgumentException("Not a valid item stack: " + item);
+        }
+        return ((ItemStack) internal).copy();
     }
 
     public static void setStackInSlot(final IItemHandler inv, final int slot, final ItemStack stack) {

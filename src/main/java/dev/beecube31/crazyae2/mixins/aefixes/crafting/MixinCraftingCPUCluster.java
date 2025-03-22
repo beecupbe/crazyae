@@ -4,21 +4,31 @@ import appeng.api.config.Actionable;
 import appeng.api.networking.crafting.ICraftingCPU;
 import appeng.api.networking.crafting.ICraftingMedium;
 import appeng.api.networking.crafting.ICraftingPatternDetails;
+import appeng.api.networking.energy.IEnergyGrid;
 import appeng.api.networking.security.IActionSource;
 import appeng.api.storage.data.IAEItemStack;
 import appeng.api.storage.data.IItemList;
 import appeng.crafting.MECraftingInventory;
+import appeng.helpers.PatternHelper;
+import appeng.me.cache.CraftingGridCache;
 import appeng.me.cluster.IAECluster;
 import appeng.me.cluster.implementations.CraftingCPUCluster;
 import appeng.me.helpers.MachineSource;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
+import dev.beecube31.crazyae2.common.containers.base.ContainerNull;
+import dev.beecube31.crazyae2.common.interfaces.crafting.ICrazyAECraftingPatternDetails;
+import dev.beecube31.crazyae2.core.CrazyAE;
+import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
@@ -53,6 +63,17 @@ public abstract class MixinCraftingCPUCluster implements IAECluster, ICraftingCP
 
         found.set(true);
         return false;
+    }
+
+    @Inject(
+            method = "executeCrafting",
+            at = @At(value = "INVOKE", target = "Lnet/minecraft/inventory/InventoryCrafting;<init>(Lnet/minecraft/inventory/Container;II)V", ordinal = 0, shift = At.Shift.AFTER),
+            remap = false
+    )
+    private void crazyae$checkPatternType(IEnergyGrid eg, CraftingGridCache cc, CallbackInfo ci, @Local ICraftingPatternDetails details, @Local InventoryCrafting ic) {
+         ic = details instanceof ICrazyAECraftingPatternDetails s
+                ? new InventoryCrafting(new ContainerNull(), s.getInventorySizeX(), s.getInventorySizeY())
+                : new InventoryCrafting(new ContainerNull(), 3,3);
     }
 
     @Redirect(

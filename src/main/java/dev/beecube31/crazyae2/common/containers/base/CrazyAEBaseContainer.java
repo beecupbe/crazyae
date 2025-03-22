@@ -362,6 +362,8 @@ public abstract class CrazyAEBaseContainer extends Container {
                                             || it == RestrictedSlot.PlaceableItemType.PETAL_ENCODED_PATTERN
                                             || it == RestrictedSlot.PlaceableItemType.RUNEALTAR_ENCODED_PATTERN
                                             || it == RestrictedSlot.PlaceableItemType.PUREDAISY_ENCODED_PATTERN
+                                            || it == RestrictedSlot.PlaceableItemType.TERAPLATE_ENCODED_PATTERN
+                                            || it == RestrictedSlot.PlaceableItemType.BREWERY_ENCODED_PATTERN
                                     ) return ItemStack.EMPTY;
                                 }
 

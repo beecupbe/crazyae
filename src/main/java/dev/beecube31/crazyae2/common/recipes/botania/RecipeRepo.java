@@ -26,9 +26,7 @@ public class RecipeRepo {
         terraplateRecipes.add(new RecipeTerraplate(
                 ImmutableList.of(manaResource(2), manaResource(0), manaResource(1)),
                 manaResource(4),
-                500000,
-                0x0000FF,
-                0x00FF00
+                500000
         ));
     }
 
@@ -38,6 +36,14 @@ public class RecipeRepo {
                 return Optional.of(recipe);
         }
         return Optional.empty();
+    }
+
+    public static void add(RecipeTerraplate recipe) {
+        terraplateRecipes.add(recipe);
+    }
+
+    public static void remove(RecipeTerraplate recipe) {
+        terraplateRecipes.remove(recipe);
     }
 
     private static ItemStack manaResource(int meta) {

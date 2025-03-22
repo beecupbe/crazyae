@@ -10,6 +10,7 @@ import dev.beecube31.crazyae2.common.recipes.botania.RecipeRepo;
 import dev.beecube31.crazyae2.common.recipes.handlers.DisassembleRecipe;
 import dev.beecube31.crazyae2.common.registration.definitions.*;
 import dev.beecube31.crazyae2.common.registration.registry.Registry;
+import dev.beecube31.crazyae2.integrations.ct.CraftTweakerPlugin;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.ItemMeshDefinition;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -74,6 +75,14 @@ public class Registration {
 				RecipeRepo.addDefaultTerrasteelRecipe();
 			}
 		}
+
+		if (Loader.isModLoaded("crafttweaker")) {
+			this.initCraftTweakerPlugin();
+		}
+	}
+
+	public void initCraftTweakerPlugin() {
+		CraftTweakerPlugin.postInit();
 	}
 
 	@SubscribeEvent

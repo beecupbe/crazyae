@@ -51,4 +51,14 @@ public class RunealtarCraftingPatternDetails extends CrazyAECraftingPatternDetai
         }
         return false;
     }
+
+    @Override
+    public int getInventorySizeX() {
+        return 8;
+    }
+
+    @Override
+    public int getInventorySizeY() {
+        return 2;
+    }
 }

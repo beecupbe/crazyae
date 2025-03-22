@@ -17,8 +17,6 @@ public class RecipeTerraplate {
     public final ImmutableList<String> recipeOreKeys;
     public final ItemStack recipeOutput;
     public final int manaCost;
-    public final int color1;
-    public final int color2;
 
     final int totalInputs;
 
@@ -31,7 +29,7 @@ public class RecipeTerraplate {
         }
     }
 
-    public RecipeTerraplate(ImmutableList<Object> recipeInputs, ItemStack recipeOutput, int manaCost, int color1, int color2) {
+    public RecipeTerraplate(ImmutableList<Object> recipeInputs, ItemStack recipeOutput, int manaCost) {
         verifyInputs(recipeInputs);
 
         ImmutableList.Builder<ItemStack> stackInputBuilder = new ImmutableList.Builder<>();
@@ -48,8 +46,6 @@ public class RecipeTerraplate {
 
         this.recipeOutput = recipeOutput;
         this.manaCost = manaCost;
-        this.color1 = color1;
-        this.color2 = color2;
     }
 
     public RecipeTerraplate(AgglomerationRecipe s) {
@@ -67,8 +63,6 @@ public class RecipeTerraplate {
 
         this.recipeOutput = s.recipeOutput;
         this.manaCost = s.manaCost;
-        this.color1 = s.color1;
-        this.color2 = s.color2;
     }
 
     public boolean matches(IItemHandler inv) {

@@ -52,4 +52,14 @@ public class PuredaisyCraftingPatternDetails extends CrazyAECraftingPatternDetai
         }
         return false;
     }
+
+    @Override
+    public int getInventorySizeX() {
+        return 1;
+    }
+
+    @Override
+    public int getInventorySizeY() {
+        return 1;
+    }
 }

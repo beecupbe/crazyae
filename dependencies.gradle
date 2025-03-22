@@ -37,4 +37,5 @@ dependencies {
     implementation rfg.deobf("curse.maven:industrial-upgrade-372007:6237087")
     implementation rfg.deobf("curse.maven:cofh-core-69162:2920433")
     implementation rfg.deobf("curse.maven:botania-tweaks-295114:3092102")
+    compileOnly "CraftTweaker2:CraftTweaker2-API:4.1.20.684"
 }

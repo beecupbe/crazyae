@@ -356,7 +356,7 @@ public class PartEnergyExportBus extends CrazyAEPartSharedBus implements IEnergy
             for (Field field : te.getClass().getDeclaredFields()) {
                 if (IEnergyStorage.class.isAssignableFrom(field.getType())) {
                     field.setAccessible(true);
-                    IEnergyStorage candidate = (IEnergyStorage) field.get(null);
+                    IEnergyStorage candidate = (IEnergyStorage) field.get(te);
 
                     if (candidate.canReceive()) {
                         int received = candidate.receiveEnergy((int) this.availableEnergy(CrazyAE.definitions().items().FEEnergyAsAeStack()), false);

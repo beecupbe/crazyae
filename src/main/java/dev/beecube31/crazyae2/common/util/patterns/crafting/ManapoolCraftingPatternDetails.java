@@ -51,4 +51,14 @@ public class ManapoolCraftingPatternDetails extends CrazyAECraftingPatternDetail
         }
         return false;
     }
+
+    @Override
+    public int getInventorySizeX() {
+        return 2;
+    }
+
+    @Override
+    public int getInventorySizeY() {
+        return 1;
+    }
 }

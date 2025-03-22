@@ -51,4 +51,14 @@ public class TeraplateCraftingPatternDetails extends CrazyAECraftingPatternDetai
         }
         return false;
     }
+
+    @Override
+    public int getInventorySizeX() {
+        return 3;
+    }
+
+    @Override
+    public int getInventorySizeY() {
+        return 1;
+    }
 }

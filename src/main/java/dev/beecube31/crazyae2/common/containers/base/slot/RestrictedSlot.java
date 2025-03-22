@@ -111,6 +111,10 @@ public class RestrictedSlot extends CrazyAESlot {
 
             case PETAL_BLANK_PATTERN ->
                     CrazyAE.definitions().materials().petalBlankPattern().isSameAs(i);
+            case TERAPLATE_ENCODED_PATTERN ->
+                    CrazyAE.definitions().items().teraplateEncodedPattern().isSameAs(i);
+            case BREWERY_ENCODED_PATTERN ->
+                    CrazyAE.definitions().items().breweryEncodedPattern().isSameAs(i);
             case PETAL_ENCODED_PATTERN ->
                     CrazyAE.definitions().items().petalEncodedPattern().isSameAs(i);
 
@@ -186,6 +190,8 @@ public class RestrictedSlot extends CrazyAESlot {
         MANAPOOL_ENCODED_PATTERN(StateSprite.PATTERNS_SLOT_NEW),
         RUNEALTAR_ENCODED_PATTERN(StateSprite.PATTERNS_SLOT_NEW),
         PUREDAISY_ENCODED_PATTERN(StateSprite.PATTERNS_SLOT_NEW),
+        TERAPLATE_ENCODED_PATTERN(StateSprite.PATTERNS_SLOT_NEW),
+        BREWERY_ENCODED_PATTERN(StateSprite.PATTERNS_SLOT_NEW),
         PETAL_ENCODED_PATTERN(StateSprite.PATTERNS_SLOT_NEW);
 
 
