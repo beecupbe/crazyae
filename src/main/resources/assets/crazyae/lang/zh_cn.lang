@@ -12,6 +12,19 @@ item.crazyae.storage_cell_256mb.name=§b256MB§r-ME存储元件
 item.crazyae.storage_cell_1gb.name=§11GB§r-ME存储元件
 item.crazyae.storage_cell_2gb.name=§d2GB§r-ME存储元件
 
+item.crazyae.energy_cell_1k.name=§61k§r-ME能源存储元件
+item.crazyae.energy_cell_4k.name=§e4k§r-ME能源存储元件
+item.crazyae.energy_cell_16k.name=§a16k§r-ME能源存储元件
+item.crazyae.energy_cell_64k.name=§b64k§r-ME能源存储元件
+item.crazyae.energy_cell_256k.name=§c256k§r-ME能源存储元件
+item.crazyae.energy_cell_1mb.name=§61MB§r-ME能源存储元件
+item.crazyae.energy_cell_4mb.name=§e4MB§r-ME能源存储元件
+item.crazyae.energy_cell_16mb.name=§a16MB§r-ME能源存储元件
+item.crazyae.energy_cell_64mb.name=§264MB§r-ME能源存储元件
+item.crazyae.energy_cell_256mb.name=§b256MB§r-ME能源存储元件
+item.crazyae.energy_cell_1gb.name=§11GB§r-ME能源存储元件
+item.crazyae.energy_cell_2gb.name=§d2GB§r-ME能源存储元件
+
 item.crazyae.mana_cell_1k.name=§61k§r-ME魔力存储元件
 item.crazyae.mana_cell_4k.name=§e4k§r-ME魔力存储元件
 item.crazyae.mana_cell_16k.name=§a16k§r-ME魔力存储元件
@@ -48,6 +61,19 @@ item.crazyae.material.cell_part_256mb.name=§b256MB§r-ME存储组件
 item.crazyae.material.cell_part_1gb.name=§11GB§r-ME存储组件
 item.crazyae.material.cell_part_2gb.name=§d2GB§r-ME存储组件
 
+item.crazyae.material.energy_part_1k.name=§61k§r-ME能源存储组件
+item.crazyae.material.energy_part_4k.name=§e4k§r-ME能源存储组件
+item.crazyae.material.energy_part_16k.name=§a16k§r-ME能源存储组件
+item.crazyae.material.energy_part_64k.name=§b64k§r-ME能源存储组件
+item.crazyae.material.energy_part_256k.name=§c256k§r-ME能源存储组件
+item.crazyae.material.energy_part_1mb.name=§61MB§r-ME能源存储组件
+item.crazyae.material.energy_part_4mb.name=§e4MB§r-ME能源存储组件
+item.crazyae.material.energy_part_16mb.name=§a16MB§r-ME能源存储组件
+item.crazyae.material.energy_part_64mb.name=§264MB§r-ME能源存储组件
+item.crazyae.material.energy_part_256mb.name=§b256MB§r-ME能源存储组件
+item.crazyae.material.energy_part_1gb.name=§11GB§r-ME能源存储组件
+item.crazyae.material.energy_part_2gb.name=§d2GB§r-ME能源存储组件
+
 item.crazyae.material.mana_part_1k.name=§61k§r-ME魔力存储组件
 item.crazyae.material.mana_part_4k.name=§e4k§r-ME魔力存储组件
 item.crazyae.material.mana_part_16k.name=§a16k§r-ME魔力存储组件
@@ -77,6 +103,7 @@ item.crazyae.material.fluixilized_ingot.name=§5强化福鲁伊克斯水晶§r
 item.crazyae.quantum_wireless_booster.name=量子无线信号增幅器
 item.crazyae.material.quantum_processor.name=量子处理器
 item.crazyae.material.mana_processor.name=魔力处理器
+item.crazyae.material.energy_processor.name=能源处理器
 item.crazyae.mana_connector.name=魔力连接器
 item.crazyae.gui_colorizer.name=调色工具
 
@@ -86,12 +113,19 @@ item.crazyae.material.manapool_blank_pattern.name=魔力灌注空白样板
 item.crazyae.material.petal_blank_pattern.name=花瓣炼制空白样板
 item.crazyae.material.runealtar_blank_pattern.name=符文祭坛空白样板
 item.crazyae.material.puredaisy_blank_pattern.name=白雏活化空白样板
+item.crazyae.material.teraplate_blank_pattern.name=泰拉凝聚空白样板
+item.crazyae.material.brewery_blank_pattern.name=植物酿造空白样板
 
 item.crazyae.elventrade_encoded_pattern.name=精灵交易编码样板
 item.crazyae.manapool_encoded_pattern.name=魔力灌注编码样板
 item.crazyae.petal_encoded_pattern.name=花瓣炼制编码样板
 item.crazyae.runealtar_encoded_pattern.name=符文祭坛编码样板
 item.crazyae.puredaisy_encoded_pattern.name=白雏活化编码样板
+item.crazyae.teraplate_encoded_pattern.name=泰拉凝聚编码样板
+item.crazyae.brewery_encoded_pattern.name=植物酿造编码样板
+
+item.crazyae.creative_mana_cell.name=创造型ME魔力存储组件
+item.crazyae.creative_energy_cell.name=创造型ME能源存储组件
 
 
 tooltip.crazyae.colorizer_desc.name=用于调整本模组的Gui与文本颜色。
@@ -111,6 +145,17 @@ item.crazyae.part.improved_import_fluid_bus.name=增强型ME流体输出总线
 item.crazyae.part.mana_import_bus.name=ME魔力输入总线
 item.crazyae.part.mana_export_bus.name=ME魔力输出总线
 item.crazyae.part.mana_term.name=ME魔力终端
+
+item.crazyae.part.energy_term.name=ME能源终端
+item.crazyae.part.part_drive.name=ME驱动器
+item.crazyae.part.patterns_iface.name=§8ME样板接口§r
+item.crazyae.part.perfect_iface.name=§cME完美接口§r
+
+item.crazyae.part.energy_export_bus.name=ME能源输出总线
+item.crazyae.part.energy_import_bus.name=ME能源输入总线
+
+item.crazyae.part.part_patterns_iface.name=§8ME样板接口§r
+item.crazyae.part.part_perfect_iface.name=§cME完美接口§r
 
 
 # Upgrades
@@ -154,13 +199,13 @@ tile.crazyae.advanced_solar_panel.name=§dME高级太阳能板§r
 tile.crazyae.perfect_solar_panel.name=§cME完美太阳能板§r
 
 tile.crazyae.patterns_interface.name=§8ME样板接口§r
+tile.crazyae.perfect_interface.name=§cME完美接口§r
+
 
 tile.crazyae.improved_condenser.name=§6增强型物质聚合器§r
 
 tile.crazyae.quantum_channels_multiplier.name=量子频道增幅器
 tile.crazyae.quantum_channels_multiplier_creative.name=创造量子频道增幅器
-
-tile.crazyae.quantum_wap.name=量子无线访问点
 
 
 tile.crazyae.mechanical_elventrade.name=精灵交易处理仓
@@ -168,6 +213,8 @@ tile.crazyae.mechanical_manapool.name=魔力灌注处理仓
 tile.crazyae.mechanical_runealtar.name=符文祭坛处理仓
 tile.crazyae.mechanical_petal.name=花瓣炼制处理仓
 tile.crazyae.mechanical_puredaisy.name=白雏活化处理仓
+tile.crazyae.mechanical_teraplate.name=泰拉凝聚处理仓
+tile.crazyae.mechanical_brewery.name=植物酿造处理仓
 
 
 #Resource
@@ -187,15 +234,22 @@ gui.crazyae.imp_fluid_import_bus.name=增强型ME流体输入总线
 gui.crazyae.imp_fluid_export_bus.name=增强型ME流体输出总线
 
 gui.crazyae.pattern_interface.name=ME样板接口
+gui.crazyae.perfect_interface.name=ME完美接口
 
 gui.crazyae.mana_terminal.name=ME魔力终端
 gui.crazyae.mana_import_bus.name=ME魔力输入总线
 gui.crazyae.mana_export_bus.name=ME魔力输出总线
 
+gui.crazyae.energy_terminal.name=ME能源终端
+gui.crazyae.energy_import_bus.name=ME能源输入总线
+gui.crazyae.energy_export_bus.name=ME能源输出总线
+
+gui.crazyae.energy_settings_page.name=每tick最大能源值:
+
 gui.crazyae.link_with_mana_connector.name=此总线需要使用
 gui.crazyae.link_with_mana_connector2.name="魔力连接器"
 gui.crazyae.link_with_mana_connector3.name=将其连接到魔力池
-gui.crazyae.linked_with_mana_pool.name=连接到 х=%s y=%s z=%s
+gui.crazyae.linked_with_mana_pool.name=连接到:
 gui.crazyae.mana_amt_to_max.name=魔力池存储的魔力:
 
 gui.crazyae.gui_colorizer_gui.name=Gui颜色
@@ -208,9 +262,24 @@ gui.crazyae.mechanical_manapool.name=魔力灌注处理仓
 gui.crazyae.mechanical_runealtar.name=符文祭坛处理仓
 gui.crazyae.mechanical_petal.name=花瓣炼制处理仓
 gui.crazyae.mechanical_puredaisy.name=白雏活化处理仓
+gui.crazyae.mechanical_teraplate.name=泰拉凝聚处理仓
+gui.crazyae.mechanical_brewery.name=植物酿造处理仓
 
 gui.crazyae.patterns_inv_gui.name=样板存放处
 
+gui.crazyae.ef_energy.name=EF 能源
+gui.crazyae.fe_energy.name=FE/RF 能源
+gui.crazyae.se_energy.name=SE 能源
+gui.crazyae.qe_energy.name=QE 能源
+gui.crazyae.eu_energy.name=EU 能源
+
+
+gui.crazyae.energy_used.name=能源已使用
+gui.crazyae.items_used.name=物品已使用
+gui.crazyae.mana_used.name=魔力已使用
+gui.crazyae.fluid_used.name=流体已使用
+
+gui.crazyae.used.name=已使用
 
 # GUI's Tooltip
 
@@ -219,8 +288,11 @@ gui.tooltip.crazyae.cu_place_all_crafting_storages_here.name=合成存储器插�
 
 gui.tooltip.crazyae.progress.name=进度:
 
+gui.tooltip.crazyae.this_device_supports.name=此设备支持:\n
+
 gui.crazyae.colorizer_gui_gui_to_text.name=调整文本颜色
 gui.crazyae.colorizer_gui_text_to_gui.name=调整Gui颜色
+gui.crazyae.open_energy_settings_page.name=设置
 
 gui.crazyae.copy_to_clipboard.name=复制
 gui.crazyae.paste_from_clipboard.name=粘贴
@@ -241,17 +313,18 @@ gui.crazyae.colorizing_disabled.name=配置文件已禁用调色功能
 #Tooltips
 
 tooltip.crazyae.shift_for_details.name=按 Shift 键查看详情
+tooltip.crazyae.ctrl_for_precise_details.name=按 Ctrl 键查看详情
 
 tooltip.crazyae.passive_generation_day.name=白天产出:
 tooltip.crazyae.passive_generation_night.name=夜晚产出:
 tooltip.crazyae.max_solar_capacity.name=最大存储
 
-tooltip.crazyae.qcm_desc.name=允许你增加线缆频道数\n每个量子频道增幅器将为普通线缆提供%s个通道\n为致密线缆提供%s个通道，耗能为%s AE/t
-
+tooltip.crazyae.qcm_desc.name=允许你增加线缆频道数 \n每个将为普通线缆提供%s个频道 \n为致密线缆提供%s个频道，耗能为%s AE/t
 tooltip.crazyae.auto_pickup.name=自动拾取:
 tooltip.crazyae.auto_pickup_how_to_enable.name=按 SHIFT+RMB 切换自动拾取模式
 tooltip.crazyae.auto_pickup_tip.name=在元件工作台中配置过滤
 
+gui.tooltip.crazyae.energy_cell_formatting_hint.name=要在元件工作台中配置存储元件\n请放置任意你想用于配置该存储元件的类型的能量线缆。
 
 tooltip.crazyae.enabled_lowercase.name=启用
 tooltip.crazyae.disabled_lowercase.name=禁用
@@ -265,8 +338,19 @@ tooltip.crazyae.mana_connector_clear.name=已解除
 #Internal
 
 item.crazyae.mana_as_aestack.name=魔力
+item.crazyae.ef_energy_as_aestack.name=EF 能源
+item.crazyae.fe_energy_as_aestack.name=FE/RF 能源
+item.crazyae.se_energy_as_aestack.name=SE 能源
+item.crazyae.qe_energy_as_aestack.name=QE 能源
+item.crazyae.eu_energy_as_aestack.name=EU 能源
 gui.tooltip.crazyae.mana.name=魔力
-gui.tooltip.crazyae.stored_mana.name=魔力储量: %s
+gui.tooltip.crazyae.ef_energy.name=EF 能源
+gui.tooltip.crazyae.fe_energy.name=FE/RF 能源
+gui.tooltip.crazyae.se_energy.name=SE 能源
+gui.tooltip.crazyae.qe_energy.name=QE 能源
+gui.tooltip.crazyae.stored_mana.name=魔力已存储: %s
+gui.tooltip.crazyae.stored_item.name=%s 已存储: %s
+gui.tooltip.crazyae.stored.name=已存储:
 
 #Misc
 
