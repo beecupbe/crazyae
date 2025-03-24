@@ -199,7 +199,7 @@ public abstract class MixinContainerInterfaceTerminal extends AEBaseContainer {
                 final InvTracker inv = en.getValue();
                 for (int x = 0; x < inv.server.getSlots(); x++) {
                     if (this.isDifferent(inv.server.getStackInSlot(x), inv.client.getStackInSlot(x))) {
-                        this.crazyae$addItems(this.data, inv, x, inv.server.getSlots(), null);
+                        this.crazyae$addItems(this.data, inv, x, inv.server.getSlots(), false);
                     }
                 }
             }
@@ -208,7 +208,7 @@ public abstract class MixinContainerInterfaceTerminal extends AEBaseContainer {
                 final InvTracker inv = en.getValue();
                 for (int x = 0; x < inv.server.getSlots(); x++) {
                     if (this.isDifferent(inv.server.getStackInSlot(x), inv.client.getStackInSlot(x))) {
-                        this.crazyae$addItems(this.data, inv, x, inv.server.getSlots(), null);
+                        this.crazyae$addItems(this.data, inv, x, inv.server.getSlots(), true);
                     }
                 }
             }
@@ -381,7 +381,7 @@ public abstract class MixinContainerInterfaceTerminal extends AEBaseContainer {
                 for (final IGridNode gn : this.grid.getMachines(TileImprovedMAC.class)) {
                     final IGridHostMonitorable ih = (IGridHostMonitorable) gn.getMachine();
                     if (gn.isActive()) {
-                        this.crazyae$macDiList.put(ih, new InvTracker(ih, true, ih.getPatternsInv(), ih.getName()));
+                        this.crazyae$macDiList.put(ih, new InvTracker(ih, ih.getPatternsInv(), ih.getName()));
                     }
                 }
             }
@@ -392,18 +392,18 @@ public abstract class MixinContainerInterfaceTerminal extends AEBaseContainer {
         for (final Map.Entry<IInterfaceHost, InvTracker> en : this.crazyae$diList.entrySet()) {
             final InvTracker inv = en.getValue();
             this.crazyae$byId.put(inv.which, inv);
-            this.crazyae$addItems(data, inv, 0, inv.server.getSlots(), null);
+            this.crazyae$addItems(data, inv, 0, inv.server.getSlots(), false);
         }
 
         for (final Map.Entry<IGridHostMonitorable, InvTracker> en : this.crazyae$macDiList.entrySet()) {
             final InvTracker inv = en.getValue();
             this.crazyae$byId.put(inv.which, inv);
-            this.crazyae$addItems(data, inv, 0, inv.server.getSlots(), null);
+            this.crazyae$addItems(data, inv, 0, inv.server.getSlots(), true);
         }
     }
 
     @Unique
-    private void crazyae$addItems(NBTTagCompound data, InvTracker inv, int offset, int length, IGridHostMonitorable mac) {
+    private void crazyae$addItems(NBTTagCompound data, InvTracker inv, int offset, int length, boolean mac) {
         String name = '=' + Long.toString(inv.which, 36);
         NBTTagCompound tag = data.getCompoundTag(name);
         if (tag.isEmpty()) {
@@ -412,11 +412,12 @@ public abstract class MixinContainerInterfaceTerminal extends AEBaseContainer {
             tag.setTag("pos", NBTUtil.createPosTag(inv.pos));
             tag.setInteger("dim", inv.dim);
             tag.setInteger("numUpgrades", inv.numUpgrades);
-            tag.setBoolean("isMAC", mac instanceof TileImprovedMAC);
+            tag.setBoolean("isMAC", mac);
             tag.setInteger("patternsNum", length);
         }
 
         for (int x = 0; x < length; ++x) {
+            if (x + offset >= length) break;
             NBTTagCompound itemNBT = new NBTTagCompound();
             ItemStack is = inv.server.getStackInSlot(x + offset);
             ItemHandlerUtil.setStackInSlot(inv.client, x + offset, is.isEmpty() ? ItemStack.EMPTY : is.copy());

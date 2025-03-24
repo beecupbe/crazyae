@@ -340,7 +340,7 @@ public abstract class MixinContainerInterfaceConfigurationTerminal extends AEBas
             tag.setString("un", inv.unlocalizedName);
             tag.setTag("pos", NBTUtil.createPosTag(inv.pos));
             tag.setInteger("dim", inv.dim);
-            tag.setInteger("num", inv.forceSlots == 0 ? length / 9 : inv.forceSlots);
+            tag.setInteger("num", length);
             tag.setInteger("forcedNum", inv.forceSlots);
         }
 

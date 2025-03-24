@@ -242,7 +242,7 @@ public abstract class MixinGuiInterfaceConfigurationTerminal extends AEBaseGui {
             if (!found) {
                 int slot = 0;
                 for (final ItemStack itemStack : entry.getInventory()) {
-                    if (crazyae$perfect.get(entry) ? slot > 36 : slot > 8 + numUpgradesMap.get(entry) * 9) {
+                    if (crazyae$perfect.get(entry) != null ? slot > 36 : slot > 8 + numUpgradesMap.get(entry) * 9) {
                         break;
                     }
                     if (this.itemStackMatchesSearchTerm(itemStack, searchFieldInputs)) {

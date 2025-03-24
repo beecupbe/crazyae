@@ -278,8 +278,8 @@ public abstract class MixinGuiInterfaceTerminal extends AEBaseGui {
                     blockPosHashMap.put(current, NBTUtil.getPosFromTag(invData.getCompoundTag("pos")));
                     dimHashMap.put(current, invData.getInteger("dim"));
                     numUpgradesMap.put(current, invData.getInteger("numUpgrades"));
-                    crazyae$patterns.put(current, !invData.getBoolean("isMAC") && invData.getInteger("patternsNum") == 72);
-                    crazyae$macs.put(current, invData.getBoolean("isMAC"));
+                    crazyae$patterns.put(current, (!invData.getBoolean("isMAC") && invData.getInteger("patternsNum") == 72));
+                    crazyae$macs.put(current, (invData.getBoolean("isMAC") && invData.getInteger("patternsNum") == 45));
 
                     for (int x = 0; x < current.getInventory().getSlots(); x++) {
                         final String which = Integer.toString(x);
