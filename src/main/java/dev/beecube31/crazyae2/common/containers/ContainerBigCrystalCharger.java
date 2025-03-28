@@ -92,6 +92,7 @@ public class ContainerBigCrystalCharger extends ContainerCrazyAEUpgradeable impl
         return title +
                 "\n" +
                 this.getCurrentProgress(tooltipID) +
+                ' ' +
                 GuiText.Of.getLocal() +
                 ' ' +
                 this.getMaxProgress(tooltipID);

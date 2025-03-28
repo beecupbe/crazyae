@@ -12,9 +12,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ComponentEFEnergySink extends BaseEnergyDelegate implements IEnergySink {
 
@@ -22,11 +20,19 @@ public class ComponentEFEnergySink extends BaseEnergyDelegate implements IEnergy
     boolean hasHashCode = false;
     int hashCodeSource;
 
-    private final PartEnergyImportBus part;
-    List<Integer> energyTicks = new LinkedList<>();
+    public double pastEnergy;
+    public double perEnergy;
+    public double tick;
+    public final List<Integer> energyTicks = new ArrayList<>();
+    public final List<InfoTile<IEnergyTile>> validTEs = new ArrayList<>();
+    public final Map<EnumFacing, IEnergyTile> energyConductorMap = new HashMap<>();
+    public long id;
 
+    private final PartEnergyImportBus part;
+
+    @Override
     public List<InfoTile<IEnergyTile>> getValidReceivers() {
-        return this.part.validTEs;
+        return this.validTEs;
     }
 
     public ComponentEFEnergySink(PartEnergyImportBus part) {
@@ -34,20 +40,24 @@ public class ComponentEFEnergySink extends BaseEnergyDelegate implements IEnergy
         this.part = part;
     }
 
+    @Override
     public int getSinkTier() {
         return 14;
     }
 
+    @Override
     public boolean acceptsEnergyFrom(IEnergyEmitter emitter, EnumFacing dir) {
         return dir == this.part.getSide().getFacing();
     }
 
+    @Override
     public long getIdNetwork() {
-        return this.part.getIdNetwork();
+        return this.id;
     }
 
+    @Override
     public void setId(final long id) {
-        this.part.setId(id);
+        this.id = id;
     }
 
     @Override
@@ -70,24 +80,39 @@ public class ComponentEFEnergySink extends BaseEnergyDelegate implements IEnergy
     }
 
     @Override
-    public void AddTile(final IEnergyTile tile, final EnumFacing dir) {
-        this.part.AddTile(tile, dir);
+    public void AddTile(IEnergyTile tile, EnumFacing dir) {
+        if (!(this.part.getTile().getWorld()).isRemote) {
+            this.energyConductorMap.put(dir, tile);
+            this.validTEs.add(new InfoTile<>(tile, dir.getOpposite()));
+        }
     }
 
     @Override
-    public void RemoveTile(final IEnergyTile tile, final EnumFacing dir) {
-        this.part.RemoveTile(tile, dir);
+    public void RemoveTile(IEnergyTile tile, EnumFacing dir) {
+        if (!(this.part.getTile().getWorld()).isRemote) {
+            this.energyConductorMap.remove(dir);
+            Iterator<InfoTile<IEnergyTile>> iter = this.validTEs.iterator();
+            while (iter.hasNext()) {
+                InfoTile<IEnergyTile> tileInfoTile = iter.next();
+                if (tileInfoTile.tileEntity == tile) {
+                    iter.remove();
+                    break;
+                }
+            }
+        }
     }
 
     @Override
     public Map<EnumFacing, IEnergyTile> getTiles() {
-        return this.part.energyConductorMap;
+        return this.energyConductorMap;
     }
 
+    @Override
     public double getDemandedEnergy() {
         return this.part.getDemandedEnergy(CrazyAE.definitions().items().EFEnergyAsAeStack());
     }
 
+    @Override
     public void receiveEnergy(double amount) {
         this.part.receiveEnergy(amount, CrazyAE.definitions().items().EFEnergyAsAeStack());
     }
@@ -99,32 +124,32 @@ public class ComponentEFEnergySink extends BaseEnergyDelegate implements IEnergy
 
     @Override
     public double getPerEnergy() {
-        return this.part.getPerEnergy();
+        return this.perEnergy;
     }
 
     @Override
     public double getPastEnergy() {
-        return this.part.getPastEnergy();
+        return this.pastEnergy;
     }
 
     @Override
     public void setPastEnergy(final double pastEnergy) {
-        this.part.setPastEnergy(pastEnergy);
+        this.pastEnergy = pastEnergy;
     }
 
     @Override
     public void addPerEnergy(final double setEnergy) {
-        this.part.addPerEnergy(setEnergy);
+        this.perEnergy = setEnergy;
     }
 
     @Override
     public void addTick(final double tick) {
-        this.part.tick = tick;
+        this.tick = tick;
     }
 
     @Override
     public double getTick() {
-        return this.part.tick;
+        return this.tick;
     }
 
     @Override

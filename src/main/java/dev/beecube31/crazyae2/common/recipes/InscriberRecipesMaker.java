@@ -47,11 +47,11 @@ public class InscriberRecipesMaker {
 
             CrazyAE.definitions().materials().energyProcessor().maybeStack(1).ifPresent(energyProcessor -> {
                 make(
-                        AEApi.instance().definitions().materials().matterBall().maybeStack(1).orElse(ItemStack.EMPTY),
-                        CrazyAE.definitions().materials().quantumProcessor().maybeStack(1).orElse(ItemStack.EMPTY),
-                        CrazyAE.definitions().materials().quantumProcessor().maybeStack(1).orElse(ItemStack.EMPTY),
-                        energyProcessor,
-                        InscriberProcessType.PRESS
+                    AEApi.instance().definitions().materials().matterBall().maybeStack(1).orElse(ItemStack.EMPTY),
+                    CrazyAE.definitions().materials().quantumProcessor().maybeStack(1).orElse(ItemStack.EMPTY),
+                    CrazyAE.definitions().blocks().fluixilizedBlock().maybeStack(1).orElse(ItemStack.EMPTY),
+                    energyProcessor,
+                    InscriberProcessType.PRESS
                 );
             });
         });

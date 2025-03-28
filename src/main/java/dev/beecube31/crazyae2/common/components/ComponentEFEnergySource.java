@@ -12,14 +12,19 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ComponentEFEnergySource extends BaseEnergyDelegate implements IEnergySource {
 
     private int hashCode;
     boolean hasHashCode = false;
     int hashCodeSource;
+
+    public double pastEnergy;
+    public double perEnergy;
+    public final List<InfoTile<IEnergyTile>> validTEs = new ArrayList<>();
+    public final Map<EnumFacing, IEnergyTile> energyConductorMap = new HashMap<>();
+    public long id;
 
     private final PartEnergyExportBus part;
 
@@ -29,13 +34,13 @@ public class ComponentEFEnergySource extends BaseEnergyDelegate implements IEner
     }
 
     @Override
-    public void setHashCodeSource(final int hashCode) {
-        hashCodeSource = hashCode;
+    public void setHashCodeSource(int hashCode) {
+        this.hashCodeSource = hashCode;
     }
 
     @Override
     public int getHashCodeSource() {
-        return hashCodeSource;
+        return this.hashCodeSource;
     }
 
     @Override
@@ -46,22 +51,37 @@ public class ComponentEFEnergySource extends BaseEnergyDelegate implements IEner
         }
         return hashCode;
     }
+
     public List<InfoTile<IEnergyTile>> getValidReceivers() {
-        return this.part.getValidReceivers();
-    }
-    @Override
-    public void AddTile(final IEnergyTile tile, final EnumFacing dir) {
-        this.part.AddTile(tile, dir);
+        return this.validTEs;
     }
 
     @Override
-    public void RemoveTile(final IEnergyTile tile, final EnumFacing dir) {
-        this.part.RemoveTile(tile, dir);
+    public void AddTile(IEnergyTile tile, EnumFacing dir) {
+        if (!(this.part.getTile().getWorld().isRemote)) {
+            this.energyConductorMap.put(dir, tile);
+            this.validTEs.add(new InfoTile<>(tile, dir.getOpposite()));
+        }
+    }
+
+    @Override
+    public void RemoveTile(IEnergyTile tile, EnumFacing dir) {
+        if (!(this.part.getTile().getWorld().isRemote)) {
+            this.energyConductorMap.remove(dir);
+            Iterator<InfoTile<IEnergyTile>> iter = this.validTEs.iterator();
+            while (iter.hasNext()) {
+                InfoTile<IEnergyTile> tileInfoTile = iter.next();
+                if (tileInfoTile.tileEntity == tile) {
+                    iter.remove();
+                    break;
+                }
+            }
+        }
     }
 
     @Override
     public Map<EnumFacing, IEnergyTile> getTiles() {
-        return this.part.getTiles();
+        return this.energyConductorMap;
     }
 
     @Override
@@ -69,48 +89,54 @@ public class ComponentEFEnergySource extends BaseEnergyDelegate implements IEner
         return this.part.getHost().getTile().getPos();
     }
 
+    @Override
     public int getSourceTier() {
         return 14;
     }
 
+    @Override
     public boolean emitsEnergyTo(IEnergyAcceptor receiver, EnumFacing dir) {
         return dir == this.part.getSide().getFacing();
     }
 
+    @Override
     public long getIdNetwork() {
-        return this.part.getIdNetwork();
+        return this.id;
     }
 
-    public void setId(final long id) {
-        this.part.setId(id);
+    @Override
+    public void setId(long id) {
+        this.id = id;
     }
 
+    @Override
     public double canExtractEnergy() {
         return this.part.availableEnergy(CrazyAE.definitions().items().EFEnergyAsAeStack());
     }
 
+    @Override
     public void extractEnergy(double amount) {
         this.part.extractEnergy(amount, CrazyAE.definitions().items().EFEnergyAsAeStack());
     }
 
     @Override
     public double getPerEnergy() {
-        return this.part.getPerEnergy();
+        return this.perEnergy;
     }
 
     @Override
     public double getPastEnergy() {
-        return this.part.getPastEnergy();
+        return this.pastEnergy;
     }
 
     @Override
-    public void setPastEnergy(final double pastEnergy) {
-        this.part.setPastEnergy(pastEnergy);
+    public void setPastEnergy(double pastEnergy) {
+        this.pastEnergy = pastEnergy;
     }
 
     @Override
-    public void addPerEnergy(final double setEnergy) {
-        this.part.addPerEnergy(setEnergy);
+    public void addPerEnergy(double setEnergy) {
+        this.perEnergy = setEnergy;
     }
 
     @Override

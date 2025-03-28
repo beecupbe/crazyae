@@ -96,6 +96,7 @@ public class ContainerImprovedCondenser extends CrazyAEBaseContainer implements 
         return title +
                 "\n" +
                 this.getCurrentProgress(tooltipID) +
+                ' ' +
                 GuiText.Of.getLocal() +
                 ' ' +
                 this.getMaxProgress(tooltipID);

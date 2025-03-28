@@ -9,17 +9,20 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ComponentMoreEnergySource extends BaseEnergyMoreDelegate implements ISource {
     private int hashCodeSource;
     private int hashCode;
     private boolean hasHashCode = false;
-    List<ISource> systemTicks = new LinkedList<>();
     private final IItemDefinition what;
     private final PartEnergyExportBus part;
+
+    public double pastEnergy;
+    public double perEnergy;
+    public final List<InfoTile<ITile>> validTEsQS = new ArrayList<>();
+    public final Map<EnumFacing, ITile> energyConductorMapQS = new HashMap<>();
+    public long id;
 
     public ComponentMoreEnergySource(IItemDefinition what, PartEnergyExportBus part) {
         super();
@@ -32,12 +35,12 @@ public class ComponentMoreEnergySource extends BaseEnergyMoreDelegate implements
     }
 
     public long getIdNetwork() {
-        return this.part.getIdNetwork();
+        return this.id;
     }
 
     @Override
     public void setHashCodeSource(final int hashCode) {
-        hashCodeSource = hashCode;
+        this.hashCodeSource = hashCode;
     }
 
     @Override
@@ -46,28 +49,43 @@ public class ComponentMoreEnergySource extends BaseEnergyMoreDelegate implements
     }
 
     public void setId(final long id) {
-        this.part.setId(id);
+        this.id = id;
     }
 
     @Override
-    public void AddTile(EnergyType type, final ITile tile, final EnumFacing dir) {
-        this.part.AddTile(type,tile, dir);
+    public void AddTile(EnergyType energyType, ITile tile, EnumFacing dir) {
+        if (!(this.getTile().getWorld()).isRemote) {
+            if (!this.energyConductorMapQS.containsKey(dir)) {
+                this.energyConductorMapQS.put(dir, tile);
+                validTEsQS.add(new InfoTile<>(tile, dir.getOpposite()));
+            }
+        }
     }
 
     @Override
-    public void RemoveTile(EnergyType type,final ITile tile, final EnumFacing dir) {
-        this.part.RemoveTile(type,tile, dir);
+    public void RemoveTile(EnergyType energyType, ITile tile, EnumFacing dir) {
+        if (!(this.getTile().getWorld()).isRemote) {
+            this.energyConductorMapQS.remove(dir);
+            final Iterator<InfoTile<ITile>> iter = validTEsQS.iterator();
+            while (iter.hasNext()){
+                InfoTile<ITile> tileInfoTile = iter.next();
+                if (tileInfoTile.tileEntity == tile) {
+                    iter.remove();
+                    break;
+                }
+            }
+        }
     }
 
     @Override
     public Map<EnumFacing, ITile> getTiles(EnergyType energyType) {
-        return this.part.energyConductorMapQS;
+        return this.energyConductorMapQS;
     }
 
 
     @Override
     public List<InfoTile<ITile>> getValidReceivers(final EnergyType energyType) {
-        return this.part.validTEsQS;
+        return this.validTEsQS;
     }
 
     @Override
@@ -84,6 +102,7 @@ public class ComponentMoreEnergySource extends BaseEnergyMoreDelegate implements
         return this.part.getHost().getTile().getPos();
     }
 
+    @Override
     public double canProvideEnergy() {
         return this.part.availableEnergy(this.what);
     }
@@ -99,22 +118,22 @@ public class ComponentMoreEnergySource extends BaseEnergyMoreDelegate implements
 
     @Override
     public double getPerEnergy() {
-        return this.part.perEnergy;
+        return this.perEnergy;
     }
 
     @Override
     public double getPastEnergy() {
-        return this.part.pastEnergy;
+        return this.pastEnergy;
     }
 
     @Override
     public void setPastEnergy(final double pastEnergy) {
-        this.part.pastEnergy = pastEnergy;
+        this.pastEnergy = pastEnergy;
     }
 
     @Override
     public void addPerEnergy(final double setEnergy) {
-        this.part.perEnergy += setEnergy;
+        this.perEnergy += setEnergy;
     }
 
     @Override

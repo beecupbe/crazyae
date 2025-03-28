@@ -29,14 +29,12 @@ import appeng.util.Platform;
 import appeng.util.SettingsFrom;
 import appeng.util.inv.InvOperation;
 import cofh.redstoneflux.api.IEnergyProvider;
-import com.denfop.api.energy.IEnergyEmitter;
-import com.denfop.api.energy.IEnergyTile;
-import com.denfop.api.energy.event.EnergyTileLoadEvent;
-import com.denfop.api.energy.event.EnergyTileUnLoadEvent;
-import com.denfop.api.sytem.*;
+import com.denfop.api.sytem.EnergyType;
+import com.denfop.api.sytem.IAcceptor;
 import com.denfop.componets.ComponentBaseEnergy;
 import com.denfop.componets.Energy;
 import dev.beecube31.crazyae2.Tags;
+import dev.beecube31.crazyae2.common.compat.IUCompat;
 import dev.beecube31.crazyae2.common.components.ComponentEFEnergySink;
 import dev.beecube31.crazyae2.common.components.ComponentEUEnergySink;
 import dev.beecube31.crazyae2.common.components.ComponentMoreEnergySink;
@@ -57,7 +55,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.energy.IEnergyStorage;
@@ -65,7 +62,7 @@ import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.List;
 
 import static dev.beecube31.crazyae2.common.util.ModsChecker.*;
 
@@ -86,17 +83,6 @@ public class PartEnergyImportBus extends CrazyAEPartSharedBus implements IEnergy
     private Object energyComponent = null;
     private boolean worked;
     private long maxConfigEnergy;
-
-    public double pastEnergy;
-    public double perEnergy;
-    public double tick;
-    public final List<Integer> energyTicks = new ArrayList<>();
-    public final List<InfoTile<IEnergyTile>> validTEs = new ArrayList<>();
-    public final List<InfoTile<ITile>> validTEsQS = new ArrayList<>();
-    public final Map<EnumFacing, IEnergyTile> energyConductorMap = new HashMap<>();
-    public final Map<EnumFacing, ITile> energyConductorMapQS = new HashMap<>();
-    public long id;
-    public int hashCodeSource;
 
     private ComponentRFEnergySink rfDelegate;
     private ComponentEUEnergySink euDelegate;
@@ -168,15 +154,15 @@ public class PartEnergyImportBus extends CrazyAEPartSharedBus implements IEnergy
             }
 
             if (this.energyDelegate != null) {
-                MinecraftForge.EVENT_BUS.post(new EnergyTileLoadEvent(this.getTile().getWorld(), this.energyDelegate));
+                IUCompat.addEFTileToWorld(this.getTile().getWorld(), this.energyDelegate);
             }
 
             if (this.solariumDelegate != null) {
-                MinecraftForge.EVENT_BUS.post(new EnergyEvent(this.getTile().getWorld(), EnumTypeEvent.LOAD, EnergyType.SOLARIUM, this.solariumDelegate));
+                IUCompat.addMultiTileToWorld(this.getTile().getWorld(), EnergyType.SOLARIUM, this.solariumDelegate);
             }
 
             if (this.quantumDelegate != null) {
-                MinecraftForge.EVENT_BUS.post(new EnergyEvent(this.getTile().getWorld(), EnumTypeEvent.LOAD, EnergyType.QUANTUM, this.quantumDelegate));
+                IUCompat.addMultiTileToWorld(this.getTile().getWorld(), EnergyType.QUANTUM, this.quantumDelegate);
             }
         }
 
@@ -191,15 +177,15 @@ public class PartEnergyImportBus extends CrazyAEPartSharedBus implements IEnergy
             }
 
             if (this.energyDelegate != null) {
-                MinecraftForge.EVENT_BUS.post(new EnergyTileUnLoadEvent(this.getTile().getWorld(), this.energyDelegate));
+                IUCompat.removeEFTileFromWorld(this.getTile().getWorld(), this.energyDelegate);
             }
 
             if (this.solariumDelegate != null) {
-                MinecraftForge.EVENT_BUS.post(new EnergyEvent(this.getTile().getWorld(), EnumTypeEvent.UNLOAD, EnergyType.SOLARIUM, this.solariumDelegate));
+                IUCompat.removeMultiTileFromWorld(this.getTile().getWorld(), EnergyType.SOLARIUM, this.solariumDelegate);
             }
 
             if (this.quantumDelegate != null) {
-                MinecraftForge.EVENT_BUS.post(new EnergyEvent(this.getTile().getWorld(), EnumTypeEvent.UNLOAD, EnergyType.QUANTUM, this.quantumDelegate));
+                IUCompat.removeMultiTileFromWorld(this.getTile().getWorld(), EnergyType.QUANTUM, this.quantumDelegate);
             }
         }
     }
@@ -527,110 +513,6 @@ public class PartEnergyImportBus extends CrazyAEPartSharedBus implements IEnergy
         return CrazyAE.definitions().parts().energyImportBus();
     }
 
-    public List<InfoTile<IEnergyTile>> getValidReceivers() {
-        return this.validTEs;
-    }
-
-    public TileEntity getTileEntity() {
-        return this.getHost().getTile();
-    }
-
-    public BlockPos getBlockPos() {
-        return this.getHost().getTile().getPos();
-    }
-
-    public long getIdNetwork() {
-        return this.id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public void AddTile(EnergyType energyType, ITile tile, EnumFacing dir) {
-        if (!(this.getTile().getWorld()).isRemote) {
-            if (!this.energyConductorMapQS.containsKey(dir)) {
-                this.energyConductorMapQS.put(dir, tile);
-                validTEsQS.add(new InfoTile<>(tile, dir.getOpposite()));
-            }
-        }
-    }
-
-    public void RemoveTile(EnergyType energyType, ITile tile, EnumFacing dir) {
-        if (!(this.getTile().getWorld()).isRemote) {
-            this.energyConductorMap.remove(dir);
-            final Iterator<InfoTile<ITile>> iter = validTEsQS.iterator();
-            while (iter.hasNext()){
-                InfoTile<ITile> tileInfoTile = iter.next();
-                if (tileInfoTile.tileEntity == tile) {
-                    iter.remove();
-                    break;
-                }
-            }
-        }
-    }
-
-    public void AddTile(IEnergyTile tile, EnumFacing dir) {
-        if (!(this.getTile().getWorld()).isRemote) {
-            this.energyConductorMap.put(dir, tile);
-            this.validTEs.add(new InfoTile<>(tile, dir.getOpposite()));
-        }
-    }
-
-    public void RemoveTile(IEnergyTile tile, EnumFacing dir) {
-        if (!(this.getTile().getWorld()).isRemote) {
-            this.energyConductorMap.remove(dir);
-            Iterator<InfoTile<IEnergyTile>> iter = this.validTEs.iterator();
-            while (iter.hasNext()) {
-                InfoTile<IEnergyTile> tileInfoTile = iter.next();
-                if (tileInfoTile.tileEntity == tile) {
-                    iter.remove();
-                    break;
-                }
-            }
-        }
-    }
-
-    public Map<EnumFacing, IEnergyTile> getTiles() {
-        return this.energyConductorMap;
-    }
-
-    public void setHashCodeSource(int hashCode) {
-        this.hashCodeSource = hashCode;
-    }
-
-    public int getHashCodeSource() {
-        return this.hashCodeSource;
-    }
-
-    public double getPerEnergy() {
-        return this.perEnergy;
-    }
-
-    public double getPastEnergy() {
-        return this.pastEnergy;
-    }
-
-    public void setPastEnergy(double pastEnergy) {
-        this.pastEnergy = pastEnergy;
-    }
-
-    public void addPerEnergy(double setEnergy) {
-        this.perEnergy = setEnergy;
-    }
-
-    public void addTick(double tick) {
-        this.tick = tick;
-    }
-
-    public double getTick() {
-        return this.tick;
-    }
-
-    public boolean isSink() {
-        return true;
-    }
-
     public double getDemandedEnergy(IItemDefinition what) {
         return this.availableEnergy(what);
     }
@@ -654,10 +536,6 @@ public class PartEnergyImportBus extends CrazyAEPartSharedBus implements IEnergy
         return 0;
     }
 
-    public int getSinkTier() {
-        return 14;
-    }
-
     public double receiveEnergy(double var2, IItemDefinition what) {
         IAEItemStack ais = AEUtils.injectToME(
                 this.getEnergyInv(),
@@ -674,22 +552,6 @@ public class PartEnergyImportBus extends CrazyAEPartSharedBus implements IEnergy
 
     public void receiveEnergy(IItemDefinition what, double amt) {
         this.receiveEnergy(amt, what);
-    }
-
-    public List<Integer> getEnergyTickList() {
-        return this.energyTicks;
-    }
-
-    public boolean acceptsEnergyFrom(IEnergyEmitter var1, EnumFacing var2) {
-        return this.canAccept(var2);
-    }
-
-    public boolean acceptsFrom(IEmitter var1, EnumFacing var2) {
-        return this.canAccept(var2);
-    }
-
-    private boolean canAccept(EnumFacing from) {
-        return this.getSide().getFacing() == from;
     }
 
     @Override

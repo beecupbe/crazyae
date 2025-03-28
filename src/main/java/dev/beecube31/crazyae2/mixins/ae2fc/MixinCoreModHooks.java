@@ -7,7 +7,7 @@ import net.minecraft.inventory.InventoryCrafting;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 
-@Mixin(value = CoreModHooks.class, remap = false)
+@Mixin(value = CoreModHooks.class, remap = false, priority = 1111)
 public abstract class MixinCoreModHooks {
     /**
      * @author Beecube31

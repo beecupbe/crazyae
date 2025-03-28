@@ -42,7 +42,7 @@ public class TileImprovedDrive extends AENetworkInvTile implements IChestOrDrive
 
     private final AppEngCellInventory inv = new AppEngCellInventory(this, CELL_COUNT);
     private final ICellHandler[] handlersBySlot = new ICellHandler[CELL_COUNT];
-    private final DriveWatcherImproved<IAEItemStack>[] invBySlot = new DriveWatcherImproved[CELL_COUNT];
+    private final  DriveWatcherImproved<IAEItemStack>[] invBySlot = new DriveWatcherImproved[CELL_COUNT];
     private final IActionSource mySrc;
     private boolean isCached = false;
     private final Map<IStorageChannel<? extends IAEStack<?>>, List<IMEInventoryHandler>> inventoryHandlers;

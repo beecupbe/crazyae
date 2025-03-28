@@ -1,6 +1,7 @@
 package dev.beecube31.crazyae2.common.components;
 
 import appeng.api.definitions.IItemDefinition;
+import com.denfop.api.energy.IEnergyTile;
 import com.denfop.api.sytem.*;
 import dev.beecube31.crazyae2.common.components.base.BaseEnergyMoreDelegate;
 import dev.beecube31.crazyae2.common.parts.implementations.PartEnergyImportBus;
@@ -9,9 +10,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ComponentMoreEnergySink extends BaseEnergyMoreDelegate implements ISink {
     private int hashCodeSource;
@@ -19,6 +18,15 @@ public class ComponentMoreEnergySink extends BaseEnergyMoreDelegate implements I
     private boolean hasHashCode = false;
     List<ISource> systemTicks = new LinkedList<>();
     private final IItemDefinition what;
+
+    public double pastEnergy;
+    public double perEnergy;
+    public double tick;
+    public final List<InfoTile<ITile>> validTEsQS = new ArrayList<>();
+    public final Map<EnumFacing, IEnergyTile> energyConductorMap = new HashMap<>();
+    public final Map<EnumFacing, ITile> energyConductorMapQS = new HashMap<>();
+    public long id;
+
     private final PartEnergyImportBus part;
 
     public ComponentMoreEnergySink(IItemDefinition what, PartEnergyImportBus part) {
@@ -27,12 +35,14 @@ public class ComponentMoreEnergySink extends BaseEnergyMoreDelegate implements I
         this.part = part;
     }
 
+    @Override
     public boolean acceptsFrom(IEmitter emitter, EnumFacing dir) {
         return dir == this.part.getSide().getFacing();
     }
 
+    @Override
     public long getIdNetwork() {
-        return this.part.getIdNetwork();
+        return this.id;
     }
 
     @Override
@@ -50,30 +60,45 @@ public class ComponentMoreEnergySink extends BaseEnergyMoreDelegate implements I
         return systemTicks;
     }
 
-
+    @Override
     public void setId(final long id) {
-        this.part.setId(id);
+        this.id = id;
     }
 
     @Override
-    public void AddTile(EnergyType type, final ITile tile, final EnumFacing dir) {
-        this.part.AddTile(type,tile, dir);
+    public void AddTile(EnergyType energyType, ITile tile, EnumFacing dir) {
+        if (!(this.getTile().getWorld()).isRemote) {
+            if (!this.energyConductorMapQS.containsKey(dir)) {
+                this.energyConductorMapQS.put(dir, tile);
+                validTEsQS.add(new InfoTile<>(tile, dir.getOpposite()));
+            }
+        }
     }
 
     @Override
-    public void RemoveTile(EnergyType type,final ITile tile, final EnumFacing dir) {
-        this.part.RemoveTile(type,tile, dir);
+    public void RemoveTile(EnergyType energyType, ITile tile, EnumFacing dir) {
+        if (!(this.getTile().getWorld()).isRemote) {
+            this.energyConductorMap.remove(dir);
+            final Iterator<InfoTile<ITile>> iter = validTEsQS.iterator();
+            while (iter.hasNext()){
+                InfoTile<ITile> tileInfoTile = iter.next();
+                if (tileInfoTile.tileEntity == tile) {
+                    iter.remove();
+                    break;
+                }
+            }
+        }
     }
 
     @Override
     public Map<EnumFacing, ITile> getTiles(EnergyType energyType) {
-        return this.part.energyConductorMapQS;
+        return this.energyConductorMapQS;
     }
 
 
     @Override
     public List<InfoTile<ITile>> getValidReceivers(final EnergyType energyType) {
-        return this.part.validTEsQS;
+        return this.validTEsQS;
     }
 
     @Override
@@ -99,38 +124,39 @@ public class ComponentMoreEnergySink extends BaseEnergyMoreDelegate implements I
         return this.part.getHost().getTile();
     }
 
+    @Override
     public void receivedEnergy(double amount) {
         this.part.receiveEnergy(this.what, amount);
     }
 
     @Override
     public double getPerEnergy() {
-        return this.part.getPerEnergy();
+        return this.perEnergy;
     }
 
     @Override
     public double getPastEnergy() {
-        return this.part.getPastEnergy();
+        return this.pastEnergy;
     }
 
     @Override
     public void setPastEnergy(final double pastEnergy) {
-        this.part.setPastEnergy(pastEnergy);
+        this.pastEnergy = pastEnergy;
     }
 
     @Override
     public void addPerEnergy(final double setEnergy) {
-        this.part.addPerEnergy(setEnergy);
+        this.perEnergy = setEnergy;
     }
 
     @Override
     public void addTick(final double tick) {
-        this.part.tick = tick;
+        this.tick = tick;
     }
 
     @Override
     public double getTick() {
-        return this.part.tick;
+        return this.tick;
     }
 
     @Override

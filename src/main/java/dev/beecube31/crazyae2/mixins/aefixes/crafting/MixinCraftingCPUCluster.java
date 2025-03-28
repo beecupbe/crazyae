@@ -33,7 +33,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 
-@Mixin(value = CraftingCPUCluster.class, remap = false)
+@Mixin(value = CraftingCPUCluster.class, remap = false, priority = 1111)
 public abstract class MixinCraftingCPUCluster implements IAECluster, ICraftingCPU {
 
     @Shadow protected abstract void postChange(IAEItemStack diff, IActionSource src);
