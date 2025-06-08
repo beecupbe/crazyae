@@ -4,7 +4,7 @@ import appeng.api.storage.channels.IFluidStorageChannel;
 import appeng.api.storage.data.IAEFluidStack;
 import appeng.core.Api;
 import dev.beecube31.crazyae2.common.registration.definitions.Materials;
-import dev.beecube31.crazyae2.core.CrazyAEConfig;
+import dev.beecube31.crazyae2.core.config.CrazyAEConfig;
 import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 

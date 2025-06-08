@@ -1,0 +1,11 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "crazyae:quantum_cpu"
+    },
+    "variants": {
+        "normal": {
+            "submodel": "appliedenergistics2:molecular_assembler_lights"
+        }
+    }
+}

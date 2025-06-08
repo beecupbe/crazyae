@@ -60,6 +60,9 @@ item.crazyae.material.cell_part_64mb.name=§264MB§r ME Storage Component
 item.crazyae.material.cell_part_256mb.name=§b256MB§r ME Storage Component
 item.crazyae.material.cell_part_1gb.name=§11GB§r ME Storage Component
 item.crazyae.material.cell_part_2gb.name=§d2GB§r ME Storage Component
+item.crazyae.material.cell_part_8gb.name=§a8GB§r ME Storage Component
+item.crazyae.material.cell_part_32gb.name=§532GB§r ME Storage Component
+item.crazyae.material.cell_part_128gb.name=§4128GB§r ME Storage Component
 
 item.crazyae.material.energy_part_1k.name=§61k§r Energy Component
 item.crazyae.material.energy_part_4k.name=§e4k§r Energy Component
@@ -172,6 +175,10 @@ tile.crazyae.crafting_accelerator_1024x.name=§c1024x§r Crafting Co-Processing 
 tile.crazyae.crafting_accelerator_4096x.name=§44096x§r Crafting Co-Processing Unit
 tile.crazyae.crafting_accelerator_16384x.name=§416384x§r Crafting Co-Processing Unit
 tile.crazyae.crafting_accelerator_65536x.name=§465536x§r Crafting Co-Processing Unit
+tile.crazyae.crafting_accelerator_262144x.name=§e262144x§r Crafting Co-Processing Unit
+tile.crazyae.crafting_accelerator_1048576x.name=§a1048576x§r Crafting Co-Processing Unit
+tile.crazyae.crafting_accelerator_4194304x.name=§d4194304x§r Crafting Co-Processing Unit
+tile.crazyae.crafting_accelerator_creative.name=§8Creative§r Crafting Co-Processing Unit
 
 tile.crazyae.crafting_storage_256k.name=§c256k§r Crafting Storage
 tile.crazyae.crafting_storage_1mb.name=§61MB§r Crafting Storage
@@ -180,11 +187,16 @@ tile.crazyae.crafting_storage_16mb.name=§a16MB§r Crafting Storage
 tile.crazyae.crafting_storage_64mb.name=§264MB§r Crafting Storage
 tile.crazyae.crafting_storage_256mb.name=§b256MB§r Crafting Storage
 tile.crazyae.crafting_storage_1gb.name=§11GB§r Crafting Storage
-tile.crazyae.crafting_storage_2gb.name=§d2GB§r Crafting Storage
+tile.crazyae.crafting_storage_2gb.name=§52GB§r Crafting Storage
+tile.crazyae.crafting_storage_8gb.name=§28GB§r Crafting Storage
+tile.crazyae.crafting_storage_32gb.name=§d32GB§r Crafting Storage
+tile.crazyae.crafting_storage_128gb.name=§6128GB§r Crafting Storage
+tile.crazyae.crafting_storage_creative.name=§8Creative§r Crafting Storage
 
 tile.crazyae.improved_energy_cell.name=§cImproved Energy Cell§r
 tile.crazyae.advanced_energy_cell.name=§aAdvanced Energy Cell§r
 tile.crazyae.perfect_energy_cell.name=§9Perfect Energy Cell§r
+tile.crazyae.quantum_energy_cell.name=Quantum Energy Cell
 
 tile.crazyae.improved_molecular_assembler.name=Improved Molecular Assembler
 tile.crazyae.improved_drive.name=ME Improved Drive
@@ -215,6 +227,18 @@ tile.crazyae.mechanical_petal.name=Mechanical Petal
 tile.crazyae.mechanical_puredaisy.name=Mechanical Pure Daisy
 tile.crazyae.mechanical_teraplate.name=Mechanical Agglomeration Plate
 tile.crazyae.mechanical_brewery.name=Mechanical Brewery
+
+tile.crazyae.quantum_cpu.name=Quantum CPU
+tile.crazyae.quantum_cpu_host.name=Quantum CPU
+tile.crazyae.quantum_interface.name=Quantum Interface
+
+tile.crazyae.trashcan_item.name=Item Trash Can
+tile.crazyae.trashcan_fluid.name=Fluid Trash Can
+tile.crazyae.trashcan_energy.name=Energy Trash Can
+tile.crazyae.trashcan_mana.name=Mana Trash Can
+
+tile.crazyae.perfect_inscriber.name=Perfect Inscriber
+
 
 
 #Resource
@@ -265,6 +289,10 @@ gui.crazyae.mechanical_puredaisy.name=Mechanical Pure Daisy
 gui.crazyae.mechanical_teraplate.name=Mechanical Agglomeration Plate
 gui.crazyae.mechanical_brewery.name=Mechanical Brewery
 
+gui.crazyae.quantum_interface.name=Quantum Interface
+
+gui.crazyae.perfect_inscriber.name=Perfect Inscriber
+
 gui.crazyae.patterns_inv_gui.name=Patterns storage
 
 gui.crazyae.ef_energy.name=EF Energy
@@ -279,7 +307,11 @@ gui.crazyae.items_used.name=Items used
 gui.crazyae.mana_used.name=Mana used
 gui.crazyae.fluid_used.name=Fluid used
 
+gui.crazyae.trashcan.name=Trash Can
+
 gui.crazyae.used.name=used
+gui.crazyae.page.name=Page
+
 
 # GUI's Tooltip
 
@@ -309,15 +341,25 @@ gui.crazyae.mana_block_highlighted_in_another_dimension_with_pos.name=The mana b
 gui.crazyae.mana_block_highlighted_in_another_dimension.name=The mana block located in another dimension, and cannot be highlighted
 gui.crazyae.colorizing_disabled.name=Colorizing is disabled in your config file.
 
+gui.crazyae.quantum_cpu.name=Quantum CPU
 
-#Tooltips
+gui.crazyae.clear_inv_items_nbt.name=Clear NBT for all items\nin the crafting grid
+
+gui.crazyae.craft_started_at.name=Craft started at
+gui.crazyae.initiator.name=Initiator
+
+gui.crazyae.open_crafting_block_list.name=Open crafting blocks inventory
+
+
+#Tooltips 2
 
 tooltip.crazyae.shift_for_details.name=Hold Shift for details
 tooltip.crazyae.ctrl_for_precise_details.name=Hold Ctrl for precise item count
 
 tooltip.crazyae.passive_generation_day.name=Generation at day:
 tooltip.crazyae.passive_generation_night.name=Generation at night:
-tooltip.crazyae.max_solar_capacity.name=Capacity
+tooltip.crazyae.max_solar_capacity.name=Capacity:
+tooltip.crazyae.require_channel.name=Requires a channel
 
 tooltip.crazyae.qcm_desc.name=Allows you to increase cable capacity:\nEach Quantum Multiplier will give %s channels for a normal cables\nand %s channels for a dense cables, at a cost of %s AE/t.
 tooltip.crazyae.auto_pickup.name=Auto pickup is
@@ -334,6 +376,10 @@ tooltip.crazyae.disabled.name=Disabled
 tooltip.crazyae.mana_connector_block_linked.name=The binding was successful.
 tooltip.crazyae.mana_connector_block_saved.name=Mana Pool was successfully saved.
 tooltip.crazyae.mana_connector_clear.name=Mana Connector has been cleared.
+
+tooltip.crazyae.quantum_cpu_warning.name=This CPU only works with the Quantum interface.
+tooltip.crazyae.quantum_interface_warning.name=This Interface only works with the Quantum CPU.
+
 
 #Internal
 

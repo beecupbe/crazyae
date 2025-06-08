@@ -1,9 +1,10 @@
 package dev.beecube31.crazyae2.common.blocks.storage;
 
 import appeng.api.util.AEPartLocation;
-import appeng.block.AEBaseTileBlock;
 import appeng.block.storage.DriveSlotsState;
 import appeng.client.UnlistedProperty;
+import dev.beecube31.crazyae2.common.base.CrazyAEBlockAttribute;
+import dev.beecube31.crazyae2.common.enums.MachineAttributes;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiBridge;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiHandler;
 import dev.beecube31.crazyae2.common.tile.storage.TileImprovedDrive;
@@ -21,7 +22,7 @@ import net.minecraftforge.common.property.ExtendedBlockState;
 import net.minecraftforge.common.property.IExtendedBlockState;
 import net.minecraftforge.common.property.IUnlistedProperty;
 
-public class BlockDriveImproved extends AEBaseTileBlock {
+public class BlockDriveImproved extends CrazyAEBlockAttribute {
 
     public static final UnlistedProperty<DriveSlotsState> SLOTS_STATE = new UnlistedProperty<>("drive_slots_state", DriveSlotsState.class);
 
@@ -58,5 +59,10 @@ public class BlockDriveImproved extends AEBaseTileBlock {
         }
 
         return super.onBlockActivated(w, pos, state, p, hand, side, hitX, hitY, hitZ);
+    }
+
+    @Override
+    public MachineAttributes getAttributes() {
+        return new MachineAttributes().setRequireChannel(true);
     }
 }

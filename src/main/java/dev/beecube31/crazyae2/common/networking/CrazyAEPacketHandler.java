@@ -17,6 +17,9 @@ public class CrazyAEPacketHandler {
         PACKET_SWITCH_GUIS(PacketSwitchGuis.class),
         PACKET_TOGGLE_GUI_OBJECT(PacketToggleGuiObject.class),
 
+        //fix
+        PACKET_LONG_CRAFT_REQUEST(PacketLongCraftRequest.class),
+
         //orig
         PACKET_CONFIG_BUTTON(PacketConfigButton.class),
         PACKET_INVENTORY_ACTION(PacketInventoryAction.class),

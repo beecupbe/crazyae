@@ -8,6 +8,7 @@ import appeng.api.storage.data.IAEItemStack;
 import appeng.me.helpers.MachineSource;
 import appeng.util.inv.InvOperation;
 import com.google.common.base.Preconditions;
+import dev.beecube31.crazyae2.common.containers.base.slot.RestrictedSlot;
 import dev.beecube31.crazyae2.common.enums.BotaniaMechanicalDeviceType;
 import dev.beecube31.crazyae2.common.parts.implementations.CrazyAEBlockUpgradeInv;
 import dev.beecube31.crazyae2.common.util.NBTUtils;
@@ -45,15 +46,25 @@ public class TileMechanicalBrewery extends TileBotaniaMechanicalMachineBase {
         final Block block = CrazyAE.definitions().blocks().mechanicalBrewery().maybeBlock().orElse(null);
         Preconditions.checkNotNull(block);
         this.upgrades = new CrazyAEBlockUpgradeInv(block, this, this.getUpgradeSlots());
+
+        this.internalPatternsStorageInv.setItemFilter(RestrictedSlot.PlaceableItemType.BREWERY_ENCODED_PATTERN.associatedFilter);
+    }
+
+    @Override
+    public NBTTagCompound writeToNBT(final NBTTagCompound data) {
+        super.writeToNBT(data);
+        this.craftingBottleSlot.writeToNBT(data, "bottleInv");
+        return data;
+    }
+
+    @Override
+    public void readFromNBT(final NBTTagCompound data) {
+        super.readFromNBT(data);
+        this.craftingBottleSlot.readFromNBT(data, "bottleInv");
     }
 
     @Override
     public boolean pushPattern(ICraftingPatternDetails iCraftingPatternDetails, InventoryCrafting inventoryCrafting) {
-        return this.acceptPattern(iCraftingPatternDetails);
-    }
-
-    @Override
-    public boolean fastPushPattern(ICraftingPatternDetails iCraftingPatternDetails) {
         return this.acceptPattern(iCraftingPatternDetails);
     }
 

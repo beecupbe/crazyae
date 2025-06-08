@@ -7,7 +7,7 @@ import dev.beecube31.crazyae2.client.gui.widgets.OptionSideButton;
 import dev.beecube31.crazyae2.common.containers.ContainerDriveImproved;
 import dev.beecube31.crazyae2.common.networking.network.NetworkHandler;
 import dev.beecube31.crazyae2.common.networking.packets.PacketSwitchGuis;
-import dev.beecube31.crazyae2.common.sync.CrazyAEGuiText;
+import dev.beecube31.crazyae2.common.i18n.CrazyAEGuiText;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiBridge;
 import dev.beecube31.crazyae2.common.tile.storage.TileImprovedDrive;
 import net.minecraft.client.gui.GuiButton;

@@ -3,14 +3,11 @@ package dev.beecube31.crazyae2.common.containers;
 import appeng.api.config.RedstoneMode;
 import appeng.api.config.SecurityPermissions;
 import appeng.api.config.Settings;
-import appeng.api.networking.crafting.ICraftingPatternDetails;
-import appeng.items.misc.ItemEncodedPattern;
 import appeng.util.Platform;
 import dev.beecube31.crazyae2.common.containers.base.slot.RestrictedSlot;
 import dev.beecube31.crazyae2.common.tile.crafting.TileImprovedMAC;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
 
 public class ContainerFastMAC extends ContainerCrazyAEUpgradeable {

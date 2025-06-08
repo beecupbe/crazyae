@@ -1,6 +1,6 @@
 package dev.beecube31.crazyae2.common.tile.solars;
 
-import dev.beecube31.crazyae2.core.CrazyAEConfig;
+import dev.beecube31.crazyae2.core.config.CrazyAEConfig;
 
 public class TileEnergyPanelBasic extends TileEnergyPanelBase {
     public TileEnergyPanelBasic() {

@@ -24,7 +24,6 @@ import appeng.api.util.IConfigManager;
 import appeng.core.settings.TickRates;
 import appeng.me.GridAccessException;
 import appeng.me.helpers.MachineSource;
-import appeng.tile.inventory.AppEngInternalInventory;
 import appeng.util.ConfigManager;
 import appeng.util.IConfigManagerHost;
 import appeng.util.InventoryAdaptor;
@@ -36,9 +35,11 @@ import appeng.util.inv.WrapperChainedItemHandler;
 import appeng.util.inv.WrapperFilteredItemHandler;
 import appeng.util.inv.filter.AEItemFilters;
 import com.google.common.base.Preconditions;
+import dev.beecube31.crazyae2.common.containers.base.slot.RestrictedSlot;
 import dev.beecube31.crazyae2.common.interfaces.upgrades.IUpgradesInfoProvider;
 import dev.beecube31.crazyae2.common.parts.implementations.CrazyAEBlockUpgradeInv;
 import dev.beecube31.crazyae2.common.tile.base.CrazyAENetworkInvOCTile;
+import dev.beecube31.crazyae2.common.util.inv.CrazyAEInternalInv;
 import dev.beecube31.crazyae2.core.CrazyAE;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
@@ -60,8 +61,8 @@ public class TileImprovedIOPort extends CrazyAENetworkInvOCTile implements IUpgr
 
     private final ConfigManager manager;
 
-    private final AppEngInternalInventory inputCells = new AppEngInternalInventory(this, NUMBER_OF_CELL_SLOTS, 1);
-    private final AppEngInternalInventory outputCells = new AppEngInternalInventory(this, NUMBER_OF_CELL_SLOTS, 1);
+    private final CrazyAEInternalInv inputCells = new CrazyAEInternalInv(this, NUMBER_OF_CELL_SLOTS, 1).setItemFilter(RestrictedSlot.PlaceableItemType.STORAGE_CELLS.associatedFilter);
+    private final CrazyAEInternalInv outputCells = new CrazyAEInternalInv(this, NUMBER_OF_CELL_SLOTS, 1).setItemFilter(RestrictedSlot.PlaceableItemType.STORAGE_CELLS.inputLockedFilter());
     private final IItemHandler combinedInventory = new WrapperChainedItemHandler(this.inputCells, this.outputCells);
 
     private final IItemHandler inputCellsExt = new WrapperFilteredItemHandler(this.inputCells, AEItemFilters.INSERT_ONLY);

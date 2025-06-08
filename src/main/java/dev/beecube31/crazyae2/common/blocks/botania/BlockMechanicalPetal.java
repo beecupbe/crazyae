@@ -42,6 +42,6 @@ public class BlockMechanicalPetal extends CrazyAEModelBlock {
 
     @Override
     public MachineAttributes getAttributes() {
-        return new MachineAttributes().setRequiredAEPerTick(64.0D);
+        return new MachineAttributes().setRequiredAEPerTick(64.0D).setRequireChannel(true);
     }
 }

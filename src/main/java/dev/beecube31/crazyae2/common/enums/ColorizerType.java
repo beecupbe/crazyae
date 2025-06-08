@@ -1,7 +1,7 @@
 package dev.beecube31.crazyae2.common.enums;
 
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiBridge;
-import dev.beecube31.crazyae2.common.sync.CrazyAEGuiText;
+import dev.beecube31.crazyae2.common.i18n.CrazyAEGuiText;
 
 public enum ColorizerType {
     GUI, TEXT;

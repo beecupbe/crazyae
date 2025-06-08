@@ -317,7 +317,7 @@ tooltip.crazyae.ctrl_for_precise_details.name=按 Ctrl 键查看详情
 
 tooltip.crazyae.passive_generation_day.name=白天产出:
 tooltip.crazyae.passive_generation_night.name=夜晚产出:
-tooltip.crazyae.max_solar_capacity.name=最大存储
+tooltip.crazyae.max_solar_capacity.name=最大存储:
 
 tooltip.crazyae.qcm_desc.name=允许你增加线缆频道数 \n每个将为普通线缆提供%s个频道 \n为致密线缆提供%s个频道，耗能为%s AE/t
 tooltip.crazyae.auto_pickup.name=自动拾取:

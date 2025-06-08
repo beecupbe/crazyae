@@ -1,0 +1,39 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:trashcan_energy"
+        },
+        {
+          "type": "crazyae:part_exists",
+          "name": "energy_export_bus"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "appliedenergistics2:interface"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "item": "crazyae:trashcan_energy"
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    " e ",
+    "eie",
+    " e "
+  ],
+  "key": {
+    "e": {
+      "type": "crazyae:part",
+      "name": "energy_export_bus"
+    },
+    "i": {
+      "item": "appliedenergistics2:interface"
+    }
+  }
+}

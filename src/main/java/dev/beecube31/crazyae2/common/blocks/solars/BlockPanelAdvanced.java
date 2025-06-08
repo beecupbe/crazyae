@@ -1,8 +1,10 @@
 package dev.beecube31.crazyae2.common.blocks.solars;
 
 import appeng.block.AEBaseTileBlock;
-import dev.beecube31.crazyae2.common.sync.CrazyAETooltip;
-import dev.beecube31.crazyae2.core.CrazyAEConfig;
+import dev.beecube31.crazyae2.client.gui.sprites.Sprite;
+import dev.beecube31.crazyae2.common.i18n.CrazyAETooltip;
+import dev.beecube31.crazyae2.common.util.Utils;
+import dev.beecube31.crazyae2.core.config.CrazyAEConfig;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -22,9 +24,9 @@ public class BlockPanelAdvanced extends AEBaseTileBlock {
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced) {
-        tooltip.add(CrazyAETooltip.PASSIVE_GENERATION_DAY.getLocalWithSpaceAtEnd() + CrazyAEConfig.advancedSolarPanelGenPerTick + " AE/t");
-        tooltip.add(CrazyAETooltip.PASSIVE_GENERATION_NIGHT.getLocalWithSpaceAtEnd() + CrazyAEConfig.advancedSolarPanelGenPerTickNight + " AE/t");
-        tooltip.add(CrazyAETooltip.MAX_SOLAR_CAPACITY.getLocalWithSpaceAtEnd() + CrazyAEConfig.advancedSolarPanelCapacity + " AE");
+        tooltip.add(Utils.writeSpriteFlag(Sprite.SUN) + CrazyAETooltip.PASSIVE_GENERATION_DAY.getLocalWithSpaceAtEnd() + CrazyAEConfig.advancedSolarPanelGenPerTick + " AE/t");
+        tooltip.add(Utils.writeSpriteFlag(Sprite.MOON) + CrazyAETooltip.PASSIVE_GENERATION_NIGHT.getLocalWithSpaceAtEnd() + CrazyAEConfig.advancedSolarPanelGenPerTickNight + " AE/t");
+        tooltip.add(Utils.writeSpriteFlag(Sprite.CAPACITY) + CrazyAETooltip.MAX_SOLAR_CAPACITY.getLocalWithSpaceAtEnd() + CrazyAEConfig.advancedSolarPanelCapacity + " AE");
         super.addInformation(stack, player, tooltip, advanced);
     }
 }

@@ -2,8 +2,10 @@ package dev.beecube31.crazyae2.common.items;
 
 import appeng.items.AEBaseItem;
 import appeng.tile.networking.TileCableBus;
+import dev.beecube31.crazyae2.client.gui.sprites.Sprite;
 import dev.beecube31.crazyae2.common.interfaces.mana.IManaLinkableDevice;
-import dev.beecube31.crazyae2.common.sync.CrazyAETooltip;
+import dev.beecube31.crazyae2.common.i18n.CrazyAETooltip;
+import dev.beecube31.crazyae2.common.util.Utils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -34,12 +36,12 @@ public class ManaConnector extends AEBaseItem {
     public void addCheckedInformation(final ItemStack stack, final World world, final List<String> lines, final ITooltipFlag advancedTooltips) {
         if (stack.getTagCompound() != null && stack.getTagCompound().hasKey("connectFrom")) {
             int[] pos = stack.getTagCompound().getIntArray("connectFrom");
-            lines.add(String.format(CrazyAETooltip.LINKED_WITH_MANA_POOL_AT_POS.getLocalWithSpaceAtEnd(), pos[0], pos[1], pos[2]));
-            lines.add(CrazyAETooltip.MANA_CONNECTOR_LETS_CONNECT_TO_BUS.getLocal());
+            lines.add(Utils.writeSpriteFlag(Sprite.INFO) + String.format(CrazyAETooltip.LINKED_WITH_MANA_POOL_AT_POS.getLocalWithSpaceAtEnd(), pos[0], pos[1], pos[2]));
+            lines.add(Utils.writeSpriteFlag(Sprite.INFO) + CrazyAETooltip.MANA_CONNECTOR_LETS_CONNECT_TO_BUS.getLocal());
             return;
         }
 
-        lines.add(CrazyAETooltip.MANA_CONNECTOR_DESC.getLocal());
+        lines.add(Utils.writeSpriteFlag(Sprite.INFO) + CrazyAETooltip.MANA_CONNECTOR_DESC.getLocal());
     }
 
     @Override

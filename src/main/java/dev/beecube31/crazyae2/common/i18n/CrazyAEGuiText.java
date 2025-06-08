@@ -1,0 +1,162 @@
+package dev.beecube31.crazyae2.common.i18n;
+
+import dev.beecube31.crazyae2.Tags;
+import net.minecraft.util.text.translation.I18n;
+
+@SuppressWarnings("deprecation, unused")
+public enum CrazyAEGuiText {
+    ADV_TOOL_PAGE1_BUTTON_RESTART_ME,
+
+    ADV_TOOL_PAGE1_ME_CURRENT_STATUS,
+    ADV_TOOL_PAGE1_ME_ENERGY_INFO,
+
+    ADV_TOOL_PAGE1_ME_ENERGY_INFO_DETAILED,
+    ADV_TOOL_PAGE1_ME_INFO,
+
+    ADV_TOOL_PAGE1_ME_UPTIME,
+
+    AUTOSEND_TO_ME,
+    BIG_CRYSTAL_CHARGER,
+
+    BUTTON_PATTERN_FAST_PLACE,
+    CLEAR_INV_ITEMS_NBT,
+    CLEAR_INV_ITEMS_NBT_LINE2,
+    COLORIZER_GUI_GUI_TO_TEXT,
+    COLORIZER_GUI_TEXT_TO_GUI,
+
+    COLORIZING_DISABLED,
+
+    CRAFT_STARTED_AT,
+
+    COPY_TO_CLIPBOARD,
+    CU_COMBINER,
+    DENSE_PORTABLE_CELL,
+    DESELECT_ALL,
+
+    DISABLE_UPDATES_TIP,
+
+    DOWNLOAD_LINK,
+    EF_ENERGY,
+    ELVENTRADE_PATTERN,
+    ENERGY_ACCEPTOR,
+    ENERGY_EXPORT_BUS,
+
+    ENERGY_EXTRACTOR,
+    ENERGY_IMPORT_BUS,
+
+    ENERGY_SETTINGS_PAGE,
+
+    ENERGY_TERMINAL,
+
+    ENERGY_USED,
+    EU_ENERGY,
+    EXPERIENCE_CELLS,
+    FE_ENERGY,
+    FLUID_USED,
+
+    GUI_COLORIZER_GUI,
+    GUI_COLORIZER_TEXT,
+
+    HIGHLIGHT_MANA_BLOCK,
+
+
+    IMPROVED_DRIVE_GUI,
+    IMPROVED_MAC_GUI,
+    IMP_EXPORT_BUS,
+
+    INITIATOR,
+
+    IMP_FLUID_EXPORT_BUS,
+    IMP_FLUID_IMPORT_BUS,
+    IMP_IMPORT_BUS,
+    ITEMS_USED,
+    LINKED_WITH_MANA_POOL,
+
+
+    LINK_WITH_MANA_CONNECTOR,
+    LINK_WITH_MANA_CONNECTOR2,
+
+    LINK_WITH_MANA_CONNECTOR3,
+    MANAPOOL_PATTERN,
+    MANA_AMT_TO_MAX,
+
+    MANA_BLOCK_HIGHLIGHTED_IN,
+    MANA_BLOCK_HIGHLIGHTED_IN_ANOTHER_DIMENSION,
+    MANA_BLOCK_HIGHLIGHTED_IN_ANOTHER_DIMENSION_WITH_POS,
+    MANA_CELLS,
+    MANA_EXPORT_BUS,
+    MANA_IMPORT_BUS,
+    MANA_TERMINAL,
+    MANA_USED,
+    MECHANICAL_BREWERY,
+    MECHANICAL_ELVENTRADE,
+    MECHANICAL_MANAPOOL,
+    MECHANICAL_PETAL,
+    MECHANICAL_PUREDAISY,
+    MECHANICAL_RUNEALTAR,
+    MECHANICAL_TERAPLATE,
+
+    MULTI_ENERGY_CELLS,
+    NOT_DEFINED,
+
+    NO_LIMIT,
+    OPEN_CRAFTING_BLOCK_LIST,
+
+
+    OPEN_ENERGY_SETTINGS_PAGE,
+    OPEN_PATTERN_STORAGE,
+    PAGE,
+    PASTE_FROM_CLIPBOARD,
+    PATTERNS_INV_GUI,
+    PATTERN_INTERFACE,
+    PERFECT_INSCRIBER,
+
+    PERFECT_INTERFACE,
+    PROGRESS,
+
+
+    PETAL_PATTERN,
+    PORTABLE_CELL_CHARGING,
+    PUREDAISY_PATTERN,
+
+
+    QE_ENERGY,
+    QUANTUM_CPU,
+
+    QUANTUM_INTERFACE,
+
+    RESTORE_DEFAULTS,
+    RUNEALTAR_PATTERN,
+
+
+    SELECT_ALL,
+    SE_ENERGY,
+    TRASHCAN,
+    UPDATE_FOUND,
+    USED,
+
+    WIRELESS_TERMINALS_CHARGING;
+
+
+    private final String root;
+
+    CrazyAEGuiText() {
+        this.root = "gui." + Tags.MODID;
+    }
+
+    CrazyAEGuiText(String r) {
+        this.root = r;
+    }
+
+    public String getLocal() {
+        return I18n.translateToLocal(this.getUnlocalized().toLowerCase());
+    }
+
+    public String getLocalWithSpaceAtEnd() {
+        return I18n.translateToLocal(this.getUnlocalized().toLowerCase()) + ' ';
+    }
+
+    public String getUnlocalized() {
+        return this.root + '.' + this + ".name";
+    }
+}

@@ -5,7 +5,7 @@ import appeng.api.config.RedstoneMode;
 import appeng.api.config.Settings;
 import appeng.client.gui.widgets.GuiImgButton;
 import dev.beecube31.crazyae2.common.containers.ContainerFastMAC;
-import dev.beecube31.crazyae2.common.sync.CrazyAEGuiText;
+import dev.beecube31.crazyae2.common.i18n.CrazyAEGuiText;
 import dev.beecube31.crazyae2.common.tile.crafting.TileImprovedMAC;
 import net.minecraft.entity.player.InventoryPlayer;
 

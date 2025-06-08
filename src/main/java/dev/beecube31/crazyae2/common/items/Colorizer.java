@@ -2,10 +2,12 @@ package dev.beecube31.crazyae2.common.items;
 
 import appeng.api.util.AEPartLocation;
 import appeng.items.AEBaseItem;
+import dev.beecube31.crazyae2.client.gui.sprites.Sprite;
 import dev.beecube31.crazyae2.common.interfaces.ICrazyAEGuiItem;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiBridge;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiHandler;
-import dev.beecube31.crazyae2.common.sync.CrazyAETooltip;
+import dev.beecube31.crazyae2.common.i18n.CrazyAETooltip;
+import dev.beecube31.crazyae2.common.util.Utils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -29,7 +31,7 @@ public class Colorizer extends AEBaseItem implements ICrazyAEGuiItem<ColorizerOb
     @Override
     @SideOnly(Side.CLIENT)
     public void addCheckedInformation(final ItemStack stack, final World world, final List<String> lines, final ITooltipFlag advancedTooltips) {
-        lines.add(CrazyAETooltip.COLORIZER_DESC.getLocal());
+        lines.add(Utils.writeSpriteFlag(Sprite.INFO) + CrazyAETooltip.COLORIZER_DESC.getLocal());
     }
 
     @Override

@@ -22,7 +22,6 @@ import appeng.api.util.DimensionalCoord;
 import appeng.api.util.IConfigManager;
 import appeng.me.GridAccessException;
 import appeng.me.helpers.MachineSource;
-import appeng.tile.inventory.AppEngInternalInventory;
 import appeng.util.ConfigManager;
 import appeng.util.IConfigManagerHost;
 import appeng.util.Platform;
@@ -31,9 +30,11 @@ import appeng.util.inv.IAEAppEngInventory;
 import appeng.util.inv.InvOperation;
 import appeng.util.item.AEItemStack;
 import com.google.common.base.Preconditions;
+import dev.beecube31.crazyae2.common.containers.base.slot.RestrictedSlot;
 import dev.beecube31.crazyae2.common.interfaces.upgrades.IUpgradesInfoProvider;
 import dev.beecube31.crazyae2.common.parts.implementations.CrazyAEBlockUpgradeInv;
 import dev.beecube31.crazyae2.common.tile.base.CrazyAENetworkOCTile;
+import dev.beecube31.crazyae2.common.util.inv.CrazyAEInternalInv;
 import dev.beecube31.crazyae2.core.CrazyAE;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
@@ -57,10 +58,10 @@ public class TileBigCrystalCharger extends CrazyAENetworkOCTile implements IConf
     private final CrazyAEBlockUpgradeInv upgrades;
     private final IConfigManager manager;
 
-    private final AppEngInternalInventory inputInv = new
-            AppEngInternalInventory(this, 18, 64);
-    private final AppEngInternalInventory outputInv = new
-            AppEngInternalInventory(this, 18, 64);
+    private final CrazyAEInternalInv inputInv = new
+            CrazyAEInternalInv(this, 18, 64).setItemFilter(RestrictedSlot.PlaceableItemType.CERTUS_QUARTZ_CRYSTALS.associatedFilter);
+    private final CrazyAEInternalInv outputInv = new
+            CrazyAEInternalInv(this, 18, 64).setItemFilter(RestrictedSlot.PlaceableItemType.CHARGED_CERTUS_QUARTZ_CRYSTALS.inputLockedFilter());
 
     private int progressPerTick = 1;
     private int progress = 0;

@@ -84,7 +84,7 @@ public abstract class MixinCellWorkbench extends AEBaseTile implements IUpgradea
             boolean isEnergyCell = !cell.isEmpty() && (cell.getItem() instanceof MultiEnergyItemCell || cell.getItem() instanceof MultiEnergyItemCreativeCell);
             if (isEnergyCell) {
                 final IItemHandler c = this.getCellConfigInventory();
-                Utils.updateEnergyHandler(c, this.getWorld());
+                Utils.updateEnergyHandler(c);
                 Utils.copy(c, this.config, false);
             }
         }

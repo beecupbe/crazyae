@@ -12,6 +12,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandler;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 
@@ -29,6 +30,8 @@ public class CrazyAESlot extends Slot implements IColorizeableSlot {
     private hasCalculatedValidness isValid;
     private boolean isDisplay = false;
     private boolean returnAsSingleStack;
+
+    private int stackLimit = -1;
 
     public CrazyAESlot(final IItemHandler inv, final int idx, final int x, final int y) {
         super(emptyInventory, idx, x, y);
@@ -73,12 +76,9 @@ public class CrazyAESlot extends Slot implements IColorizeableSlot {
             return ItemStack.EMPTY;
         }
 
-        if (this.itemHandler
-                .getSlots() <=
-                this.getSlotIndex()) {
+        if (this.itemHandler.getSlots() <= this.getSlotIndex()) {
             return ItemStack.EMPTY;
         }
-
 
         if (this.isDisplay()) {
             this.setDisplay(false);
@@ -103,7 +103,7 @@ public class CrazyAESlot extends Slot implements IColorizeableSlot {
     }
 
     @Override
-    public void putStack(final ItemStack stack) {
+    public void putStack(final @NotNull ItemStack stack) {
         if (this.isSlotEnabled()) {
             ItemHandlerUtil.setStackInSlot(this.itemHandler, this.index, stack);
 
@@ -111,10 +111,6 @@ public class CrazyAESlot extends Slot implements IColorizeableSlot {
                 this.getContainer().onSlotChange(this);
             }
         }
-    }
-
-    public boolean disableInteraction() {
-        return false;
     }
 
     public IItemHandler getItemHandler() {
@@ -136,7 +132,15 @@ public class CrazyAESlot extends Slot implements IColorizeableSlot {
 
     @Override
     public int getSlotStackLimit() {
+        if (this.stackLimit != -1) {
+            return this.stackLimit;
+        }
         return this.itemHandler.getSlotLimit(this.index);
+    }
+
+    public CrazyAESlot setStackLimit(int i) {
+        this.stackLimit = i;
+        return this;
     }
 
     @Override
@@ -145,7 +149,7 @@ public class CrazyAESlot extends Slot implements IColorizeableSlot {
     }
 
     @Override
-    public boolean canTakeStack(final EntityPlayer par1EntityPlayer) {
+    public boolean canTakeStack(final @NotNull EntityPlayer par1EntityPlayer) {
         if (this.isSlotEnabled()) {
             var draggedStack = par1EntityPlayer.inventory.getItemStack();
             ItemStack slotStack = this.getStack();
@@ -175,7 +179,7 @@ public class CrazyAESlot extends Slot implements IColorizeableSlot {
     }
 
     @Override
-    public boolean isSameInventory(Slot other) {
+    public boolean isSameInventory(@NotNull Slot other) {
         return other instanceof CrazyAESlot && ((CrazyAESlot) other).itemHandler == this.itemHandler;
     }
 
@@ -196,6 +200,9 @@ public class CrazyAESlot extends Slot implements IColorizeableSlot {
     }
 
     public ItemStack getDisplayStack() {
+        if (this.itemHandler == null || !this.isSlotEnabled() || this.itemHandler.getSlots() <= this.index) {
+            return ItemStack.EMPTY;
+        }
         return this.itemHandler.getStackInSlot(this.index);
     }
 

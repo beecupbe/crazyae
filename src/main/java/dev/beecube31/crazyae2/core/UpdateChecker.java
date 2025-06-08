@@ -1,6 +1,6 @@
 package dev.beecube31.crazyae2.core;
 
-import dev.beecube31.crazyae2.common.sync.CrazyAEGuiText;
+import dev.beecube31.crazyae2.common.i18n.CrazyAEGuiText;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.text.TextComponentBase;
 import net.minecraft.util.text.TextComponentString;

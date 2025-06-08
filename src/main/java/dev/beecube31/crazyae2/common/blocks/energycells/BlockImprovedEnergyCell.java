@@ -1,9 +1,10 @@
 package dev.beecube31.crazyae2.common.blocks.energycells;
 
 import appeng.block.networking.BlockEnergyCell;
-import dev.beecube31.crazyae2.core.CrazyAEConfig;
+import dev.beecube31.crazyae2.common.interfaces.IDenseEnergyCell;
+import dev.beecube31.crazyae2.core.config.CrazyAEConfig;
 
-public class BlockImprovedEnergyCell extends BlockEnergyCell {
+public class BlockImprovedEnergyCell extends BlockEnergyCell implements IDenseEnergyCell {
 
     public BlockImprovedEnergyCell() {}
 

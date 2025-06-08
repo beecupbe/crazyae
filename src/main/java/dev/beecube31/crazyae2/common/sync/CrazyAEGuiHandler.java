@@ -23,40 +23,6 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 public class CrazyAEGuiHandler implements IGuiHandler {
-//	public static void openGUI(@Nonnull final EntityPlayer p, @Nullable final TileEntity tile, @Nonnull final AEPartLocation side, @Nonnull final CrazyAEGuiBridge type) {
-//		if (Platform.isClient()) {
-//			return;
-//		}
-//
-//		int x;
-//		var y = 0;
-//		var z = Integer.MIN_VALUE;
-//
-//		if (tile != null) {
-//			x = tile.getPos().getX();
-//			y = tile.getPos().getY();
-//			z = tile.getPos().getZ();
-//		} else {
-//			x = p.inventory.currentItem;
-//		}
-//
-//		CrazyAE.logger().info("1 {}",(type.getHostType().isItem() && tile == null) || type.hasPermissions(tile, x, y, z, side, p));
-//		if ((type.getHostType().isItem() && tile == null) || type.hasPermissions(tile, x, y, z, side, p)) {
-//			CrazyAE.logger().info("2 {}",(tile == null && type.getHostType() == GuiHostType.ITEM));
-//			CrazyAE.logger().info("3 {}",(tile == null || type.getHostType() == GuiHostType.ITEM));
-//			if (tile == null && type.getHostType() == GuiHostType.ITEM) {
-//				p.openGui(CrazyAE.instance, type.ordinal() << 4, p.getEntityWorld(), x, 0, 0);
-//			} else if (tile == null || type.getHostType() == GuiHostType.ITEM) {
-//				if (tile != null) {
-//					p.openGui(CrazyAE.instance, type.ordinal() << 4 | side.ordinal() | (1 << 3), p.getEntityWorld(), x, y, z);
-//				} else {
-//					p.openGui(CrazyAE.instance, type.ordinal() << 4, p.getEntityWorld(), x, y, z);
-//				}
-//			} else {
-//				p.openGui(CrazyAE.instance, type.ordinal() << 4 | side.ordinal(), tile.getWorld(), x, y, z);
-//			}
-//		}
-//	}
 	public static void openGUI(@Nonnull final EntityPlayer p, @Nullable final TileEntity tile, @Nonnull final AEPartLocation side, @Nonnull final Object type) {
 		if (Platform.isClient()) {
 			return;

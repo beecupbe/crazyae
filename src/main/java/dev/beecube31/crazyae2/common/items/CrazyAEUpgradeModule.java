@@ -9,12 +9,12 @@ import appeng.util.InventoryAdaptor;
 import appeng.util.Platform;
 import appeng.util.inv.AdaptorItemHandler;
 import com.google.common.base.Preconditions;
-import dev.beecube31.crazyae2.core.CrazyAE;
 import dev.beecube31.crazyae2.common.interfaces.ICrazyAEUpgradeHost;
 import dev.beecube31.crazyae2.common.interfaces.ICrazyAEUpgradeModule;
 import dev.beecube31.crazyae2.common.registration.definitions.Upgrades;
+import dev.beecube31.crazyae2.core.CrazyAE;
+import dev.beecube31.crazyae2.core.client.CrazyAEClientHandler;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,7 +32,6 @@ import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.text.Collator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -98,17 +97,7 @@ public class CrazyAEUpgradeModule extends AEBaseItem implements ICrazyAEUpgradeM
 				}
 			}
 
-			Collator locale = Collator.getInstance(
-					Minecraft
-						.getMinecraft()
-						.getLanguageManager()
-						.getCurrentLanguage()
-						.getJavaLocale()
-			);
-
-			if (locale != null) {
-				textList.sort(locale);
-			}
+			textList.sort(CrazyAEClientHandler.getLocaleCollator());
 
 			lines.addAll(textList);
 		}

@@ -1,0 +1,39 @@
+{
+    "conditions": [
+        {
+            "type": "forge:and",
+            "values": [
+                {
+                    "type": "minecraft:item_exists",
+                    "item": "crazyae:quantum_energy_cell"
+                },
+                {
+                    "type": "minecraft:item_exists",
+                    "item": "crazyae:advanced_energy_cell"
+                },
+                {
+                    "type": "appliedenergistics2:material_exists",
+                    "material": "material.calculation_processor"
+                }
+            ]
+        }
+    ],
+    "result": {
+        "item": "crazyae:quantum_energy_cell"
+    },
+    "type": "forge:ore_shaped",
+    "pattern": [
+        "aba",
+        "aba",
+        "aba"
+    ],
+    "key": {
+        "a": {
+            "item": "crazyae:perfect_energy_cell"
+        },
+        "b": {
+            "item": "crazyae:material",
+            "data": 16
+        }
+    }
+}

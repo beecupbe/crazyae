@@ -52,6 +52,9 @@ public class ContainerCrazyAEUpgradeable extends CrazyAEBaseContainer implements
     @GuiSync(13)
     public boolean manaDeviceLinked;
 
+    @GuiSync(14)
+    public boolean isThisEnergyDevice = false;
+
     private int tbSlot;
     private NetworkToolViewer tbInventory;
 
@@ -66,6 +69,10 @@ public class ContainerCrazyAEUpgradeable extends CrazyAEBaseContainer implements
         if (te instanceof IManaLinkableDevice) {
             this.manaDevice = (IManaLinkableDevice) te;
             this.isThisManaDevice = true;
+        }
+
+        if (te instanceof IEnergyBus) {
+            this.isThisEnergyDevice = true;
         }
 
         World w = null;
@@ -103,7 +110,7 @@ public class ContainerCrazyAEUpgradeable extends CrazyAEBaseContainer implements
             for (int v = 0; v < 3; v++) {
                 for (int u = 0; u < 3; u++) {
                     this.addSlotToContainer((new RestrictedSlot(RestrictedSlot.PlaceableItemType.UPGRADES, this.tbInventory
-                            .getInternalInventory(), u + v * 3, 187 + u * 18, this.getHeight() - 82 + v * 18, this.getInventoryPlayer())).setPlayerSide());
+                            .getInternalInventory(), u + v * 3, 187 + u * 18, this.getHeight() - this.getToolboxYOffset() + v * 18, this.getInventoryPlayer())).setPlayerSide());
                 }
             }
         }
@@ -133,11 +140,15 @@ public class ContainerCrazyAEUpgradeable extends CrazyAEBaseContainer implements
         return 184;
     }
 
+    protected int getToolboxYOffset() {
+        return 82;
+    }
+
     protected void setupConfig() {
         this.setupUpgrades();
 
-        if (this.upgradeable.getTile() instanceof IManaLinkableDevice ||
-                this.upgradeable.getTile() instanceof IEnergyBus) {
+        if (this.isThisManaDevice ||
+                this.isThisEnergyDevice) {
             return;
         }
 

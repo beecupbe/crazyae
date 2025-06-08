@@ -14,7 +14,12 @@ public class CreativeTab extends CreativeTabs {
 	}
 
 	@Override
-	public @NotNull ItemStack createIcon() {
+	public @NotNull ItemStack getIcon() {
+		return CrazyAE.icon();
+	}
+
+	@Override
+	public ItemStack createIcon() {
 		return CrazyAE.icon();
 	}
 }

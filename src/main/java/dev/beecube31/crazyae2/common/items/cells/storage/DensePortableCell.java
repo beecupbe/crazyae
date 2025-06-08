@@ -18,7 +18,10 @@ import appeng.items.contents.CellUpgrades;
 import appeng.items.contents.PortableCellViewer;
 import appeng.items.tools.powered.powersink.AEBasePoweredItem;
 import appeng.util.Platform;
-import dev.beecube31.crazyae2.common.sync.CrazyAETooltip;
+import dev.beecube31.crazyae2.client.gui.sprites.ISpriteProvider;
+import dev.beecube31.crazyae2.client.gui.sprites.Sprite;
+import dev.beecube31.crazyae2.common.i18n.CrazyAETooltip;
+import dev.beecube31.crazyae2.common.util.Utils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -32,6 +35,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.IItemHandler;
+import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.util.List;
@@ -51,12 +55,12 @@ public class DensePortableCell extends AEBasePoweredItem implements IStorageCell
         this.idleDrain = idleDrain;
     }
 
-    public int getRGBDurabilityForDisplay(ItemStack stack) {
+    public int getRGBDurabilityForDisplay(@NotNull ItemStack stack) {
         return durabilityColor;
     }
 
     @Override
-    public ActionResult<ItemStack> onItemRightClick(final World w, final EntityPlayer player, final EnumHand hand) {
+    public @NotNull ActionResult<ItemStack> onItemRightClick(final @NotNull World w, final EntityPlayer player, final @NotNull EnumHand hand) {
         if (player.isSneaking()) {
             ItemStack item = player.getHeldItem(hand);
             NBTTagCompound itemNBT = item.getTagCompound();
@@ -92,31 +96,33 @@ public class DensePortableCell extends AEBasePoweredItem implements IStorageCell
 
         NBTTagCompound nbt = stack.getTagCompound();
         boolean isAutoPickupEnabled = nbt != null && nbt.getBoolean("autoPickup");
+        ISpriteProvider spritePickup = isAutoPickupEnabled ? Sprite.YES : Sprite.NO;
 
-        lines.add(CrazyAETooltip.AUTO_PICKUP.getLocalWithSpaceAtEnd() + this.getAutoPickupState(isAutoPickupEnabled));
-        lines.add(CrazyAETooltip.AUTO_PICKUP_HOW_TO_ENABLE.getLocal());
-        lines.add(CrazyAETooltip.AUTO_PICKUP_TIP.getLocal());
+        lines.add(Utils.writeSpriteFlag(spritePickup) + CrazyAETooltip.AUTO_PICKUP.getLocalWithSpaceAtEnd() + this.getAutoPickupState(isAutoPickupEnabled));
+
+        lines.add(Utils.writeSpriteFlag(Sprite.INFO) + CrazyAETooltip.AUTO_PICKUP_HOW_TO_ENABLE.getLocal());
+        lines.add(Utils.writeSpriteFlag(Sprite.INFO) + CrazyAETooltip.AUTO_PICKUP_TIP.getLocal());
 
         AEApi.instance().client().addCellInformation(cdi, lines);
     }
 
     @Override
-    public int getBytes(final ItemStack cellItem) {
+    public int getBytes(final @NotNull ItemStack cellItem) {
         return this.capacity;
     }
 
     @Override
-    public int getBytesPerType(final ItemStack cellItem) {
+    public int getBytesPerType(final @NotNull ItemStack cellItem) {
         return this.bytesPerType;
     }
 
     @Override
-    public int getTotalTypes(final ItemStack cellItem) {
+    public int getTotalTypes(final @NotNull ItemStack cellItem) {
         return 63;
     }
 
     @Override
-    public boolean isBlackListed(final ItemStack cellItem, final IAEItemStack requestedAddition) {
+    public boolean isBlackListed(final @NotNull ItemStack cellItem, final @NotNull IAEItemStack requestedAddition) {
         return false;
     }
 
@@ -126,7 +132,7 @@ public class DensePortableCell extends AEBasePoweredItem implements IStorageCell
     }
 
     @Override
-    public boolean isStorageCell(final ItemStack i) {
+    public boolean isStorageCell(final @NotNull ItemStack i) {
         return true;
     }
 
@@ -136,7 +142,7 @@ public class DensePortableCell extends AEBasePoweredItem implements IStorageCell
     }
 
     @Override
-    public IStorageChannel<IAEItemStack> getChannel() {
+    public @NotNull IStorageChannel<IAEItemStack> getChannel() {
         return AEApi.instance().storage().getStorageChannel(IItemStorageChannel.class);
     }
 
@@ -181,7 +187,7 @@ public class DensePortableCell extends AEBasePoweredItem implements IStorageCell
     }
 
     @Override
-    public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+    public boolean shouldCauseReequipAnimation(@NotNull ItemStack oldStack, @NotNull ItemStack newStack, boolean slotChanged) {
         return slotChanged;
     }
 

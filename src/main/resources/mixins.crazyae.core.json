@@ -5,19 +5,34 @@
   "minVersion": "0.8",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "aefixes.crafting.MixinCraftingCPUCluster",
     "aefixes.crafting.MixinNetworkMonitor",
+    "aefixes.cells.MixinCreativeCellInventory",
     "features.patternterm.fastplace.AccessorContainerPatternEncoder",
     "features.energycells.MixinApiStorages",
     "features.terminals.MixinPacketMEInventoryUpdate",
+    "features.termnbt.MixinContainerPatternEncoder",
     "core.MixinInterfaceDuality",
     "core.MixinCellWorkbench",
     "core.MixinDriveWatcher",
-    "core.MixinAEBasePart"
+    "core.MixinAEBasePart",
+    "core.crafting.container.MixinContainerCraftConfirm",
+    "core.crafting.MixinCraftingCPUStatus",
+    "core.crafting.container.MixinContainerCraftingCPU",
+    "core.crafting.container.AccessorContainerCraftingCPU",
+    "core.crafting.container.MixinContainerCraftingStatus",
+    "core.crafting.MixinCraftingCPUCalculator",
+    "core.crafting.MixinCraftingCPUCluster",
+    "core.crafting.MixinPacketCraftRequest",
+    "core.inv.MixinAdaptorItemHandler"
   ],
   "client": [
     "features.cellinformation.MixinApiClientHelper",
-    "features.patternterm.fastplace.MixinGuiPatternTerm"
+    "features.patternterm.fastplace.MixinGuiPatternTerm",
+    "features.termnbt.MixinGuiPatternTerm",
+    "core.crafting.MixinCraftingCPUStatusClient",
+    "core.crafting.gui.MixinGuiCraftAmount",
+    "core.crafting.gui.MixinGuiCraftingStatus",
+    "core.icons.MixinAEBasePoweredItem"
   ],
   "server": []
 }

@@ -9,6 +9,8 @@ import static net.minecraftforge.common.config.Configuration.CATEGORY_CLIENT;
 
 @SideOnly(Side.CLIENT)
 public class CrazyAEClientState {
+    public static int lastQCpuPage = 0;
+
     public static void applyColorizerGui(int red, int green, int blue, @Nullable ComponentHue guiHue) {
         CrazyAEClientConfig.updateIntKey(
                 CATEGORY_CLIENT,

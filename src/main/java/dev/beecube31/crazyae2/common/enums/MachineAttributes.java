@@ -6,6 +6,8 @@ public class MachineAttributes {
     private double requiredAEPerTick = Double.MIN_VALUE;
     private double requiredAEPerJob = Double.MIN_VALUE;
 
+    private boolean requireChannel = false;
+
     public MachineAttributes setRequiredManaPerJob(double requiredManaPerJob) {
         this.requiredManaPerJob = requiredManaPerJob;
         return this;
@@ -24,6 +26,15 @@ public class MachineAttributes {
     public MachineAttributes setRequiredAEPerJob(double requiredAEPerJob) {
         this.requiredAEPerJob = requiredAEPerJob;
         return this;
+    }
+
+    public MachineAttributes setRequireChannel(boolean requireChannel) {
+        this.requireChannel = requireChannel;
+        return this;
+    }
+
+    public boolean isRequireChannel() {
+        return requireChannel;
     }
 
     public double getRequiredManaPerJob() {

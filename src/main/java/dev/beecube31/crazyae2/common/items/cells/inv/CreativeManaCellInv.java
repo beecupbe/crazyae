@@ -11,10 +11,9 @@ import appeng.api.storage.data.IAEItemStack;
 import appeng.api.storage.data.IAEStack;
 import appeng.api.storage.data.IItemList;
 import appeng.me.storage.BasicCellInventoryHandler;
-import appeng.util.item.AEItemStack;
+import dev.beecube31.crazyae2.common.util.AEUtils;
 import dev.beecube31.crazyae2.core.CrazyAE;
 import dev.beecube31.crazyae2.core.api.storage.IManaStorageChannel;
-import net.minecraft.item.ItemStack;
 
 public class CreativeManaCellInv implements IMEInventoryHandler<IAEItemStack> {
 
@@ -44,7 +43,9 @@ public class CreativeManaCellInv implements IMEInventoryHandler<IAEItemStack> {
 
     @Override
     public IItemList<IAEItemStack> getAvailableItems(final IItemList out) {
-        out.add(AEItemStack.fromItemStack(CrazyAE.definitions().items().manaAsAEStack().maybeStack(Integer.MAX_VALUE).orElse(ItemStack.EMPTY)));
+        out.add(AEUtils.createAEStackFromDefinition(
+                CrazyAE.definitions().items().manaAsAEStack(), Integer.MAX_VALUE * 1024L
+        ));
 
         return out;
     }

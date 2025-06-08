@@ -186,6 +186,11 @@ public class PartManaImportBus extends CrazyAEPartSharedBus implements IManaLink
     }
 
     @Override
+    public RedstoneMode getRSMode() {
+        return (RedstoneMode) this.getConfigManager().getSetting(Settings.REDSTONE_CONTROLLED);
+    }
+
+    @Override
     public void link(int x, int y, int z) {
         this.hasConnection = true;
         this.connectionX = x;

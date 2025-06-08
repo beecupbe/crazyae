@@ -4,6 +4,7 @@ import dev.beecube31.crazyae2.client.gui.CrazyAESlot;
 import dev.beecube31.crazyae2.client.gui.sprites.StateSprite;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
+import org.jetbrains.annotations.NotNull;
 
 public class SlotOutput extends CrazyAESlot {
 
@@ -14,7 +15,7 @@ public class SlotOutput extends CrazyAESlot {
     }
 
     @Override
-    public boolean isItemValid(final ItemStack i) {
+    public boolean isItemValid(final @NotNull ItemStack i) {
         return false;
     }
 }

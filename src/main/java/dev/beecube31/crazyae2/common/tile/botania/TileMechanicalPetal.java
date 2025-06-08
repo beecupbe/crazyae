@@ -8,6 +8,7 @@ import appeng.api.storage.data.IAEItemStack;
 import appeng.me.helpers.MachineSource;
 import appeng.tile.inventory.AppEngInternalInventory;
 import com.google.common.base.Preconditions;
+import dev.beecube31.crazyae2.common.containers.base.slot.RestrictedSlot;
 import dev.beecube31.crazyae2.common.enums.BotaniaMechanicalDeviceType;
 import dev.beecube31.crazyae2.common.parts.implementations.CrazyAEBlockUpgradeInv;
 import dev.beecube31.crazyae2.common.util.NBTUtils;
@@ -39,19 +40,12 @@ public class TileMechanicalPetal extends TileBotaniaMechanicalMachineBase {
         final Block block = CrazyAE.definitions().blocks().mechanicalPetal().maybeBlock().orElse(null);
         Preconditions.checkNotNull(block);
         this.upgrades = new CrazyAEBlockUpgradeInv(block, this, this.getUpgradeSlots());
+
+        this.internalPatternsStorageInv.setItemFilter(RestrictedSlot.PlaceableItemType.PETAL_ENCODED_PATTERN.associatedFilter);
     }
 
     @Override
     public boolean pushPattern(ICraftingPatternDetails iCraftingPatternDetails, InventoryCrafting inventoryCrafting) {
-        if (this.tasksQueued >= this.tasksMaxAmt) return false;
-
-        this.tasksQueued++;
-        this.queueMap.add(new CraftingTask(iCraftingPatternDetails.getCondensedOutputs(), 0));
-        return true;
-    }
-
-    @Override
-    public boolean fastPushPattern(ICraftingPatternDetails iCraftingPatternDetails) {
         if (this.tasksQueued >= this.tasksMaxAmt) return false;
 
         this.tasksQueued++;

@@ -1,10 +1,9 @@
 package dev.beecube31.crazyae2.client.gui.implementations;
 
-import dev.beecube31.crazyae2.client.gui.sprites.Sprite;
 import dev.beecube31.crazyae2.common.containers.ContainerManapoolMechanical;
 import dev.beecube31.crazyae2.common.networking.network.NetworkHandler;
 import dev.beecube31.crazyae2.common.networking.packets.PacketToggleGuiObject;
-import dev.beecube31.crazyae2.common.sync.CrazyAEGuiText;
+import dev.beecube31.crazyae2.common.i18n.CrazyAEGuiText;
 import dev.beecube31.crazyae2.common.tile.botania.TileMechanicalManapool;
 import net.minecraft.entity.player.InventoryPlayer;
 

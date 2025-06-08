@@ -175,8 +175,6 @@ public class Parts implements Definitions<CrazyAEDamagedItemDefinition> {
 		ENERGY_EXPORT_BUS("energy_export_bus", PartEnergyExportBus.class, Features.ENERGY_BUSES),
 		ENERGY_TERM("energy_terminal", PartEnergyTerminal.class, Features.ENERGY_TERM),
 
-		PART_DRIVE("part_drive", PartDrive.class, Features.PART_DRIVE),
-
 		PART_PERFECT_IFACE("part_perfect_iface", PartPerfectInterface.class, Features.PERFECT_INTERFACE),
 		PART_PATTERNS_IFACE("part_patterns_iface", PartPatternsInterface.class, Features.PATTERNS_INTERFACE);
 

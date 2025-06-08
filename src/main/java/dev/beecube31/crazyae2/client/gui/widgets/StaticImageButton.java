@@ -1,20 +1,23 @@
 package dev.beecube31.crazyae2.client.gui.widgets;
 
+import appeng.client.gui.widgets.ITooltip;
 import dev.beecube31.crazyae2.client.gui.components.ComponentHue;
 import dev.beecube31.crazyae2.client.gui.sprites.StateSprite;
 import dev.beecube31.crazyae2.common.interfaces.gui.ITooltipObj;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
-public class StaticImageButton extends GuiButton implements ITooltipObj {
+public class StaticImageButton extends GuiButton implements ITooltipObj, ITooltip {
     private String message;
     private StateSprite myIcon;
 
     private final ComponentHue hue;
 
     private boolean disableHue = false;
+    private boolean halfSize = false;
 
     public StaticImageButton(final int x, final int y, @Nullable final StateSprite ico, final String message, final ComponentHue guiHue, final int id) {
         super(id, 0, 0, "");
@@ -37,7 +40,38 @@ public class StaticImageButton extends GuiButton implements ITooltipObj {
             final int offsetX = 1;
 
             if (this.myIcon != null) {
-                this.hue.drawHue();
+                if (!this.disableHue) this.hue.drawHue();
+
+                if (this.halfSize) {
+                    this.width = 8;
+                    this.height = 8;
+
+                    GlStateManager.pushMatrix();
+                    GlStateManager.translate(this.x, this.y, 0.0F);
+                    GlStateManager.scale(0.5f, 0.5f, 0.5f);
+
+                    this.drawTexturedModalRect(
+                            0,
+                            0,
+                            StateSprite.AE_IMAGE_BUTTON.getTextureX(),
+                            StateSprite.AE_IMAGE_BUTTON.getTextureY(),
+                            StateSprite.AE_IMAGE_BUTTON.getSizeX(),
+                            StateSprite.AE_IMAGE_BUTTON.getSizeY()
+                    );
+
+                    this.drawTexturedModalRect(
+                            0,
+                            0,
+                            this.myIcon.getTextureX(),
+                            this.myIcon.getTextureY(),
+                            this.myIcon.getSizeX(),
+                            this.myIcon.getSizeY()
+                    );
+
+                    GlStateManager.popMatrix();
+                    return;
+                }
+
                 this.drawTexturedModalRect(
                         offsetX + this.x,
                         this.y,
@@ -47,7 +81,7 @@ public class StaticImageButton extends GuiButton implements ITooltipObj {
                         StateSprite.IMAGE_BUTTON.getSizeY()
                 );
 
-                this.hue.endDrawHue();
+                if (!this.disableHue) this.hue.endDrawHue();
 
                 if (!this.disableHue) this.hue.drawHue();
                 this.drawTexturedModalRect(
@@ -59,11 +93,20 @@ public class StaticImageButton extends GuiButton implements ITooltipObj {
                         this.myIcon.getSizeY()
                 );
 
-                this.hue.endDrawHue();
+                if (!this.disableHue) this.hue.endDrawHue();
             }
 
             this.mouseDragged(minecraft, x, y);
         }
+    }
+
+    public StaticImageButton setHalfSize(boolean halfSize) {
+        this.halfSize = halfSize;
+        return this;
+    }
+
+    public boolean isHalfSize() {
+        return halfSize;
     }
 
     public void setMyIcon(StateSprite myIcon) {
@@ -74,12 +117,18 @@ public class StaticImageButton extends GuiButton implements ITooltipObj {
         this.message = message;
     }
 
-    public void setDisableHue(boolean v) {
+    public StaticImageButton setDisableHue(boolean v) {
         this.disableHue = v;
+        return this;
     }
 
     @Override
     public String getTooltipMsg() {
+        return this.message;
+    }
+
+    @Override
+    public String getMessage() {
         return this.message;
     }
 

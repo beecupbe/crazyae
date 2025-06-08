@@ -2,9 +2,8 @@ package dev.beecube31.crazyae2.core.cache.impl;
 
 import appeng.api.networking.*;
 import dev.beecube31.crazyae2.common.interfaces.IChannelsMultiplier;
-import dev.beecube31.crazyae2.common.tile.networking.TileCreativeQuantumChannelsBooster;
 import dev.beecube31.crazyae2.core.cache.IGridChannelBoostersCache;
-import dev.beecube31.crazyae2.core.CrazyAEConfig;
+import dev.beecube31.crazyae2.core.config.CrazyAEConfig;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;

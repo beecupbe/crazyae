@@ -2,8 +2,9 @@ package dev.beecube31.crazyae2.common.blocks.networking;
 
 import appeng.api.util.AEPartLocation;
 import appeng.api.util.IOrientable;
-import appeng.block.AEBaseTileBlock;
 import appeng.util.Platform;
+import dev.beecube31.crazyae2.common.base.CrazyAEBlockAttribute;
+import dev.beecube31.crazyae2.common.enums.MachineAttributes;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiBridge;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiHandler;
 import dev.beecube31.crazyae2.common.tile.networking.TilePatternsInterface;
@@ -21,7 +22,7 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class BlockInterfacePatterns extends AEBaseTileBlock {
+public class BlockInterfacePatterns extends CrazyAEBlockAttribute {
 
     private static final PropertyBool OMNIDIRECTIONAL = PropertyBool.create("omnidirectional");
 
@@ -73,5 +74,10 @@ public class BlockInterfacePatterns extends AEBaseTileBlock {
         if (rotatable instanceof TilePatternsInterface) {
             ((TilePatternsInterface) rotatable).setSide(axis);
         }
+    }
+
+    @Override
+    public MachineAttributes getAttributes() {
+        return new MachineAttributes().setRequireChannel(true);
     }
 }

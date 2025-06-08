@@ -9,6 +9,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class BasicButton extends GuiButton {
     private final ComponentHue hue;
+    private boolean hide = false;
 
     public BasicButton(int buttonId, int x, int y, int widthIn, int heightIn, String buttonText, final ComponentHue hue) {
         super(buttonId, x, y, buttonText);
@@ -22,7 +23,7 @@ public class BasicButton extends GuiButton {
 
     @Override
     public void drawButton(final Minecraft minecraft, final int mouseX, final int mouseY, float partialTicks) {
-        if (this.visible) {
+        if (!this.hide) {
             this.hue.drawHue();
             FontRenderer fontrenderer = minecraft.fontRenderer;
             minecraft.renderEngine.bindTexture(new ResourceLocation("crazyae", "textures/guis/widgets/buttons.png"));
@@ -54,5 +55,10 @@ public class BasicButton extends GuiButton {
 
             this.hue.endDrawHue();
         }
+    }
+
+    public BasicButton hide(boolean v) {
+        this.hide = v;
+        return this;
     }
 }

@@ -3,18 +3,13 @@ package dev.beecube31.crazyae2.common.items;
 import appeng.api.config.AccessRestriction;
 import appeng.api.config.Actionable;
 import appeng.api.config.PowerUnits;
-import appeng.api.definitions.IBlockDefinition;
 import appeng.api.implementations.items.IAEItemPowerStorage;
 import appeng.block.AEBaseItemBlock;
-import appeng.core.Api;
 import appeng.core.localization.GuiText;
 import appeng.util.Platform;
-import dev.beecube31.crazyae2.common.blocks.energycells.BlockAdvancedEnergyCell;
-import dev.beecube31.crazyae2.common.blocks.energycells.BlockImprovedEnergyCell;
-import dev.beecube31.crazyae2.common.blocks.energycells.BlockPerfectEnergyCell;
-import dev.beecube31.crazyae2.common.tile.energycells.TileBigEnergyCells;
-import dev.beecube31.crazyae2.core.CrazyAE;
-import dev.beecube31.crazyae2.core.CrazyAEConfig;
+import dev.beecube31.crazyae2.client.gui.sprites.Sprite;
+import dev.beecube31.crazyae2.common.interfaces.IDenseEnergyCell;
+import dev.beecube31.crazyae2.common.util.Utils;
 import net.minecraft.block.Block;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -22,6 +17,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.lwjgl.input.Keyboard;
 
 import java.text.MessageFormat;
 import java.util.List;
@@ -47,9 +43,10 @@ public class ItemEnergyCells extends AEBaseItemBlock implements IAEItemPowerStor
             }
 
             final double percent = internalCurrentPower / maxAEPower;
+            final boolean shift = Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT);
 
-            lines.add(GuiText.StoredEnergy.getLocal() + ':' + MessageFormat.format(" {0,number,#} ", internalCurrentPower) + Platform
-                    .gui_localize(PowerUnits.AE.unlocalizedName) + " -" + MessageFormat.format(" {0,number,#.##%} ", percent));
+            lines.add(Utils.writeSpriteFlag(Sprite.ENERGY) + GuiText.StoredEnergy.getLocal() + ':' + MessageFormat.format(" {0,number,#} ", internalCurrentPower) + Platform
+                    .gui_localize(PowerUnits.AE.unlocalizedName) + " -" + MessageFormat.format(shift ? " {0,number,#.#####%}" : " {0,number,#.##%}", percent));
         }
     }
 
@@ -90,21 +87,7 @@ public class ItemEnergyCells extends AEBaseItemBlock implements IAEItemPowerStor
     }
 
     public double setMaxAEPower() {
-        final Block blockID = Block.getBlockFromItem(this);
-        final IBlockDefinition energyCell = Api.INSTANCE.definitions().blocks().energyCell();
-
-        return energyCell.maybeBlock().map(block ->
-        {
-            if (blockID instanceof BlockImprovedEnergyCell) {
-                return CrazyAEConfig.impEnergyCellCap;
-            } else if (blockID instanceof BlockAdvancedEnergyCell) {
-                return CrazyAEConfig.advEnergyCellCap;
-            } else if (blockID instanceof BlockPerfectEnergyCell) {
-                return CrazyAEConfig.perEnergyCellCap;
-            } else {
-                return 0D;
-            }
-        }).orElse(0D);
+        return ((IDenseEnergyCell) Block.getBlockFromItem(this)).getMaxPower();
     }
 
     @Override

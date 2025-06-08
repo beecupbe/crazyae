@@ -3,6 +3,7 @@ package dev.beecube31.crazyae2.common.sync;
 import appeng.api.AEApi;
 import appeng.api.config.SecurityPermissions;
 import appeng.api.exceptions.AppEngException;
+import appeng.api.implementations.guiobjects.IPortableCell;
 import appeng.api.networking.security.IActionHost;
 import appeng.api.networking.security.ISecurityGrid;
 import appeng.api.parts.IPartHost;
@@ -18,6 +19,7 @@ import dev.beecube31.crazyae2.client.gui.CrazyAEBaseGui;
 import dev.beecube31.crazyae2.common.containers.*;
 import dev.beecube31.crazyae2.common.containers.base.CrazyAEBaseContainer;
 import dev.beecube31.crazyae2.common.interfaces.ICrazyAEGuiItem;
+import dev.beecube31.crazyae2.common.interfaces.craftsystem.ICrazyCraftHost;
 import dev.beecube31.crazyae2.common.interfaces.upgrades.IUpgradesInfoProvider;
 import dev.beecube31.crazyae2.common.items.ColorizerObj;
 import dev.beecube31.crazyae2.common.items.PatternsUSBStickObj;
@@ -25,11 +27,16 @@ import dev.beecube31.crazyae2.common.parts.implementations.PartDrive;
 import dev.beecube31.crazyae2.common.parts.implementations.fluid.CrazyAEPartSharedFluidBus;
 import dev.beecube31.crazyae2.common.tile.botania.*;
 import dev.beecube31.crazyae2.common.tile.crafting.TileImprovedMAC;
+import dev.beecube31.crazyae2.common.tile.crafting.TileQuantumCPU;
 import dev.beecube31.crazyae2.common.tile.misc.TileImprovedCondenser;
 import dev.beecube31.crazyae2.common.tile.networking.TileBigCrystalCharger;
 import dev.beecube31.crazyae2.common.tile.networking.TileCraftingUnitsCombiner;
 import dev.beecube31.crazyae2.common.tile.networking.TileImprovedIOPort;
 import dev.beecube31.crazyae2.common.tile.storage.TileImprovedDrive;
+import dev.beecube31.crazyae2.common.tile.trashcans.TileTrashcanEnergy;
+import dev.beecube31.crazyae2.common.tile.trashcans.TileTrashcanFluids;
+import dev.beecube31.crazyae2.common.tile.trashcans.TileTrashcanItems;
+import dev.beecube31.crazyae2.common.tile.trashcans.TileTrashcanMana;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
@@ -48,7 +55,10 @@ public enum CrazyAEGuiBridge {
 
 	GUI_PRIORITY(IPriorityHost.class, ContainerPriority.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
 
+	GUI_CRAFTING_BLOCKS_LIST(ICrazyCraftHost.class, ContainerCraftingBlockList.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
+
 	IMPROVED_MOLECULAR_ASSEMBLER(TileImprovedMAC.class, ContainerFastMAC.class, GuiHostType.WORLD, null),
+	QUANTUM_CPU_HOST(TileQuantumCPU.class, ContainerQuantumCPU.class, GuiHostType.WORLD, null),
 	IMPROVED_DRIVE(TileImprovedDrive.class, ContainerDriveImproved.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
 	IMPROVED_IO_PORT(TileImprovedIOPort.class, ContainerIOPortImproved.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
 	CRAFTING_UNITS_COMBINER(TileCraftingUnitsCombiner.class, ContainerCraftingUnitsCombiner.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
@@ -58,7 +68,9 @@ public enum CrazyAEGuiBridge {
 	IMPROVED_FLUID_BUSES(CrazyAEPartSharedFluidBus.class, ContainerImprovedFluidBuses.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
 	IMPROVED_CONDENSER(TileImprovedCondenser.class, ContainerImprovedCondenser.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
 	PATTERN_INTERFACE(IInterfaceHost.class, ContainerPatternsInterface.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
+	QUANTUM_INTERFACE(IInterfaceHost.class, ContainerQuantumInterface.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
 	PERFECT_INTERFACE(IInterfaceHost.class, ContainerPerfectInterface.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
+	//PERFECT_INSCRIBER(TilePerfectInscriber.class, ContainerPerfectInscriber.class, GuiHostType.WORLD, null),
 
 	GUI_MANA_TERMINAL(ITerminalHost.class, ContainerManaTerminal.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
 	GUI_ENERGY_TERMINAL(ITerminalHost.class, ContainerEnergyTerminal.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
@@ -73,10 +85,19 @@ public enum CrazyAEGuiBridge {
 	GUI_TERAPLATE_MECHANICAL(TileMechanicalTerraplate.class, ContainerTeraplateMechanical.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
 	GUI_BREWERY_MECHANICAL(TileMechanicalBrewery.class, ContainerBreweryMechanical.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
 
+	GUI_TRASHCAN_ITEMS(TileTrashcanItems.class, ContainerTrashcan.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
+	GUI_TRASHCAN_FLUID(TileTrashcanFluids.class, ContainerTrashcanFluid.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
+	GUI_TRASHCAN_MANA(TileTrashcanMana.class, ContainerTrashcanMana.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
+	GUI_TRASHCAN_ENERGY(TileTrashcanEnergy.class, ContainerTrashcanEnergy.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
+	GUI_TRASHCAN_EXP(TileTrashcanItems.class, ContainerTrashcan.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
+
+
 	GUI_MECHANICAL_DEVICE_PATTERN_INV(TileBotaniaMechanicalMachineBase.class, ContainerBotaniaDevicePatternsInv.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
 	GUI_ENERGY_BUS_SETTINGS(IUpgradesInfoProvider.class, ContainerEnergyBusSettings.class, GuiHostType.WORLD, SecurityPermissions.BUILD),
 
 	//Item GUIs
+	GUI_DENSE_PORTABLE_CELL(IPortableCell.class, ContainerMEPortableCellColorizeable.class, GuiHostType.ITEM, null),
+
 	GUI_ITEM_COLORIZER_GUI(ColorizerObj.class, ContainerColorizerGui.class, GuiHostType.ITEM, SecurityPermissions.BUILD),
 	GUI_ITEM_COLORIZER_TEXT(ColorizerObj.class, ContainerColorizerText.class, GuiHostType.ITEM, SecurityPermissions.BUILD),
 

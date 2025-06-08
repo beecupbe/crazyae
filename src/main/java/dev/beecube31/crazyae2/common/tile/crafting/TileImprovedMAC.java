@@ -27,20 +27,21 @@ import appeng.api.util.IConfigManager;
 import appeng.helpers.ItemStackHelper;
 import appeng.me.GridAccessException;
 import appeng.me.helpers.MachineSource;
-import appeng.tile.inventory.AppEngInternalInventory;
 import appeng.util.ConfigManager;
 import appeng.util.IConfigManagerHost;
 import appeng.util.Platform;
 import appeng.util.inv.InvOperation;
 import appeng.util.item.AEItemStack;
 import com.google.common.base.Preconditions;
+import dev.beecube31.crazyae2.common.containers.base.slot.RestrictedSlot;
 import dev.beecube31.crazyae2.common.interfaces.IGridHostMonitorable;
-import dev.beecube31.crazyae2.common.interfaces.crafting.IFastCraftingHandler;
 import dev.beecube31.crazyae2.common.interfaces.upgrades.IUpgradesInfoProvider;
 import dev.beecube31.crazyae2.common.parts.implementations.CrazyAEBlockUpgradeInv;
-import dev.beecube31.crazyae2.common.sync.CrazyAEGuiText;
+import dev.beecube31.crazyae2.common.i18n.CrazyAEGuiText;
 import dev.beecube31.crazyae2.common.tile.base.CrazyAENetworkInvOCTile;
+import dev.beecube31.crazyae2.common.util.inv.CrazyAEInternalInv;
 import dev.beecube31.crazyae2.core.CrazyAE;
+import dev.beecube31.crazyae2.core.config.CrazyAEConfig;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.InventoryCrafting;
@@ -57,12 +58,12 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-public class TileImprovedMAC extends CrazyAENetworkInvOCTile implements IConfigManagerHost, IGridTickable, ICraftingMedium, ICraftingProvider, IUpgradesInfoProvider, IFastCraftingHandler, IGridHostMonitorable {
+public class TileImprovedMAC extends CrazyAENetworkInvOCTile implements IConfigManagerHost, IGridTickable, ICraftingMedium, ICraftingProvider, IUpgradesInfoProvider, IGridHostMonitorable {
 
-    private final int maxQueueSize = 160;
+    private final int maxQueueSize = CrazyAEConfig.improvedMolecularAssemblerMaxQueueSize;
     private int itemsToSendPerTick = 8;
 
-    private final AppEngInternalInventory patternsInv = new AppEngInternalInventory(this, 45, 1);
+    private final CrazyAEInternalInv patternsInv = new CrazyAEInternalInv(this, 45, 1).setItemFilter(RestrictedSlot.PlaceableItemType.ENCODED_CRAFTING_PATTERN.associatedFilter);
     private final IConfigManager settings;
     private final CrazyAEBlockUpgradeInv upgrades;
     private boolean isPowered = false;
@@ -90,15 +91,7 @@ public class TileImprovedMAC extends CrazyAENetworkInvOCTile implements IConfigM
 
     @Override
     public boolean pushPattern(final ICraftingPatternDetails patternDetails, final InventoryCrafting table) {
-        if (this.cached && this.itemsToSend.size() < this.maxQueueSize) {
-            return this.dispatchJob(patternDetails);
-        }
-        return false;
-    }
-
-    @Override
-    public boolean fastPushPattern(final ICraftingPatternDetails patternDetails) {
-        if (this.cached && this.itemsToSend.size() < this.maxQueueSize) {
+        if (this.cached && this.itemsToSend.size() < this.maxQueueSize && patternDetails.isCraftable()) {
             return this.dispatchJob(patternDetails);
         }
         return false;
@@ -239,22 +232,22 @@ public class TileImprovedMAC extends CrazyAENetworkInvOCTile implements IConfigM
     private void checkUpgrades() {
         switch (this.getInstalledCustomUpgrades(dev.beecube31.crazyae2.common.registration.definitions.Upgrades.UpgradeType.STACKS)) {
             default:
-                this.itemsToSendPerTick = 8;
+                this.itemsToSendPerTick = CrazyAEConfig.improvedMolecularAssemblerCraftsPerTickWithoutUpgrades;
                 break;
             case 1:
-                this.itemsToSendPerTick = 16;
+                this.itemsToSendPerTick = CrazyAEConfig.improvedMolecularAssemblerCraftsPerTickWith1Upgrade;
                 break;
             case 2:
-                this.itemsToSendPerTick = 32;
+                this.itemsToSendPerTick = CrazyAEConfig.improvedMolecularAssemblerCraftsPerTickWith2Upgrades;
                 break;
             case 3:
-                this.itemsToSendPerTick = 64;
+                this.itemsToSendPerTick = CrazyAEConfig.improvedMolecularAssemblerCraftsPerTickWith3Upgrades;
                 break;
             case 4:
-                this.itemsToSendPerTick = 128;
+                this.itemsToSendPerTick = CrazyAEConfig.improvedMolecularAssemblerCraftsPerTickWith4Upgrades;
                 break;
             case 5:
-                this.itemsToSendPerTick = 160;
+                this.itemsToSendPerTick = CrazyAEConfig.improvedMolecularAssemblerCraftsPerTickWith5Upgrades;
                 break;
         }
     }

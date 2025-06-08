@@ -9,6 +9,7 @@ import appeng.items.AEBaseItem;
 import com.github.bsideup.jabel.Desugar;
 import com.google.common.base.Preconditions;
 import dev.beecube31.crazyae2.common.registration.definitions.Parts;
+import dev.beecube31.crazyae2.common.util.Utils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -171,9 +172,10 @@ public class CrazyAEBaseItemPart extends AEBaseItem implements IPartItem {
 	}
 
 	@Override
-	protected void addCheckedInformation(ItemStack stack, World world, List<String> lines,
-	                                     ITooltipFlag advancedTooltips) {
+	protected void addCheckedInformation(ItemStack stack, World world, List<String> lines, ITooltipFlag advancedTooltips) {
 		super.addCheckedInformation(stack, world, lines, advancedTooltips);
+
+		Utils.addReqChannelTooltip(lines);
 
 		final var pt = this.getTypeByStack(stack);
 

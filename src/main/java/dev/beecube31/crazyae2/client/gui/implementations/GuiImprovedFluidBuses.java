@@ -6,7 +6,7 @@ import dev.beecube31.crazyae2.client.gui.slot.OptionalAEFluidSlot;
 import dev.beecube31.crazyae2.common.containers.ContainerImprovedFluidBuses;
 import dev.beecube31.crazyae2.common.parts.implementations.fluid.CrazyAEPartSharedFluidBus;
 import dev.beecube31.crazyae2.common.parts.implementations.fluid.PartFluidImportBusImp;
-import dev.beecube31.crazyae2.common.sync.CrazyAEGuiText;
+import dev.beecube31.crazyae2.common.i18n.CrazyAEGuiText;
 import net.minecraft.entity.player.InventoryPlayer;
 
 public class GuiImprovedFluidBuses extends GuiCrazyAEUpgradeable {

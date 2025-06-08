@@ -25,14 +25,12 @@ import appeng.api.util.AEPartLocation;
 import appeng.api.util.DimensionalCoord;
 import appeng.api.util.IConfigManager;
 import appeng.me.GridAccessException;
-import appeng.tile.inventory.AppEngInternalInventory;
 import appeng.util.ConfigManager;
 import appeng.util.IConfigManagerHost;
 import appeng.util.Platform;
 import appeng.util.inv.InvOperation;
 import appeng.util.inv.filter.IAEItemFilter;
 import appeng.util.item.AEItemStack;
-import dev.beecube31.crazyae2.common.interfaces.crafting.IFastCraftingHandler;
 import dev.beecube31.crazyae2.common.interfaces.device.mechanical.IBotaniaMechanicalDevice;
 import dev.beecube31.crazyae2.common.interfaces.upgrades.IUpgradesInfoProvider;
 import dev.beecube31.crazyae2.common.parts.implementations.CrazyAEBlockUpgradeInv;
@@ -58,15 +56,15 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-public abstract class TileBotaniaMechanicalMachineBase extends CrazyAENetworkInvOCTile implements IBotaniaMechanicalDevice, IUpgradesInfoProvider, IConfigManagerHost, IGridTickable, ICraftingMedium, ICraftingProvider, IFastCraftingHandler {
+public abstract class TileBotaniaMechanicalMachineBase extends CrazyAENetworkInvOCTile implements IBotaniaMechanicalDevice, IUpgradesInfoProvider, IConfigManagerHost, IGridTickable, ICraftingMedium, ICraftingProvider {
 
     protected List<ICraftingPatternDetails> craftingList = null;
     protected List<CraftingTask> queueMap = new ArrayList<>();
     protected CrazyAEInternalInv craftingInputInv;
     protected CrazyAEInternalInv craftingOutputInv;
-    protected final AppEngInternalInventory internalPatternsStorageInv = new AppEngInternalInventory(this, 45);
-    protected final AppEngInternalInventory patternsInv = new AppEngInternalInventory(this, 2);
-    protected final AppEngInternalInventory findSlot = new AppEngInternalInventory(this, 1, 1);
+    protected final CrazyAEInternalInv internalPatternsStorageInv = new CrazyAEInternalInv(this, 45);
+    protected final CrazyAEInternalInv patternsInv = new CrazyAEInternalInv(this, 2);
+    protected final CrazyAEInternalInv findSlot = new CrazyAEInternalInv(this, 1, 1);
     protected final IConfigManager settings;
     protected CrazyAEBlockUpgradeInv upgrades;
     protected boolean isPowered = false;
@@ -249,8 +247,6 @@ public abstract class TileBotaniaMechanicalMachineBase extends CrazyAENetworkInv
     }
 
     @Override public abstract boolean pushPattern(ICraftingPatternDetails iCraftingPatternDetails, InventoryCrafting inventoryCrafting);
-
-    @Override public abstract boolean fastPushPattern(ICraftingPatternDetails iCraftingPatternDetails);
 
     @Override
     public boolean isBusy() {

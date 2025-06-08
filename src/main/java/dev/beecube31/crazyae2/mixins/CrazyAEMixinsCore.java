@@ -1,6 +1,7 @@
 package dev.beecube31.crazyae2.mixins;
 
 import com.google.common.collect.ImmutableList;
+import dev.beecube31.crazyae2.common.util.ModsChecker;
 import dev.beecube31.crazyae2.core.CrazyAE;
 import dev.beecube31.crazyae2.common.features.Features;
 import net.minecraftforge.common.ForgeVersion;
@@ -56,12 +57,12 @@ public class CrazyAEMixinsCore implements IFMLLoadingPlugin, ILateMixinLoader {
 		mixins.add(String.format(MIXIN_PATH, "core"));
 		mixins.add(String.format(MIXIN_PATH, "aefixes"));
 
-		if (Loader.isModLoaded("thermaldynamics")) {
+		if (ModsChecker.TD_LOADED) {
 			mixins.add(String.format(MIXIN_PATH, "thermal.dynamics.fix"));
 		}
 
 
-		if (Loader.isModLoaded("ae2fc")) {
+		if (ModsChecker.AE2FC_LOADED) {
 			try {
 				Class.forName("com.glodblock.github.FluidCraft");
 				mixins.add(String.format(MIXIN_PATH, "ae2fc.fix"));

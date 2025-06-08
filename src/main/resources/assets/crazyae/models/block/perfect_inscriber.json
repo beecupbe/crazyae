@@ -1,0 +1,8 @@
+{
+    "parent": "appliedenergistics2:block/cube/cube_ae_bottom_top",
+    "textures": {
+        "bottom": "crazyae:block/q_inscriber_top",
+        "side": "crazyae:block/q_inscriber_side",
+        "top": "crazyae:block/q_inscriber_top"
+    }
+}

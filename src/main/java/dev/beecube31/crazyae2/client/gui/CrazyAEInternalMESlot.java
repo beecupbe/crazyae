@@ -1,7 +1,7 @@
 package dev.beecube31.crazyae2.client.gui;
 
 import appeng.api.storage.data.IAEItemStack;
-import appeng.client.me.ItemRepo;
+import dev.beecube31.crazyae2.client.me.ItemRepo;
 import net.minecraft.item.ItemStack;
 
 public class CrazyAEInternalMESlot {

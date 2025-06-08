@@ -7,6 +7,7 @@ import dev.beecube31.crazyae2.common.interfaces.jei.IJEITargetSlot;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import org.jetbrains.annotations.NotNull;
 
 public class SlotDisconnected extends CrazyAESlot implements IJEITargetSlot {
 
@@ -18,7 +19,7 @@ public class SlotDisconnected extends CrazyAESlot implements IJEITargetSlot {
     }
 
     @Override
-    public boolean isItemValid(final ItemStack par1ItemStack) {
+    public boolean isItemValid(final @NotNull ItemStack par1ItemStack) {
         return false;
     }
 
@@ -57,7 +58,7 @@ public class SlotDisconnected extends CrazyAESlot implements IJEITargetSlot {
     }
 
     @Override
-    public ItemStack decrStackSize(final int par1) {
+    public @NotNull ItemStack decrStackSize(final int par1) {
         return ItemStack.EMPTY;
     }
 

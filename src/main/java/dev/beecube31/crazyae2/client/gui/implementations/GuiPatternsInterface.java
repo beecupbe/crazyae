@@ -13,7 +13,7 @@ import dev.beecube31.crazyae2.common.networking.network.NetworkHandler;
 import dev.beecube31.crazyae2.common.networking.packets.PacketSwitchGuis;
 import dev.beecube31.crazyae2.common.networking.packets.orig.PacketConfigButton;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiBridge;
-import dev.beecube31.crazyae2.common.sync.CrazyAEGuiText;
+import dev.beecube31.crazyae2.common.i18n.CrazyAEGuiText;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.InventoryPlayer;
 import org.lwjgl.input.Mouse;
@@ -81,7 +81,7 @@ public class GuiPatternsInterface extends GuiCrazyAEUpgradeable {
     }
 
     @Override
-    protected boolean drawPatternsInterfaceOutputSlots() {
+    protected boolean moveUpgradeSlotsRight() {
         return true;
     }
 

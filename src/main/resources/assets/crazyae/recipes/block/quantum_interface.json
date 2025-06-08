@@ -1,0 +1,50 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:quantum_interface"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:patterns_interface"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:crafting_accelerator_256x"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "appliedenergistics2:interface"
+        },
+        {
+          "type": "crazyae:upgrade_exists",
+          "name": "stacks"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "item": "crazyae:quantum_interface"
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "aba",
+    "bdb",
+    "aba"
+  ],
+  "key": {
+    "b": {
+      "item": "crazyae:crafting_accelerator_256x"
+    },
+    "d": {
+      "item": "crazyae:patterns_interface"
+    },
+    "a": {
+      "type": "crazyae:upgrade",
+      "name": "stacks"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "crazyae:block/interfacequantum",
+        "down": "crazyae:block/interfacequantum_alternate",
+        "up": "crazyae:block/interfacequantum",
+        "north": "crazyae:block/interfacequantum_alternate_arrow",
+        "south": "crazyae:block/interfacequantum_alternate_arrow",
+        "east": "crazyae:block/interfacequantum_alternate_arrow",
+        "west": "crazyae:block/interfacequantum_alternate_arrow"
+    }
+}

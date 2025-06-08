@@ -1,6 +1,7 @@
 package dev.beecube31.crazyae2.common.util;
 
 import appeng.api.storage.data.IAEItemStack;
+import appeng.api.util.DimensionalCoord;
 import appeng.helpers.ItemStackHelper;
 import appeng.util.item.AEItemStack;
 import dev.beecube31.crazyae2.common.tile.botania.TileBotaniaMechanicalMachineBase;
@@ -8,9 +9,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.world.World;
+import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.util.Constants;
 
-import java.util.*;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 import static appeng.helpers.ItemStackHelper.stackWriteToNBT;
 
@@ -20,6 +25,40 @@ public class NBTUtils {
         NBTTagCompound compound = i.getTagCompound();
         i.setTagCompound(compound);
         return compound;
+    }
+
+    public static NBTTagCompound writeDimensionalCoord(@Nullable DimensionalCoord coord) {
+        NBTTagCompound nbt = new NBTTagCompound();
+        if (coord != null) {
+            nbt.setInteger("x", coord.x);
+            nbt.setInteger("y", coord.y);
+            nbt.setInteger("z", coord.z);
+            if (coord.getWorld() != null) {
+                nbt.setInteger("dim", coord.getWorld().provider.getDimension());
+            }
+        }
+        return nbt;
+    }
+
+    public static DimensionalCoord readDimensionalCoord(@Nullable NBTTagCompound nbt) {
+        if (nbt == null || !nbt.hasKey("x", net.minecraftforge.common.util.Constants.NBT.TAG_INT)
+                || !nbt.hasKey("y", net.minecraftforge.common.util.Constants.NBT.TAG_INT)
+                || !nbt.hasKey("z", net.minecraftforge.common.util.Constants.NBT.TAG_INT)
+                || !nbt.hasKey("dim", net.minecraftforge.common.util.Constants.NBT.TAG_INT)) {
+            return null;
+        }
+        int dimId = nbt.getInteger("dim");
+        World world = DimensionManager.getWorld(dimId);
+
+        if (world == null) {
+            return null;
+        }
+
+        int x = nbt.getInteger("x");
+        int y = nbt.getInteger("y");
+        int z = nbt.getInteger("z");
+
+        return new DimensionalCoord(world, x, y, z);
     }
 
     public static NBTBase createItemTag(final ItemStack i) {

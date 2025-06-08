@@ -1,23 +1,31 @@
 package dev.beecube31.crazyae2.common.tile.networking;
 
-import appeng.api.AEApi;
-import appeng.api.config.*;
+import appeng.api.config.Upgrades;
 import appeng.api.definitions.IItemDefinition;
 import appeng.api.networking.GridFlags;
+import appeng.api.networking.IGridNode;
 import appeng.api.networking.events.MENetworkCraftingCpuChange;
-import appeng.api.util.*;
+import appeng.api.networking.ticking.IGridTickable;
+import appeng.api.networking.ticking.TickRateModulation;
+import appeng.api.networking.ticking.TickingRequest;
+import appeng.api.util.AECableType;
+import appeng.api.util.AEPartLocation;
+import appeng.api.util.DimensionalCoord;
+import appeng.api.util.IConfigManager;
 import appeng.me.GridAccessException;
 import appeng.me.cluster.IAECluster;
 import appeng.me.cluster.implementations.CraftingCPUCalculator;
 import appeng.me.cluster.implementations.CraftingCPUCluster;
 import appeng.tile.crafting.TileCraftingTile;
-import appeng.tile.inventory.AppEngInternalInventory;
 import appeng.util.IConfigManagerHost;
 import appeng.util.Platform;
 import appeng.util.inv.IAEAppEngInventory;
 import appeng.util.inv.InvOperation;
 import appeng.util.inv.WrapperChainedItemHandler;
+import dev.beecube31.crazyae2.common.containers.base.slot.RestrictedSlot;
 import dev.beecube31.crazyae2.common.interfaces.upgrades.IUpgradesInfoProvider;
+import dev.beecube31.crazyae2.common.util.Utils;
+import dev.beecube31.crazyae2.common.util.inv.CrazyAEInternalInv;
 import dev.beecube31.crazyae2.core.CrazyAE;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.item.ItemStack;
@@ -32,17 +40,17 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.io.IOException;
-import java.util.*;
+import java.util.List;
 
-public class TileCraftingUnitsCombiner extends TileCraftingTile implements IConfigManagerHost, IUpgradesInfoProvider, IAEAppEngInventory {
+public class TileCraftingUnitsCombiner extends TileCraftingTile implements IConfigManagerHost, IUpgradesInfoProvider, IAEAppEngInventory, IGridTickable {
 
     private CraftingCPUCluster cluster;
     private CraftingCPUCalculator calc = new CraftingCPUCalculator(this);
 
-    private final AppEngInternalInventory acceleratorsInv = new
-            AppEngInternalInventory(this, 12, 64);
-    private final AppEngInternalInventory storageInv = new
-            AppEngInternalInventory(this, 12, 64);
+    private final CrazyAEInternalInv acceleratorsInv = new
+            CrazyAEInternalInv(this, 12, 64).setItemFilter(RestrictedSlot.PlaceableItemType.CRAFTING_ACCELERATORS.associatedFilter);
+    private final CrazyAEInternalInv storageInv = new
+            CrazyAEInternalInv(this, 12, 64).setItemFilter(RestrictedSlot.PlaceableItemType.CRAFTING_STORAGES.associatedFilter);
 
     private final IItemHandler combinedInv = new WrapperChainedItemHandler(this.acceleratorsInv, this.storageInv);
 
@@ -53,6 +61,8 @@ public class TileCraftingUnitsCombiner extends TileCraftingTile implements IConf
     private int acceleratorItemsAmt = 0;
 
     private boolean isPowered = false;
+
+    private boolean recalculate = false;
 
 
     public TileCraftingUnitsCombiner() {
@@ -141,10 +151,6 @@ public class TileCraftingUnitsCombiner extends TileCraftingTile implements IConf
     }
 
     public boolean isAccelerator() {
-        return false;
-    }
-
-    public boolean isStorage() {
         return false;
     }
 
@@ -259,14 +265,7 @@ public class TileCraftingUnitsCombiner extends TileCraftingTile implements IConf
     @Override
     public void onChangeInventory(final IItemHandler inv, final int slot, final InvOperation mc, final ItemStack removed, final ItemStack added) {
         if (this.getProxy().isReady() && (!removed.isEmpty() || !added.isEmpty())) {
-            this.removeCluster();
-            this.calculateCrafting();
-            this.updateMultiBlock();
-            try {
-                this.getProxy().getGrid().postEvent(new MENetworkCraftingCpuChange(this.getProxy().getNode()));
-            } catch (GridAccessException e) {
-                // :(
-            }
+            this.recalculate = true;
         }
     }
 
@@ -280,19 +279,7 @@ public class TileCraftingUnitsCombiner extends TileCraftingTile implements IConf
             if (item != null) {
                 this.storageItemsAmt += item.getCount();
                 for (int i = 0; i < item.getCount(); i++) {
-                    this.storageAmt += AEApi.instance().definitions().blocks().craftingStorage1k().isSameAs(item) ? 1024
-                            : AEApi.instance().definitions().blocks().craftingStorage4k().isSameAs(item) ? 1024 * 4
-                            : AEApi.instance().definitions().blocks().craftingStorage16k().isSameAs(item) ? 1024 * 16
-                            : AEApi.instance().definitions().blocks().craftingStorage64k().isSameAs(item) ? 1024 * 64
-                            : CrazyAE.definitions().blocks().craftingStorage256k().isSameAs(item) ? 1024 * 256
-                            : CrazyAE.definitions().blocks().craftingStorage1mb().isSameAs(item) ? 1024 * 1024
-                            : CrazyAE.definitions().blocks().craftingStorage4mb().isSameAs(item) ? 1024 * 4096
-                            : CrazyAE.definitions().blocks().craftingStorage16mb().isSameAs(item) ? 1024 * 16384
-                            : CrazyAE.definitions().blocks().craftingStorage64mb().isSameAs(item) ? 1024 * 65536
-                            : CrazyAE.definitions().blocks().craftingStorage256mb().isSameAs(item) ? 1024 * 262144
-                            : CrazyAE.definitions().blocks().craftingStorage1gb().isSameAs(item) ? 1024 * 1048576
-                            : CrazyAE.definitions().blocks().craftingStorage2gb().isSameAs(item) ? Integer.MAX_VALUE
-                            : 0;
+                    this.storageAmt += Math.min(Utils.getStorageCountOf(item), Long.MAX_VALUE - this.storageAmt);
                 }
             }
         }
@@ -301,16 +288,7 @@ public class TileCraftingUnitsCombiner extends TileCraftingTile implements IConf
             if (item != null) {
                 this.acceleratorItemsAmt += item.getCount();
                 for (int i = 0; i < item.getCount(); i++) {
-                    this.acceleratorAmt += AEApi.instance().definitions().blocks().craftingAccelerator().isSameAs(item) ? 1
-                            : CrazyAE.definitions().blocks().coprocessor4x().isSameAs(item) ? 4
-                            : CrazyAE.definitions().blocks().coprocessor16x().isSameAs(item) ? 16
-                            : CrazyAE.definitions().blocks().coprocessor64x().isSameAs(item) ? 64
-                            : CrazyAE.definitions().blocks().coprocessor256x().isSameAs(item) ? 256
-                            : CrazyAE.definitions().blocks().coprocessor1024x().isSameAs(item) ? 1024
-                            : CrazyAE.definitions().blocks().coprocessor4096x().isSameAs(item) ? 4096
-                            : CrazyAE.definitions().blocks().coprocessor16384x().isSameAs(item) ? 16384
-                            : CrazyAE.definitions().blocks().coprocessor65536x().isSameAs(item) ? 65536
-                            : 0;
+                    this.acceleratorAmt += Math.min(Utils.getAcceleratorsCountOf(item), Integer.MAX_VALUE - this.acceleratorAmt);
                 }
             }
         }
@@ -359,5 +337,29 @@ public class TileCraftingUnitsCombiner extends TileCraftingTile implements IConf
     @Override
     public IItemDefinition getBlock() {
         return CrazyAE.definitions().blocks().craftingUnitsCombiner();
+    }
+
+    @NotNull
+    @Override
+    public TickingRequest getTickingRequest(@NotNull IGridNode iGridNode) {
+        return new TickingRequest(1, 1, false, false);
+    }
+
+    @NotNull
+    @Override
+    public TickRateModulation tickingRequest(@NotNull IGridNode iGridNode, int i) {
+        if (this.recalculate) {
+            this.removeCluster();
+            this.calculateCrafting();
+            this.updateMultiBlock();
+            try {
+                this.getProxy().getGrid().postEvent(new MENetworkCraftingCpuChange(this.getProxy().getNode()));
+            } catch (GridAccessException e) {
+                // :(
+            }
+            this.recalculate = false;
+        }
+
+        return TickRateModulation.SAME;
     }
 }

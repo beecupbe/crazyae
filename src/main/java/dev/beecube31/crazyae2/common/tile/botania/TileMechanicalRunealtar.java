@@ -9,10 +9,11 @@ import appeng.helpers.ItemStackHelper;
 import appeng.me.helpers.MachineSource;
 import appeng.tile.inventory.AppEngInternalInventory;
 import appeng.util.item.AEItemStack;
-import com.aeternal.botaniverse.common.item.materials.ItemMoreRune;
 import com.google.common.base.Preconditions;
+import dev.beecube31.crazyae2.common.containers.base.slot.RestrictedSlot;
 import dev.beecube31.crazyae2.common.enums.BotaniaMechanicalDeviceType;
 import dev.beecube31.crazyae2.common.parts.implementations.CrazyAEBlockUpgradeInv;
+import dev.beecube31.crazyae2.common.util.ModsChecker;
 import dev.beecube31.crazyae2.common.util.NBTUtils;
 import dev.beecube31.crazyae2.common.util.inv.CrazyAEInternalInv;
 import dev.beecube31.crazyae2.common.util.patterns.crafting.RunealtarCraftingPatternDetails;
@@ -48,6 +49,8 @@ public class TileMechanicalRunealtar extends TileBotaniaMechanicalMachineBase {
         final Block block = CrazyAE.definitions().blocks().mechanicalRunealtar().maybeBlock().orElse(null);
         Preconditions.checkNotNull(block);
         this.upgrades = new CrazyAEBlockUpgradeInv(block, this, this.getUpgradeSlots());
+
+        this.internalPatternsStorageInv.setItemFilter(RestrictedSlot.PlaceableItemType.RUNEALTAR_ENCODED_PATTERN.associatedFilter);
     }
 
     @Override
@@ -60,27 +63,7 @@ public class TileMechanicalRunealtar extends TileBotaniaMechanicalMachineBase {
             for (IAEItemStack ais : iCraftingPatternDetails.getCondensedInputs()) {
                 Item item = ais.createItemStack().getItem();
 
-                if (item instanceof ItemRune || item instanceof ItemMoreRune) {
-                    this.outputRunes.add(ais);
-                }
-            }
-            this.pushOutRunes();
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean fastPushPattern(ICraftingPatternDetails iCraftingPatternDetails) {
-        if (iCraftingPatternDetails instanceof RunealtarCraftingPatternDetails pd) {
-            if (this.tasksQueued >= this.tasksMaxAmt) return false;
-
-            this.tasksQueued++;
-            this.queueMap.add(new RuneAltarCraftingTask(iCraftingPatternDetails.getCondensedOutputs(), 0, pd.getRequiredMana()));
-            for (IAEItemStack ais : iCraftingPatternDetails.getCondensedInputs()) {
-                Item item = ais.createItemStack().getItem();
-
-                if (item instanceof ItemRune || item instanceof ItemMoreRune) {
+                if (item instanceof ItemRune || ModsChecker.isItemMoreRune(item)) {
                     this.outputRunes.add(ais);
                 }
             }

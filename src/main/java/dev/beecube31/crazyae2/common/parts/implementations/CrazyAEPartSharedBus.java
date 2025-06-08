@@ -13,6 +13,7 @@ import appeng.me.GridAccessException;
 import appeng.tile.inventory.AppEngInternalAEInventory;
 import appeng.util.InventoryAdaptor;
 import dev.beecube31.crazyae2.core.api.storage.energy.IEnergyStorageChannel;
+import dev.beecube31.crazyae2.core.config.CrazyAEConfig;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
@@ -150,7 +151,7 @@ public abstract class CrazyAEPartSharedBus extends CrazyAEPartUpgradeable implem
         return energy;
     }
 
-    protected int calculateEFEnergyToSend() {
+    protected long calculateEFEnergyToSend() {
         int energy = 32;
 
         switch (this.getInstalledUpgrades(dev.beecube31.crazyae2.common.registration.definitions.Upgrades.UpgradeType.STACKS)) {
@@ -164,7 +165,7 @@ public abstract class CrazyAEPartSharedBus extends CrazyAEPartUpgradeable implem
             energy += 32768;
         }
 
-        return energy;
+        return CrazyAEConfig.disableTierSystemForEnergyBuses ? Long.MAX_VALUE : energy;
     }
 
     protected int calculateManaIterations() {

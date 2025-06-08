@@ -5,6 +5,7 @@ import dev.beecube31.crazyae2.client.gui.components.ComponentHue;
 import dev.beecube31.crazyae2.common.interfaces.gui.IGuiElementsCallbackHandler;
 import dev.beecube31.crazyae2.common.interfaces.gui.IScrollSrc;
 import net.minecraft.client.renderer.GlStateManager;
+import org.jetbrains.annotations.Nullable;
 
 public class Scrollbar implements IScrollSrc {
     private int displayX = 0;
@@ -20,7 +21,7 @@ public class Scrollbar implements IScrollSrc {
     private final ComponentHue hue;
     private final IGuiElementsCallbackHandler gui;
 
-    public Scrollbar(final ComponentHue hue, final IGuiElementsCallbackHandler gui) {
+    public Scrollbar(final ComponentHue hue, @Nullable final IGuiElementsCallbackHandler gui) {
         this.hue = hue;
         this.gui = gui;
     }
@@ -107,7 +108,9 @@ public class Scrollbar implements IScrollSrc {
             return;
         }
 
-        this.gui.onInteractionUpdate();
+        if (this.gui != null) {
+            this.gui.onInteractionUpdate();
+        }
 
         if (x > this.displayX && x <= this.displayX + this.width) {
             if (y > this.displayY && y <= this.displayY + this.height) {
@@ -121,7 +124,9 @@ public class Scrollbar implements IScrollSrc {
 
     @Override
     public void onClickEnd(CrazyAEBaseGui aeBaseGui, int x, int y) {
-        this.gui.onInteractionEnd();
+        if (this.gui != null) {
+            this.gui.onInteractionEnd();
+        }
     }
 
     @Override

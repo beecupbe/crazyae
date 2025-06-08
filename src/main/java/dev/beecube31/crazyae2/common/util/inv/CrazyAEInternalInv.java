@@ -24,4 +24,13 @@ public class CrazyAEInternalInv extends AppEngInternalInventory {
     public List<ItemStack> getStacks() {
         return Collections.unmodifiableList(this.stacks);
     }
+
+    public CrazyAEInternalInv setItemFilter(IAEItemFilter filter) {
+        this.filter = filter;
+        return this;
+    }
+
+    public boolean isEmpty() {
+        return this.stacks.isEmpty();
+    }
 }

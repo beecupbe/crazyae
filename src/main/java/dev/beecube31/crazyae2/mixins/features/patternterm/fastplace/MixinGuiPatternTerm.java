@@ -8,14 +8,14 @@ import appeng.container.implementations.ContainerPatternEncoder;
 import appeng.container.interfaces.IJEIGhostIngredients;
 import dev.beecube31.crazyae2.common.networking.network.NetworkHandler;
 import dev.beecube31.crazyae2.common.networking.packets.PacketToggleGuiObject;
-import dev.beecube31.crazyae2.common.sync.CrazyAEGuiText;
+import dev.beecube31.crazyae2.common.i18n.CrazyAEGuiText;
 import dev.beecube31.crazyae2.core.CrazyAE;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.lwjgl.input.Keyboard;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -31,7 +31,10 @@ import java.io.IOException;
 public abstract class MixinGuiPatternTerm extends GuiMEMonitorable implements IJEIGhostIngredients {
 
     @Shadow @Final private ContainerPatternEncoder container;
-    @Unique private GuiTabButton fastPlaceBtn;
+
+    @Unique private GuiTabButton crazyae$fastPlaceBtn;
+
+    @Unique private GuiTabButton crazyae$fastPlaceQCpuBtn;
 
     public MixinGuiPatternTerm(InventoryPlayer inventoryPlayer, ITerminalHost te) {
         super(inventoryPlayer, te);
@@ -41,12 +44,13 @@ public abstract class MixinGuiPatternTerm extends GuiMEMonitorable implements IJ
             method = "actionPerformed",
             at = @At("RETURN")
     )
-    private void patchActionPerformed(final GuiButton btn, CallbackInfo ci) {
+    private void crazyae$patchActionPerformed(final GuiButton btn, CallbackInfo ci) {
         try {
-            if (this.fastPlaceBtn == btn && this.container.isCraftingMode()) {
+            if (this.crazyae$fastPlaceBtn == btn && this.container.isCraftingMode()) {
+                TileEntity te = this.container.getPart().getHost().getTile();
                 NetworkHandler.instance().sendToServer(new PacketToggleGuiObject(
                         "CRAZYAE.GUI.patternTerm.fastPlace",
-                        String.valueOf(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)))
+                        te.getPos().getX() + ";" + te.getPos().getY() + ";" + te.getPos().getZ())
                 );
             }
         } catch (IOException e) {
@@ -58,10 +62,10 @@ public abstract class MixinGuiPatternTerm extends GuiMEMonitorable implements IJ
             method = "initGui",
             at = @At("TAIL")
     )
-    private void addOwnButton(CallbackInfo ci) {
-        this.fastPlaceBtn = new GuiTabButton(
+    private void crazyae$addOwnButton(CallbackInfo ci) {
+        this.crazyae$fastPlaceBtn = new GuiTabButton(
                 this.guiLeft + 173,
-                this.guiTop + this.ySize - 155,
+                this.guiTop + this.ySize - 154,
                 CrazyAE.definitions().blocks().improvedMolecularAssembler().maybeStack(1).orElse(ItemStack.EMPTY),
                 String.format(
                         CrazyAEGuiText.BUTTON_PATTERN_FAST_PLACE.getLocal(),
@@ -70,11 +74,22 @@ public abstract class MixinGuiPatternTerm extends GuiMEMonitorable implements IJ
                 this.itemRender
         );
 
-        this.buttonList.add(this.fastPlaceBtn);
+        this.crazyae$fastPlaceQCpuBtn = new GuiTabButton(
+                this.guiLeft + 173,
+                this.guiTop + this.ySize - 131,
+                CrazyAE.definitions().blocks().quantumCPU().maybeStack(1).orElse(ItemStack.EMPTY),
+                String.format(
+                        CrazyAEGuiText.BUTTON_PATTERN_FAST_PLACE.getLocal(),
+                        CrazyAEGuiText.IMPROVED_MAC_GUI.getLocal()
+                ),
+                this.itemRender
+        );
+
+        this.buttonList.add(this.crazyae$fastPlaceBtn);
     }
 
     @Inject(method = "drawFG", at = @At("HEAD"), remap = false)
-    private void drawOwnButton(final int offsetX, final int offsetY, final int mouseX, final int mouseY, final CallbackInfo ci) {
-        this.fastPlaceBtn.visible = this.container.isCraftingMode();
+    private void crazyae$drawOwnButton(final int offsetX, final int offsetY, final int mouseX, final int mouseY, final CallbackInfo ci) {
+        this.crazyae$fastPlaceBtn.visible = this.container.isCraftingMode();
     }
 }

@@ -22,13 +22,24 @@ public enum Sprite implements ISpriteProvider {
     WARN_GRAY("sprites/icons/warning_gray.png", 9, 9, 0, 0),
     INFO("sprites/icons/info.png", 9, 9, 0, 0),
 
+    BAR("widgets/bar.png", 102, 5, 0, 0),
+    BAR_FILL("widgets/bar.png", 100, 3, 0, 5),
+
+    SUN("sprites/icons/sun.png", 16, 16, 0,0),
+    MOON("sprites/icons/moon.png", 16, 16, 0,0),
+    CAPACITY("sprites/icons/capacity.png", 32, 32, 0,0),
+
+    NO("sprites/icons/x.png", 13, 13, 0,0),
+    YES("sprites/icons/y.png", 15, 15, 0,0),
+
 
 
     STORAGE_256K_CELL("sprites/icons/storage_cell_256k.png", 16, 16, 0, 0),
     DUST("sprites/icons/dust.png", 16, 16, 0, 0),
     WATER_BUCKET("sprites/icons/water_bucket.png", 16, 16, 0, 0),
     CERTUS_WRENCH("sprites/icons/certus_quartz_wrench.png", 16, 16, 0, 0),
-    ENERGY("sprites/icons/energy.png", 14, 20, 0, 0),
+    ENERGY("sprites/icons/energy.png", 20, 20, 0, 0),
+    IRON_INGOT("sprites/icons/iron_ingot.png", 16, 16, 0, 0),
     MANA_TABLET("sprites/icons/mana_tablet.png", 16, 16, 0, 0);
 
 

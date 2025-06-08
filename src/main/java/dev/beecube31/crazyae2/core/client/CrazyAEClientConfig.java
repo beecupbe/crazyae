@@ -7,9 +7,11 @@ import net.minecraftforge.common.config.Property;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 @SuppressWarnings("unused")
-@Mod.EventBusSubscriber(modid = Tags.MODID)
+@Mod.EventBusSubscriber(modid = Tags.MODID, value = Side.CLIENT)
 @Config(modid = Tags.MODID, name = "crazyae-client", category = "client")
 public final class CrazyAEClientConfig extends Configuration {
 
@@ -21,9 +23,10 @@ public final class CrazyAEClientConfig extends Configuration {
     private static int colorizerTextColorRed = 0;
     private static int colorizerTextColorGreen = 0;
     private static int colorizerTextColorBlue = 0;
+    private static int tooltipIconsIndentationSize = 4;
 
     private static boolean isColorizingEnabled = true;
-    //private static boolean isAdvancedTooltipsEnabled = true;
+    private static boolean isAdvancedTooltipsEnabled = true;
 
 
     public static void init(Configuration configuration) {
@@ -45,7 +48,9 @@ public final class CrazyAEClientConfig extends Configuration {
         colorizerTextColorGreen = getIntKey(CATEGORY_CLIENT, "colorizerTextColorGreen", colorizerTextColorGreen, 0, 255, "Text green color for the Gui colorizer.").getInt();
         colorizerTextColorBlue = getIntKey(CATEGORY_CLIENT, "colorizerTextColorBlue", colorizerTextColorBlue, 0, 255, "Text blue color for the Gui colorizer.").getInt();
         isColorizingEnabled = getBooleanKey(CATEGORY_CLIENT, "isColorizingEnabled", isColorizingEnabled, "Enable GUI & Text colorizing?").getBoolean();
-        //isAdvancedTooltipsEnabled = getBooleanKey(CATEGORY_CLIENT, "isAdvancedTooltipsEnabled", isAdvancedTooltipsEnabled, "Enable advanced tooltips with icons for AE2 and CrazyAE?").getBoolean();
+
+        tooltipIconsIndentationSize = getIntKey(CATEGORY_CLIENT, "tooltipIconsIndentationSize", tooltipIconsIndentationSize, 0, 16, "Indentation length for advanced tooltips").getInt();
+        isAdvancedTooltipsEnabled = getBooleanKey(CATEGORY_CLIENT, "isAdvancedTooltipsEnabled", isAdvancedTooltipsEnabled, "Enable advanced tooltips with icons for AE2 and CrazyAE?").getBoolean();
 
         config.save();
     }
@@ -84,9 +89,9 @@ public final class CrazyAEClientConfig extends Configuration {
         return isColorizingEnabled;
     }
 
-//    public static boolean isAdvancedTooltipsEnabled() {
-//        return isAdvancedTooltipsEnabled;
-//    }
+    public static boolean isAdvancedTooltipsEnabled() {
+        return isAdvancedTooltipsEnabled;
+    }
 
     public static int getColorizerColorRed() {
         return colorizerColorRed;
@@ -112,18 +117,14 @@ public final class CrazyAEClientConfig extends Configuration {
         return colorizerTextColorBlue;
     }
 
+    public static int getTooltipsIndentationSize() {
+        return tooltipIconsIndentationSize;
+    }
+
     @SubscribeEvent
     public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event) {
         if (event.getModID().equals(Tags.MODID)) {
             updateConfig();
         }
-    }
-
-    public static final CrazyAEFixesConfig aeFixes = new CrazyAEFixesConfig();
-
-    public static class CrazyAEFixesConfig {
-        @Config.Comment("Enable Molecular Assembler Crafting Animation? (disabling this may increase your FPS!)")
-        @Config.RequiresMcRestart
-        public boolean disableMolecularAssemblerCraftingAnimation = false;
     }
 }

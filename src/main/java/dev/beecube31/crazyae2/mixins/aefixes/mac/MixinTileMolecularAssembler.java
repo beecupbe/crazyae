@@ -9,7 +9,7 @@ import appeng.api.networking.ticking.TickRateModulation;
 import appeng.tile.crafting.TileMolecularAssembler;
 import appeng.tile.grid.AENetworkInvTile;
 import appeng.util.IConfigManagerHost;
-import dev.beecube31.crazyae2.core.client.CrazyAEClientConfig;
+import dev.beecube31.crazyae2.core.config.CrazyAEConfig;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -30,7 +30,7 @@ public abstract class MixinTileMolecularAssembler extends AENetworkInvTile imple
             cancellable = true
     )
     private void crazyae$tickingRequest(IGridNode node, int ticksSinceLastCall, CallbackInfoReturnable<TickRateModulation> cir) {
-        if (CrazyAEClientConfig.aeFixes.disableMolecularAssemblerCraftingAnimation) {
+        if (CrazyAEConfig.aeFixes.disableMolecularAssemblerCraftingAnimation) {
             this.saveChanges();
             this.updateSleepiness();
             cir.setReturnValue(this.isAwake ? TickRateModulation.IDLE : TickRateModulation.SLEEP);

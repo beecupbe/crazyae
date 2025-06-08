@@ -1,0 +1,50 @@
+{
+  "conditions": [
+    {
+      "type": "forge:and",
+      "values": [
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:crafting_accelerator_262144x"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:crafting_accelerator_65536x"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "crazyae:crafting_accelerator_1048576x"
+        },
+        {
+          "type": "minecraft:item_exists",
+          "item": "appliedenergistics2:crafting_accelerator"
+        }
+      ]
+    }
+  ],
+  "result": {
+    "item": "crazyae:crafting_accelerator_1048576x"
+  },
+  "type": "forge:ore_shaped",
+  "pattern": [
+    "cec",
+    "bdb",
+    "cec"
+  ],
+  "key": {
+    "b": {
+      "item": "crazyae:crafting_accelerator_262144x"
+    },
+    "e": {
+      "item": "crazyae:crafting_accelerator_65536x"
+    },
+    "c": {
+      "type": "appliedenergistics2:part",
+      "part": "material.singularity"
+    },
+    "d": {
+      "item": "crazyae:material",
+      "data": 16
+    }
+  }
+}

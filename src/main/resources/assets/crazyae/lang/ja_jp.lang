@@ -184,7 +184,7 @@ tooltip.crazyae.shift_for_details.name=シフトキー長押しで詳細を確�
 
 tooltip.crazyae.passive_generation_day.name=昼の発電量:
 tooltip.crazyae.passive_generation_night.name=夜の発電量:
-tooltip.crazyae.max_solar_capacity.name=容量
+tooltip.crazyae.max_solar_capacity.name=容量:
 
 tooltip.crazyae.qcm_desc.name=ケーブルの容量を増やすことができます。例:\n各量子マルチプライヤーは通常ケーブルに対して%s個のチャンネルを、\n高密度ケーブルには%s個のチャンネルを%s AE/tのコストで追加する。
 

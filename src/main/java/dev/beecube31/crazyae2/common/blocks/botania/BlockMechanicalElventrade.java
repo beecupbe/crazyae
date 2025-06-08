@@ -42,6 +42,6 @@ public class BlockMechanicalElventrade extends CrazyAEModelBlock {
 
     @Override
     public MachineAttributes getAttributes() {
-        return new MachineAttributes().setRequiredManaPerJob(500.0D).setRequiredAEPerTick(64.0D);
+        return new MachineAttributes().setRequiredManaPerJob(500.0D).setRequiredAEPerTick(64.0D).setRequireChannel(true);
     }
 }

@@ -8,6 +8,7 @@ import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.util.NonNullList;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
+import org.jetbrains.annotations.NotNull;
 
 public class CrazyAECraftingSlot extends CrazyAESlot {
 
@@ -24,7 +25,7 @@ public class CrazyAECraftingSlot extends CrazyAESlot {
     }
 
     @Override
-    public boolean isItemValid(final ItemStack par1ItemStack) {
+    public boolean isItemValid(final @NotNull ItemStack par1ItemStack) {
         return false;
     }
 
@@ -80,7 +81,7 @@ public class CrazyAECraftingSlot extends CrazyAESlot {
     }
 
     @Override
-    public ItemStack decrStackSize(final int par1) {
+    public @NotNull ItemStack decrStackSize(final int par1) {
         if (this.getHasStack()) {
             this.amountCrafted += Math.min(par1, this.getStack().getCount());
         }

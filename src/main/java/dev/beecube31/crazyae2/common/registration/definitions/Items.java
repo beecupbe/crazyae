@@ -15,12 +15,14 @@ import dev.beecube31.crazyae2.common.items.QuantumWirelessBooster;
 import dev.beecube31.crazyae2.common.items.cells.energy.MultiEnergyItemCell;
 import dev.beecube31.crazyae2.common.items.cells.energy.MultiEnergyItemCreativeCell;
 import dev.beecube31.crazyae2.common.items.cells.storage.*;
+import dev.beecube31.crazyae2.common.items.internal.ExperienceAsAEStack;
 import dev.beecube31.crazyae2.common.items.internal.InternalStubItem;
 import dev.beecube31.crazyae2.common.items.internal.ManaAsAEStack;
 import dev.beecube31.crazyae2.common.items.internal.energy.*;
 import dev.beecube31.crazyae2.common.items.patterns.*;
 import dev.beecube31.crazyae2.common.registration.registry.Registry;
 import dev.beecube31.crazyae2.common.registration.registry.interfaces.Definitions;
+import dev.beecube31.crazyae2.core.CrazyAE;
 import dev.beecube31.crazyae2.core.CrazyAESidedHandler;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.item.ItemStack;
@@ -69,6 +71,20 @@ public class Items implements Definitions<IItemDefinition> {
 	private final IItemDefinition energyCell1gb;
 	private final IItemDefinition energyCell2gb;
 
+//	private final IItemDefinition experienceCell1k;
+//	private final IItemDefinition experienceCell4k;
+//	private final IItemDefinition experienceCell16k;
+//	private final IItemDefinition experienceCell64k;
+//	private final IItemDefinition experienceCell256k;
+//	private final IItemDefinition experienceCell1mb;
+//	private final IItemDefinition experienceCell4mb;
+//	private final IItemDefinition experienceCell16mb;
+//	private final IItemDefinition experienceCell64mb;
+//	private final IItemDefinition experienceCell256mb;
+//	private final IItemDefinition experienceCell1gb;
+//	private final IItemDefinition experienceCell2gb;
+
+
 	private final IItemDefinition creativeManaCell;
 	private final IItemDefinition creativeEnergyCell;
 
@@ -90,6 +106,7 @@ public class Items implements Definitions<IItemDefinition> {
 //	private final IItemDefinition patternsUSBStick;
 
 	private final IItemDefinition manaAsAEStack;
+	private final IItemDefinition expAsAEStack;
 	private final IItemDefinition EFEnergyAsAeStack;
 	private final IItemDefinition FEEnergyAsAeStack;
 	private final IItemDefinition EUEnergyAsAeStack;
@@ -268,6 +285,54 @@ public class Items implements Definitions<IItemDefinition> {
 				.ifModPresent("botania")
 				.features(Features.MEGA_MANA_DENSE_CELLS)
 				.build());
+
+//		this.experienceCell1k = this.registerById(registry.item("exp_cell_1k", () -> new ExperienceItemCell(Materials.MaterialType.EXP_PART_1K, 1024, 1D))
+//				.features(Features.EXPERIENCE_CELLS)
+//				.build());
+//
+//		this.experienceCell4k = this.registerById(registry.item("exp_cell_4k", () -> new ExperienceItemCell(Materials.MaterialType.EXP_PART_4K, 4 * 1024, 2D))
+//				.features(Features.EXPERIENCE_CELLS)
+//				.build());
+//
+//		this.experienceCell16k = this.registerById(registry.item("exp_cell_16k", () -> new ExperienceItemCell(Materials.MaterialType.EXP_PART_16K, 16 * 1024, 3D))
+//				.features(Features.EXPERIENCE_CELLS)
+//				.build());
+//
+//		this.experienceCell64k = this.registerById(registry.item("exp_cell_64k", () -> new ExperienceItemCell(Materials.MaterialType.EXP_PART_64K, 64 * 1024, 4D))
+//				.features(Features.EXPERIENCE_CELLS)
+//				.build());
+//
+//		this.experienceCell256k = this.registerById(registry.item("exp_cell_256k", () -> new ExperienceItemCell(Materials.MaterialType.EXP_PART_256K, 256 * 1024, 4D))
+//				.features(Features.EXPERIENCE_DENSE_CELLS)
+//				.build());
+//
+//		this.experienceCell1mb = this.registerById(registry.item("exp_cell_1mb", () -> new ExperienceItemCell(Materials.MaterialType.EXP_PART_1MB, 1024 * 1024, 6D))
+//				.features(Features.EXPERIENCE_DENSE_CELLS)
+//				.build());
+//
+//		this.experienceCell4mb = this.registerById(registry.item("exp_cell_4mb", () -> new ExperienceItemCell(Materials.MaterialType.EXP_PART_4MB, 4096 * 1024, 8D))
+//				.features(Features.EXPERIENCE_DENSE_CELLS)
+//				.build());
+//
+//		this.experienceCell16mb = this.registerById(registry.item("exp_cell_16mb", () -> new ExperienceItemCell(Materials.MaterialType.EXP_PART_16MB, 16384 * 1024, 12D))
+//				.features(Features.EXPERIENCE_DENSE_CELLS)
+//				.build());
+//
+//		this.experienceCell64mb = this.registerById(registry.item("exp_cell_64mb", () -> new ExperienceItemCell(Materials.MaterialType.EXP_PART_64MB, 65536 * 1024, 24D))
+//				.features(Features.MEGA_EXPERIENCE_DENSE_CELLS)
+//				.build());
+//
+//		this.experienceCell256mb = this.registerById(registry.item("exp_cell_256mb", () -> new ExperienceItemCell(Materials.MaterialType.EXP_PART_256MB, 262144 * 1024, 40D))
+//				.features(Features.MEGA_EXPERIENCE_DENSE_CELLS)
+//				.build());
+//
+//		this.experienceCell1gb = this.registerById(registry.item("exp_cell_1gb", () -> new ExperienceItemCell(Materials.MaterialType.EXP_PART_1GB, 1048576 * 1024, 52D))
+//				.features(Features.MEGA_EXPERIENCE_DENSE_CELLS)
+//				.build());
+//
+//		this.experienceCell2gb = this.registerById(registry.item("exp_cell_2gb", () -> new ExperienceItemCell(Materials.MaterialType.EXP_PART_2GB, Integer.MAX_VALUE, 64D))
+//				.features(Features.MEGA_EXPERIENCE_DENSE_CELLS)
+//				.build());
 		
 
 		this.energyCell1k = this.registerById(registry.item("energy_cell_1k", () -> new MultiEnergyItemCell(Materials.MaterialType.ENERGY_PART_1K, 1024, 1D))
@@ -381,6 +446,10 @@ public class Items implements Definitions<IItemDefinition> {
 		this.manaAsAEStack = this.registerById(registry.item("mana_as_aestack", ManaAsAEStack::new)
 				.ifModPresent("botania")
 				.features(Features.MANA_BUSES, Features.MANA_TERM, Features.MANA_CELLS, Features.MANA_DENSE_CELLS, Features.MEGA_MANA_DENSE_CELLS)
+				.hide()
+				.build());
+
+		this.expAsAEStack = this.registerById(registry.item("exp_as_aestack", ExperienceAsAEStack::new)
 				.hide()
 				.build());
 
@@ -574,7 +643,7 @@ public class Items implements Definitions<IItemDefinition> {
 		return this.energyCell64mb;
 	}
 
-	public IItemDefinition efCell256MB() {
+	public IItemDefinition energyCell256MB() {
 		return this.energyCell256mb;
 	}
 
@@ -585,6 +654,54 @@ public class Items implements Definitions<IItemDefinition> {
 	public IItemDefinition energyCell2GB() {
 		return this.energyCell2gb;
 	}
+
+//	public IItemDefinition expCell1k() {
+//		return this.experienceCell1k;
+//	}
+//
+//	public IItemDefinition expCell4k() {
+//		return this.experienceCell4k;
+//	}
+//
+//	public IItemDefinition expCell16k() {
+//		return this.experienceCell16k;
+//	}
+//
+//	public IItemDefinition expCell64k() {
+//		return this.experienceCell64k;
+//	}
+//
+//	public IItemDefinition expCell256k() {
+//		return this.experienceCell256k;
+//	}
+//
+//	public IItemDefinition expCell1MB() {
+//		return this.experienceCell1mb;
+//	}
+//
+//	public IItemDefinition expCell4MB() {
+//		return this.experienceCell4mb;
+//	}
+//
+//	public IItemDefinition expCell16MB() {
+//		return this.experienceCell16mb;
+//	}
+//
+//	public IItemDefinition expCell64MB() {
+//		return this.experienceCell64mb;
+//	}
+//
+//	public IItemDefinition expCell256MB() {
+//		return this.experienceCell256mb;
+//	}
+//
+//	public IItemDefinition expCell1GB() {
+//		return this.experienceCell1gb;
+//	}
+//
+//	public IItemDefinition expCell2GB() {
+//		return this.experienceCell2gb;
+//	}
 
 	public IItemDefinition creativeManaCell() {
 		return this.creativeManaCell;
@@ -678,6 +795,10 @@ public class Items implements Definitions<IItemDefinition> {
 		return this.manaAsAEStack;
 	}
 
+	public IItemDefinition experienceAsAEStack() {
+		return this.expAsAEStack;
+	}
+
 	public IItemDefinition EFEnergyAsAeStack() {
 		return this.EFEnergyAsAeStack;
 	}
@@ -696,6 +817,17 @@ public class Items implements Definitions<IItemDefinition> {
 
 	public List<IItemDefinition> energyIUItemsList() {
 		return Arrays.asList(this.EFEnergyAsAeStack, this.SEEnergyAsAeStack, this.QEEnergyAsAeStack);
+	}
+
+
+	public List<IItemDefinition> getCreativeTabIcons() {
+		return Arrays.asList(
+				this.storageCell256k, this.storageCell1mb, this.storageCell4mb, this.storageCell16mb,
+				this.storageCell64mb, this.storageCell256mb, this.storageCell1gb, this.storageCell2gb,
+				this.fluidCell256k, this.fluidCell1mb, this.fluidCell4mb, this.fluidCell16mb,
+				this.fluidCell64mb, this.fluidCell256mb, this.fluidCell1gb, this.fluidCell2gb,
+				CrazyAE.definitions().blocks().improvedMolecularAssembler(), CrazyAE.definitions().blocks().perfectInterface()
+		);
 	}
 
 	public IItemDefinition QEEnergyAsAeStack() {

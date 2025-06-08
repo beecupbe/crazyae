@@ -4,7 +4,7 @@ import dev.beecube31.crazyae2.client.gui.CrazyAEBaseGui;
 import dev.beecube31.crazyae2.client.gui.sprites.Sprite;
 import dev.beecube31.crazyae2.client.gui.widgets.TooltipArea;
 import dev.beecube31.crazyae2.common.containers.ContainerCraftingUnitsCombiner;
-import dev.beecube31.crazyae2.common.sync.CrazyAEGuiTooltip;
+import dev.beecube31.crazyae2.common.i18n.CrazyAEGuiTooltip;
 import dev.beecube31.crazyae2.common.tile.networking.TileCraftingUnitsCombiner;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.InventoryPlayer;

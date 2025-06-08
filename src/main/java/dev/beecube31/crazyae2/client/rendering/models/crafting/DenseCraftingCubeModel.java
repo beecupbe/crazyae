@@ -3,7 +3,7 @@ package dev.beecube31.crazyae2.client.rendering.models.crafting;//
 import appeng.core.AppEng;
 import com.google.common.collect.ImmutableList;
 import dev.beecube31.crazyae2.Tags;
-import dev.beecube31.crazyae2.common.blocks.BlockDenseCraftingUnit;
+import dev.beecube31.crazyae2.common.blocks.crafting.BlockDenseCraftingUnit;
 import net.minecraft.client.renderer.block.model.IBakedModel;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.renderer.vertex.VertexFormat;
@@ -20,8 +20,7 @@ import java.util.Collections;
 import java.util.function.Function;
 
 @SideOnly(Side.CLIENT)
-public
-class DenseCraftingCubeModel implements IModel {
+public class DenseCraftingCubeModel implements IModel {
 	private static final ResourceLocation RING_CORNER = texture("ring_corner");
 	private static final ResourceLocation RING_SIDE_HOR = texture("ring_side_hor");
 	private static final ResourceLocation RING_SIDE_VER = texture("ring_side_ver");
@@ -39,6 +38,10 @@ class DenseCraftingCubeModel implements IModel {
 	private static final ResourceLocation COPROCESSOR_4096X_LIGHT = crazyAETexture("accelerator_4096x_light");
 	private static final ResourceLocation COPROCESSOR_16384X_LIGHT = crazyAETexture("accelerator_16384x_light");
 	private static final ResourceLocation COPROCESSOR_65536X_LIGHT = crazyAETexture("accelerator_65536x_light");
+	private static final ResourceLocation COPROCESSOR_262144X_LIGHT = crazyAETexture("accelerator_262144x_light");
+	private static final ResourceLocation COPROCESSOR_1048576X_LIGHT = crazyAETexture("accelerator_1048576x_light");
+	private static final ResourceLocation COPROCESSOR_4194304X_LIGHT = crazyAETexture("accelerator_4194304x_light");
+	private static final ResourceLocation COPROCESSOR_CREATIVE_LIGHT = crazyAETexture("accelerator_creative_light");
 	private static final ResourceLocation STORAGE_256K_LIGHT = crazyAETexture("crafting_storage_256k_light");
 	private static final ResourceLocation STORAGE_1MB_LIGHT = crazyAETexture("crafting_storage_1mb_light");
 	private static final ResourceLocation STORAGE_4MB_LIGHT = crazyAETexture("crafting_storage_4mb_light");
@@ -47,6 +50,10 @@ class DenseCraftingCubeModel implements IModel {
 	private static final ResourceLocation STORAGE_256MB_LIGHT = crazyAETexture("crafting_storage_256mb_light");
 	private static final ResourceLocation STORAGE_1024MB_LIGHT = crazyAETexture("crafting_storage_1gb_light");
 	private static final ResourceLocation STORAGE_2048MB_LIGHT = crazyAETexture("crafting_storage_2gb_light");
+	private static final ResourceLocation STORAGE_8192MB_LIGHT = crazyAETexture("crafting_storage_8gb_light");
+	private static final ResourceLocation STORAGE_32768MB_LIGHT = crazyAETexture("crafting_storage_32gb_light");
+	private static final ResourceLocation STORAGE_131072MB_LIGHT = crazyAETexture("crafting_storage_128gb_light");
+	private static final ResourceLocation STORAGE_CREATIVE_LIGHT = crazyAETexture("crafting_storage_creative_light");
 	private final BlockDenseCraftingUnit.DenseCraftingUnitType type;
 
 	public DenseCraftingCubeModel(BlockDenseCraftingUnit.DenseCraftingUnitType type) {
@@ -63,7 +70,11 @@ class DenseCraftingCubeModel implements IModel {
 			case STORAGE_262144K -> textureGetter.apply(STORAGE_256MB_LIGHT);
 			case STORAGE_1GB -> textureGetter.apply(STORAGE_1024MB_LIGHT);
 			case STORAGE_2GB -> textureGetter.apply(STORAGE_2048MB_LIGHT);
-			case COPROCESSOR_4X -> textureGetter.apply(COPROCESSOR_4X_LIGHT);
+            case STORAGE_8GB -> textureGetter.apply(STORAGE_8192MB_LIGHT);
+            case STORAGE_32GB -> textureGetter.apply(STORAGE_32768MB_LIGHT);
+            case STORAGE_128GB -> textureGetter.apply(STORAGE_131072MB_LIGHT);
+            case STORAGE_CREATIVE -> textureGetter.apply(STORAGE_CREATIVE_LIGHT);
+            case COPROCESSOR_4X -> textureGetter.apply(COPROCESSOR_4X_LIGHT);
 			case COPROCESSOR_16X -> textureGetter.apply(COPROCESSOR_16X_LIGHT);
 			case COPROCESSOR_64X -> textureGetter.apply(COPROCESSOR_64X_LIGHT);
 			case COPROCESSOR_256X -> textureGetter.apply(COPROCESSOR_256X_LIGHT);
@@ -71,7 +82,11 @@ class DenseCraftingCubeModel implements IModel {
 			case COPROCESSOR_4096X -> textureGetter.apply(COPROCESSOR_4096X_LIGHT);
 			case COPROCESSOR_16384X -> textureGetter.apply(COPROCESSOR_16384X_LIGHT);
 			case COPROCESSOR_65536X -> textureGetter.apply(COPROCESSOR_65536X_LIGHT);
-		};
+            case COPROCESSOR_262144X -> textureGetter.apply(COPROCESSOR_262144X_LIGHT);
+            case COPROCESSOR_1048576X -> textureGetter.apply(COPROCESSOR_1048576X_LIGHT);
+            case COPROCESSOR_4194304X -> textureGetter.apply(COPROCESSOR_4194304X_LIGHT);
+            case COPROCESSOR_CREATIVE -> textureGetter.apply(COPROCESSOR_CREATIVE_LIGHT);
+        };
 	}
 
 	private static ResourceLocation texture(String name) {
@@ -87,33 +102,42 @@ class DenseCraftingCubeModel implements IModel {
 	}
 
 	public @NotNull Collection<ResourceLocation> getTextures() {
-		return ImmutableList.of(RING_CORNER,
-			RING_SIDE_HOR,
-			RING_SIDE_VER,
-			UNIT_BASE,
-			LIGHT_BASE,
+		return ImmutableList.of(
+				RING_CORNER,
+				RING_SIDE_HOR,
+				RING_SIDE_VER,
+				UNIT_BASE,
+				LIGHT_BASE,
 
-			COPROCESSOR_4X_LIGHT,
-			COPROCESSOR_16X_LIGHT,
-			COPROCESSOR_64X_LIGHT,
-			COPROCESSOR_256X_LIGHT,
-			COPROCESSOR_1024X_LIGHT,
-			COPROCESSOR_4096X_LIGHT,
-			COPROCESSOR_16384X_LIGHT,
-			COPROCESSOR_65536X_LIGHT,
+				COPROCESSOR_4X_LIGHT,
+				COPROCESSOR_16X_LIGHT,
+				COPROCESSOR_64X_LIGHT,
+				COPROCESSOR_256X_LIGHT,
+				COPROCESSOR_1024X_LIGHT,
+				COPROCESSOR_4096X_LIGHT,
+				COPROCESSOR_16384X_LIGHT,
+				COPROCESSOR_65536X_LIGHT,
+				COPROCESSOR_262144X_LIGHT,
+				COPROCESSOR_1048576X_LIGHT,
+				COPROCESSOR_4194304X_LIGHT,
+				COPROCESSOR_CREATIVE_LIGHT,
 
-			STORAGE_256K_LIGHT,
-			STORAGE_1MB_LIGHT,
-			STORAGE_4MB_LIGHT,
-			STORAGE_16MB_LIGHT,
-			STORAGE_64MB_LIGHT,
-			STORAGE_256MB_LIGHT,
-			STORAGE_1024MB_LIGHT,
-			STORAGE_2048MB_LIGHT,
+				STORAGE_256K_LIGHT,
+				STORAGE_1MB_LIGHT,
+				STORAGE_4MB_LIGHT,
+				STORAGE_16MB_LIGHT,
+				STORAGE_64MB_LIGHT,
+				STORAGE_256MB_LIGHT,
+				STORAGE_1024MB_LIGHT,
+				STORAGE_2048MB_LIGHT,
+				STORAGE_8192MB_LIGHT,
+				STORAGE_32768MB_LIGHT,
+				STORAGE_131072MB_LIGHT,
+				STORAGE_CREATIVE_LIGHT,
 
-			MONITOR_BASE,
-			MONITOR_LIGHT_DARK,
-			MONITOR_LIGHT_MEDIUM, MONITOR_LIGHT_BRIGHT
+				MONITOR_BASE,
+				MONITOR_LIGHT_DARK,
+				MONITOR_LIGHT_MEDIUM, MONITOR_LIGHT_BRIGHT
 		);
 	}
 

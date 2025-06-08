@@ -7,8 +7,8 @@ import appeng.api.util.IConfigManager;
 import appeng.container.slot.IOptionalSlotHost;
 import appeng.helpers.DualityInterface;
 import appeng.helpers.IInterfaceHost;
+import dev.beecube31.crazyae2.client.gui.CrazyAESlot;
 import dev.beecube31.crazyae2.common.containers.base.slot.SlotFake;
-import dev.beecube31.crazyae2.common.containers.base.slot.SlotOversized;
 import dev.beecube31.crazyae2.common.containers.guisync.GuiSync;
 import dev.beecube31.crazyae2.common.interfaces.upgrades.IUpgradesInfoProvider;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -41,7 +41,7 @@ public class ContainerPerfectInterface extends ContainerCrazyAEUpgradeable imple
 
         for (int row = 0; row < 4; row++) {
             for (int col = 0; col < 9; col++) {
-                this.addSlotToContainer(new SlotOversized(
+                this.addSlotToContainer(new CrazyAESlot(
                         this.myDuality.getStorage(),
                         col + row * 9,
                         8 + 18 * col,

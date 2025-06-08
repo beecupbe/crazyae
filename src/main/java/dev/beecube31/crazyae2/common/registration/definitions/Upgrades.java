@@ -5,6 +5,7 @@ import appeng.bootstrap.components.IPostInitComponent;
 import appeng.core.features.DamagedItemDefinition;
 import appeng.core.features.IStackSrc;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableMap;
 import dev.beecube31.crazyae2.Tags;
 import dev.beecube31.crazyae2.common.features.IFeature;
 import dev.beecube31.crazyae2.common.features.subfeatures.UpgradeFeatures;
@@ -14,6 +15,7 @@ import dev.beecube31.crazyae2.common.registration.registry.interfaces.DamagedDef
 import dev.beecube31.crazyae2.common.registration.registry.rendering.CrazyAEDamagedItemRendering;
 import dev.beecube31.crazyae2.common.registration.registry.rendering.CrazyAEIModelProvider;
 import dev.beecube31.crazyae2.common.registration.upgrades.UpgradesInfoProvider;
+import dev.beecube31.crazyae2.common.i18n.CrazyAETooltip;
 import dev.beecube31.crazyae2.common.util.FeatureSet;
 import dev.beecube31.crazyae2.core.CrazyAE;
 import it.unimi.dsi.fastutil.ints.Int2ObjectLinkedOpenHashMap;
@@ -49,41 +51,48 @@ public class Upgrades implements DamagedDefinitions<DamagedItemDefinition, Upgra
 		this.stackUpgrade = this.createUpgrade(this.upgrade, UpgradeType.STACKS);
 		if (this.stackUpgrade.isEnabled()) {
 			registry.addBootstrapComponent((IPostInitComponent) r -> {
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().ioPortImp(), new FeatureSet().add("stacks:3").add("more_items_per_tick").add("2048;65536;1048576;8388608"));
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().improvedImportBus(), new FeatureSet().add("stacks:4").add("more_items_per_tick").add("256;1024;1792;3328;4352"));
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().improvedExportBus(), new FeatureSet().add("stacks:4").add("more_items_per_tick").add("256;1024;1792;3328;4352"));
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().improvedImportFluidBus(), new FeatureSet().add("stacks:4").add("more_fluid_per_tick").add("8000;40000;136000;392000;1032000"));
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().improvedExportFluidBus(), new FeatureSet().add("stacks:4").add("more_fluid_per_tick").add("8000;40000;136000;392000;1032000"));
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().improvedMolecularAssembler(), new FeatureSet().add("stacks:5").add("more_operations_per_tick").add("8;16;32;64;128;160"));
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().bigCrystalCharger(), new FeatureSet().add("stacks:5").add("more_operations_per_job").add("1;64;192;384;768;1152"));
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().manaImportBus(), new FeatureSet().add("stacks:4").add("more_items_per_tick").add("256;16384;131328;524544;2097408"));
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().manaExportBus(), new FeatureSet().add("stacks:4").add("more_items_per_tick").add("256;16384;131328;524544;2097408"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().ioPortImp(), new FeatureSet().add("stacks:3").add(CrazyAETooltip.MORE_ITEMS_PER_TICK.getUnlocalized()).add("2048;65536;1048576;8388608"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().improvedImportBus(), new FeatureSet().add("stacks:4").add(CrazyAETooltip.MORE_ITEMS_PER_TICK.getUnlocalized()).add("256;1024;1792;3328;4352"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().improvedExportBus(), new FeatureSet().add("stacks:4").add(CrazyAETooltip.MORE_ITEMS_PER_TICK.getUnlocalized()).add("256;1024;1792;3328;4352"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().improvedImportFluidBus(), new FeatureSet().add("stacks:4").add(CrazyAETooltip.MORE_FLUID_PER_TICK.getUnlocalized()).add("8000;40000;136000;392000;1032000"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().improvedExportFluidBus(), new FeatureSet().add("stacks:4").add(CrazyAETooltip.MORE_FLUID_PER_TICK.getUnlocalized()).add("8000;40000;136000;392000;1032000"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().improvedMolecularAssembler(), new FeatureSet().add("stacks:5").add(CrazyAETooltip.MORE_OPERATIONS_PER_TICK.getUnlocalized()).add("8;16;32;64;128;160"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().bigCrystalCharger(), new FeatureSet().add("stacks:5").add(CrazyAETooltip.MORE_OPERATIONS_PER_JOB).add("1;64;192;384;768;1152"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().manaImportBus(), new FeatureSet().add("stacks:4").add(CrazyAETooltip.MORE_ITEMS_PER_TICK.getUnlocalized()).add("256;16384;131328;524544;2097408"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().manaExportBus(), new FeatureSet().add("stacks:4").add(CrazyAETooltip.MORE_ITEMS_PER_TICK.getUnlocalized()).add("256;16384;131328;524544;2097408"));
 
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().energyImportBus(), new FeatureSet().add("stacks:4").add("more_items_per_tick").add("32;2048;32768;524288;33554432"));
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().energyExportBus(), new FeatureSet().add("stacks:4").add("more_items_per_tick").add("32;2048;32768;524288;33554432"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().energyImportBus(), new FeatureSet().add("stacks:4").add(CrazyAETooltip.MORE_ITEMS_PER_TICK.getUnlocalized()).add("32;2048;32768;524288;33554432"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().parts().energyExportBus(), new FeatureSet().add("stacks:4").add(CrazyAETooltip.MORE_ITEMS_PER_TICK.getUnlocalized()).add("32;2048;32768;524288;33554432"));
 
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().mechanicalElventrade(), new FeatureSet().add("stacks:5").add("more_items_per_tick").add("1;8;24;48;192;320").add("more_tasks_in_job").add("1;8;24;48;192;320").add("more_operations_per_tick").add("1;10;25;50;100;100"));
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().mechanicalManapool(), new FeatureSet().add("stacks:5").add("more_items_per_tick").add("1;8;24;48;192;320").add("more_tasks_in_job").add("1;8;24;48;192;320").add("more_operations_per_tick").add("1;10;25;50;100;100"));
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().mechanicalPetal(), new FeatureSet().add("stacks:5").add("more_items_per_tick").add("1;8;24;48;192;320").add("more_tasks_in_job").add("1;8;24;48;192;320").add("more_operations_per_tick").add("1;10;25;50;100;100"));
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().mechanicalPuredaisy(), new FeatureSet().add("stacks:5").add("more_items_per_tick").add("1;8;24;48;192;320").add("more_tasks_in_job").add("1;8;24;48;192;320").add("more_operations_per_tick").add("1;10;25;50;100;100"));
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().mechanicalRunealtar(), new FeatureSet().add("stacks:5").add("more_items_per_tick").add("1;8;24;48;192;320").add("more_tasks_in_job").add("1;8;24;48;192;320").add("more_operations_per_tick").add("1;10;25;50;100;100"));
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().mechanicalBrewery(), new FeatureSet().add("stacks:5").add("more_items_per_tick").add("1;8;24;48;192;320").add("more_tasks_in_job").add("1;8;24;48;192;320").add("more_operations_per_tick").add("1;10;25;50;100;100"));
-				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().mechanicalTeraplate(), new FeatureSet().add("stacks:5").add("more_items_per_tick").add("1;8;24;48;192;320").add("more_tasks_in_job").add("1;8;24;48;192;320").add("more_operations_per_tick").add("1;10;25;50;100;100"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().trashcanItem(), new FeatureSet().add("stacks:4").add(CrazyAETooltip.MORE_ITEMS_PER_TICK.getUnlocalized()).add("32;2048;16384;65536;262144"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().trashcanEnergy(), new FeatureSet().add("stacks:4").add(CrazyAETooltip.MORE_ITEMS_PER_TICK.getUnlocalized()).add("32;2048;16384;65536;262144"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().trashcanFluid(), new FeatureSet().add("stacks:4").add(CrazyAETooltip.MORE_ITEMS_PER_TICK.getUnlocalized()).add("32;2048;16384;65536;262144"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().trashcanMana(), new FeatureSet().add("stacks:4").add(CrazyAETooltip.MORE_ITEMS_PER_TICK.getUnlocalized()).add("32;2048;16384;65536;262144"));
+
+				//UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().perfectInscriber(), new FeatureSet().add("stacks:4").add(CrazyAETooltip.MORE_ITEMS_PER_TICK.getUnlocalized()).add("1;8;64;512;4096"));
+
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().mechanicalElventrade(), new FeatureSet().add("stacks:5").add(CrazyAETooltip.MORE_ITEMS_PER_TICK.getUnlocalized()).add("1;8;24;48;192;320").add(CrazyAETooltip.MORE_TASKS_IN_JOB.getUnlocalized()).add("1;8;24;48;192;320").add(CrazyAETooltip.MORE_OPERATIONS_PER_TICK.getUnlocalized()).add("1;10;25;50;100;100"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().mechanicalManapool(), new FeatureSet().add("stacks:5").add(CrazyAETooltip.MORE_ITEMS_PER_TICK.getUnlocalized()).add("1;8;24;48;192;320").add(CrazyAETooltip.MORE_TASKS_IN_JOB.getUnlocalized()).add("1;8;24;48;192;320").add(CrazyAETooltip.MORE_OPERATIONS_PER_TICK.getUnlocalized()).add("1;10;25;50;100;100"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().mechanicalPetal(), new FeatureSet().add("stacks:5").add(CrazyAETooltip.MORE_ITEMS_PER_TICK.getUnlocalized()).add("1;8;24;48;192;320").add(CrazyAETooltip.MORE_TASKS_IN_JOB.getUnlocalized()).add("1;8;24;48;192;320").add(CrazyAETooltip.MORE_OPERATIONS_PER_TICK.getUnlocalized()).add("1;10;25;50;100;100"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().mechanicalPuredaisy(), new FeatureSet().add("stacks:5").add(CrazyAETooltip.MORE_ITEMS_PER_TICK.getUnlocalized()).add("1;8;24;48;192;320").add(CrazyAETooltip.MORE_TASKS_IN_JOB.getUnlocalized()).add("1;8;24;48;192;320").add(CrazyAETooltip.MORE_OPERATIONS_PER_TICK.getUnlocalized()).add("1;10;25;50;100;100"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().mechanicalRunealtar(), new FeatureSet().add("stacks:5").add(CrazyAETooltip.MORE_ITEMS_PER_TICK.getUnlocalized()).add("1;8;24;48;192;320").add(CrazyAETooltip.MORE_TASKS_IN_JOB.getUnlocalized()).add("1;8;24;48;192;320").add(CrazyAETooltip.MORE_OPERATIONS_PER_TICK.getUnlocalized()).add("1;10;25;50;100;100"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().mechanicalBrewery(), new FeatureSet().add("stacks:5").add(CrazyAETooltip.MORE_ITEMS_PER_TICK.getUnlocalized()).add("1;8;24;48;192;320").add(CrazyAETooltip.MORE_TASKS_IN_JOB.getUnlocalized()).add("1;8;24;48;192;320").add(CrazyAETooltip.MORE_OPERATIONS_PER_TICK.getUnlocalized()).add("1;10;25;50;100;100"));
+				UpgradeType.STACKS.registerItem(CrazyAE.definitions().blocks().mechanicalTeraplate(), new FeatureSet().add("stacks:5").add(CrazyAETooltip.MORE_ITEMS_PER_TICK.getUnlocalized()).add("1;8;24;48;192;320").add(CrazyAETooltip.MORE_TASKS_IN_JOB.getUnlocalized()).add("1;8;24;48;192;320").add(CrazyAETooltip.MORE_OPERATIONS_PER_TICK.getUnlocalized()).add("1;10;25;50;100;100"));
 			});
 		}
 
 		this.improvedSpeedUpgrade = this.createUpgrade(this.upgrade, UpgradeType.IMPROVED_SPEED);
 		if (this.improvedSpeedUpgrade.isEnabled()) {
 			registry.addBootstrapComponent((IPostInitComponent) r -> {
-				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().blocks().bigCrystalCharger(), new FeatureSet().add("imp:5").add("more_operations_per_tick").add("1;10;15;25;40;60"));
+				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().blocks().bigCrystalCharger(), new FeatureSet().add("imp:5").add(CrazyAETooltip.MORE_OPERATIONS_PER_TICK.getUnlocalized()).add("1;10;15;25;40;60"));
 
-				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalElventrade(), new FeatureSet().add("imp:4").add("more_operations_per_tick").add("1;2;5;10;15;20"));
-				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalManapool(), new FeatureSet().add("imp:4").add("more_operations_per_tick").add("1;2;5;10;15;20"));
-				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalPetal(), new FeatureSet().add("imp:4").add("more_operations_per_tick").add("1;2;5;10;15;20"));
-				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalPuredaisy(), new FeatureSet().add("imp:4").add("more_operations_per_tick").add("1;2;5;10;15;20"));
-				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalRunealtar(), new FeatureSet().add("imp:4").add("more_operations_per_tick").add("1;2;5;10;15;20"));
-				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalBrewery(), new FeatureSet().add("imp:4").add("more_operations_per_tick").add("1;2;5;10;15;20"));
-				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalTeraplate(), new FeatureSet().add("imp:4").add("more_operations_per_tick").add("1;2;5;10;15;20"));
+				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalElventrade(), new FeatureSet().add("imp:4").add(CrazyAETooltip.MORE_OPERATIONS_PER_TICK.getUnlocalized()).add("1;2;5;10;15;20"));
+				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalManapool(), new FeatureSet().add("imp:4").add(CrazyAETooltip.MORE_OPERATIONS_PER_TICK.getUnlocalized()).add("1;2;5;10;15;20"));
+				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalPetal(), new FeatureSet().add("imp:4").add(CrazyAETooltip.MORE_OPERATIONS_PER_TICK.getUnlocalized()).add("1;2;5;10;15;20"));
+				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalPuredaisy(), new FeatureSet().add("imp:4").add(CrazyAETooltip.MORE_OPERATIONS_PER_TICK.getUnlocalized()).add("1;2;5;10;15;20"));
+				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalRunealtar(), new FeatureSet().add("imp:4").add(CrazyAETooltip.MORE_OPERATIONS_PER_TICK.getUnlocalized()).add("1;2;5;10;15;20"));
+				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalBrewery(), new FeatureSet().add("imp:4").add(CrazyAETooltip.MORE_OPERATIONS_PER_TICK.getUnlocalized()).add("1;2;5;10;15;20"));
+				UpgradeType.IMPROVED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalTeraplate(), new FeatureSet().add("imp:4").add(CrazyAETooltip.MORE_OPERATIONS_PER_TICK.getUnlocalized()).add("1;2;5;10;15;20"));
 
 			});
 		}
@@ -91,15 +100,15 @@ public class Upgrades implements DamagedDefinitions<DamagedItemDefinition, Upgra
 		this.advancedSpeedUpgrade = this.createUpgrade(this.upgrade, UpgradeType.ADVANCED_SPEED);
 		if (this.advancedSpeedUpgrade.isEnabled()) {
 			registry.addBootstrapComponent((IPostInitComponent) r -> {
-				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().blocks().bigCrystalCharger(), new FeatureSet().add("adv:1").add("more_operations_per_tick").add("1;100"));
+				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().blocks().bigCrystalCharger(), new FeatureSet().add("adv:1").add(CrazyAETooltip.MORE_OPERATIONS_PER_TICK.getUnlocalized()).add("1;100"));
 
-				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalElventrade(), new FeatureSet().add("adv:1").add("more_operations_per_tick").add("1;100"));
-				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalManapool(), new FeatureSet().add("adv:1").add("more_operations_per_tick").add("1;100"));
-				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalPetal(), new FeatureSet().add("adv:1").add("more_operations_per_tick").add("1;100"));
-				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalPuredaisy(), new FeatureSet().add("adv:1").add("more_operations_per_tick").add("1;100"));
-				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalRunealtar(), new FeatureSet().add("adv:1").add("more_operations_per_tick").add("1;100"));
-				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalBrewery(), new FeatureSet().add("adv:1").add("more_operations_per_tick").add("1;100"));
-				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalTeraplate(), new FeatureSet().add("adv:1").add("more_operations_per_tick").add("1;100"));
+				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalElventrade(), new FeatureSet().add("adv:1").add(CrazyAETooltip.MORE_OPERATIONS_PER_TICK.getUnlocalized()).add("1;100"));
+				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalManapool(), new FeatureSet().add("adv:1").add(CrazyAETooltip.MORE_OPERATIONS_PER_TICK.getUnlocalized()).add("1;100"));
+				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalPetal(), new FeatureSet().add("adv:1").add(CrazyAETooltip.MORE_OPERATIONS_PER_TICK.getUnlocalized()).add("1;100"));
+				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalPuredaisy(), new FeatureSet().add("adv:1").add(CrazyAETooltip.MORE_OPERATIONS_PER_TICK.getUnlocalized()).add("1;100"));
+				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalRunealtar(), new FeatureSet().add("adv:1").add(CrazyAETooltip.MORE_OPERATIONS_PER_TICK.getUnlocalized()).add("1;100"));
+				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalBrewery(), new FeatureSet().add("adv:1").add(CrazyAETooltip.MORE_OPERATIONS_PER_TICK.getUnlocalized()).add("1;100"));
+				UpgradeType.ADVANCED_SPEED.registerItem(CrazyAE.definitions().blocks().mechanicalTeraplate(), new FeatureSet().add("adv:1").add(CrazyAETooltip.MORE_OPERATIONS_PER_TICK.getUnlocalized()).add("1;100"));
 			});
 		}
 
@@ -122,6 +131,8 @@ public class Upgrades implements DamagedDefinitions<DamagedItemDefinition, Upgra
 
 			appeng.api.config.Upgrades.FUZZY.registerItem(CrazyAE.definitions().parts().improvedExportBus(), 1);
 			appeng.api.config.Upgrades.FUZZY.registerItem(CrazyAE.definitions().parts().improvedImportBus(), 1);
+
+			appeng.api.config.Upgrades.FUZZY.registerItem(CrazyAE.definitions().blocks().trashcanItem(), 1);
 		});
 	}
 
@@ -273,7 +284,7 @@ public class Upgrades implements DamagedDefinitions<DamagedItemDefinition, Upgra
 		}
 
 		public Map<ItemStack, Integer> getSupported() {
-			return this.supportedMax;
+			return ImmutableMap.copyOf(this.supportedMax);
 		}
 
 		public void registerItem(IItemDefinition item, FeatureSet inf) {

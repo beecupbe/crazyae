@@ -10,10 +10,6 @@
         {
           "type": "minecraft:item_exists",
           "item": "appliedenergistics2:molecular_assembler"
-        },
-        {
-          "type": "minecraft:item_exists",
-          "item": "appliedenergistics2:crank"
         }
       ]
     }

@@ -1,0 +1,7 @@
+{
+    "variants": {
+        "normal": {
+            "model": "crazyae:trashcans/item_trashcan"
+        }
+    }
+}

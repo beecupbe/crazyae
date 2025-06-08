@@ -1,0 +1,11 @@
+{
+    "variants": {
+        "omnidirectional=true": {
+            "model": "crazyae:quantum_interface"
+        },
+        "omnidirectional=false": {
+            "model": "crazyae:quantum_interface_oriented",
+            "x": 90
+        }
+    }
+}

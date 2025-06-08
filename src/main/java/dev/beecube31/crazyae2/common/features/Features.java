@@ -1,9 +1,6 @@
 package dev.beecube31.crazyae2.common.features;
 
-import dev.beecube31.crazyae2.common.features.subfeatures.DenseCellFeatures;
-import dev.beecube31.crazyae2.common.features.subfeatures.ISubFeature;
-import dev.beecube31.crazyae2.common.features.subfeatures.MegaDenseCellFeatures;
-import dev.beecube31.crazyae2.common.features.subfeatures.UpgradeFeatures;
+import dev.beecube31.crazyae2.common.features.subfeatures.*;
 import dev.beecube31.crazyae2.common.util.FeatureSet;
 import net.minecraftforge.fml.common.Loader;
 
@@ -22,6 +19,9 @@ public enum Features implements IFeature {
 	MEGA_DENSE_CELLS(
 			new FeatureSet().add(EnumSet.allOf(MegaDenseCellFeatures.class))
 	),
+	ULTRA_DENSE_CPUS(
+			new FeatureSet().add(EnumSet.allOf(UltraDenseDeviceFeatures.class))
+	),
 
 	PARTS(),
 
@@ -35,11 +35,18 @@ public enum Features implements IFeature {
 	IMPROVED_BUSES,
 	IMPROVED_ENERGY_CELLS,
 	SOLAR_PANELS,
+	PERFECT_INSCRIBER,
 	PART_DRIVE,
 	PERFECT_INTERFACE(
 			new FeatureSet().add("mixin:perfect.interface")
 	),
 	ENERGY_BUSES,
+
+	FAST_AUTOCRAFTING_SYSTEM(
+			new FeatureSet().add("mixin:qcpu")
+	),
+
+	TRASH_CANS,
 
 	IMPROVED_MOLECULAR_ASSEMBLER(
 			new FeatureSet().add("mixin:patternterm.fastplace")
@@ -68,6 +75,16 @@ public enum Features implements IFeature {
 	ENERGY_DENSE_CELLS(),
 	MEGA_ENERGY_DENSE_CELLS(),
 
+//	EXPERIENCE_CELLS(
+//			new FeatureSet().add("mixin:expcells")
+//	),
+//	EXPERIENCE_DENSE_CELLS(
+//			new FeatureSet().add("mixin:expcells")
+//	),
+//	MEGA_EXPERIENCE_DENSE_CELLS(
+//			new FeatureSet().add("mixin:expcells")
+//	),
+
 	CRAFTING_UNITS_COMBINER(
 			new FeatureSet().add("mixin:cu.combiner")
 	),
@@ -83,9 +100,15 @@ public enum Features implements IFeature {
 	),
 
 	DENSE_CPU_COPROCESSORS(
-			new FeatureSet().add("mixin:patterns.interface")
+			new FeatureSet().add("mixin:dense.coprocessor")
 	),
 	MEGA_DENSE_CPU_COPROCESSORS(
+			new FeatureSet().add("mixin:dense.coprocessor")
+	),
+	ULTRA_DENSE_CPU_COPROCESSORS(
+			new FeatureSet().add("mixin:dense.coprocessor")
+	),
+	CREATIVE_DENSE_CPU_BLOCKS(
 			new FeatureSet().add("mixin:dense.coprocessor")
 	);
 

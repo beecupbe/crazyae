@@ -5,7 +5,7 @@ import appeng.items.AEBaseItem;
 import dev.beecube31.crazyae2.common.interfaces.ICrazyAEGuiItem;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiBridge;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiHandler;
-import dev.beecube31.crazyae2.common.sync.CrazyAETooltip;
+import dev.beecube31.crazyae2.common.i18n.CrazyAETooltip;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

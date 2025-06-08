@@ -3,8 +3,8 @@ package dev.beecube31.crazyae2.client.gui.implementations;
 import dev.beecube31.crazyae2.client.gui.sprites.Sprite;
 import dev.beecube31.crazyae2.client.gui.widgets.ProgressBar;
 import dev.beecube31.crazyae2.common.containers.ContainerBigCrystalCharger;
-import dev.beecube31.crazyae2.common.sync.CrazyAEGuiText;
-import dev.beecube31.crazyae2.common.sync.CrazyAEGuiTooltip;
+import dev.beecube31.crazyae2.common.i18n.CrazyAEGuiText;
+import dev.beecube31.crazyae2.common.i18n.CrazyAEGuiTooltip;
 import dev.beecube31.crazyae2.common.tile.networking.TileBigCrystalCharger;
 import net.minecraft.entity.player.InventoryPlayer;
 

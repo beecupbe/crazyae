@@ -7,7 +7,9 @@ import appeng.api.storage.ICellWorkbenchItem;
 import appeng.api.storage.IMEInventoryHandler;
 import appeng.items.AEBaseItem;
 import appeng.items.contents.CellConfig;
-import dev.beecube31.crazyae2.common.sync.CrazyAEGuiTooltip;
+import dev.beecube31.crazyae2.client.gui.sprites.Sprite;
+import dev.beecube31.crazyae2.common.i18n.CrazyAEGuiTooltip;
+import dev.beecube31.crazyae2.common.util.Utils;
 import dev.beecube31.crazyae2.core.api.storage.energy.IEnergyStorageChannel;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -45,7 +47,7 @@ public class MultiEnergyItemCreativeCell extends AEBaseItem implements ICellWork
     @SideOnly(Side.CLIENT)
     @Override
     public void addCheckedInformation(final ItemStack stack, final World world, final List<String> lines, final ITooltipFlag advancedTooltips) {
-        lines.add(String.format(
+        lines.add(Utils.writeSpriteFlag(Sprite.INFO) + String.format(
                 CrazyAEGuiTooltip.ENERGY_CELL_FORMATTING_HINT.getLocal()
         ));
         
@@ -58,8 +60,14 @@ public class MultiEnergyItemCreativeCell extends AEBaseItem implements ICellWork
         if (inventory instanceof ICellInventoryHandler) {
             final CellConfig cc = new CellConfig(stack);
 
+            boolean addedEmpty = false;
             for (final ItemStack is : cc) {
                 if (!is.isEmpty()) {
+                    if (!addedEmpty) {
+                        lines.add("");
+                        addedEmpty = true;
+                    }
+
                     lines.add(is.getDisplayName());
                 }
             }

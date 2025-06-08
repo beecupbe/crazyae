@@ -11,17 +11,18 @@ import org.jetbrains.annotations.NotNull;
 
 public class Checkbox extends GuiButton implements ITooltipObj {
     private boolean visible = true;
-    private ICheckboxProvider state;
-    private int id;
+    private final ICheckboxProvider state;
+    private final int id;
     private String text;
-    private String texture;
+    private boolean overrideState = false;
+    private final ResourceLocation texture;
 
     private final ComponentHue textHue;
 
     private final ISpriteProvider spriteOn;
     private final ISpriteProvider spriteOff;
 
-    public Checkbox(final int id, final int posX, final int posY, final int width, final int height, final ICheckboxProvider state, final String text, final ComponentHue textHue, String texture, ISpriteProvider spriteOn, ISpriteProvider spriteOff) {
+    public Checkbox(final int id, final int posX, final int posY, final int width, final int height, final ICheckboxProvider state, final String text, final ComponentHue textHue, ResourceLocation texture, ISpriteProvider spriteOn, ISpriteProvider spriteOff) {
         super(id, posX, posY, width, height, "");
         this.id = id;
         this.x = posX;
@@ -41,15 +42,15 @@ public class Checkbox extends GuiButton implements ITooltipObj {
             par1Minecraft.fontRenderer.drawString(this.text, this.x + 18, this.y + 2, this.textHue.getIntColor());
             this.textHue.endDrawHue();
 
-            par1Minecraft.getTextureManager().bindTexture(new ResourceLocation("crazyae", texture));
+            par1Minecraft.getTextureManager().bindTexture(texture);
 
             this.drawTexturedModalRect(
                     this.x,
                     this.y,
-                    this.state.getCheckboxCurrentState(this.id) ? this.spriteOn.getTextureX() : this.spriteOff.getTextureX(),
-                    this.state.getCheckboxCurrentState(this.id) ? this.spriteOn.getTextureY() : this.spriteOff.getTextureY(),
-                    this.state.getCheckboxCurrentState(this.id) ? this.spriteOn.getSizeX() : this.spriteOff.getSizeX(),
-                    this.state.getCheckboxCurrentState(this.id) ? this.spriteOn.getSizeY() : this.spriteOff.getSizeY()
+                    (this.overrideState || this.state.getCheckboxCurrentState(this.id)) ? this.spriteOn.getTextureX() : this.spriteOff.getTextureX(),
+                    (this.overrideState || this.state.getCheckboxCurrentState(this.id)) ? this.spriteOn.getTextureY() : this.spriteOff.getTextureY(),
+                    (this.overrideState || this.state.getCheckboxCurrentState(this.id)) ? this.spriteOn.getSizeX() : this.spriteOff.getSizeX(),
+                    (this.overrideState || this.state.getCheckboxCurrentState(this.id)) ? this.spriteOn.getSizeY() : this.spriteOff.getSizeY()
             );
 
             this.mouseDragged(par1Minecraft, par2, par3);
@@ -62,6 +63,10 @@ public class Checkbox extends GuiButton implements ITooltipObj {
 
     public boolean getState() {
         return this.state.getCheckboxCurrentState();
+    }
+
+    public void setState(boolean state) {
+        this.overrideState = state;
     }
 
     public boolean getState(int idx) {

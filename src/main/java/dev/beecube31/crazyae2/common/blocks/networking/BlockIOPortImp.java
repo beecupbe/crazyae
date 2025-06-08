@@ -73,6 +73,6 @@ public class BlockIOPortImp extends CrazyAEBlockAttribute {
 
     @Override
     public MachineAttributes getAttributes() {
-        return new MachineAttributes().setRequiredAEPerTick(64.0D);
+        return new MachineAttributes().setRequiredAEPerTick(64.0D).setRequireChannel(true);
     }
 }

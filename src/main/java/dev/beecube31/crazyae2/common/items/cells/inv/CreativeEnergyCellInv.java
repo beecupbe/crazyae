@@ -25,7 +25,7 @@ public class CreativeEnergyCellInv implements IMEInventoryHandler<IAEItemStack> 
         for (final ItemStack is : cc) {
             if (!is.isEmpty()) {
                 final IAEItemStack i = AEItemStack.fromItemStack(is);
-                i.setStackSize(Integer.MAX_VALUE);
+                i.setStackSize(Integer.MAX_VALUE * 1024L);
                 this.itemListCache.add(i);
             }
         }

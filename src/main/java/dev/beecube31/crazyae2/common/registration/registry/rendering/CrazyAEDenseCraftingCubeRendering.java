@@ -6,7 +6,7 @@ import appeng.bootstrap.IBlockRendering;
 import appeng.bootstrap.IItemRendering;
 import dev.beecube31.crazyae2.Tags;
 import dev.beecube31.crazyae2.client.rendering.models.crafting.DenseCraftingCubeModel;
-import dev.beecube31.crazyae2.common.blocks.BlockDenseCraftingUnit;
+import dev.beecube31.crazyae2.common.blocks.crafting.BlockDenseCraftingUnit;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;

@@ -9,6 +9,7 @@ item.crazyae.storage_cell_64mb.name=§264MB§r МЭ Ячейка хранени�
 item.crazyae.storage_cell_256mb.name=§b256MB§r МЭ Ячейка хранения
 item.crazyae.storage_cell_1gb.name=§11GB§r МЭ Ячейка хранения
 item.crazyae.storage_cell_2gb.name=§d2GB§r МЭ Ячейка хранения
+
 item.crazyae.mana_cell_1k.name=§61k§r МЭ Ячейка маны
 item.crazyae.mana_cell_4k.name=§e4k§r МЭ Ячейка маны
 item.crazyae.mana_cell_16k.name=§a16k§r МЭ Ячейка маны
@@ -21,18 +22,20 @@ item.crazyae.mana_cell_64mb.name=§264MB§r МЭ Ячейка маны
 item.crazyae.mana_cell_256mb.name=§b256MB§r МЭ Ячейка маны
 item.crazyae.mana_cell_1gb.name=§11GB§r МЭ Ячейка маны
 item.crazyae.mana_cell_2gb.name=§d2GB§r МЭ Ячейка маны
-item.crazyae.energy_cell_1k.name=§61k§r Энергетическая ячейка
-item.crazyae.energy_cell_4k.name=§e4k§r Энергетическая ячейка
-item.crazyae.energy_cell_16k.name=§a16k§r Энергетическая ячейка
-item.crazyae.energy_cell_64k.name=§b64k§r Энергетическая ячейка
-item.crazyae.energy_cell_256k.name=§c256k§r Энергетическая ячейка
-item.crazyae.energy_cell_1mb.name=§61MB§r Энергетическая ячейка
-item.crazyae.energy_cell_4mb.name=§e4MB§r Энергетическая ячейка
-item.crazyae.energy_cell_16mb.name=§a16MB§r Энергетическая ячейка
-item.crazyae.energy_cell_64mb.name=§264MB§r Энергетическая ячейка
-item.crazyae.energy_cell_256mb.name=§b256MB§r Энергетическая ячейка
-item.crazyae.energy_cell_1gb.name=§11GB§r Энергетическая ячейка
-item.crazyae.energy_cell_2gb.name=§d2GB§r Энергетическая ячейка
+
+item.crazyae.energy_cell_1k.name=§61k§r МЭ Энергетическая ячейка
+item.crazyae.energy_cell_4k.name=§e4k§r МЭ Энергетическая ячейка
+item.crazyae.energy_cell_16k.name=§a16k§r МЭ Энергетическая ячейка
+item.crazyae.energy_cell_64k.name=§b64k§r МЭ Энергетическая ячейка
+item.crazyae.energy_cell_256k.name=§c256k§r МЭ Энергетическая ячейка
+item.crazyae.energy_cell_1mb.name=§61MB§r МЭ Энергетическая ячейка
+item.crazyae.energy_cell_4mb.name=§e4MB§r МЭ Энергетическая ячейка
+item.crazyae.energy_cell_16mb.name=§a16MB§r МЭ Энергетическая ячейка
+item.crazyae.energy_cell_64mb.name=§264MB§r МЭ Энергетическая ячейка
+item.crazyae.energy_cell_256mb.name=§b256MB§r МЭ Энергетическая ячейка
+item.crazyae.energy_cell_1gb.name=§11GB§r МЭ Энергетическая ячейка
+item.crazyae.energy_cell_2gb.name=§d2GB§r МЭ Энергетическая ячейка
+
 item.crazyae.fluid_storage_cell_256k.name=§c256k§r МЭ Жидкостная ячейка хранения
 item.crazyae.fluid_storage_cell_1mb.name=§61MB§r МЭ Жидкостная ячейка хранения
 item.crazyae.fluid_storage_cell_4mb.name=§e4MB§r МЭ Жидкостная ячейка хранения
@@ -41,9 +44,11 @@ item.crazyae.fluid_storage_cell_64mb.name=§264MB§r МЭ Жидкостная �
 item.crazyae.fluid_storage_cell_256mb.name=§b256MB§r МЭ Жидкостная ячейка хранения
 item.crazyae.fluid_storage_cell_1gb.name=§11GB§r МЭ Жидкостная ячейка хранения
 item.crazyae.fluid_storage_cell_2gb.name=§d2GB§r МЭ Жидкостная ячейка хранения
+
 item.crazyae.improved_portable_cell.name=§61MB§r МЭ Переносная ячейка
 item.crazyae.advanced_portable_cell.name=§e4MB§r МЭ Переносная ячейка
 item.crazyae.perfect_portable_cell.name=§a16MB§r МЭ Переносная ячейка
+
 item.crazyae.material.mana_part_1k.name=§61k§r МЭ Компонент маны
 item.crazyae.material.mana_part_4k.name=§e4k§r МЭ Компонент маны
 item.crazyae.material.mana_part_16k.name=§a16k§r МЭ Компонент маны
@@ -56,6 +61,7 @@ item.crazyae.material.mana_part_64mb.name=§264MB§r МЭ Компонент м�
 item.crazyae.material.mana_part_256mb.name=§b256MB§r МЭ Компонент маны
 item.crazyae.material.mana_part_1gb.name=§11GB§r МЭ Компонент маны
 item.crazyae.material.mana_part_2gb.name=§d2GB§r МЭ Компонент маны
+
 item.crazyae.material.cell_part_256k.name=§c256k§r МЭ Компонент хранения
 item.crazyae.material.cell_part_1mb.name=§61MB§r МЭ Компонент хранения
 item.crazyae.material.cell_part_4mb.name=§e4MB§r МЭ Компонент хранения
@@ -64,6 +70,10 @@ item.crazyae.material.cell_part_64mb.name=§264MB§r МЭ Компонент х�
 item.crazyae.material.cell_part_256mb.name=§b256MB§r МЭ Компонент хранения
 item.crazyae.material.cell_part_1gb.name=§11GB§r МЭ Компонент хранения
 item.crazyae.material.cell_part_2gb.name=§d2GB§r МЭ Компонент хранения
+item.crazyae.material.cell_part_8gb.name=§d8GB§r МЭ Компонент хранения
+item.crazyae.material.cell_part_32gb.name=§d32GB§r МЭ Компонент хранения
+item.crazyae.material.cell_part_128gb.name=§d128GB§r МЭ Компонент хранения
+
 item.crazyae.material.energy_part_1k.name=§61k§r МЭ Энергетический компонент
 item.crazyae.material.energy_part_4k.name=§e4k§r МЭ Энергетический компонент
 item.crazyae.material.energy_part_16k.name=§a16k§r МЭ Энергетический компонент
@@ -76,6 +86,7 @@ item.crazyae.material.energy_part_64mb.name=§264MB§r МЭ Энергетиче
 item.crazyae.material.energy_part_256mb.name=§b256MB§r МЭ Энергетический компонент
 item.crazyae.material.energy_part_1gb.name=§11GB§r МЭ Энергетический компонент
 item.crazyae.material.energy_part_2gb.name=§d2GB§r МЭ Энергетический компонент
+
 item.crazyae.material.cell_part_fluid_256k.name=§c256k§r МЭ Жидкостный компонент хранения
 item.crazyae.material.cell_part_fluid_1mb.name=§61MB§r МЭ Жидкостный компонент хранения
 item.crazyae.material.cell_part_fluid_4mb.name=§e4MB§r МЭ Жидкостный компонент хранения
@@ -84,6 +95,7 @@ item.crazyae.material.cell_part_fluid_64mb.name=§264MB§r МЭ Жидкостн
 item.crazyae.material.cell_part_fluid_256mb.name=§b256MB§r МЭ Жидкостный компонент хранения
 item.crazyae.material.cell_part_fluid_1gb.name=§11GB§r МЭ Жидкостный компонент хранения
 item.crazyae.material.cell_part_fluid_2gb.name=§d2GB§r МЭ Жидкостный компонент хранения
+
 item.crazyae.material.quantum_processor.name=Квантовый процессор
 item.crazyae.material.mana_processor.name=Мана-процессор
 item.crazyae.material.energy_processor.name=Энергетический процессор
@@ -94,6 +106,7 @@ item.crazyae.part.improved_import_fluid_bus.name=МЭ Улучшенная жи�
 item.crazyae.upgrade.stacks.name=Карта стаков
 item.crazyae.upgrade.improved_speed.name=Улучшенная карта скорости
 item.crazyae.upgrade.advanced_speed.name=Продвинутая карта скорости
+
 tile.crazyae.crafting_accelerator_4x.name=§d4x§r Блок обработки крафта
 tile.crazyae.crafting_accelerator_16x.name=§516x§r Блок обработки крафта
 tile.crazyae.crafting_accelerator_64x.name=§164x§r Блок обработки крафта
@@ -102,6 +115,10 @@ tile.crazyae.crafting_accelerator_1024x.name=§c1024x§r Блок обработ
 tile.crazyae.crafting_accelerator_4096x.name=§44096x§r Блок обработки крафта
 tile.crazyae.crafting_accelerator_16384x.name=§416384x§r Блок обработки крафта
 tile.crazyae.crafting_accelerator_65536x.name=§465536x§r Блок обработки крафта
+tile.crazyae.crafting_accelerator_262144x.name=§e262144x§r Блок обработки крафта
+tile.crazyae.crafting_accelerator_1048576x.name=§a1048576x§r Блок обработки крафта
+tile.crazyae.crafting_accelerator_4194304x.name=§d4194304x§r Блок обработки крафта
+tile.crazyae.crafting_accelerator_creative.name=§8Творческий§r Блок обработки крафта
 tile.crazyae.crafting_storage_256k.name=§c256k§r Хранилище крафта
 tile.crazyae.crafting_storage_1mb.name=§61MB§r Хранилище крафта
 tile.crazyae.crafting_storage_4mb.name=§e4MB§r Хранилище крафта
@@ -110,6 +127,10 @@ tile.crazyae.crafting_storage_64mb.name=§264MB§r Хранилище крафт
 tile.crazyae.crafting_storage_256mb.name=§b256MB§r Хранилище крафта
 tile.crazyae.crafting_storage_1gb.name=§11GB§r Хранилище крафта
 tile.crazyae.crafting_storage_2gb.name=§d2GB§r Хранилище крафта
+tile.crazyae.crafting_storage_8gb.name=§28GB§r Хранилище крафта
+tile.crazyae.crafting_storage_32gb.name=§d32GB§r Хранилище крафта
+tile.crazyae.crafting_storage_128gb.name=§6128GB§r Хранилище крафта
+tile.crazyae.crafting_storage_creative.name=§8Creative§r Crafting Storage
 tile.crazyae.improved_energy_cell.name=§cУлучшенная энергетическая ячейка§r
 tile.crazyae.advanced_energy_cell.name=§aПродвинутая энергетическая ячейка§r
 tile.crazyae.perfect_energy_cell.name=§9Совершенная энергетическая ячейка§r
@@ -127,31 +148,36 @@ tile.crazyae.fluixilized_block.name=§5Волшебный изменчивый �
 tile.crazyae.patterns_interface.name=§8МЭ Интерфейс шаблонов§r
 tile.crazyae.improved_condenser.name=§6Улучшенный конденсатор материи§r
 tile.crazyae.quantum_channels_multiplier.name=Квантовый множитель каналов
+
 gui.crazyae.big_crystal_charger.name=МЭ Улучшенный зарядник кристаллов
 gui.crazyae.improved_mac_gui.name=Улучшенный молекулярный сборщик
 gui.crazyae.improved_drive_gui.name=Улучшенный МЭ Накопитель
 gui.crazyae.imp_import_bus.name=МЭ Улучшенная шина импорта
 gui.crazyae.imp_export_bus.name=МЭ Улучшенная шина экспорта
 gui.crazyae.pattern_interface.name=МЭ Интерфейс шаблонов
-gui.crazyae.imp_fluid_import_bus.name=МЭ Улучшенная жидкостная шина импорта
-gui.crazyae.imp_fluid_export_bus.name=МЭ Улучшенная жидкостная шина экспорта
+gui.crazyae.imp_fluid_import_bus.name=Улучшенная жидкостная шина
+gui.crazyae.imp_fluid_export_bus.name=Улучшенная жидкостная шина
 gui.tooltip.crazyae.cu_place_all_accelerators_here.name=Эти слоты предназначены для блоков обработки крафта
 gui.tooltip.crazyae.cu_place_all_crafting_storages_here.name=Эти слоты предназначены для хранилищ крафта
 gui.tooltip.crazyae.progress.name=Прогресс:
+
 tooltip.crazyae.shift_for_details.name=Удерживайте Shift для просмотра содержимого
 tooltip.crazyae.ctrl_for_precise_details.name=Удерживайте Ctrl для просмотра точного количества предметов
 tooltip.crazyae.passive_generation_day.name=Генерация днём:
 tooltip.crazyae.passive_generation_night.name=Генерация ночью:
-tooltip.crazyae.max_solar_capacity.name=Ёмкость:
+tooltip.crazyae.max_solar_capacity.name=Хранит:
+tooltip.crazyae.require_channel.name=Требует канал
 tooltip.crazyae.qcm_desc.name=Позволяет увеличить ёмкость кабелей.\nКаждый квантовый множитель будет давать %s каналов для обычных кабелей\nи %s каналов для плотных кабелей, затрачивая при этом %s AE/t.
 tooltip.crazyae.mana_connector_desc.name=Позволяет соединить бассейн маны с шиной маны.
 tooltip.crazyae.linked_with_mana_pool_at_pos.name=Соединен с бассейном маны в x=%s, y=%s, z=%s.
 tooltip.crazyae.mana_connector_lets_connect_to_bus.name=Нажмите по шине маны для того чтобы привязать их.
+
 item.crazyae.quantum_wireless_booster.name=Квантовый беспроводной усилитель
 item.crazyae.mana_connector.name=Связыватель мана-устройств
+
 tooltip.crazyae.auto_pickup.name=Автосбор предметов
 tooltip.crazyae.auto_pickup_how_to_enable.name=Нажмите SHIFT+ПКМ для переключения автосбора.
-tooltip.crazyae.auto_pickup_tip.name=Автосбор предметов учитывает разметку (черный/белый списки), сделанную в верстаке для ячеек.
+tooltip.crazyae.auto_pickup_tip.name=Автосбор предметов учитывает разметку, сделанную в верстаке для ячеек.
 tooltip.crazyae.enabled_lowercase.name=включен
 tooltip.crazyae.disabled_lowercase.name=отключен
 tooltip.crazyae.enabled.name=Включен
@@ -159,15 +185,20 @@ tooltip.crazyae.disabled.name=Отключен
 tooltip.crazyae.mana_connector_block_linked.name=Привязка прошла успешно.
 tooltip.crazyae.mana_connector_block_saved.name=Блок успешно сохранен.
 tooltip.crazyae.mana_connector_clear.name=Соединитель очищен.
+
 gui.crazyae.update_found.name=[CrazyAE] §lВышло обновление§r
 gui.crazyae.download_link.name=[CrazyAE] §oНажмите на это сообщение, чтобы открыть страницу загрузки.§r
 gui.crazyae.disable_updates_tip.name=[CrazyAE] Вы можете отключить проверку обновлений в файле конфигурации CrazyAE.
+
 item.crazyae.mana_as_aestack.name=Мана
 item.crazyae.part.mana_import_bus.name=МЭ Шина импорта маны
 item.crazyae.part.mana_export_bus.name=МЭ Шина экспорта маны
+
 gui.tooltip.crazyae.mana.name=Мана
 gui.tooltip.crazyae.stored_mana.name=Хранится маны: %s
+
 item.crazyae.part.mana_term.name=МЭ Терминал маны
+
 gui.crazyae.mana_terminal.name=МЭ Терминал маны
 gui.crazyae.mana_import_bus.name=МЭ Шина импорта маны
 gui.crazyae.mana_export_bus.name=МЭ Шина экспорта маны
@@ -175,6 +206,7 @@ gui.crazyae.link_with_mana_connector.name=Эту шину необходимо �
 gui.crazyae.link_with_mana_connector2.name=с бассейном маны с помощью
 gui.crazyae.link_with_mana_connector3.name="Связывателя мана-устройств".
 gui.crazyae.linked_with_mana_pool.name=Связан с блоком в
+
 item.crazyae.material.fluixilized_ingot.name=§5Волшебный изменчивый кристалл§r
 item.crazyae.gui_colorizer.name=Колоризатор
 item.crazyae.material.elventrade_blank_pattern.name=Пустой шаблон эльфийских врат
@@ -191,13 +223,16 @@ item.crazyae.runealtar_encoded_pattern.name=Кодированный шабло�
 item.crazyae.puredaisy_encoded_pattern.name=Кодированный шаблон чистой маргаритки
 item.crazyae.teraplate_encoded_pattern.name=Кодированный шаблон агломерационной плиты
 item.crazyae.brewery_encoded_pattern.name=Кодированный шаблон варочной стойки
+
 tooltip.crazyae.colorizer_desc.name=Позволяет менять цвет графического интерфейса и текста
+
 tile.crazyae.quantum_channels_multiplier_creative.name=Творческий бесконечный источник каналов
 tile.crazyae.mechanical_elventrade.name=Механические эльфийские врата
 tile.crazyae.mechanical_manapool.name=Механический бассейн маны
 tile.crazyae.mechanical_runealtar.name=Механический рунический алтарь
 tile.crazyae.mechanical_petal.name=Механический лепестковый аптекарь
 tile.crazyae.mechanical_puredaisy.name=Механическая чистая маргаритка
+
 gui.crazyae.mana_amt_to_max.name=Содержится маны в блоке:
 gui.crazyae.gui_colorizer_gui.name=Колоризатор интерфейса
 gui.crazyae.gui_colorizer_text.name=Колоризатор текста
@@ -219,11 +254,13 @@ gui.crazyae.highlight_mana_block.name=Подсветить мана блок
 gui.crazyae.mana_block_highlighted_in.name=Мана блок подсвечен в x=%s y=%s z=%s
 gui.crazyae.mana_block_highlighted_in_another_dimension_with_pos.name=Мана блок находится находится в другом измерении %s (%s) в x=%s y=%s z=%s, и не может быть подсвечен
 gui.crazyae.mana_block_highlighted_in_another_dimension.name=Мана блок находится находится в другом измерении, и не может быть подсвечен
-gui.crazyae.colorizing_disabled.name=Функция Изменение цвета интерфейса и текста отключена в вашем конфиг файле.
-tooltip.crazyae.require_mana_per_job.name=Базовое потребление маны за операцию: %s
-tooltip.crazyae.require_mana_per_tick.name=Базовое потребление Маны: %s/тик
-tooltip.crazyae.require_ae_per_job.name=Базовое потребление AE за операцию: %s
-tooltip.crazyae.require_ae_per_tick.name=Базовое потребление АЕ: %s/тик
+gui.crazyae.colorizing_disabled.name=Функция изменения цвета интерфейса и текста отключена в вашем файле конфигурации.
+
+tooltip.crazyae.require_mana_per_job.name=Потребляет %s Маны/операция
+tooltip.crazyae.require_mana_per_tick.name=Потребляет %s Маны/тик
+tooltip.crazyae.require_ae_per_job.name=Потребляет %s AE/операция
+tooltip.crazyae.require_ae_per_tick.name=Потребляет %s AE/тик
+
 item.crazyae.creative_mana_cell.name=МЭ Творческая ячейка маны
 item.crazyae.creative_energy_cell.name=МЭ Творческая ячейка энергии
 item.crazyae.part.energy_term.name=МЭ Терминал энергии
@@ -234,10 +271,14 @@ item.crazyae.part.energy_export_bus.name=МЭ Шина экспорта энер
 item.crazyae.part.energy_import_bus.name=МЭ Шина импорта энергии
 item.crazyae.part.part_patterns_iface.name=§8МЭ Интерфейс шаблонов§r
 item.crazyae.part.part_perfect_iface.name=§cМЭ Совершенный интерфейс§r
+
 tile.crazyae.perfect_interface.name=§cМЭ Совершенный интерфейс§r
+
 gui.crazyae.perfect_interface.name=МЭ Совершенный интерфейс
+
 tile.crazyae.mechanical_teraplate.name=Механическая агломерационная плита
 tile.crazyae.mechanical_brewery.name=Механическая варочная стойка
+
 gui.crazyae.energy_terminal.name=МЭ терминал энергии
 gui.crazyae.energy_import_bus.name=МЭ Шина импорта энергии
 gui.crazyae.energy_export_bus.name=МЭ Шина экспорта энергии
@@ -254,17 +295,41 @@ gui.crazyae.items_used.name=Предметов использовано
 gui.crazyae.mana_used.name=Маны использовано
 gui.crazyae.fluid_used.name=Жидкостей использовано
 gui.crazyae.used.name=использовано
+gui.crazyae.craft_started_at.name=Крафт запущен в
+gui.crazyae.initiator.name=Инициатор
 gui.tooltip.crazyae.this_device_supports.name=Машина поддерживает:\n
 gui.crazyae.open_energy_settings_page.name=Настройки
+
 item.crazyae.ef_energy_as_aestack.name=EF Энергия
 item.crazyae.fe_energy_as_aestack.name=FE/RF Энергия
 item.crazyae.se_energy_as_aestack.name=SE Энергия
 item.crazyae.qe_energy_as_aestack.name=QE Энергия
 item.crazyae.eu_energy_as_aestack.name=EU Энергия
+
 gui.tooltip.crazyae.ef_energy.name=EF Энергия
 gui.tooltip.crazyae.fe_energy.name=FE/RF Энергия
 gui.tooltip.crazyae.se_energy.name=SE Энергия
 gui.tooltip.crazyae.qe_energy.name=QE Энергия
 gui.tooltip.crazyae.stored_item.name=%s хранится: %s
 gui.tooltip.crazyae.stored.name=Хранится:
+
+tile.crazyae.quantum_energy_cell.name=Квантовая энергетическая ячейка
+tile.crazyae.quantum_cpu.name=§5Квантовый процессор§r
+tile.crazyae.quantum_cpu_host.name=§5Квантовый процессор§r
+tile.crazyae.quantum_interface.name=Квантовый интерфейс
+tile.crazyae.trashcan_item.name=Предметная мусорка
+tile.crazyae.trashcan_fluid.name=Жидкостная мусорка
+tile.crazyae.trashcan_energy.name=Энергетическая мусорка
+tile.crazyae.trashcan_mana.name=Мана мусорка
+tile.crazyae.perfect_inscriber.name=Совершенный высекатель
+gui.crazyae.trashcan.name=Мусорка
+gui.crazyae.page.name=Страница
+gui.crazyae.quantum_cpu.name=Квантовый процессор
+gui.crazyae.clear_inv_items_nbt.name=Очистить NBT теги у всех предметов\nв сетке крафта
+gui.crazyae.open_crafting_block_list.name=Открыть инвентарь блоков крафта
+tooltip.crazyae.quantum_cpu_warning.name=Этот процессор работает только с квантовыми интерфейсами.
+tooltip.crazyae.quantum_interface_warning.name=Этот интерфейс работает только с квантовыми процессорами.
+
+gui.crazyae.perfect_inscriber.name=Совершенный высекатель
+gui.crazyae.quantum_interface.name=Квантовый интерфейс
 gui.tooltip.crazyae.energy_cell_formatting_hint.name=Для разметки ячейки в верстаке для ячеек поместите любой\nэнергетический провод того типа энергии, которым вы хотите разметить ячейку.

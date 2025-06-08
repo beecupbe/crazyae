@@ -6,7 +6,7 @@ import appeng.items.contents.CellConfig;
 import appeng.items.contents.CellUpgrades;
 import dev.beecube31.crazyae2.common.items.cells.BaseCell;
 import dev.beecube31.crazyae2.common.registration.definitions.Materials;
-import dev.beecube31.crazyae2.common.sync.CrazyAEGuiText;
+import dev.beecube31.crazyae2.common.i18n.CrazyAEGuiText;
 import dev.beecube31.crazyae2.core.CrazyAESidedHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;

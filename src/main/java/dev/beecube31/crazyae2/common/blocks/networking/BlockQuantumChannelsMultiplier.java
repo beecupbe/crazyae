@@ -3,9 +3,11 @@ package dev.beecube31.crazyae2.common.blocks.networking;
 import appeng.block.AEBaseTileBlock;
 import appeng.helpers.AEGlassMaterial;
 import appeng.helpers.ICustomCollision;
-import dev.beecube31.crazyae2.common.sync.CrazyAETooltip;
+import dev.beecube31.crazyae2.client.gui.sprites.Sprite;
+import dev.beecube31.crazyae2.common.i18n.CrazyAETooltip;
 import dev.beecube31.crazyae2.common.tile.networking.TileQuantumChannelsBooster;
-import dev.beecube31.crazyae2.core.CrazyAEConfig;
+import dev.beecube31.crazyae2.common.util.Utils;
+import dev.beecube31.crazyae2.core.config.CrazyAEConfig;
 import net.minecraft.block.properties.IProperty;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.IBlockState;
@@ -201,8 +203,8 @@ public class BlockQuantumChannelsMultiplier extends AEBaseTileBlock implements I
     @Override
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack stack, World player, List<String> tooltip, ITooltipFlag advanced) {
-        final int qmc = CrazyAEConfig.QCMBoostAmt;
-        tooltip.add(String.format(CrazyAETooltip.QCM_DESC.getLocal(), qmc / 4, qmc, qmc * 256));
+        final int qcm = CrazyAEConfig.QCMBoostAmt;
+        tooltip.add(Utils.writeSpriteFlag(Sprite.INFO) + String.format(CrazyAETooltip.QCM_DESC.getLocal(), qcm / 4, qcm, qcm * 256));
 
         super.addInformation(stack, player, tooltip, advanced);
     }

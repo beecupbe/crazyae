@@ -3,7 +3,7 @@ package dev.beecube31.crazyae2.common.base;
 import appeng.block.AEBaseTileBlock;
 import dev.beecube31.crazyae2.common.enums.MachineAttributes;
 import dev.beecube31.crazyae2.common.interfaces.attrib.IMachineAttributeProvider;
-import dev.beecube31.crazyae2.common.sync.CrazyAETooltip;
+import dev.beecube31.crazyae2.common.util.Utils;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
@@ -26,31 +26,23 @@ public abstract class CrazyAEBlockAttribute extends AEBaseTileBlock implements I
 
         if (attrib != null) {
             if (attrib.getRequiredAEPerTick() != Double.MIN_VALUE) {
-                tooltip.add(String.format(
-                        CrazyAETooltip.REQUIRE_AE_PER_TICK.getLocalWithSpaceAtEnd(),
-                        attrib.getRequiredAEPerTick()
-                ));
+                Utils.addReqAePerTick(tooltip, attrib.getRequiredAEPerTick());
             }
 
             if (attrib.getRequiredAEPerJob() != Double.MIN_VALUE) {
-                tooltip.add(String.format(
-                        CrazyAETooltip.REQUIRE_AE_PER_JOB.getLocalWithSpaceAtEnd(),
-                        attrib.getRequiredAEPerJob()
-                ));
+                Utils.addReqAePerJob(tooltip, attrib.getRequiredAEPerJob());
             }
 
             if (attrib.getRequiredManaPerTick() != Double.MIN_VALUE) {
-                tooltip.add(String.format(
-                        CrazyAETooltip.REQUIRE_MANA_PER_TICK.getLocalWithSpaceAtEnd(),
-                        attrib.getRequiredManaPerTick()
-                ));
+                Utils.addReqManaPerTick(tooltip, attrib.getRequiredManaPerTick());
             }
 
             if (attrib.getRequiredManaPerJob() != Double.MIN_VALUE) {
-                tooltip.add(String.format(
-                        CrazyAETooltip.REQUIRE_MANA_PER_JOB.getLocalWithSpaceAtEnd(),
-                        attrib.getRequiredManaPerJob()
-                ));
+                Utils.addReqManaPerJob(tooltip, attrib.getRequiredManaPerJob());
+            }
+
+            if (attrib.isRequireChannel()) {
+                Utils.addReqChannelTooltip(tooltip);
             }
         }
 

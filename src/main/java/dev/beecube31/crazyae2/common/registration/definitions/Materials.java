@@ -36,6 +36,9 @@ public class Materials implements DamagedDefinitions<DamagedItemDefinition, Mate
 	private final IItemDefinition cellPart256mb;
 	private final IItemDefinition cellPart1gb;
 	private final IItemDefinition cellPart2gb;
+	private final IItemDefinition cellPart8gb;
+	private final IItemDefinition cellPart32gb;
+	private final IItemDefinition cellPart128gb;
 
 	private final IItemDefinition fluidCellPart256k;
 	private final IItemDefinition fluidCellPart1mb;
@@ -76,6 +79,19 @@ public class Materials implements DamagedDefinitions<DamagedItemDefinition, Mate
 	private final IItemDefinition energyPart1gb;
 	private final IItemDefinition energyPart2gb;
 
+//	private final IItemDefinition expPart1k;
+//	private final IItemDefinition expPart4k;
+//	private final IItemDefinition expPart16k;
+//	private final IItemDefinition expPart64k;
+//	private final IItemDefinition expPart256k;
+//	private final IItemDefinition expPart1mb;
+//	private final IItemDefinition expPart4mb;
+//	private final IItemDefinition expPart16mb;
+//	private final IItemDefinition expPart64mb;
+//	private final IItemDefinition expPart256mb;
+//	private final IItemDefinition expPart1gb;
+//	private final IItemDefinition expPart2gb;
+
 
 	private final IItemDefinition elventradeBlankPattern;
 	private final IItemDefinition manapoolBlankPattern;
@@ -106,6 +122,9 @@ public class Materials implements DamagedDefinitions<DamagedItemDefinition, Mate
 		this.cellPart256mb = this.createMaterial(this.material, MaterialType.CELL_PART_256MB);
 		this.cellPart1gb = this.createMaterial(this.material, MaterialType.CELL_PART_1GB);
 		this.cellPart2gb = this.createMaterial(this.material, MaterialType.CELL_PART_2GB);
+		this.cellPart8gb = this.createMaterial(this.material, MaterialType.CELL_PART_8GB);
+		this.cellPart32gb = this.createMaterial(this.material, MaterialType.CELL_PART_32GB);
+		this.cellPart128gb = this.createMaterial(this.material, MaterialType.CELL_PART_128GB);
 		
 		this.fluidCellPart256k = this.createMaterial(this.material, MaterialType.CELL_FLUID_PART_256K);
 		this.fluidCellPart1mb = this.createMaterial(this.material, MaterialType.CELL_FLUID_PART_1MB);
@@ -155,6 +174,19 @@ public class Materials implements DamagedDefinitions<DamagedItemDefinition, Mate
 		this.breweryBlankPattern = this.createMaterial(this.material, MaterialType.BREWERY_BLANK_PATTERN);
 
 		this.energyProcessor = this.createMaterial(this.material, MaterialType.ENERGY_PROCESSOR);
+
+//		this.expPart1k = this.createMaterial(this.material, MaterialType.EXP_PART_1K);
+//		this.expPart4k = this.createMaterial(this.material, MaterialType.EXP_PART_4K);
+//		this.expPart16k = this.createMaterial(this.material, MaterialType.EXP_PART_16K);
+//		this.expPart64k = this.createMaterial(this.material, MaterialType.EXP_PART_64K);
+//		this.expPart256k = this.createMaterial(this.material, MaterialType.EXP_PART_256K);
+//		this.expPart1mb = this.createMaterial(this.material, MaterialType.EXP_PART_1MB);
+//		this.expPart4mb = this.createMaterial(this.material, MaterialType.EXP_PART_4MB);
+//		this.expPart16mb = this.createMaterial(this.material, MaterialType.EXP_PART_16MB);
+//		this.expPart64mb = this.createMaterial(this.material, MaterialType.EXP_PART_64MB);
+//		this.expPart256mb = this.createMaterial(this.material, MaterialType.EXP_PART_256MB);
+//		this.expPart1gb = this.createMaterial(this.material, MaterialType.EXP_PART_1GB);
+//		this.expPart2gb = this.createMaterial(this.material, MaterialType.EXP_PART_2GB);
 	}
 
 
@@ -281,6 +313,54 @@ public class Materials implements DamagedDefinitions<DamagedItemDefinition, Mate
 		return this.energyPart2gb;
 	}
 
+//	public IItemDefinition expPart1k() {
+//		return this.expPart1k;
+//	}
+//
+//	public IItemDefinition expPart4k() {
+//		return this.expPart4k;
+//	}
+//
+//	public IItemDefinition expPart16k() {
+//		return this.expPart16k;
+//	}
+//
+//	public IItemDefinition expPart64k() {
+//		return this.expPart64k;
+//	}
+//
+//	public IItemDefinition expPart256k() {
+//		return this.expPart256k;
+//	}
+//
+//	public IItemDefinition expPart1mb() {
+//		return this.expPart1mb;
+//	}
+//
+//	public IItemDefinition expPart4mb() {
+//		return this.expPart4mb;
+//	}
+//
+//	public IItemDefinition expPart16mb() {
+//		return this.expPart16mb;
+//	}
+//
+//	public IItemDefinition expPart64mb() {
+//		return this.expPart64mb;
+//	}
+//
+//	public IItemDefinition expPart256mb() {
+//		return this.expPart256mb;
+//	}
+//
+//	public IItemDefinition expPart1gb() {
+//		return this.expPart1gb;
+//	}
+//
+//	public IItemDefinition expPart2gb() {
+//		return this.expPart2gb;
+//	}
+
 	public IItemDefinition quantumProcessor() {
 		return this.quantumProcessor;
 	}
@@ -323,6 +403,18 @@ public class Materials implements DamagedDefinitions<DamagedItemDefinition, Mate
 
 	public IItemDefinition cellPart2GB() {
 		return this.cellPart2gb;
+	}
+
+	public IItemDefinition cellPart8GB() {
+		return this.cellPart8gb;
+	}
+
+	public IItemDefinition cellPart32GB() {
+		return this.cellPart32gb;
+	}
+
+	public IItemDefinition cellPart128GB() {
+		return this.cellPart128gb;
 	}
 
 	public IItemDefinition cellFluidPart256K() {
@@ -450,7 +542,25 @@ public class Materials implements DamagedDefinitions<DamagedItemDefinition, Mate
 		ENERGY_PROCESSOR("energy_processor", Features.STUB),
 
 		TERAPLATE_BLANK_PATTERN("teraplate_blank_pattern", Features.BOTANIA_MECHANICAL_BLOCKS, "botania"),
-		BREWERY_BLANK_PATTERN("brewery_blank_pattern", Features.BOTANIA_MECHANICAL_BLOCKS, "botania");
+		BREWERY_BLANK_PATTERN("brewery_blank_pattern", Features.BOTANIA_MECHANICAL_BLOCKS, "botania"),
+
+//		EXP_PART_1K("exp_part_1k", Features.EXPERIENCE_CELLS),
+//		EXP_PART_4K("exp_part_4k", Features.EXPERIENCE_CELLS),
+//		EXP_PART_16K("exp_part_16k", Features.EXPERIENCE_CELLS),
+//		EXP_PART_64K("exp_part_64k", Features.EXPERIENCE_CELLS),
+//		EXP_PART_256K("exp_part_256k", Features.EXPERIENCE_DENSE_CELLS),
+//		EXP_PART_1MB("exp_part_1mb", Features.EXPERIENCE_DENSE_CELLS),
+//		EXP_PART_4MB("exp_part_4mb", Features.EXPERIENCE_DENSE_CELLS),
+//		EXP_PART_16MB("exp_part_16mb", Features.EXPERIENCE_DENSE_CELLS),
+//		EXP_PART_64MB("exp_part_64mb", Features.MEGA_EXPERIENCE_DENSE_CELLS),
+//		EXP_PART_256MB("exp_part_256mb", Features.MEGA_EXPERIENCE_DENSE_CELLS),
+//		EXP_PART_1GB("exp_part_1gb", Features.MEGA_EXPERIENCE_DENSE_CELLS),
+//		EXP_PART_2GB("exp_part_2gb", Features.MEGA_EXPERIENCE_DENSE_CELLS);
+
+		CELL_PART_8GB("cell_part_8gb", Features.ULTRA_DENSE_CPUS),
+		CELL_PART_32GB("cell_part_32gb", Features.ULTRA_DENSE_CPUS),
+		CELL_PART_128GB("cell_part_128gb", Features.ULTRA_DENSE_CPUS);
+
 
 
 		private static Int2ObjectLinkedOpenHashMap<MaterialType> cachedValues;

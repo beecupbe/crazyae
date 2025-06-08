@@ -30,7 +30,7 @@ public final class DisassembleRecipe extends net.minecraftforge.registries.IForg
 		final var mats = definitions.materials();
 
 		this.cellMappings = new HashMap<>(15);
-		this.nonCellMappings = new HashMap<>(7);
+		this.nonCellMappings = new HashMap<>(11);
 
 		this.cellMappings.put(items.storageCell256K(), mats.cellPart256K());
 		this.cellMappings.put(items.storageCell1MB(), mats.cellPart1MB());
@@ -58,6 +58,9 @@ public final class DisassembleRecipe extends net.minecraftforge.registries.IForg
 		this.nonCellMappings.put(blocks.craftingStorage256mb(), mats.cellPart256MB());
 		this.nonCellMappings.put(blocks.craftingStorage1gb(), mats.cellPart1GB());
 		this.nonCellMappings.put(blocks.craftingStorage2gb(), mats.cellPart2GB());
+		this.nonCellMappings.put(blocks.craftingStorage8gb(), mats.cellPart8GB());
+		this.nonCellMappings.put(blocks.craftingStorage32gb(), mats.cellPart32GB());
+		this.nonCellMappings.put(blocks.craftingStorage128gb(), mats.cellPart128GB());
 	}
 	
 	@SuppressWarnings("unchecked")

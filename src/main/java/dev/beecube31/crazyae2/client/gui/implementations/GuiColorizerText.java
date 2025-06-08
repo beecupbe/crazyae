@@ -10,7 +10,7 @@ import dev.beecube31.crazyae2.common.items.ColorizerObj;
 import dev.beecube31.crazyae2.common.networking.network.NetworkHandler;
 import dev.beecube31.crazyae2.common.networking.packets.PacketSwitchGuis;
 import dev.beecube31.crazyae2.common.networking.packets.PacketUptadeTextField;
-import dev.beecube31.crazyae2.common.sync.CrazyAEGuiText;
+import dev.beecube31.crazyae2.common.i18n.CrazyAEGuiText;
 import dev.beecube31.crazyae2.common.util.ColorUtils;
 import dev.beecube31.crazyae2.common.util.SystemUtils;
 import dev.beecube31.crazyae2.core.CrazyAE;

@@ -18,14 +18,16 @@ import com.google.common.collect.Lists;
 import dev.beecube31.crazyae2.client.gui.components.ComponentHue;
 import dev.beecube31.crazyae2.client.gui.slot.CustomSlot;
 import dev.beecube31.crazyae2.client.gui.slot.SlotTooltip;
+import dev.beecube31.crazyae2.client.gui.sprites.ISpriteProvider;
 import dev.beecube31.crazyae2.common.containers.base.CrazyAEBaseContainer;
 import dev.beecube31.crazyae2.common.containers.base.slot.*;
-import dev.beecube31.crazyae2.common.interfaces.gui.*;
+import dev.beecube31.crazyae2.common.interfaces.gui.IColorizeableSlot;
+import dev.beecube31.crazyae2.common.interfaces.gui.IScrollSrc;
+import dev.beecube31.crazyae2.common.interfaces.gui.ITooltipObj;
 import dev.beecube31.crazyae2.common.networking.network.NetworkHandler;
 import dev.beecube31.crazyae2.common.networking.packets.orig.PacketInventoryAction;
 import dev.beecube31.crazyae2.common.networking.packets.orig.PacketSwapSlots;
 import dev.beecube31.crazyae2.core.client.CrazyAEClientConfig;
-import dev.beecube31.crazyae2.core.client.CrazyAEClientHandler;
 import mezz.jei.api.gui.IGhostIngredientHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -294,14 +296,6 @@ public abstract class CrazyAEBaseGui extends GuiContainer {
                 final String msg = tooltip.getTooltipMsg();
                 if (msg != null) {
                     this.drawTooltip(x + (mouseX - tooltip.xPos()), y + (mouseY - tooltip.yPos()), msg);
-                    if (tooltip instanceof ITooltipIconsObj j) {
-                        for (Map.Entry<ItemStack, Integer> e : j.getTooltipIcons().entrySet()) {
-                            ItemStack is = e.getKey();
-                            int v = e.getValue();
-
-                            CrazyAEClientHandler.drawItemIntoTooltip(is, v, x + (mouseX - tooltip.xPos()) + 1, Math.max(y + (mouseY - tooltip.yPos()), 1));
-                        }
-                    }
                 }
             }
         }
@@ -910,33 +904,54 @@ public abstract class CrazyAEBaseGui extends GuiContainer {
             try {
                 final ItemStack is = s.getStack();
                 if (s instanceof final IColorizeableSlot c && c.getTarget().getIcon() != null) {
-                    this.bindTexture("guis/states.png");
-                    CrazyAESlot aes = c.getTarget();
+                    ISpriteProvider sprite = c.getTarget().getIcon();
+                    this.bindTexture(sprite.getTextureStr());
+                    CrazyAESlot slot = c.getTarget();
 
                     try {
                         GlStateManager.enableBlend();
                         GlStateManager.disableLighting();
                         GlStateManager.enableTexture2D();
                         GlStateManager.blendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-                        GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
-                        final float par1 = aes.xPos;
-                        final float par2 = aes.yPos;
-                        final float par3 = aes.getIcon().getTextureX();
-                        final float par4 = aes.getIcon().getTextureY();
+                        GlStateManager.color(1.0f, 1.0f, 1.0f, slot.getOpacityOfIcon());
+
+                        float slotX = slot.xPos;
+                        float slotY = slot.yPos;
+                        float slotSize = 16.0f;
+
+                        float spriteTexX = sprite.getTextureX();
+                        float spriteTexY = sprite.getTextureY();
+                        float spriteTexWidth = sprite.getSizeX();
+                        float spriteTexHeight = sprite.getSizeY();
+
+                        float scaleX = slotSize / spriteTexWidth;
+                        float scaleY = slotSize / spriteTexHeight;
+                        float scale = Math.min(scaleX, scaleY);
+
+                        float scaledWidth = spriteTexWidth * scale;
+                        float scaledHeight = spriteTexHeight * scale;
+
+                        float drawX = slotX + (slotSize - scaledWidth) / 2.0f;
+                        float drawY = slotY + (slotSize - scaledHeight) / 2.0f;
+
+                        float textureAtlasWidth = 256.0f;
+                        float textureAtlasHeight = 256.0f;
+
+                        float u1 = spriteTexX / textureAtlasWidth;
+                        float v1 = spriteTexY / textureAtlasHeight;
+                        float u2 = (spriteTexX + spriteTexWidth) / textureAtlasWidth;
+                        float v2 = (spriteTexY + spriteTexHeight) / textureAtlasHeight;
+
 
                         final Tessellator tessellator = Tessellator.getInstance();
                         final BufferBuilder vb = tessellator.getBuffer();
 
-                        vb.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_COLOR);
+                        vb.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
 
-                        final float f1 = 0.00390625F;
-                        final float f = 0.00390625F;
-                        final float par6 = 16;
-                        vb.pos(par1 + 0, par2 + par6, this.zLevel).tex((par3 + 0) * f, (par4 + par6) * f1).color(1.0f, 1.0f, 1.0f, aes.getOpacityOfIcon()).endVertex();
-                        final float par5 = 16;
-                        vb.pos(par1 + par5, par2 + par6, this.zLevel).tex((par3 + par5) * f, (par4 + par6) * f1).color(1.0f, 1.0f, 1.0f, aes.getOpacityOfIcon()).endVertex();
-                        vb.pos(par1 + par5, par2 + 0, this.zLevel).tex((par3 + par5) * f, (par4 + 0) * f1).color(1.0f, 1.0f, 1.0f, aes.getOpacityOfIcon()).endVertex();
-                        vb.pos(par1 + 0, par2 + 0, this.zLevel).tex((par3 + 0) * f, (par4 + 0) * f1).color(1.0f, 1.0f, 1.0f, aes.getOpacityOfIcon()).endVertex();
+                        vb.pos(drawX, drawY + scaledHeight, this.zLevel).tex(u1, v2).endVertex();
+                        vb.pos(drawX + scaledWidth, drawY + scaledHeight, this.zLevel).tex(u2, v2).endVertex();
+                        vb.pos(drawX + scaledWidth, drawY, this.zLevel).tex(u2, v1).endVertex();
+                        vb.pos(drawX, drawY, this.zLevel).tex(u1, v1).endVertex();
                         tessellator.draw();
 
                     } catch (final Exception ignored) {}
@@ -975,7 +990,6 @@ public abstract class CrazyAEBaseGui extends GuiContainer {
                         final ItemStack out = iep.getOutput(is);
                         if (!out.isEmpty()) {
                             CrazyAESlot appEngSlot = ((CrazyAESlot) s);
-                            if (s.getStack().isEmpty()) return;
                             appEngSlot.setDisplay(true);
                             appEngSlot.setReturnAsSingleStack(true);
 
@@ -992,8 +1006,7 @@ public abstract class CrazyAEBaseGui extends GuiContainer {
                             // Annoying but easier than trying to splice into render item
                             super.drawSlot(s);
 
-                            final boolean forceRender = s instanceof RestrictedSlot ris && ris.getPlaceableItemType() == RestrictedSlot.PlaceableItemType.ENCODED_PATTERN;
-                            if (isShiftKeyDown() || forceRender) {
+                            if (isShiftKeyDown()) {
                                 this.stackSizeRenderer.renderStackSize(this.fontRenderer, AEItemStack.fromItemStack(out), s.xPos, s.yPos);
                             } else {
                                 super.drawSlot(s);

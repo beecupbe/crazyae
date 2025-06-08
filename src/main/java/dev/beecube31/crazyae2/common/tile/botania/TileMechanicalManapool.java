@@ -9,6 +9,7 @@ import appeng.me.helpers.MachineSource;
 import appeng.tile.inventory.AppEngInternalInventory;
 import appeng.util.inv.InvOperation;
 import com.google.common.base.Preconditions;
+import dev.beecube31.crazyae2.common.containers.base.slot.RestrictedSlot;
 import dev.beecube31.crazyae2.common.enums.BotaniaMechanicalDeviceType;
 import dev.beecube31.crazyae2.common.parts.implementations.CrazyAEBlockUpgradeInv;
 import dev.beecube31.crazyae2.common.util.NBTUtils;
@@ -44,22 +45,12 @@ public class TileMechanicalManapool extends TileBotaniaMechanicalMachineBase {
         final Block block = CrazyAE.definitions().blocks().mechanicalManapool().maybeBlock().orElse(null);
         Preconditions.checkNotNull(block);
         this.upgrades = new CrazyAEBlockUpgradeInv(block, this, this.getUpgradeSlots());
+
+        this.internalPatternsStorageInv.setItemFilter(RestrictedSlot.PlaceableItemType.MANAPOOL_ENCODED_PATTERN.associatedFilter);
     }
 
     @Override
     public boolean pushPattern(ICraftingPatternDetails iCraftingPatternDetails, InventoryCrafting inventoryCrafting) {
-        if (iCraftingPatternDetails instanceof ManapoolCraftingPatternDetails pd) {
-            if (this.tasksQueued >= this.tasksMaxAmt) return false;
-
-            this.tasksQueued++;
-            this.queueMap.add(new ManaCraftingTask(iCraftingPatternDetails.getCondensedOutputs(), 0, pd.getRequiredMana()));
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean fastPushPattern(ICraftingPatternDetails iCraftingPatternDetails) {
         if (iCraftingPatternDetails instanceof ManapoolCraftingPatternDetails pd) {
             if (this.tasksQueued >= this.tasksMaxAmt) return false;
 

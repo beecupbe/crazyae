@@ -1,3 +1,5 @@
-version:v0.5.0.1
+version:v0.6
 link:https://www.curseforge.com/minecraft/mc-mods/crazyae/files/all?showAlphaFiles=show
-desc: - compatibility issues with IndustrialUpgrade mod fixes, Energy Processor recipe bug fix.
+desc: - New FASTEST (and OPTIMIZED) Autocrafting system EVER.  ...and more QoL content :)
+desc_ru: - Новая САМАЯ БЫСТРАЯ и ОПТИМИЗИРОВАННАЯ система автокрафта.  ...и еще парочка полезных штучек :)
+desc_cn: - todo

@@ -6,6 +6,8 @@ import appeng.api.networking.IGridNode;
 import appeng.crafting.CraftingLink;
 import appeng.me.cache.CraftingGridCache;
 import appeng.me.cluster.implementations.CraftingCPUCluster;
+import appeng.tile.crafting.TileCraftingTile;
+import dev.beecube31.crazyae2.common.tile.crafting.TileDenseCraftingUnit;
 import dev.beecube31.crazyae2.common.tile.networking.TileCraftingUnitsCombiner;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -26,11 +28,11 @@ public abstract class MixinCraftingGridCache {
 
     @Shadow public abstract void addLink(CraftingLink link);
 
-    @Inject(method = "updateCPUClusters()V", at = @At("RETURN"), remap = false, cancellable = true)
+    @Inject(method = "updateCPUClusters()V", at = @At("RETURN"), remap = false)
     private void crazyae$updateCPUClusters(CallbackInfo ci) {
-        for (Object cls: StreamSupport.stream(grid.getMachinesClasses().spliterator(), false).filter(TileCraftingUnitsCombiner.class::isAssignableFrom).toArray()) {
+        for (Object cls: StreamSupport.stream(grid.getMachinesClasses().spliterator(), false).filter(te -> te.isAssignableFrom(TileDenseCraftingUnit.class) || te.isAssignableFrom(TileCraftingUnitsCombiner.class)).toArray()) {
             for (final IGridNode cst : this.grid.getMachines((Class<? extends IGridHost>) cls)) {
-                final TileCraftingUnitsCombiner tile = (TileCraftingUnitsCombiner) cst.getMachine();
+                final TileCraftingTile tile = (TileCraftingTile) cst.getMachine();
                 final CraftingCPUCluster cluster = (CraftingCPUCluster) tile.getCluster();
                 if (cluster != null) {
                     this.craftingCPUClusters.add(cluster);

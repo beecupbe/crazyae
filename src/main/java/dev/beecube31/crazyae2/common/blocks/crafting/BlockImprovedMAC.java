@@ -7,7 +7,6 @@ import dev.beecube31.crazyae2.common.sync.CrazyAEGuiBridge;
 import dev.beecube31.crazyae2.common.sync.CrazyAEGuiHandler;
 import dev.beecube31.crazyae2.common.tile.crafting.TileImprovedMAC;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.BlockRenderLayer;
@@ -19,8 +18,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class BlockImprovedMAC extends CrazyAEBlockAttribute {
-
-    public static final PropertyBool POWERED = PropertyBool.create("powered");
 
     public BlockImprovedMAC() {
         super(Material.IRON);

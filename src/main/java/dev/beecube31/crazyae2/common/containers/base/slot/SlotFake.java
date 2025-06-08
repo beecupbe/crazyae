@@ -5,6 +5,7 @@ import dev.beecube31.crazyae2.client.gui.CrazyAESlot;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.IItemHandler;
+import org.jetbrains.annotations.NotNull;
 
 public class SlotFake extends CrazyAESlot implements IJEITargetSlot {
 
@@ -35,12 +36,12 @@ public class SlotFake extends CrazyAESlot implements IJEITargetSlot {
     }
 
     @Override
-    public ItemStack decrStackSize(final int par1) {
+    public @NotNull ItemStack decrStackSize(final int par1) {
         return ItemStack.EMPTY;
     }
 
     @Override
-    public boolean isItemValid(final ItemStack par1ItemStack) {
+    public boolean isItemValid(final @NotNull ItemStack par1ItemStack) {
         return false;
     }
 
