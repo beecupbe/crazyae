@@ -11,6 +11,9 @@ import appeng.api.networking.events.MENetworkEventSubscribe;
 import appeng.api.networking.events.MENetworkPowerStatusChange;
 import appeng.api.networking.security.IActionSource;
 import appeng.api.networking.storage.IStorageGrid;
+import appeng.api.networking.ticking.IGridTickable;
+import appeng.api.networking.ticking.TickRateModulation;
+import appeng.api.networking.ticking.TickingRequest;
 import appeng.api.storage.IMEInventory;
 import appeng.api.storage.IMEMonitorHandlerReceiver;
 import appeng.api.storage.channels.IItemStorageChannel;
@@ -62,7 +65,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class TileQuantumCPU extends CrazyCraftContainer implements IConfigManagerHost, ICraftingCPU, ICrazyCraftHost, ICrazyCraftingMethod, ICrazyCraftCallback, IGridHostMonitorable, IMixinCraftingCPUStatus {
+public class TileQuantumCPU extends CrazyCraftContainer implements IConfigManagerHost, ICraftingCPU, ICrazyCraftHost, ICrazyCraftingMethod, ICrazyCraftCallback, IGridHostMonitorable, IMixinCraftingCPUStatus, IGridTickable {
 
 
     private final CrazyAEInternalInv patternsInv = new CrazyAEInternalInv(this, 1024, 1).setItemFilter(RestrictedSlot.PlaceableItemType.ENCODED_CRAFTING_PATTERN.associatedFilter);
@@ -90,8 +93,8 @@ public class TileQuantumCPU extends CrazyCraftContainer implements IConfigManage
 
     private String myOwnName = "";
 
-    private long millisWhenJobStarted;
-    private String jobInitiator;
+    private long millisWhenJobStarted = 0;
+    private String jobInitiator = "";
 
     public TileQuantumCPU() {
         this.settings = new ConfigManager(this);
@@ -419,18 +422,6 @@ public class TileQuantumCPU extends CrazyCraftContainer implements IConfigManage
     public void tickCraftHost(IGrid grid, CrazyAutocraftingSystem cache) {
         if (!this.getProxy().isActive()) {
             return;
-        }
-
-        if (!this.cached) {
-            this.accelsCount = -1;
-            this.storageCount = -1;
-            if (this.getProxy().isActive()) {
-                this.updateCraftingList();
-                this.notifyPatternsChanged();
-                this.notifyReady();
-            } else {
-                this.cached = true;
-            }
         }
 
         if (!this.itemsToSend.isEmpty() && this.getProxy().isActive()) {
@@ -2070,6 +2061,28 @@ public class TileQuantumCPU extends CrazyCraftContainer implements IConfigManage
     @Override
     public void removeListener(IMEMonitorHandlerReceiver<IAEItemStack> imeMonitorHandlerReceiver) {
         this.listeners.remove(imeMonitorHandlerReceiver);
+    }
+
+    @NotNull
+    @Override
+    public TickingRequest getTickingRequest(@NotNull IGridNode iGridNode) {
+        return new TickingRequest(1,1,false,false);
+    }
+
+    @NotNull
+    @Override
+    public TickRateModulation tickingRequest(@NotNull IGridNode iGridNode, int i) {
+        if (!this.cached) {
+            this.accelsCount = -1;
+            this.storageCount = -1;
+            if (this.getProxy().isActive()) {
+                this.updateCraftingList();
+                this.notifyPatternsChanged();
+                this.notifyReady();
+            }
+        }
+
+        return TickRateModulation.URGENT;
     }
 
     private static class PendingInterfaceTask {

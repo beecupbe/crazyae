@@ -33,11 +33,12 @@ import appeng.util.Platform;
 import appeng.util.inv.InvOperation;
 import appeng.util.item.AEItemStack;
 import com.google.common.base.Preconditions;
+import dev.beecube31.crazyae2.common.containers.base.ContainerNull;
 import dev.beecube31.crazyae2.common.containers.base.slot.RestrictedSlot;
+import dev.beecube31.crazyae2.common.i18n.CrazyAEGuiText;
 import dev.beecube31.crazyae2.common.interfaces.IGridHostMonitorable;
 import dev.beecube31.crazyae2.common.interfaces.upgrades.IUpgradesInfoProvider;
 import dev.beecube31.crazyae2.common.parts.implementations.CrazyAEBlockUpgradeInv;
-import dev.beecube31.crazyae2.common.i18n.CrazyAEGuiText;
 import dev.beecube31.crazyae2.common.tile.base.CrazyAENetworkInvOCTile;
 import dev.beecube31.crazyae2.common.util.inv.CrazyAEInternalInv;
 import dev.beecube31.crazyae2.core.CrazyAE;
@@ -51,6 +52,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraftforge.items.IItemHandler;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -72,7 +74,9 @@ public class TileImprovedMAC extends CrazyAENetworkInvOCTile implements IConfigM
 
     private int priority = 1;
     private List<ICraftingPatternDetails> craftingList = null;
-    private final List<IAEItemStack> itemsToSend = new ArrayList<>();
+
+    private final List<IAEItemStack> itemsToSend = new ArrayList<>(); // not used, just for compatibility
+    private final List<InventoryCrafting> activeJobs = new ArrayList<>();
 
     public TileImprovedMAC() {
         final Block assembler = CrazyAE.definitions().blocks().improvedMolecularAssembler().maybeBlock().orElse(null);
@@ -91,15 +95,22 @@ public class TileImprovedMAC extends CrazyAENetworkInvOCTile implements IConfigM
 
     @Override
     public boolean pushPattern(final ICraftingPatternDetails patternDetails, final InventoryCrafting table) {
-        if (this.cached && this.itemsToSend.size() < this.maxQueueSize && patternDetails.isCraftable()) {
-            return this.dispatchJob(patternDetails);
+        if (this.isPowered && !this.isBusy()) {
+            this.activeJobs.add(table);
+
+            try {
+                this.getProxy().getTick().wakeDevice(this.getProxy().getNode());
+            } catch (GridAccessException ignored) {}
+
+            return true;
         }
+
         return false;
     }
 
     @Override
     public boolean isBusy() {
-        return this.itemsToSend.size() >= this.maxQueueSize;
+        return this.activeJobs.size() >= this.maxQueueSize;
     }
 
     @Override
@@ -135,6 +146,24 @@ public class TileImprovedMAC extends CrazyAENetworkInvOCTile implements IConfigM
         }
         data.setTag("itemsToSend", nbtTagList);
 
+        NBTTagList jobsList = new NBTTagList();
+        for (InventoryCrafting job : this.activeJobs) {
+            NBTTagCompound jobTag = new NBTTagCompound();
+            NBTTagList itemsList = new NBTTagList();
+            for (int i = 0; i < job.getSizeInventory(); i++) {
+                ItemStack stack = job.getStackInSlot(i);
+                if (!stack.isEmpty()) {
+                    NBTTagCompound itemTag = new NBTTagCompound();
+                    itemTag.setByte("Slot", (byte) i);
+                    stack.writeToNBT(itemTag);
+                    itemsList.appendTag(itemTag);
+                }
+            }
+            jobTag.setTag("Items", itemsList);
+            jobsList.appendTag(jobTag);
+        }
+        data.setTag("activeJobs", jobsList);
+
         this.patternsInv.writeToNBT(data, "patterns");
         this.upgrades.writeToNBT(data, "upgrades");
         this.settings.writeToNBT(data);
@@ -157,6 +186,25 @@ public class TileImprovedMAC extends CrazyAENetworkInvOCTile implements IConfigM
             }
         }
 
+        this.activeJobs.clear();
+        if (data.hasKey("activeJobs")) {
+            NBTTagList jobsList = data.getTagList("activeJobs", 10);
+            for (int i = 0; i < jobsList.tagCount(); i++) {
+                NBTTagCompound jobTag = jobsList.getCompoundTagAt(i);
+                InventoryCrafting job = new InventoryCrafting(new ContainerNull(), 3, 3);
+
+                NBTTagList itemsList = jobTag.getTagList("Items", 10);
+                for (int j = 0; j < itemsList.tagCount(); j++) {
+                    NBTTagCompound itemTag = itemsList.getCompoundTagAt(j);
+                    int slot = itemTag.getByte("Slot");
+                    if (slot >= 0 && slot < job.getSizeInventory()) {
+                        job.setInventorySlotContents(slot, new ItemStack(itemTag));
+                    }
+                }
+                this.activeJobs.add(job);
+            }
+        }
+
         this.patternsInv.readFromNBT(data, "patterns");
         this.priority = data.getInteger("priority");
         this.upgrades.readFromNBT(data, "upgrades");
@@ -164,7 +212,7 @@ public class TileImprovedMAC extends CrazyAENetworkInvOCTile implements IConfigM
     }
 
     @Override
-    public AECableType getCableConnectionType(final AEPartLocation dir) {
+    public @NotNull AECableType getCableConnectionType(final @NotNull AEPartLocation dir) {
         return AECableType.COVERED;
     }
 
@@ -191,7 +239,7 @@ public class TileImprovedMAC extends CrazyAENetworkInvOCTile implements IConfigM
     public void updateSetting(final IConfigManager manager, final Enum settingName, final Enum newValue) {}
 
     @Override
-    public IItemHandler getInternalInventory() {
+    public @NotNull IItemHandler getInternalInventory() {
         return this.patternsInv;
     }
 
@@ -394,12 +442,12 @@ public class TileImprovedMAC extends CrazyAENetworkInvOCTile implements IConfigM
     }
 
     @Override
-    public TickingRequest getTickingRequest(final IGridNode node) {
+    public @NotNull TickingRequest getTickingRequest(final @NotNull IGridNode node) {
         return new TickingRequest(1, 10, this.checkStatus(), false);
     }
 
     @Override
-    public TickRateModulation tickingRequest(final IGridNode node, int ticksSinceLastCall) {
+    public @NotNull TickRateModulation tickingRequest(final @NotNull IGridNode node, int ticksSinceLastCall) {
         if (!this.cached) {
             if (this.getProxy().isActive()) {
                 this.notifyPatternsChanged();
@@ -415,16 +463,68 @@ public class TileImprovedMAC extends CrazyAENetworkInvOCTile implements IConfigM
             this.pushItemsOut();
         }
 
-        return TickRateModulation.URGENT;
-    }
+        if (!this.activeJobs.isEmpty()) {
+            IStorageGrid storage;
 
-    private boolean dispatchJob(ICraftingPatternDetails details) {
-        if (details != null) {
-            IAEItemStack output = details.getPrimaryOutput();
-            this.itemsToSend.add(output);
-            return true;
+            try {
+                storage = this.getProxy().getGrid().getCache(IStorageGrid.class);
+            } catch (GridAccessException e) {
+                return TickRateModulation.IDLE;
+            }
+
+            int processedThisTick = 0;
+
+            Iterator<InventoryCrafting> iterator = this.activeJobs.iterator();
+            while (iterator.hasNext() && processedThisTick < this.itemsToSendPerTick) {
+                InventoryCrafting craftingGrid = iterator.next();
+
+                ItemStack result = Platform.findMatchingRecipeOutput(craftingGrid, this.world);
+
+                if (result != null && !result.isEmpty()) {
+                    List<ItemStack> outputs = new ArrayList<>();
+                    outputs.add(result.copy());
+
+                    for (int i = 0; i < craftingGrid.getSizeInventory(); ++i) {
+                        ItemStack remaining = craftingGrid.getStackInSlot(i).getItem().getContainerItem(craftingGrid.getStackInSlot(i));
+                        if (!remaining.isEmpty()) {
+                            outputs.add(remaining);
+                        }
+                    }
+
+                    boolean allPushed = true;
+                    for (ItemStack outputStack : outputs) {
+                        IAEItemStack toInject = AEItemStack.fromItemStack(outputStack);
+                        IAEItemStack overflow = storage.getInventory(AEApi.instance().storage().getStorageChannel(IItemStorageChannel.class))
+                                .injectItems(toInject, Actionable.SIMULATE, this.actionSource);
+
+                        if (overflow != null && overflow.getStackSize() > 0) {
+                            allPushed = false;
+                            break;
+                        }
+                    }
+
+                    if (allPushed) {
+                        for (ItemStack outputStack : outputs) {
+                            IAEItemStack toInject = AEItemStack.fromItemStack(outputStack);
+                            storage.getInventory(AEApi.instance().storage().getStorageChannel(IItemStorageChannel.class))
+                                    .injectItems(toInject, Actionable.MODULATE, this.actionSource);
+                        }
+
+                        processedThisTick += outputs.size();
+                        this.addCompletedOperations(1);
+                        iterator.remove();
+                    }
+                } else {
+                    iterator.remove();
+                }
+            }
         }
-        return false;
+
+        if (this.activeJobs.isEmpty()) {
+            return TickRateModulation.SLEEP;
+        }
+
+        return TickRateModulation.URGENT;
     }
 
     @MENetworkEventSubscribe

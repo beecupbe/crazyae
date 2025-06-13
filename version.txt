@@ -1,5 +1,5 @@
-version:v0.6
+version:v0.6.0.1
 link:https://www.curseforge.com/minecraft/mc-mods/crazyae/files/all?showAlphaFiles=show
-desc: - New FASTEST (and OPTIMIZED) Autocrafting system EVER.  ...and more QoL content :)
-desc_ru: - Новая САМАЯ БЫСТРАЯ и ОПТИМИЗИРОВАННАЯ система автокрафта.  ...и еще парочка полезных штучек :)
-desc_cn: - todo
+desc: - Bug fixes for Quantum CPU and Improved Molecular Assembler.
+desc_ru: - Исправление багов для Квантового процессора и Улучшенного молекулярного сборщика.
+desc_cn: - hjkfghjkgfdshjkgfsd
