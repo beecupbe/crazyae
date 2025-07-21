@@ -18,26 +18,28 @@ public abstract class DenseCell<T extends IAEStack<T>> extends BaseCell {
 	protected final int capacity;
 	protected final double idleDrain;
 	protected final int bytesPerType;
+	protected final int type;
 
-	public DenseCell(Materials.MaterialType whichCell, int bytes) {
-		this(whichCell, bytes, 1, 16);
+	public DenseCell(Materials.MaterialType whichCell, int bytes, int type) {
+		this(whichCell, bytes, 1, 16, type);
 	}
 
-	public DenseCell(Materials.MaterialType whichCell, int bytes, int bytesPerType) {
-		this(whichCell, bytes, bytesPerType, 16);
+	public DenseCell(Materials.MaterialType whichCell, int bytes, int bytesPerType, int type) {
+		this(whichCell, bytes, bytesPerType, 16, type);
 	}
 
-	public DenseCell(Materials.MaterialType whichCell, int bytes, double idleDrain) {
-		this(whichCell, bytes, 1, idleDrain);
+	public DenseCell(Materials.MaterialType whichCell, int bytes, double idleDrain, int type) {
+		this(whichCell, bytes, 1, idleDrain, type);
 	}
 
-	public DenseCell(Materials.MaterialType whichCell, int bytes, int bytesPerType, double idleDrain) {
+	public DenseCell(Materials.MaterialType whichCell, int bytes, int bytesPerType, double idleDrain, int type) {
 		super(whichCell, bytes, bytesPerType, idleDrain);
 		this.setMaxStackSize(1);
 		this.component = whichCell;
 		this.capacity = bytes;
 		this.idleDrain = idleDrain;
 		this.bytesPerType = bytesPerType;
+		this.type = type;
 	}
 
 	public IItemHandler getUpgradesInventory(ItemStack is) {
@@ -55,7 +57,7 @@ public abstract class DenseCell<T extends IAEStack<T>> extends BaseCell {
 
 	@Override
 	public int getTotalTypes(@NotNull ItemStack cellItem) {
-		return CrazyAEConfig.cellItemsTypesAmt;
+		return this.type;
 	}
 
 	@Override

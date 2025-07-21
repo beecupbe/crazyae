@@ -24,6 +24,7 @@ import dev.beecube31.crazyae2.common.registration.registry.Registry;
 import dev.beecube31.crazyae2.common.registration.registry.interfaces.Definitions;
 import dev.beecube31.crazyae2.core.CrazyAE;
 import dev.beecube31.crazyae2.core.CrazyAESidedHandler;
+import dev.beecube31.crazyae2.core.config.CrazyAEConfig;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.item.ItemStack;
 
@@ -192,35 +193,35 @@ public class Items implements Definitions<IItemDefinition> {
 
 
 
-		this.storageCell256k = this.registerById(registry.item("storage_cell_256k", () -> new DenseItemCell(Materials.MaterialType.CELL_PART_256K, 256 * 1024, 4D))
+		this.storageCell256k = this.registerById(registry.item("storage_cell_256k", () -> new DenseItemCell(Materials.MaterialType.CELL_PART_256K, 256 * 1024, 4D, CrazyAEConfig.storageCell256kTypeAmt))
 				.features(Features.DENSE_CELLS)
 				.build());
 
-		this.storageCell1mb = this.registerById(registry.item("storage_cell_1mb", () -> new DenseItemCell(Materials.MaterialType.CELL_PART_1MB, 1024 * 1024, 6D))
+		this.storageCell1mb = this.registerById(registry.item("storage_cell_1mb", () -> new DenseItemCell(Materials.MaterialType.CELL_PART_1MB, 1024 * 1024, 6D, CrazyAEConfig.storageCell1mbTypeAmt))
 				.features(Features.DENSE_CELLS)
 				.build());
 
-		this.storageCell4mb = this.registerById(registry.item("storage_cell_4mb", () -> new DenseItemCell(Materials.MaterialType.CELL_PART_4MB, 4096 * 1024, 8D))
+		this.storageCell4mb = this.registerById(registry.item("storage_cell_4mb", () -> new DenseItemCell(Materials.MaterialType.CELL_PART_4MB, 4096 * 1024, 8D, CrazyAEConfig.storageCell4mbTypeAmt))
 				.features(Features.DENSE_CELLS)
 				.build());
 
-		this.storageCell16mb = this.registerById(registry.item("storage_cell_16mb", () -> new DenseItemCell(Materials.MaterialType.CELL_PART_16MB, 16384 * 1024, 12D))
+		this.storageCell16mb = this.registerById(registry.item("storage_cell_16mb", () -> new DenseItemCell(Materials.MaterialType.CELL_PART_16MB, 16384 * 1024, 12D, CrazyAEConfig.storageCell16mbTypeAmt))
 				.features(Features.DENSE_CELLS)
 				.build());
 
-		this.storageCell64mb = this.registerById(registry.item("storage_cell_64mb", () -> new DenseItemCell(Materials.MaterialType.CELL_PART_64MB, 65536 * 1024, 24D))
+		this.storageCell64mb = this.registerById(registry.item("storage_cell_64mb", () -> new DenseItemCell(Materials.MaterialType.CELL_PART_64MB, 65536 * 1024, 24D, CrazyAEConfig.storageCell64mbTypeAmt))
 				.features(Features.MEGA_DENSE_CELLS)
 				.build());
 
-		this.storageCell256mb = this.registerById(registry.item("storage_cell_256mb", () -> new DenseItemCell(Materials.MaterialType.CELL_PART_256MB, 262144 * 1024, 40D))
+		this.storageCell256mb = this.registerById(registry.item("storage_cell_256mb", () -> new DenseItemCell(Materials.MaterialType.CELL_PART_256MB, 262144 * 1024, 40D, CrazyAEConfig.storageCell256mbTypeAmt))
 				.features(Features.MEGA_DENSE_CELLS)
 				.build());
 
-		this.storageCell1gb = this.registerById(registry.item("storage_cell_1gb", () -> new DenseItemCell(Materials.MaterialType.CELL_PART_1GB, 1048576 * 1024, 52D))
+		this.storageCell1gb = this.registerById(registry.item("storage_cell_1gb", () -> new DenseItemCell(Materials.MaterialType.CELL_PART_1GB, 1048576 * 1024, 52D, CrazyAEConfig.storageCell1gbTypeAmt))
 				.features(Features.MEGA_DENSE_CELLS)
 				.build());
 
-		this.storageCell2gb = this.registerById(registry.item("storage_cell_2gb", () -> new DenseItemCell(Materials.MaterialType.CELL_PART_2GB, Integer.MAX_VALUE, 64D))
+		this.storageCell2gb = this.registerById(registry.item("storage_cell_2gb", () -> new DenseItemCell(Materials.MaterialType.CELL_PART_2GB, Integer.MAX_VALUE, 64D, CrazyAEConfig.storageCell2gbTypeAmt))
 				.features(Features.MEGA_DENSE_CELLS)
 				.build());
 
@@ -406,35 +407,35 @@ public class Items implements Definitions<IItemDefinition> {
 
 
 
-		this.fluidCell256k = this.registerById(registry.item("fluid_storage_cell_256k", () -> new DenseFluidCell(Materials.MaterialType.CELL_FLUID_PART_256K, 256 * 1024, 4D))
+		this.fluidCell256k = this.registerById(registry.item("fluid_storage_cell_256k", () -> new DenseFluidCell(Materials.MaterialType.CELL_FLUID_PART_256K, 256 * 1024, 4D, CrazyAEConfig.fluidCell256kTypeAmt))
 				.features(Features.DENSE_CELLS)
 				.build());
 
-		this.fluidCell1mb = this.registerById(registry.item("fluid_storage_cell_1mb", () -> new DenseFluidCell(Materials.MaterialType.CELL_FLUID_PART_1MB, 1024 * 1024, 6D))
+		this.fluidCell1mb = this.registerById(registry.item("fluid_storage_cell_1mb", () -> new DenseFluidCell(Materials.MaterialType.CELL_FLUID_PART_1MB, 1024 * 1024, 6D, CrazyAEConfig.fluidCell1mbTypeAmt))
 				.features(Features.DENSE_CELLS)
 				.build());
 
-		this.fluidCell4mb = this.registerById(registry.item("fluid_storage_cell_4mb", () -> new DenseFluidCell(Materials.MaterialType.CELL_FLUID_PART_4MB, 4096 * 1024, 8D))
+		this.fluidCell4mb = this.registerById(registry.item("fluid_storage_cell_4mb", () -> new DenseFluidCell(Materials.MaterialType.CELL_FLUID_PART_4MB, 4096 * 1024, 8D, CrazyAEConfig.fluidCell4mbTypeAmt))
 				.features(Features.DENSE_CELLS)
 				.build());
 
-		this.fluidCell16mb = this.registerById(registry.item("fluid_storage_cell_16mb", () -> new DenseFluidCell(Materials.MaterialType.CELL_FLUID_PART_16MB, 16384 * 1024, 12D))
+		this.fluidCell16mb = this.registerById(registry.item("fluid_storage_cell_16mb", () -> new DenseFluidCell(Materials.MaterialType.CELL_FLUID_PART_16MB, 16384 * 1024, 12D, CrazyAEConfig.fluidCell16mbTypeAmt))
 				.features(Features.DENSE_CELLS)
 				.build());
 
-		this.fluidCell64mb = this.registerById(registry.item("fluid_storage_cell_64mb", () -> new DenseFluidCell(Materials.MaterialType.CELL_FLUID_PART_64MB, 65536 * 1024, 24D))
+		this.fluidCell64mb = this.registerById(registry.item("fluid_storage_cell_64mb", () -> new DenseFluidCell(Materials.MaterialType.CELL_FLUID_PART_64MB, 65536 * 1024, 24D, CrazyAEConfig.fluidCell64mbTypeAmt))
 				.features(Features.MEGA_DENSE_CELLS)
 				.build());
 
-		this.fluidCell256mb = this.registerById(registry.item("fluid_storage_cell_256mb", () -> new DenseFluidCell(Materials.MaterialType.CELL_FLUID_PART_256MB, 262144 * 1024, 40D))
+		this.fluidCell256mb = this.registerById(registry.item("fluid_storage_cell_256mb", () -> new DenseFluidCell(Materials.MaterialType.CELL_FLUID_PART_256MB, 262144 * 1024, 40D, CrazyAEConfig.fluidCell256mbTypeAmt))
 				.features(Features.MEGA_DENSE_CELLS)
 				.build());
 
-		this.fluidCell1gb = this.registerById(registry.item("fluid_storage_cell_1gb", () -> new DenseFluidCell(Materials.MaterialType.CELL_FLUID_PART_1GB, 1048576 * 1024, 52D))
+		this.fluidCell1gb = this.registerById(registry.item("fluid_storage_cell_1gb", () -> new DenseFluidCell(Materials.MaterialType.CELL_FLUID_PART_1GB, 1048576 * 1024, 52D, CrazyAEConfig.fluidCell1gbTypeAmt))
 				.features(Features.MEGA_DENSE_CELLS)
 				.build());
 
-		this.fluidCell2gb = this.registerById(registry.item("fluid_storage_cell_2gb", () -> new DenseFluidCell(Materials.MaterialType.CELL_FLUID_PART_2GB, Integer.MAX_VALUE, 64D))
+		this.fluidCell2gb = this.registerById(registry.item("fluid_storage_cell_2gb", () -> new DenseFluidCell(Materials.MaterialType.CELL_FLUID_PART_2GB, Integer.MAX_VALUE, 64D, CrazyAEConfig.fluidCell2gbTypeAmt))
 				.features(Features.MEGA_DENSE_CELLS)
 				.build());
 
