@@ -1,0 +1,5 @@
+version:v0.1
+link:~~~~~~~~~~~~~~~
+desc: - Initial release for 1.20.1
+desc_ru: - Первый релиз для версии 1.20.1
+desc_cn: - 1.20.1 初始版本

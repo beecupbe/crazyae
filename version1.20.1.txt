@@ -1,5 +1,0 @@
-version:v0.5
-link:https://www.curseforge.com/minecraft/mc-mods/crazyae/files/all?showAlphaFiles=show
-desc: - Initial release for 1.20.1
-desc_ru: - Первый релиз для версии 1.20.1
-desc_cn: - 1.20.1 初始版本
