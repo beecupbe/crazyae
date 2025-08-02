@@ -1,5 +1,6 @@
 version:v0.6.0.2
 link:https://www.curseforge.com/minecraft/mc-mods/crazyae/files/all?showAlphaFiles=show
-desc: - fixed crash when opening crafting status without cpus
+desc: - Fixed crash when opening crafting status GUI without cpus
 desc_ru: - Исправление краша при открытии статуса крафта без единого процессора
+
 desc_cn: -
