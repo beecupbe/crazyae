@@ -179,7 +179,7 @@ public abstract class MixinContainerCraftingCPU extends AEBaseContainer implemen
     public void detectAndSendChanges() {
         if (Platform.isServer()) {
             ICraftingCPU currentCpu = this.getMonitor() != null ? this.getMonitor() : this.crazyae$worker;
-            final long elapsedTime =  this.getMonitor() != null ? this.getMonitor().getElapsedTime() : this.crazyae$worker.getElapsedTime();
+            final long elapsedTime =  this.getMonitor() != null ? this.getMonitor().getElapsedTime() : this.crazyae$worker != null ? this.crazyae$worker.getElapsedTime() : -1L;
 
             if (currentCpu != null) {
                 if (this.getEstimatedTime() >= 0) {
