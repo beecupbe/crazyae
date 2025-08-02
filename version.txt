@@ -1,5 +1,5 @@
-version:v0.6.0.1
+version:v0.6.0.2
 link:https://www.curseforge.com/minecraft/mc-mods/crazyae/files/all?showAlphaFiles=show
-desc: - Bug fixes for Quantum CPU and Improved Molecular Assembler.
-desc_ru: - Исправление багов для Квантового процессора и Улучшенного молекулярного сборщика.
-desc_cn: - hjkfghjkgfdshjkgfsd
+desc: - fixed crash when opening crafting status without cpus
+desc_ru: - Исправление краша при открытии статуса крафта без единого процессора
+desc_cn: -
