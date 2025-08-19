@@ -8,16 +8,16 @@ import org.jetbrains.annotations.NotNull;
 
 public class DenseItemCell extends DenseCell<IAEItemStack> {
 
-	public DenseItemCell(Materials.MaterialType whichCell, int bytes) {
-		super(whichCell, bytes);
+	public DenseItemCell(Materials.MaterialType whichCell, int bytes, int type) {
+		super(whichCell, bytes, type);
 	}
 
-	public DenseItemCell(Materials.MaterialType whichCell, int bytes, int bytesPerType) {
-		super(whichCell, bytes, bytesPerType, 16);
+	public DenseItemCell(Materials.MaterialType whichCell, int bytes, int bytesPerType, int type) {
+		super(whichCell, bytes, bytesPerType, 16, type);
 	}
 
-	public DenseItemCell(Materials.MaterialType whichCell, int bytes, double idleDrain) {
-		super(whichCell, bytes, 1, idleDrain);
+	public DenseItemCell(Materials.MaterialType whichCell, int bytes, double idleDrain, int type) {
+		super(whichCell, bytes, 1, idleDrain, type);
 	}
 
 	@NotNull
