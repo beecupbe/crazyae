@@ -1,6 +1,6 @@
 #PARSE_ESCAPES
-# Corresponding Version: CrazyAE-v0.3
-# 対応バージョン: CrazyAE-v0.3
+# Corresponding Version: CrazyAE-v0.6
+# 対応バージョン: CrazyAE-v0.6
 
 itemGroup.crazyae=CrazyAE
 item.crazyae.invalid.name=無効または利用不可のアイテム
@@ -14,6 +14,19 @@ item.crazyae.storage_cell_64mb.name=§264MB§r MEストレージセル
 item.crazyae.storage_cell_256mb.name=§b256MB§r MEストレージセル
 item.crazyae.storage_cell_1gb.name=§11GB§r MEストレージセル
 item.crazyae.storage_cell_2gb.name=§d2GB§r MEストレージセル
+
+item.crazyae.energy_cell_1k.name=§61k§r MEエナジーセル
+item.crazyae.energy_cell_4k.name=§e4k§r MEエナジーセル
+item.crazyae.energy_cell_16k.name=§a16k§r MEエナジーセル
+item.crazyae.energy_cell_64k.name=§b64k§r MEエナジーセル
+item.crazyae.energy_cell_256k.name=§c256k§r MEエナジーセル
+item.crazyae.energy_cell_1mb.name=§61MB§r MEエナジーセル
+item.crazyae.energy_cell_4mb.name=§e4MB§r MEエナジーセル
+item.crazyae.energy_cell_16mb.name=§a16MB§r MEエナジーセル
+item.crazyae.energy_cell_64mb.name=§264MB§r MEエナジーセル
+item.crazyae.energy_cell_256mb.name=§b256MB§r MEエナジーセル
+item.crazyae.energy_cell_1gb.name=§11GB§r MEエナジーセル
+item.crazyae.energy_cell_2gb.name=§d2GB§r MEエナジーセル
 
 item.crazyae.mana_cell_1k.name=§61k§r MEマナセル
 item.crazyae.mana_cell_4k.name=§e4k§r MEマナセル
@@ -50,6 +63,22 @@ item.crazyae.material.cell_part_64mb.name=§264MB§r MEストレージコンポ�
 item.crazyae.material.cell_part_256mb.name=§b256MB§r MEストレージコンポーネント
 item.crazyae.material.cell_part_1gb.name=§11GB§r MEストレージコンポーネント
 item.crazyae.material.cell_part_2gb.name=§d2GB§r MEストレージコンポーネント
+item.crazyae.material.cell_part_8gb.name=§a8GB§r MEストレージコンポーネント
+item.crazyae.material.cell_part_32gb.name=§532GB§r MEストレージコンポーネント
+item.crazyae.material.cell_part_128gb.name=§4128GB§r MEストレージコンポーネント
+
+item.crazyae.material.energy_part_1k.name=§61k§r MEエナジーコンポーネント
+item.crazyae.material.energy_part_4k.name=§e4k§r MEエナジーコンポーネント
+item.crazyae.material.energy_part_16k.name=§a16k§r MEエナジーコンポーネント
+item.crazyae.material.energy_part_64k.name=§b64k§r MEエナジーコンポーネント
+item.crazyae.material.energy_part_256k.name=§c256k§r MEエナジーコンポーネント
+item.crazyae.material.energy_part_1mb.name=§61MB§r MEエナジーコンポーネント
+item.crazyae.material.energy_part_4mb.name=§e4MB§r MEエナジーコンポーネント
+item.crazyae.material.energy_part_16mb.name=§a16MB§r MEエナジーコンポーネント
+item.crazyae.material.energy_part_64mb.name=§264MB§r MEエナジーコンポーネント
+item.crazyae.material.energy_part_256mb.name=§b256MB§r MEエナジーコンポーネント
+item.crazyae.material.energy_part_1gb.name=§11GB§r MEエナジーコンポーネント
+item.crazyae.material.energy_part_2gb.name=§d2GB§r MEエナジーコンポーネント
 
 item.crazyae.material.mana_part_1k.name=§61k§r MEマナコンポーネント
 item.crazyae.material.mana_part_4k.name=§e4k§r MEマナコンポーネント
@@ -73,13 +102,39 @@ item.crazyae.material.cell_part_fluid_256mb.name=§b256MB§r ME液体コンポ�
 item.crazyae.material.cell_part_fluid_1gb.name=§11GB§r ME液体コンポーネント
 item.crazyae.material.cell_part_fluid_2gb.name=§d2GB§r ME液体コンポーネント
 
+item.crazyae.material.fluixilized_ingot.name=§5フルーシライズドクリスタル§r
+
 
 #Items
 item.crazyae.quantum_wireless_booster.name=量子無線ブースター
 item.crazyae.material.quantum_processor.name=量子プロセッサ
 item.crazyae.material.mana_processor.name=マナプロセッサ
+item.crazyae.material.energy_processor.name=エナジープロセッサ
 item.crazyae.mana_connector.name=マナコネクタ
-tooltip.crazyae.quantum_wireless_booster_desc.name=このアイテムは現在開発中です
+item.crazyae.gui_colorizer.name=Gui着色器
+
+
+item.crazyae.material.elventrade_blank_pattern.name=エルブン交易ブランクパターン
+item.crazyae.material.manapool_blank_pattern.name=マナプールブランクパターン
+item.crazyae.material.petal_blank_pattern.name=花びらの調合所ブランクパターン
+item.crazyae.material.runealtar_blank_pattern.name=ルーンの祭壇ブランクパターン
+item.crazyae.material.puredaisy_blank_pattern.name=ピュアデイジーブランクパターン
+item.crazyae.material.teraplate_blank_pattern.name=大地性集結プレートブランクパターン
+item.crazyae.material.brewery_blank_pattern.name=ボタニア醸造台ブランクパターン
+
+item.crazyae.elventrade_encoded_pattern.name=エルブン交易エンコード済みパターン
+item.crazyae.manapool_encoded_pattern.name=マナプールエンコード済みパターン
+item.crazyae.petal_encoded_pattern.name=花びらの調合所エンコード済みパターン
+item.crazyae.runealtar_encoded_pattern.name=ルーンの祭壇エンコード済みパターン
+item.crazyae.puredaisy_encoded_pattern.name=ピュアデイジーエンコード済みパターン
+item.crazyae.teraplate_encoded_pattern.name=大地性集結プレートエンコード済みパターン
+item.crazyae.brewery_encoded_pattern.name=ボタニア醸造台エンコード済みパターン
+
+item.crazyae.creative_mana_cell.name=クリエイティブ用MEマナセル
+item.crazyae.creative_energy_cell.name=クリエイティブ用MEエナジーセル
+
+
+tooltip.crazyae.colorizer_desc.name=CrazyAE GUIの色/テキスト色を変更できます。
 tooltip.crazyae.mana_connector_desc.name=マナプールをマナ入力/出力バスにリンクさせる
 tooltip.crazyae.linked_with_mana_pool_at_pos.name=x=%s, y=%s, z=%s のマナプールに接続
 tooltip.crazyae.mana_connector_lets_connect_to_bus.name=マナ入力/出力バスをクリックして接続する
@@ -97,6 +152,17 @@ item.crazyae.part.mana_import_bus.name=MEマナ入力バス
 item.crazyae.part.mana_export_bus.name=MEマナ出力バス
 item.crazyae.part.mana_term.name=MEマナターミナル
 
+item.crazyae.part.energy_term.name=MEエナジーターミナル
+item.crazyae.part.part_drive.name=MEドライブ
+item.crazyae.part.patterns_iface.name=§8MEパターンインターフェース§r
+item.crazyae.part.perfect_iface.name=§cME究極型インターフェース§r
+
+item.crazyae.part.energy_export_bus.name=MEエナジー出力バス
+item.crazyae.part.energy_import_bus.name=MEエナジー入力バス
+
+item.crazyae.part.part_patterns_iface.name=§8MEパターンインターフェース§r
+item.crazyae.part.part_perfect_iface.name=§cME究極型インターフェース§r
+
 
 # Upgrades
 item.crazyae.upgrade.stacks.name=スタックカード
@@ -112,6 +178,10 @@ tile.crazyae.crafting_accelerator_1024x.name=§c1024x§r クラフティング�
 tile.crazyae.crafting_accelerator_4096x.name=§44096x§r クラフティング並列処理ユニット
 tile.crazyae.crafting_accelerator_16384x.name=§416384x§r クラフティング並列処理ユニット
 tile.crazyae.crafting_accelerator_65536x.name=§465536x§r クラフティング並列処理ユニット
+tile.crazyae.crafting_accelerator_262144x.name=§e262144x§r クラフティング並列処理ユニット
+tile.crazyae.crafting_accelerator_1048576x.name=§a1048576x§r クラフティング並列処理ユニット
+tile.crazyae.crafting_accelerator_4194304x.name=§d4194304x§r クラフティング並列処理ユニット
+tile.crazyae.crafting_accelerator_creative.name=§8クリエイティブ§r クラフティング並列処理ユニット
 
 tile.crazyae.crafting_storage_256k.name=§c256k§r クラフティングストレージ
 tile.crazyae.crafting_storage_1mb.name=§61MB§r クラフティングストレージ
@@ -121,10 +191,15 @@ tile.crazyae.crafting_storage_64mb.name=§264MB§r クラフティングスト�
 tile.crazyae.crafting_storage_256mb.name=§b256MB§r クラフティングストレージ
 tile.crazyae.crafting_storage_1gb.name=§11GB§r クラフティングストレージ
 tile.crazyae.crafting_storage_2gb.name=§d2GB§r クラフティングストレージ
+tile.crazyae.crafting_storage_8gb.name=§28GB§r クラフティングストレージ
+tile.crazyae.crafting_storage_32gb.name=§d32GB§r クラフティングストレージ
+tile.crazyae.crafting_storage_128gb.name=§6128GB§r クラフティングストレージ
+tile.crazyae.crafting_storage_creative.name=§8クリエイティブ§r クラフティングストレージ
 
 tile.crazyae.improved_energy_cell.name=§c発展型エネルギーセル
 tile.crazyae.advanced_energy_cell.name=§a精鋭型エネルギーセル
 tile.crazyae.perfect_energy_cell.name=§9究極型エネルギーセル
+tile.crazyae.quantum_energy_cell.name=史上最高型エネルギーセル
 
 tile.crazyae.improved_molecular_assembler.name=発展型分子組立機
 tile.crazyae.improved_drive.name=ME発展型ドライブ
@@ -139,10 +214,35 @@ tile.crazyae.advanced_solar_panel.name=§dME精鋭型ソーラーパネル§r
 tile.crazyae.perfect_solar_panel.name=§cME究極型ソーラーパネル§r
 
 tile.crazyae.patterns_interface.name=§8MEパターンインターフェース§r
+tile.crazyae.perfect_interface.name=§cME究極型インターフェース§r
+
 
 tile.crazyae.improved_condenser.name=§6発展型コンデンサー§r
 
 tile.crazyae.quantum_channels_multiplier.name=量子チャンネルマルチプライヤー
+tile.crazyae.quantum_channels_multiplier_creative.name=クリエイティブ用無限チャンネルソース
+
+
+tile.crazyae.mechanical_elventrade.name=機械式エルブン交易
+tile.crazyae.mechanical_manapool.name=機械式マナプール
+tile.crazyae.mechanical_runealtar.name=機械式ルーンの祭壇
+tile.crazyae.mechanical_petal.name=機械式花びらの調合所
+tile.crazyae.mechanical_puredaisy.name=機械式ピュアデイジー
+tile.crazyae.mechanical_teraplate.name=機械式大地性集結プレート
+tile.crazyae.mechanical_brewery.name=機械式ボタニア醸造台
+
+tile.crazyae.quantum_cpu.name=量子CPU
+tile.crazyae.quantum_cpu_host.name=量子CPU
+tile.crazyae.quantum_interface.name=量子インターフェース
+
+tile.crazyae.trashcan_item.name=アイテムゴミ箱
+tile.crazyae.trashcan_fluid.name=液体ゴミ箱
+tile.crazyae.trashcan_energy.name=エナジーゴミ箱
+tile.crazyae.trashcan_mana.name=マナゴミ箱
+
+tile.crazyae.perfect_inscriber.name=究極型刻印機
+
+
 
 #Resource
 
@@ -160,16 +260,61 @@ gui.crazyae.imp_export_bus.name=ME発展型出力バス
 gui.crazyae.imp_fluid_import_bus.name=ME発展型液体入力バス
 gui.crazyae.imp_fluid_export_bus.name=ME発展型液体出力バス
 
-gui.crazyae.pattern_interface.name=§8MEパターンインターフェース§r
+gui.crazyae.pattern_interface.name=MEパターンインターフェース
+gui.crazyae.perfect_interface.name=ME究極型インターフェース
 
 gui.crazyae.mana_terminal.name=MEマナターミナル
 gui.crazyae.mana_import_bus.name=MEマナ入力バス
 gui.crazyae.mana_export_bus.name=MEマナ出力バス
 
+gui.crazyae.energy_terminal.name=MEエナジーターミナル
+gui.crazyae.energy_import_bus.name=MEエナジー入力バス
+gui.crazyae.energy_export_bus.name=MEエナジー出力バス
+
+gui.crazyae.energy_settings_page.name=1ティックあたりの最大エネルギー量:
+
 gui.crazyae.link_with_mana_connector.name=このバスはリンクする必要があります
 gui.crazyae.link_with_mana_connector2.name=をマナプールに接続する
 gui.crazyae.link_with_mana_connector3.name="マナコネクター".
 gui.crazyae.linked_with_mana_pool.name=х=%s y=%s z=%s と接続中
+gui.crazyae.mana_amt_to_max.name=ブロック内のマナ貯蔵量:
+
+gui.crazyae.gui_colorizer_gui.name=GUI着色器
+gui.crazyae.gui_colorizer_text.name=テキスト着色器
+
+gui.crazyae.open_pattern_storage.name=パターンストレージを開く
+
+gui.crazyae.mechanical_elventrade.name=機械式エルブン交易
+gui.crazyae.mechanical_manapool.name=機械式マナプール
+gui.crazyae.mechanical_runealtar.name=機械式ルーンの祭壇
+gui.crazyae.mechanical_petal.name=機械式花びらの調合所
+gui.crazyae.mechanical_puredaisy.name=機械式ピュアデイジー
+gui.crazyae.mechanical_teraplate.name=機械式大地性集結プレート
+gui.crazyae.mechanical_brewery.name=機械式ボタニア醸造台
+
+gui.crazyae.quantum_interface.name=量子インターフェース
+
+gui.crazyae.perfect_inscriber.name=究極型刻印機
+
+gui.crazyae.patterns_inv_gui.name=パターンストレージ
+
+gui.crazyae.ef_energy.name=EFエナジー
+gui.crazyae.fe_energy.name=FE/RFエナジー
+gui.crazyae.se_energy.name=SEエナジー
+gui.crazyae.qe_energy.name=QEエナジー
+gui.crazyae.eu_energy.name=EUエナジー
+
+
+gui.crazyae.energy_used.name=消費エネルギー
+gui.crazyae.items_used.name=消費アイテム
+gui.crazyae.mana_used.name=消費マナ
+gui.crazyae.fluid_used.name=消費液体
+
+gui.crazyae.trashcan.name=ゴミ箱
+
+gui.crazyae.used.name=使用済み
+gui.crazyae.page.name=ページ
+
 
 # GUI's Tooltip
 
@@ -178,20 +323,53 @@ gui.tooltip.crazyae.cu_place_all_crafting_storages_here.name=クラフティン�
 
 gui.tooltip.crazyae.progress.name=進捗:
 
-#Tooltips
+gui.tooltip.crazyae.this_device_supports.name=この装置がサポートしているもの:\n
+
+gui.crazyae.colorizer_gui_gui_to_text.name=テキスト着色器を開く
+gui.crazyae.colorizer_gui_text_to_gui.name=GUI着色器を開く
+gui.crazyae.open_energy_settings_page.name=設定
+
+gui.crazyae.copy_to_clipboard.name=クリップボードにコピー
+gui.crazyae.paste_from_clipboard.name=クリップボードから貼り付け
+
+gui.crazyae.restore_defaults.name=初期値に戻す
+
+gui.crazyae.button_pattern_fast_place.name=クラフティングパターンを\n%s に配置
+
+gui.crazyae.checkbox_qwap_text.name=どのディメンションからでもアクセス可能
+
+gui.crazyae.highlight_mana_block.name=マナブロックをハイライト
+gui.crazyae.mana_block_highlighted_in.name=マナブロックが x=%s y=%s z=%s でハイライトされました
+gui.crazyae.mana_block_highlighted_in_another_dimension_with_pos.name=マナブロックは別のディメンション %s (%s) の x=%s y=%s z=%s に存在し、ハイライトできません
+gui.crazyae.mana_block_highlighted_in_another_dimension.name=マナブロックは別のディメンションに存在し、ハイライトできません
+gui.crazyae.colorizing_disabled.name=設定ファイルでカラー変更が無効になっています。
+
+gui.crazyae.quantum_cpu.name=量子CPU
+
+gui.crazyae.clear_inv_items_nbt.name=クラフティンググリッド内の\n全アイテムのNBTをクリア
+
+gui.crazyae.craft_started_at.name=クラフト開始時刻
+gui.crazyae.initiator.name=開始者
+
+gui.crazyae.open_crafting_block_list.name=クラフティングブロック一覧を開く
+
+
+#Tooltips 2
 
 tooltip.crazyae.shift_for_details.name=シフトキー長押しで詳細を確認
+tooltip.crazyae.ctrl_for_precise_details.name=Ctrlキー長押しで正確なアイテム数を表示
 
 tooltip.crazyae.passive_generation_day.name=昼の発電量:
 tooltip.crazyae.passive_generation_night.name=夜の発電量:
 tooltip.crazyae.max_solar_capacity.name=容量:
+tooltip.crazyae.require_channel.name=チャンネルが必要です
 
-tooltip.crazyae.qcm_desc.name=ケーブルの容量を増やすことができます。例:\n各量子マルチプライヤーは通常ケーブルに対して%s個のチャンネルを、\n高密度ケーブルには%s個のチャンネルを%s AE/tのコストで追加する。
+tooltip.crazyae.qcm_desc.name=ケーブル容量を増やすことができます:\n各量子マルチプライヤーは通常のケーブルに %s チャンネル、\n高密度ケーブルに %s チャンネルを追加します。消費: %s AE/t
+tooltip.crazyae.auto_pickup.name=自動ピックアップ:
+tooltip.crazyae.auto_pickup_how_to_enable.name=SHIFT+右クリックで自動ピックアップを切り替えます。
+tooltip.crazyae.auto_pickup_tip.name=セルワークベンチでの設定がフィルターとして使用されます。
 
-tooltip.crazyae.auto_pickup.name=自動回収は
-tooltip.crazyae.auto_pickup_how_to_enable.name=SHIFT+RMBを押す毎に自動回収を切り替え
-tooltip.crazyae.auto_pickup_tip.name=セルワークベンチで指定した設定はフィルターとして使用されます。
-
+gui.tooltip.crazyae.energy_cell_formatting_hint.name=セルワークベンチでセルを設定するには、設定したいタイプの\nエネルギーワイヤーを配置してください。
 
 tooltip.crazyae.enabled_lowercase.name=有効
 tooltip.crazyae.disabled_lowercase.name=無効
@@ -202,14 +380,35 @@ tooltip.crazyae.mana_connector_block_linked.name=紐づけが成功しました
 tooltip.crazyae.mana_connector_block_saved.name=マナプールと接続しました
 tooltip.crazyae.mana_connector_clear.name=紐づけを解除しました
 
+tooltip.crazyae.quantum_cpu_warning.name=このCPUは量子インターフェースでのみ動作します。
+tooltip.crazyae.quantum_interface_warning.name=このインターフェースは量子CPUでのみ動作します。
+
+
 #Internal
 
 item.crazyae.mana_as_aestack.name=マナ
+item.crazyae.ef_energy_as_aestack.name=EFエナジー
+item.crazyae.fe_energy_as_aestack.name=FE/RFエナジー
+item.crazyae.se_energy_as_aestack.name=SEエナジー
+item.crazyae.qe_energy_as_aestack.name=QEエナジー
+item.crazyae.eu_energy_as_aestack.name=EUエナジー
 gui.tooltip.crazyae.mana.name=マナ
+gui.tooltip.crazyae.ef_energy.name=EFエナジー
+gui.tooltip.crazyae.fe_energy.name=FE/RFエナジー
+gui.tooltip.crazyae.se_energy.name=SEエナジー
+gui.tooltip.crazyae.qe_energy.name=QEエナジー
 gui.tooltip.crazyae.stored_mana.name=在庫マナ: %s
+gui.tooltip.crazyae.stored_item.name=%s 格納済み: %s
+gui.tooltip.crazyae.stored.name=格納済み:
 
 #Misc
 
-gui.crazyae.update_found.name=[CrazyAE] §l新バージョンリリース :§r
-gui.crazyae.download_link.name=[CrazyAE] クリックでダウンロードページが開きます
+gui.crazyae.update_found.name=[CrazyAE] §l新バージョン公開 :§r
+gui.crazyae.download_link.name=[CrazyAE] §oクリックでダウンロードページが開きます§r
 gui.crazyae.disable_updates_tip.name=[CrazyAE] また、CrazyAEの設定でアップデートチェックを無効にすることもできます
+
+
+tooltip.crazyae.require_mana_per_job.name=1ジョブあたり %s マナを消費
+tooltip.crazyae.require_mana_per_tick.name=%s マナ/t を消費
+tooltip.crazyae.require_ae_per_job.name=1ジョブあたり %s AE を消費
+tooltip.crazyae.require_ae_per_tick.name=%s AE/t を消費
