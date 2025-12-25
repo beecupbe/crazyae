@@ -102,7 +102,7 @@ item.crazyae.material.cell_part_fluid_256mb.name=§b256MB§r ME液体コンポ�
 item.crazyae.material.cell_part_fluid_1gb.name=§11GB§r ME液体コンポーネント
 item.crazyae.material.cell_part_fluid_2gb.name=§d2GB§r ME液体コンポーネント
 
-item.crazyae.material.fluixilized_ingot.name=§5Fluixilized Crystal§r
+item.crazyae.material.fluixilized_ingot.name=§5フルーシライズドクリスタル§r
 
 
 #Items
@@ -114,27 +114,27 @@ item.crazyae.mana_connector.name=マナコネクタ
 item.crazyae.gui_colorizer.name=Gui着色器
 
 
-item.crazyae.material.elventrade_blank_pattern.name=Elven Trade Blank Pattern
-item.crazyae.material.manapool_blank_pattern.name=Mana Pool Blank Pattern
-item.crazyae.material.petal_blank_pattern.name=Petal Blank Pattern
-item.crazyae.material.runealtar_blank_pattern.name=Rune Altar Blank Pattern
-item.crazyae.material.puredaisy_blank_pattern.name=Pure Daisy Blank Pattern
-item.crazyae.material.teraplate_blank_pattern.name=Agglomeration Plate Blank Pattern
-item.crazyae.material.brewery_blank_pattern.name=Brewery Blank Pattern
+item.crazyae.material.elventrade_blank_pattern.name=エルブン交易ブランクパターン
+item.crazyae.material.manapool_blank_pattern.name=マナプールブランクパターン
+item.crazyae.material.petal_blank_pattern.name=花びらの調合所ブランクパターン
+item.crazyae.material.runealtar_blank_pattern.name=ルーンの祭壇ブランクパターン
+item.crazyae.material.puredaisy_blank_pattern.name=ピュアデイジーブランクパターン
+item.crazyae.material.teraplate_blank_pattern.name=大地性集結プレートブランクパターン
+item.crazyae.material.brewery_blank_pattern.name=ボタニア醸造台ブランクパターン
 
-item.crazyae.elventrade_encoded_pattern.name=Elven Trade Encoded Pattern
-item.crazyae.manapool_encoded_pattern.name=Mana Pool Encoded Pattern
-item.crazyae.petal_encoded_pattern.name=Petal Encoded Pattern
-item.crazyae.runealtar_encoded_pattern.name=Rune Altar Encoded Pattern
-item.crazyae.puredaisy_encoded_pattern.name=Pure Daisy Encoded Pattern
-item.crazyae.teraplate_encoded_pattern.name=Agglomeration Plate Blank Pattern
-item.crazyae.brewery_encoded_pattern.name=Brewery Blank Pattern
+item.crazyae.elventrade_encoded_pattern.name=エルブン交易エンコード済みパターン
+item.crazyae.manapool_encoded_pattern.name=マナプールエンコード済みパターン
+item.crazyae.petal_encoded_pattern.name=花びらの調合所エンコード済みパターン
+item.crazyae.runealtar_encoded_pattern.name=ルーンの祭壇エンコード済みパターン
+item.crazyae.puredaisy_encoded_pattern.name=ピュアデイジーエンコード済みパターン
+item.crazyae.teraplate_encoded_pattern.name=大地性集結プレートエンコード済みパターン
+item.crazyae.brewery_encoded_pattern.name=ボタニア醸造台エンコード済みパターン
 
-item.crazyae.creative_mana_cell.name=Creative ME Mana Cell
-item.crazyae.creative_energy_cell.name=Creative ME Energy Cell
+item.crazyae.creative_mana_cell.name=クリエイティブ用MEマナセル
+item.crazyae.creative_energy_cell.name=クリエイティブ用MEエナジーセル
 
 
-tooltip.crazyae.colorizer_desc.name=Allows to change Gui/Text colors in CrazyAE Guis.
+tooltip.crazyae.colorizer_desc.name=CrazyAE GUIの色/テキスト色を変更できます。
 tooltip.crazyae.mana_connector_desc.name=マナプールをマナ入力/出力バスにリンクさせる
 tooltip.crazyae.linked_with_mana_pool_at_pos.name=x=%s, y=%s, z=%s のマナプールに接続
 tooltip.crazyae.mana_connector_lets_connect_to_bus.name=マナ入力/出力バスをクリックして接続する
@@ -152,16 +152,16 @@ item.crazyae.part.mana_import_bus.name=MEマナ入力バス
 item.crazyae.part.mana_export_bus.name=MEマナ出力バス
 item.crazyae.part.mana_term.name=MEマナターミナル
 
-item.crazyae.part.energy_term.name=ME Energy Terminal
-item.crazyae.part.part_drive.name=ME Drive
-item.crazyae.part.patterns_iface.name=§8ME Patterns Interface§r
-item.crazyae.part.perfect_iface.name=§cME Perfect Interface§r
+item.crazyae.part.energy_term.name=MEエナジーターミナル
+item.crazyae.part.part_drive.name=MEドライブ
+item.crazyae.part.patterns_iface.name=§8MEパターンインターフェース§r
+item.crazyae.part.perfect_iface.name=§cME究極型インターフェース§r
 
-item.crazyae.part.energy_export_bus.name=ME Energy Export Bus
-item.crazyae.part.energy_import_bus.name=ME Energy Import Bus
+item.crazyae.part.energy_export_bus.name=MEエナジー出力バス
+item.crazyae.part.energy_import_bus.name=MEエナジー入力バス
 
-item.crazyae.part.part_patterns_iface.name=§8ME Patterns Interface§r
-item.crazyae.part.part_perfect_iface.name=§cME Perfect Interface§r
+item.crazyae.part.part_patterns_iface.name=§8MEパターンインターフェース§r
+item.crazyae.part.part_perfect_iface.name=§cME究極型インターフェース§r
 
 
 # Upgrades
@@ -220,27 +220,27 @@ tile.crazyae.perfect_interface.name=§cME究極型インターフェース§r
 tile.crazyae.improved_condenser.name=§6発展型コンデンサー§r
 
 tile.crazyae.quantum_channels_multiplier.name=量子チャンネルマルチプライヤー
-tile.crazyae.quantum_channels_multiplier_creative.name=Creative Infinite Channels Source
+tile.crazyae.quantum_channels_multiplier_creative.name=クリエイティブ用無限チャンネルソース
 
 
-tile.crazyae.mechanical_elventrade.name=Mechanical Elven Trade
-tile.crazyae.mechanical_manapool.name=Mechanical Mana Pool
-tile.crazyae.mechanical_runealtar.name=Mechanical Rune Altar
-tile.crazyae.mechanical_petal.name=Mechanical Petal
-tile.crazyae.mechanical_puredaisy.name=Mechanical Pure Daisy
-tile.crazyae.mechanical_teraplate.name=Mechanical Agglomeration Plate
-tile.crazyae.mechanical_brewery.name=Mechanical Brewery
+tile.crazyae.mechanical_elventrade.name=機械式エルブン交易
+tile.crazyae.mechanical_manapool.name=機械式マナプール
+tile.crazyae.mechanical_runealtar.name=機械式ルーンの祭壇
+tile.crazyae.mechanical_petal.name=機械式花びらの調合所
+tile.crazyae.mechanical_puredaisy.name=機械式ピュアデイジー
+tile.crazyae.mechanical_teraplate.name=機械式大地性集結プレート
+tile.crazyae.mechanical_brewery.name=機械式ボタニア醸造台
 
-tile.crazyae.quantum_cpu.name=Quantum CPU
-tile.crazyae.quantum_cpu_host.name=Quantum CPU
-tile.crazyae.quantum_interface.name=Quantum Interface
+tile.crazyae.quantum_cpu.name=量子CPU
+tile.crazyae.quantum_cpu_host.name=量子CPU
+tile.crazyae.quantum_interface.name=量子インターフェース
 
-tile.crazyae.trashcan_item.name=Item Trash Can
-tile.crazyae.trashcan_fluid.name=Fluid Trash Can
-tile.crazyae.trashcan_energy.name=Energy Trash Can
-tile.crazyae.trashcan_mana.name=Mana Trash Can
+tile.crazyae.trashcan_item.name=アイテムゴミ箱
+tile.crazyae.trashcan_fluid.name=液体ゴミ箱
+tile.crazyae.trashcan_energy.name=エナジーゴミ箱
+tile.crazyae.trashcan_mana.name=マナゴミ箱
 
-tile.crazyae.perfect_inscriber.name=Perfect Inscriber
+tile.crazyae.perfect_inscriber.name=究極型刻印機
 
 
 
@@ -271,49 +271,49 @@ gui.crazyae.energy_terminal.name=MEエナジーターミナル
 gui.crazyae.energy_import_bus.name=MEエナジー入力バス
 gui.crazyae.energy_export_bus.name=MEエナジー出力バス
 
-gui.crazyae.energy_settings_page.name=Maximum amount of energy per tick:
+gui.crazyae.energy_settings_page.name=1ティックあたりの最大エネルギー量:
 
 gui.crazyae.link_with_mana_connector.name=このバスはリンクする必要があります
 gui.crazyae.link_with_mana_connector2.name=をマナプールに接続する
 gui.crazyae.link_with_mana_connector3.name="マナコネクター".
 gui.crazyae.linked_with_mana_pool.name=х=%s y=%s z=%s と接続中
-gui.crazyae.mana_amt_to_max.name=Mana stored in block:
+gui.crazyae.mana_amt_to_max.name=ブロック内のマナ貯蔵量:
 
-gui.crazyae.gui_colorizer_gui.name=Gui Colorizer
-gui.crazyae.gui_colorizer_text.name=Text Colorizer
+gui.crazyae.gui_colorizer_gui.name=GUI着色器
+gui.crazyae.gui_colorizer_text.name=テキスト着色器
 
-gui.crazyae.open_pattern_storage.name=Open pattern storage
+gui.crazyae.open_pattern_storage.name=パターンストレージを開く
 
-gui.crazyae.mechanical_elventrade.name=Mechanical Elven Trade
-gui.crazyae.mechanical_manapool.name=Mechanical Mana Pool
-gui.crazyae.mechanical_runealtar.name=Mechanical Rune Altar
-gui.crazyae.mechanical_petal.name=Mechanical Petal
-gui.crazyae.mechanical_puredaisy.name=Mechanical Pure Daisy
-gui.crazyae.mechanical_teraplate.name=Mechanical Agglomeration Plate
-gui.crazyae.mechanical_brewery.name=Mechanical Brewery
+gui.crazyae.mechanical_elventrade.name=機械式エルブン交易
+gui.crazyae.mechanical_manapool.name=機械式マナプール
+gui.crazyae.mechanical_runealtar.name=機械式ルーンの祭壇
+gui.crazyae.mechanical_petal.name=機械式花びらの調合所
+gui.crazyae.mechanical_puredaisy.name=機械式ピュアデイジー
+gui.crazyae.mechanical_teraplate.name=機械式大地性集結プレート
+gui.crazyae.mechanical_brewery.name=機械式ボタニア醸造台
 
-gui.crazyae.quantum_interface.name=Quantum Interface
+gui.crazyae.quantum_interface.name=量子インターフェース
 
-gui.crazyae.perfect_inscriber.name=Perfect Inscriber
+gui.crazyae.perfect_inscriber.name=究極型刻印機
 
-gui.crazyae.patterns_inv_gui.name=Patterns storage
+gui.crazyae.patterns_inv_gui.name=パターンストレージ
 
-gui.crazyae.ef_energy.name=EF Energy
-gui.crazyae.fe_energy.name=FE/RF Energy
-gui.crazyae.se_energy.name=SE Energy
-gui.crazyae.qe_energy.name=QE Energy
-gui.crazyae.eu_energy.name=EU Energy
+gui.crazyae.ef_energy.name=EFエナジー
+gui.crazyae.fe_energy.name=FE/RFエナジー
+gui.crazyae.se_energy.name=SEエナジー
+gui.crazyae.qe_energy.name=QEエナジー
+gui.crazyae.eu_energy.name=EUエナジー
 
 
-gui.crazyae.energy_used.name=Energy used
-gui.crazyae.items_used.name=Items used
-gui.crazyae.mana_used.name=Mana used
-gui.crazyae.fluid_used.name=Fluid used
+gui.crazyae.energy_used.name=消費エネルギー
+gui.crazyae.items_used.name=消費アイテム
+gui.crazyae.mana_used.name=消費マナ
+gui.crazyae.fluid_used.name=消費液体
 
-gui.crazyae.trashcan.name=Trash Can
+gui.crazyae.trashcan.name=ゴミ箱
 
-gui.crazyae.used.name=used
-gui.crazyae.page.name=Page
+gui.crazyae.used.name=使用済み
+gui.crazyae.page.name=ページ
 
 
 # GUI's Tooltip
@@ -323,53 +323,53 @@ gui.tooltip.crazyae.cu_place_all_crafting_storages_here.name=クラフティン�
 
 gui.tooltip.crazyae.progress.name=進捗:
 
-gui.tooltip.crazyae.this_device_supports.name=This device supports:\n
+gui.tooltip.crazyae.this_device_supports.name=この装置がサポートしているもの:\n
 
-gui.crazyae.colorizer_gui_gui_to_text.name=Open Text Colorizer
-gui.crazyae.colorizer_gui_text_to_gui.name=Open Gui Colorizer
-gui.crazyae.open_energy_settings_page.name=Settings
+gui.crazyae.colorizer_gui_gui_to_text.name=テキスト着色器を開く
+gui.crazyae.colorizer_gui_text_to_gui.name=GUI着色器を開く
+gui.crazyae.open_energy_settings_page.name=設定
 
-gui.crazyae.copy_to_clipboard.name=Copy to clipboard
-gui.crazyae.paste_from_clipboard.name=Paste from clipboard
+gui.crazyae.copy_to_clipboard.name=クリップボードにコピー
+gui.crazyae.paste_from_clipboard.name=クリップボードから貼り付け
 
-gui.crazyae.restore_defaults.name=Restore defaults
+gui.crazyae.restore_defaults.name=初期値に戻す
 
-gui.crazyae.button_pattern_fast_place.name=Place crafting pattern\nin %s
+gui.crazyae.button_pattern_fast_place.name=クラフティングパターンを\n%s に配置
 
-gui.crazyae.checkbox_qwap_text.name=Access from any dimensions
+gui.crazyae.checkbox_qwap_text.name=どのディメンションからでもアクセス可能
 
-gui.crazyae.highlight_mana_block.name=Highlight mana block
-gui.crazyae.mana_block_highlighted_in.name=The mana block is now highlighted at x=%s y=%s z=%s
-gui.crazyae.mana_block_highlighted_in_another_dimension_with_pos.name=The mana block located in another dimension %s (%s) at x=%s y=%s z=%s, and cannot be highlighted
-gui.crazyae.mana_block_highlighted_in_another_dimension.name=The mana block located in another dimension, and cannot be highlighted
-gui.crazyae.colorizing_disabled.name=Colorizing is disabled in your config file.
+gui.crazyae.highlight_mana_block.name=マナブロックをハイライト
+gui.crazyae.mana_block_highlighted_in.name=マナブロックが x=%s y=%s z=%s でハイライトされました
+gui.crazyae.mana_block_highlighted_in_another_dimension_with_pos.name=マナブロックは別のディメンション %s (%s) の x=%s y=%s z=%s に存在し、ハイライトできません
+gui.crazyae.mana_block_highlighted_in_another_dimension.name=マナブロックは別のディメンションに存在し、ハイライトできません
+gui.crazyae.colorizing_disabled.name=設定ファイルでカラー変更が無効になっています。
 
-gui.crazyae.quantum_cpu.name=Quantum CPU
+gui.crazyae.quantum_cpu.name=量子CPU
 
-gui.crazyae.clear_inv_items_nbt.name=Clear NBT for all items\nin the crafting grid
+gui.crazyae.clear_inv_items_nbt.name=クラフティンググリッド内の\n全アイテムのNBTをクリア
 
-gui.crazyae.craft_started_at.name=Craft started at
-gui.crazyae.initiator.name=Initiator
+gui.crazyae.craft_started_at.name=クラフト開始時刻
+gui.crazyae.initiator.name=開始者
 
-gui.crazyae.open_crafting_block_list.name=Open crafting blocks inventory
+gui.crazyae.open_crafting_block_list.name=クラフティングブロック一覧を開く
 
 
 #Tooltips 2
 
 tooltip.crazyae.shift_for_details.name=シフトキー長押しで詳細を確認
-tooltip.crazyae.ctrl_for_precise_details.name=Hold Ctrl for precise item count
+tooltip.crazyae.ctrl_for_precise_details.name=Ctrlキー長押しで正確なアイテム数を表示
 
 tooltip.crazyae.passive_generation_day.name=昼の発電量:
 tooltip.crazyae.passive_generation_night.name=夜の発電量:
 tooltip.crazyae.max_solar_capacity.name=容量:
-tooltip.crazyae.require_channel.name=Requires a channel
+tooltip.crazyae.require_channel.name=チャンネルが必要です
 
-tooltip.crazyae.qcm_desc.name=Allows you to increase cable capacity:\nEach Quantum Multiplier will give %s channels for a normal cables\nand %s channels for a dense cables, at a cost of %s AE/t.
-tooltip.crazyae.auto_pickup.name=Auto pickup is
-tooltip.crazyae.auto_pickup_how_to_enable.name=Press SHIFT+RMB to toggle auto pickup.
-tooltip.crazyae.auto_pickup_tip.name=Configuration made in the Cell Workbench will be used as filter.
+tooltip.crazyae.qcm_desc.name=ケーブル容量を増やすことができます:\n各量子マルチプライヤーは通常のケーブルに %s チャンネル、\n高密度ケーブルに %s チャンネルを追加します。消費: %s AE/t
+tooltip.crazyae.auto_pickup.name=自動ピックアップ:
+tooltip.crazyae.auto_pickup_how_to_enable.name=SHIFT+右クリックで自動ピックアップを切り替えます。
+tooltip.crazyae.auto_pickup_tip.name=セルワークベンチでの設定がフィルターとして使用されます。
 
-gui.tooltip.crazyae.energy_cell_formatting_hint.name=To configure a cell in Cell Workbench, place any energy wire\nof the type you want to configure the cell with.
+gui.tooltip.crazyae.energy_cell_formatting_hint.name=セルワークベンチでセルを設定するには、設定したいタイプの\nエネルギーワイヤーを配置してください。
 
 tooltip.crazyae.enabled_lowercase.name=有効
 tooltip.crazyae.disabled_lowercase.name=無効
@@ -380,26 +380,26 @@ tooltip.crazyae.mana_connector_block_linked.name=紐づけが成功しました
 tooltip.crazyae.mana_connector_block_saved.name=マナプールと接続しました
 tooltip.crazyae.mana_connector_clear.name=紐づけを解除しました
 
-tooltip.crazyae.quantum_cpu_warning.name=This CPU only works with the Quantum interface.
-tooltip.crazyae.quantum_interface_warning.name=This Interface only works with the Quantum CPU.
+tooltip.crazyae.quantum_cpu_warning.name=このCPUは量子インターフェースでのみ動作します。
+tooltip.crazyae.quantum_interface_warning.name=このインターフェースは量子CPUでのみ動作します。
 
 
 #Internal
 
 item.crazyae.mana_as_aestack.name=マナ
-item.crazyae.ef_energy_as_aestack.name=EF Energy
-item.crazyae.fe_energy_as_aestack.name=FE/RF Energy
-item.crazyae.se_energy_as_aestack.name=SE Energy
-item.crazyae.qe_energy_as_aestack.name=QE Energy
-item.crazyae.eu_energy_as_aestack.name=EU Energy
+item.crazyae.ef_energy_as_aestack.name=EFエナジー
+item.crazyae.fe_energy_as_aestack.name=FE/RFエナジー
+item.crazyae.se_energy_as_aestack.name=SEエナジー
+item.crazyae.qe_energy_as_aestack.name=QEエナジー
+item.crazyae.eu_energy_as_aestack.name=EUエナジー
 gui.tooltip.crazyae.mana.name=マナ
-gui.tooltip.crazyae.ef_energy.name=EF Energy
-gui.tooltip.crazyae.fe_energy.name=FE/RF Energy
-gui.tooltip.crazyae.se_energy.name=SE Energy
-gui.tooltip.crazyae.qe_energy.name=QE Energy
+gui.tooltip.crazyae.ef_energy.name=EFエナジー
+gui.tooltip.crazyae.fe_energy.name=FE/RFエナジー
+gui.tooltip.crazyae.se_energy.name=SEエナジー
+gui.tooltip.crazyae.qe_energy.name=QEエナジー
 gui.tooltip.crazyae.stored_mana.name=在庫マナ: %s
-gui.tooltip.crazyae.stored_item.name=%s stored: %s
-gui.tooltip.crazyae.stored.name=Stored:
+gui.tooltip.crazyae.stored_item.name=%s 格納済み: %s
+gui.tooltip.crazyae.stored.name=格納済み:
 
 #Misc
 
@@ -408,7 +408,7 @@ gui.crazyae.download_link.name=[CrazyAE] §oクリックでダウンロードペ
 gui.crazyae.disable_updates_tip.name=[CrazyAE] また、CrazyAEの設定でアップデートチェックを無効にすることもできます
 
 
-tooltip.crazyae.require_mana_per_job.name=Consumes %s Mana per job
-tooltip.crazyae.require_mana_per_tick.name=Consumes %s Mana/t
-tooltip.crazyae.require_ae_per_job.name=Consumes %s AE per job
-tooltip.crazyae.require_ae_per_tick.name=Consumes %s AE/t
+tooltip.crazyae.require_mana_per_job.name=1ジョブあたり %s マナを消費
+tooltip.crazyae.require_mana_per_tick.name=%s マナ/t を消費
+tooltip.crazyae.require_ae_per_job.name=1ジョブあたり %s AE を消費
+tooltip.crazyae.require_ae_per_tick.name=%s AE/t を消費
