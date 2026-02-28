@@ -23,6 +23,10 @@ public class RecipeRepo {
         return Loader.isModLoaded("botania_tweaks") || Loader.isModLoaded("botaniatweaks");
     }
 
+    public static boolean isGodAgglomerationPlateLoaded() {
+        return Loader.isModLoaded("godagglomerationplate");
+    }
+
 
     public static void copyFromBotaniaTweaks() {
         terraplateRecipes.clear();
@@ -61,6 +65,11 @@ public class RecipeRepo {
             return botanicAdditionsMatch;
         }
 
+        final Optional<RecipeTerraplate> godAgglomerationMatch = findMatchingGodAgglomerationRecipe(inv);
+        if (godAgglomerationMatch.isPresent()) {
+            return godAgglomerationMatch;
+        }
+
         return Optional.empty();
     }
 
@@ -97,6 +106,65 @@ public class RecipeRepo {
                 }
 
                 return Optional.of(new RecipeTerraplate(recipePetals.getOutput().copy(), manaCost, RecipeTerraplate.PlateType.GAIA_PLATE));
+            }
+        } catch (ReflectiveOperationException ignored) {
+        }
+
+        return Optional.empty();
+    }
+
+    private static Optional<RecipeTerraplate> findMatchingGodAgglomerationRecipe(IItemHandler inv) {
+        if (!isGodAgglomerationPlateLoaded()) {
+            return Optional.empty();
+        }
+
+        try {
+            final Class<?> recipesClass = Class.forName("com.wdcftgg.godagglomerationplate.recipes.GodAgglomerationRecipes");
+            final Field recipesField = recipesClass.getField("recipes");
+            final Object recipes = recipesField.get(null);
+            if (!(recipes instanceof List<?> recipeList)) {
+                return Optional.empty();
+            }
+
+            for (Object recipeObj : recipeList) {
+                final Field stacksField = recipeObj.getClass().getField("recipeStacks");
+                final Field oreKeysField = recipeObj.getClass().getField("recipeOreKeys");
+                final Field outputField = recipeObj.getClass().getField("recipeOutput");
+                final Field manaField = recipeObj.getClass().getField("manaCost");
+
+                final Object stacksObj = stacksField.get(recipeObj);
+                final Object oreKeysObj = oreKeysField.get(recipeObj);
+                final Object outputObj = outputField.get(recipeObj);
+                final Object manaObj = manaField.get(recipeObj);
+
+                if (!(stacksObj instanceof List<?> stackList)
+                        || !(oreKeysObj instanceof List<?> oreKeyList)
+                        || !(outputObj instanceof ItemStack outputStack)
+                        || !(manaObj instanceof Number manaNumber)) {
+                    continue;
+                }
+
+                final ArrayList<Object> inputs = new ArrayList<>();
+                for (Object stack : stackList) {
+                    if (stack instanceof ItemStack itemStack) {
+                        inputs.add(itemStack.copy());
+                    }
+                }
+                for (Object oreKey : oreKeyList) {
+                    if (oreKey instanceof String key) {
+                        inputs.add(key);
+                    }
+                }
+
+                final RecipeTerraplate wrapped = new RecipeTerraplate(
+                        ImmutableList.copyOf(inputs),
+                        outputStack.copy(),
+                        manaNumber.intValue(),
+                        RecipeTerraplate.PlateType.GOD_AGGLOMERATION_PLATE
+                );
+                if (wrapped.matches(inv)) {
+                    return Optional.of(wrapped);
+                }
             }
         } catch (ReflectiveOperationException ignored) {
         }

@@ -104,6 +104,7 @@ public class TileMechanicalTerraplate extends TileBotaniaMechanicalMachineBase {
         return switch (recipe.getPlateType()) {
             case TERRA_PLATE -> registryName.toString().equals("botania:terraplate");
             case GAIA_PLATE -> registryName.toString().equals("botanicadds:gaia_plate");
+            case GOD_AGGLOMERATION_PLATE -> registryName.toString().equals("godagglomerationplate:godagglomerationplate");
         };
     }
 

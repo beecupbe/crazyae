@@ -18,7 +18,8 @@ public class RecipeTerraplate {
 
     public enum PlateType {
         TERRA_PLATE,
-        GAIA_PLATE
+        GAIA_PLATE,
+        GOD_AGGLOMERATION_PLATE
     }
 
     public final ImmutableList<ItemStack> recipeStacks;
@@ -39,6 +40,10 @@ public class RecipeTerraplate {
     }
 
     public RecipeTerraplate(ImmutableList<Object> recipeInputs, ItemStack recipeOutput, int manaCost) {
+        this(recipeInputs, recipeOutput, manaCost, PlateType.TERRA_PLATE);
+    }
+
+    public RecipeTerraplate(ImmutableList<Object> recipeInputs, ItemStack recipeOutput, int manaCost, PlateType plateType) {
         verifyInputs(recipeInputs);
 
         ImmutableList.Builder<ItemStack> stackInputBuilder = new ImmutableList.Builder<>();
@@ -55,7 +60,7 @@ public class RecipeTerraplate {
 
         this.recipeOutput = recipeOutput;
         this.manaCost = manaCost;
-        this.plateType = PlateType.TERRA_PLATE;
+        this.plateType = plateType;
     }
 
     public RecipeTerraplate(AgglomerationRecipe s) {
