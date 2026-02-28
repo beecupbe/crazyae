@@ -28,7 +28,7 @@ public class ContainerTeraplateMechanical extends ContainerMechanicalBotaniaTile
             }
         }
 
-        this.addSlotToContainer(new SlotOutput(output, 0, 80, 87, null));
+        this.addSlotToContainer(new SlotOutput(output, 0, 80, 86, null));
 
         this.addSlotToContainer(new RestrictedSlot(
                 this.type == BotaniaMechanicalDeviceType.ELVENTRADE ? RestrictedSlot.PlaceableItemType.ELVENTRADE_BLANK_PATTERN
