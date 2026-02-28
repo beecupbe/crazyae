@@ -21,12 +21,15 @@ public class ContainerTeraplateMechanical extends ContainerMechanicalBotaniaTile
         final IItemHandler upgrades = this.getUpgradeable().getInventoryByName("upgrades");
         final IItemHandler input = this.getUpgradeable().getInventoryByName("input");
         final IItemHandler output = this.getUpgradeable().getInventoryByName("output");
+        final IItemHandler marker = this.getUpgradeable().getInventoryByName("findSlot");
 
         for (int y = 0; y < 2; y++) {
             for (int x = 0; x < 7; x++) {
                 this.addSlotToContainer(new SlotFake(input, x + y * 7, 26 + 18 * x, 16 + 18 * y, true));
             }
         }
+
+        this.addSlotToContainer(new SlotFake(marker, 0, 80, 52, true));
 
         this.addSlotToContainer(new SlotOutput(output, 0, 80, 86, null));
 

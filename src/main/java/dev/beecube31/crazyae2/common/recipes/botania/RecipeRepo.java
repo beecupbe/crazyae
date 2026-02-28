@@ -96,7 +96,7 @@ public class RecipeRepo {
                 } catch (ReflectiveOperationException ignored) {
                 }
 
-                return Optional.of(new RecipeTerraplate(recipePetals.getOutput().copy(), manaCost));
+                return Optional.of(new RecipeTerraplate(recipePetals.getOutput().copy(), manaCost, RecipeTerraplate.PlateType.GAIA_PLATE));
             }
         } catch (ReflectiveOperationException ignored) {
         }

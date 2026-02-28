@@ -16,10 +16,16 @@ import java.util.List;
 
 public class RecipeTerraplate {
 
+    public enum PlateType {
+        TERRA_PLATE,
+        GAIA_PLATE
+    }
+
     public final ImmutableList<ItemStack> recipeStacks;
     public final ImmutableList<String> recipeOreKeys;
     public final ItemStack recipeOutput;
     public final int manaCost;
+    public final PlateType plateType;
 
     final int totalInputs;
 
@@ -49,6 +55,7 @@ public class RecipeTerraplate {
 
         this.recipeOutput = recipeOutput;
         this.manaCost = manaCost;
+        this.plateType = PlateType.TERRA_PLATE;
     }
 
     public RecipeTerraplate(AgglomerationRecipe s) {
@@ -58,15 +65,21 @@ public class RecipeTerraplate {
 
         this.recipeOutput = s.getRecipeOutputCopy();
         this.manaCost = s.manaCost;
+        this.plateType = PlateType.TERRA_PLATE;
     }
 
     public RecipeTerraplate(ItemStack recipeOutput, int manaCost) {
+        this(recipeOutput, manaCost, PlateType.TERRA_PLATE);
+    }
+
+    public RecipeTerraplate(ItemStack recipeOutput, int manaCost, PlateType plateType) {
         this.recipeStacks = ImmutableList.of();
         this.recipeOreKeys = ImmutableList.of();
         this.totalInputs = 0;
 
         this.recipeOutput = recipeOutput;
         this.manaCost = manaCost;
+        this.plateType = plateType;
     }
 
     public boolean matches(IItemHandler inv) {
@@ -163,6 +176,10 @@ public class RecipeTerraplate {
 
     public ItemStack getOutput() {
         return recipeOutput;
+    }
+
+    public PlateType getPlateType() {
+        return this.plateType;
     }
 
     @Override
