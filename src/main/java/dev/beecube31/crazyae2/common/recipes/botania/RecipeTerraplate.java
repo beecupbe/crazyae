@@ -2,10 +2,13 @@ package dev.beecube31.crazyae2.common.recipes.botania;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.oredict.OreDictionary;
 import quaternary.botaniatweaks.modules.botania.recipe.AgglomerationRecipe;
-import vazkii.botania.common.core.helper.ItemNBTHelper;
+
+import javax.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -49,69 +52,53 @@ public class RecipeTerraplate {
     }
 
     public RecipeTerraplate(AgglomerationRecipe s) {
-        ImmutableList.Builder<ItemStack> stackInputBuilder = new ImmutableList.Builder<>();
-        ImmutableList.Builder<String> keyInputBuilder = new ImmutableList.Builder<>();
-
-        for(Object o : s.recipeStacks) {
-            if(o instanceof ItemStack) stackInputBuilder.add((ItemStack) o);
-            else keyInputBuilder.add((String) o);
-        }
-
-        this.recipeStacks = stackInputBuilder.build();
-        this.recipeOreKeys = keyInputBuilder.build();
+        this.recipeStacks = ImmutableList.copyOf(s.recipeStacks);
+        this.recipeOreKeys = ImmutableList.copyOf(s.recipeOreKeys);
         this.totalInputs = recipeStacks.size() + recipeOreKeys.size();
 
-        this.recipeOutput = s.recipeOutput;
+        this.recipeOutput = s.getRecipeOutputCopy();
         this.manaCost = s.manaCost;
     }
 
     public boolean matches(IItemHandler inv) {
-        List<Object> inputsMissing = new ArrayList<>(this.recipeStacks);
-        inputsMissing.addAll(this.recipeOreKeys);
-        int nonEmptyInputs = 0;
-
-        for(int i = 0; i < inv.getSlots(); i++) {
+        final List<ItemStack> userInputs = new ArrayList<>();
+        for (int i = 0; i < inv.getSlots(); i++) {
             ItemStack stack = inv.getStackInSlot(i);
-            if(stack.isEmpty()) {
-                continue;
-            }
-
-            nonEmptyInputs++;
-
-            int matchedIndex = -1;
-
-            for(int j = 0; j < inputsMissing.size(); j++) {
-                Object input = inputsMissing.get(j);
-                if(input instanceof String) {
-                    boolean found = false;
-                    for(ItemStack ostack : OreDictionary.getOres((String) input, false)) {
-                        if(OreDictionary.itemMatches(ostack, stack, false)) {
-                            matchedIndex = j;
-                            found = true;
-                            break;
-                        }
-                    }
-
-
-                    if(found) break;
-                } else if(input instanceof ItemStack && compareStacks((ItemStack) input, stack)) {
-                    matchedIndex = j;
-                    break;
-                }
-            }
-
-            if(matchedIndex != -1) {
-                inputsMissing.remove(matchedIndex);
-            } else {
-                return false;
+            if (!stack.isEmpty()) {
+                userInputs.add(stack);
             }
         }
 
-        return nonEmptyInputs == this.totalInputs && inputsMissing.isEmpty();
+        return itemsMatch(userInputs);
     }
 
     private boolean compareStacks(ItemStack recipe, ItemStack supplied) {
-        return recipe.getItem() == supplied.getItem() && recipe.getItemDamage() == supplied.getItemDamage() && ItemNBTHelper.matchTag(recipe.getTagCompound(), supplied.getTagCompound());
+        if(recipe.isEmpty() || supplied.isEmpty()) return false;
+        if(recipe.getItem() != supplied.getItem()) return false;
+        if(recipe.getItemDamage() != supplied.getItemDamage()) return false;
+
+        return isTagSubset(recipe.getTagCompound(), supplied.getTagCompound());
+    }
+
+    private static boolean isTagSubset(@Nullable NBTTagCompound recipeTag, @Nullable NBTTagCompound suppliedTag) {
+        if (recipeTag == null || recipeTag.isEmpty()) return true;
+        if (suppliedTag == null || suppliedTag.isEmpty()) return false;
+        if (recipeTag.getKeySet().size() > suppliedTag.getKeySet().size()) return false;
+
+        for (String key : suppliedTag.getKeySet()) {
+            if (!recipeTag.hasKey(key)) continue;
+
+            NBTBase suppliedEntry = suppliedTag.getTag(key);
+            NBTBase recipeEntry = recipeTag.getTag(key);
+
+            if (suppliedEntry instanceof NBTTagCompound && recipeEntry instanceof NBTTagCompound) {
+                if (!isTagSubset((NBTTagCompound) recipeEntry, (NBTTagCompound) suppliedEntry)) return false;
+            } else {
+                if (!suppliedEntry.equals(recipeEntry)) return false;
+            }
+        }
+
+        return true;
     }
 
     public boolean itemsMatch(List<ItemStack> userInputs) {

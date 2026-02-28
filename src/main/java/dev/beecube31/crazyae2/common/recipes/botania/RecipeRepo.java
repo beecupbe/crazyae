@@ -2,6 +2,7 @@ package dev.beecube31.crazyae2.common.recipes.botania;
 
 import com.google.common.collect.ImmutableList;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.items.IItemHandler;
 import quaternary.botaniatweaks.modules.botania.recipe.AgglomerationRecipe;
 import quaternary.botaniatweaks.modules.botania.recipe.AgglomerationRecipes;
@@ -12,6 +13,10 @@ import java.util.Optional;
 
 public class RecipeRepo {
     public static ArrayList<RecipeTerraplate> terraplateRecipes = new ArrayList<>();
+
+    public static boolean isBotaniaTweaksLoaded() {
+        return Loader.isModLoaded("botania_tweaks") || Loader.isModLoaded("botaniatweaks");
+    }
 
 
     public static void copyFromBotaniaTweaks() {
@@ -32,9 +37,20 @@ public class RecipeRepo {
 
     public static Optional<RecipeTerraplate> findMatchingRecipe(IItemHandler inv) {
         for (RecipeTerraplate recipe : terraplateRecipes) {
-            if(recipe.matches(inv))
+            if (recipe.matches(inv)) {
                 return Optional.of(recipe);
+            }
         }
+
+        if (isBotaniaTweaksLoaded()) {
+            for (AgglomerationRecipe recipe : AgglomerationRecipes.recipes) {
+                final RecipeTerraplate wrapped = new RecipeTerraplate(recipe);
+                if (wrapped.matches(inv)) {
+                    return Optional.of(wrapped);
+                }
+            }
+        }
+
         return Optional.empty();
     }
 
