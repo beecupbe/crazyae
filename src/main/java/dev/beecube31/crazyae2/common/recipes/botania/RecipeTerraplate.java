@@ -67,13 +67,18 @@ public class RecipeTerraplate {
 
     public boolean matches(IItemHandler inv) {
         List<Object> inputsMissing = new ArrayList<>(this.recipeStacks);
+        inputsMissing.addAll(this.recipeOreKeys);
+        int nonEmptyInputs = 0;
 
         for(int i = 0; i < inv.getSlots(); i++) {
             ItemStack stack = inv.getStackInSlot(i);
-            if(stack.isEmpty())
-                break;
+            if(stack.isEmpty()) {
+                continue;
+            }
 
-            int stackIndex = -1, oredictIndex = -1;
+            nonEmptyInputs++;
+
+            int matchedIndex = -1;
 
             for(int j = 0; j < inputsMissing.size(); j++) {
                 Object input = inputsMissing.get(j);
@@ -81,7 +86,7 @@ public class RecipeTerraplate {
                     boolean found = false;
                     for(ItemStack ostack : OreDictionary.getOres((String) input, false)) {
                         if(OreDictionary.itemMatches(ostack, stack, false)) {
-                            oredictIndex = j;
+                            matchedIndex = j;
                             found = true;
                             break;
                         }
@@ -90,19 +95,19 @@ public class RecipeTerraplate {
 
                     if(found) break;
                 } else if(input instanceof ItemStack && compareStacks((ItemStack) input, stack)) {
-                    stackIndex = j;
+                    matchedIndex = j;
                     break;
                 }
             }
 
-            if(stackIndex != -1)
-                inputsMissing.remove(stackIndex);
-            else if(oredictIndex != -1)
-                inputsMissing.remove(oredictIndex);
-            else return false;
+            if(matchedIndex != -1) {
+                inputsMissing.remove(matchedIndex);
+            } else {
+                return false;
+            }
         }
 
-        return inputsMissing.isEmpty();
+        return nonEmptyInputs == this.totalInputs && inputsMissing.isEmpty();
     }
 
     private boolean compareStacks(ItemStack recipe, ItemStack supplied) {
