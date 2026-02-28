@@ -29,7 +29,7 @@ public class ContainerTeraplateMechanical extends ContainerMechanicalBotaniaTile
             }
         }
 
-        this.addSlotToContainer(new SlotFake(marker, 0, 80, 52, true));
+        this.addSlotToContainer(new SlotFake(marker, 0, 80, 52, true).setNotDraggable());
 
         this.addSlotToContainer(new SlotOutput(output, 0, 80, 86, null));
 
