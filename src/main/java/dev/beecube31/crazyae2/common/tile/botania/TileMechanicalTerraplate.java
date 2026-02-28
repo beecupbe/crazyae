@@ -33,7 +33,7 @@ public class TileMechanicalTerraplate extends TileBotaniaMechanicalMachineBase {
     public TileMechanicalTerraplate() {
         super();
 
-        this.craftingInputInv = new CrazyAEInternalInv(this, 16, 64);
+        this.craftingInputInv = new CrazyAEInternalInv(this, 14, 64);
         (this.craftingOutputInv = new CrazyAEInternalInv(this, 1, 64)).setFilter(new DisabledFilter());
 
         this.actionSource = new MachineSource(this);

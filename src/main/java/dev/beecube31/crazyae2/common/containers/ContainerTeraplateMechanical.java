@@ -22,11 +22,13 @@ public class ContainerTeraplateMechanical extends ContainerMechanicalBotaniaTile
         final IItemHandler input = this.getUpgradeable().getInventoryByName("input");
         final IItemHandler output = this.getUpgradeable().getInventoryByName("output");
 
-        this.addSlotToContainer(new SlotFake(input, 0, 61, 30, true));
-        this.addSlotToContainer(new SlotFake(input, 1, 80, 30, true));
-        this.addSlotToContainer(new SlotFake(input, 2, 99, 30, true));
+        for (int y = 0; y < 2; y++) {
+            for (int x = 0; x < 7; x++) {
+                this.addSlotToContainer(new SlotFake(input, x + y * 7, 26 + 18 * x, 16 + 18 * y, true));
+            }
+        }
 
-        this.addSlotToContainer(new SlotOutput(output, 0, 80, 68, null));
+        this.addSlotToContainer(new SlotOutput(output, 0, 80, 87, null));
 
         this.addSlotToContainer(new RestrictedSlot(
                 this.type == BotaniaMechanicalDeviceType.ELVENTRADE ? RestrictedSlot.PlaceableItemType.ELVENTRADE_BLANK_PATTERN

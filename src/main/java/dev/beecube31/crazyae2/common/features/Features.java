@@ -95,9 +95,7 @@ public enum Features implements IFeature {
 	QUANTUM_CHANNELS_MULTIPLIER(
 			new FeatureSet().add("mixin:qcm")
 	),
-	PATTERNS_INTERFACE(
-			new FeatureSet().add("mixin:patterns.interface")
-	),
+	PATTERNS_INTERFACE,
 
 	DENSE_CPU_COPROCESSORS(
 			new FeatureSet().add("mixin:dense.coprocessor")
