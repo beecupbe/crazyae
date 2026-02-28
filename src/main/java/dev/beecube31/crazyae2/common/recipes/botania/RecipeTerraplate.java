@@ -60,6 +60,15 @@ public class RecipeTerraplate {
         this.manaCost = s.manaCost;
     }
 
+    public RecipeTerraplate(ItemStack recipeOutput, int manaCost) {
+        this.recipeStacks = ImmutableList.of();
+        this.recipeOreKeys = ImmutableList.of();
+        this.totalInputs = 0;
+
+        this.recipeOutput = recipeOutput;
+        this.manaCost = manaCost;
+    }
+
     public boolean matches(IItemHandler inv) {
         final List<ItemStack> userInputs = new ArrayList<>();
         for (int i = 0; i < inv.getSlots(); i++) {

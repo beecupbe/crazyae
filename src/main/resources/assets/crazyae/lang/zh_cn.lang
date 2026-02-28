@@ -113,7 +113,7 @@ item.crazyae.material.manapool_blank_pattern.name=魔力灌注空白样板
 item.crazyae.material.petal_blank_pattern.name=花瓣炼制空白样板
 item.crazyae.material.runealtar_blank_pattern.name=符文祭坛空白样板
 item.crazyae.material.puredaisy_blank_pattern.name=白雏活化空白样板
-item.crazyae.material.teraplate_blank_pattern.name=泰拉凝聚空白样板
+item.crazyae.material.teraplate_blank_pattern.name=魔力凝聚空白样板
 item.crazyae.material.brewery_blank_pattern.name=植物酿造空白样板
 
 item.crazyae.elventrade_encoded_pattern.name=精灵交易编码样板
@@ -121,7 +121,7 @@ item.crazyae.manapool_encoded_pattern.name=魔力灌注编码样板
 item.crazyae.petal_encoded_pattern.name=花瓣炼制编码样板
 item.crazyae.runealtar_encoded_pattern.name=符文祭坛编码样板
 item.crazyae.puredaisy_encoded_pattern.name=白雏活化编码样板
-item.crazyae.teraplate_encoded_pattern.name=泰拉凝聚编码样板
+item.crazyae.teraplate_encoded_pattern.name=魔力凝聚编码样板
 item.crazyae.brewery_encoded_pattern.name=植物酿造编码样板
 
 item.crazyae.creative_mana_cell.name=创造型ME魔力存储组件
@@ -213,7 +213,7 @@ tile.crazyae.mechanical_manapool.name=魔力灌注处理仓
 tile.crazyae.mechanical_runealtar.name=符文祭坛处理仓
 tile.crazyae.mechanical_petal.name=花瓣炼制处理仓
 tile.crazyae.mechanical_puredaisy.name=白雏活化处理仓
-tile.crazyae.mechanical_teraplate.name=泰拉凝聚处理仓
+tile.crazyae.mechanical_teraplate.name=魔力凝聚处理仓
 tile.crazyae.mechanical_brewery.name=植物酿造处理仓
 
 
@@ -262,7 +262,7 @@ gui.crazyae.mechanical_manapool.name=魔力灌注处理仓
 gui.crazyae.mechanical_runealtar.name=符文祭坛处理仓
 gui.crazyae.mechanical_petal.name=花瓣炼制处理仓
 gui.crazyae.mechanical_puredaisy.name=白雏活化处理仓
-gui.crazyae.mechanical_teraplate.name=泰拉凝聚处理仓
+gui.crazyae.mechanical_teraplate.name=魔力凝聚处理仓
 gui.crazyae.mechanical_brewery.name=植物酿造处理仓
 
 gui.crazyae.patterns_inv_gui.name=样板存放处
