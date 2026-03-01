@@ -1,10 +1,10 @@
 package dev.beecube31.crazyae2.common.recipes.botania;
 
 import com.google.common.collect.ImmutableList;
-import appeng.tile.inventory.AppEngInternalInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 import quaternary.botaniatweaks.modules.botania.recipe.AgglomerationRecipe;
 import quaternary.botaniatweaks.modules.botania.recipe.AgglomerationRecipes;
 import vazkii.botania.api.recipe.RecipePetals;
@@ -45,8 +45,10 @@ public class RecipeRepo {
     }
 
     public static Optional<RecipeTerraplate> findMatchingRecipe(IItemHandler inv) {
+        final IItemHandler compactedInv = compactInventory(inv);
+
         for (RecipeTerraplate recipe : terraplateRecipes) {
-            if (recipe.matches(inv)) {
+            if (recipe.matches(compactedInv)) {
                 return Optional.of(recipe);
             }
         }
@@ -54,18 +56,18 @@ public class RecipeRepo {
         if (isBotaniaTweaksLoaded()) {
             for (AgglomerationRecipe recipe : AgglomerationRecipes.recipes) {
                 final RecipeTerraplate wrapped = new RecipeTerraplate(recipe);
-                if (wrapped.matches(inv)) {
+                if (wrapped.matches(compactedInv)) {
                     return Optional.of(wrapped);
                 }
             }
         }
 
-        final Optional<RecipeTerraplate> botanicAdditionsMatch = findMatchingBotanicAdditionsRecipe(inv);
+        final Optional<RecipeTerraplate> botanicAdditionsMatch = findMatchingBotanicAdditionsRecipe(compactedInv);
         if (botanicAdditionsMatch.isPresent()) {
             return botanicAdditionsMatch;
         }
 
-        final Optional<RecipeTerraplate> godAgglomerationMatch = findMatchingGodAgglomerationRecipe(inv);
+        final Optional<RecipeTerraplate> godAgglomerationMatch = findMatchingGodAgglomerationRecipe(compactedInv);
         if (godAgglomerationMatch.isPresent()) {
             return godAgglomerationMatch;
         }
@@ -74,7 +76,7 @@ public class RecipeRepo {
     }
 
     private static Optional<RecipeTerraplate> findMatchingBotanicAdditionsRecipe(IItemHandler inv) {
-        if (!Loader.isModLoaded("botanicadds") || !(inv instanceof AppEngInternalInventory appEngInv)) {
+        if (!Loader.isModLoaded("botanicadds")) {
             return Optional.empty();
         }
 
@@ -91,7 +93,7 @@ public class RecipeRepo {
                     continue;
                 }
 
-                if (!recipePetals.matches(appEngInv)) {
+                if (!recipePetals.matches(inv)) {
                     continue;
                 }
 
@@ -182,5 +184,17 @@ public class RecipeRepo {
 
     private static ItemStack manaResource(int meta) {
         return new ItemStack(ModItems.manaResource, 1, meta);
+    }
+
+    private static IItemHandler compactInventory(IItemHandler inv) {
+        ItemStackHandler compacted = new ItemStackHandler(inv.getSlots());
+        int index = 0;
+        for (int i = 0; i < inv.getSlots(); i++) {
+            ItemStack stack = inv.getStackInSlot(i);
+            if (!stack.isEmpty()) {
+                compacted.setStackInSlot(index++, stack.copy());
+            }
+        }
+        return compacted;
     }
 }
