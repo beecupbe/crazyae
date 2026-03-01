@@ -2,8 +2,8 @@ package dev.beecube31.crazyae2.common.containers;
 
 import appeng.api.networking.IGridNode;
 import dev.beecube31.crazyae2.client.gui.sprites.StateSprite;
+import dev.beecube31.crazyae2.common.containers.base.slot.BotaniaSlotFake;
 import dev.beecube31.crazyae2.common.containers.base.slot.RestrictedSlot;
-import dev.beecube31.crazyae2.common.containers.base.slot.SlotFake;
 import dev.beecube31.crazyae2.common.containers.base.slot.SlotOutput;
 import dev.beecube31.crazyae2.common.enums.BotaniaMechanicalDeviceType;
 import dev.beecube31.crazyae2.common.tile.botania.TileMechanicalElventrade;
@@ -26,7 +26,7 @@ public class ContainerElventradeMechanical extends ContainerMechanicalBotaniaTil
 
         for (int y = 0; y < 2; y++) {
             for (int x = 0; x < 8; x++) {
-                this.addSlotToContainer(new SlotFake(input, x + y * 8, 17 + 18 * x, 14 + 18 * y, true));
+                this.addSlotToContainer(new BotaniaSlotFake(input, x + y * 8, 17 + 18 * x, 14 + 18 * y, true));
             }
         }
 

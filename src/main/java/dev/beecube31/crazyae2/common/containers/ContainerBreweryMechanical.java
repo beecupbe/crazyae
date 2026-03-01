@@ -2,8 +2,8 @@ package dev.beecube31.crazyae2.common.containers;
 
 import appeng.api.networking.IGridNode;
 import dev.beecube31.crazyae2.client.gui.sprites.StateSprite;
+import dev.beecube31.crazyae2.common.containers.base.slot.BotaniaSlotFake;
 import dev.beecube31.crazyae2.common.containers.base.slot.RestrictedSlot;
-import dev.beecube31.crazyae2.common.containers.base.slot.SlotFake;
 import dev.beecube31.crazyae2.common.containers.base.slot.SlotOutput;
 import dev.beecube31.crazyae2.common.enums.BotaniaMechanicalDeviceType;
 import dev.beecube31.crazyae2.common.tile.botania.TileMechanicalBrewery;
@@ -26,11 +26,11 @@ public class ContainerBreweryMechanical extends ContainerMechanicalBotaniaTileBa
 
         for (int y = 0; y < 2; y++) {
             for (int x = 0; x < 3; x++) {
-                this.addSlotToContainer(new SlotFake(input, x + y * 3, 62 + x * 18, 16 + y * 18, true));
+                this.addSlotToContainer(new BotaniaSlotFake(input, x + y * 3, 62 + x * 18, 16 + y * 18, true));
             }
         }
 
-        this.addSlotToContainer(new SlotFake(bottle, 0, 80, 53, true).setIIcon(StateSprite.BREW));
+        this.addSlotToContainer(new BotaniaSlotFake(bottle, 0, 80, 53, true).setIIcon(StateSprite.BREW));
         this.addSlotToContainer(new SlotOutput(output, 0, 80, 87, null));
 
         this.addSlotToContainer(new RestrictedSlot(

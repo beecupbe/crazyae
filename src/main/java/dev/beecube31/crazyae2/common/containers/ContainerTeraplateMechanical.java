@@ -1,8 +1,8 @@
 package dev.beecube31.crazyae2.common.containers;
 
 import appeng.api.networking.IGridNode;
+import dev.beecube31.crazyae2.common.containers.base.slot.BotaniaSlotFake;
 import dev.beecube31.crazyae2.common.containers.base.slot.RestrictedSlot;
-import dev.beecube31.crazyae2.common.containers.base.slot.SlotFake;
 import dev.beecube31.crazyae2.common.containers.base.slot.SlotOutput;
 import dev.beecube31.crazyae2.common.enums.BotaniaMechanicalDeviceType;
 import dev.beecube31.crazyae2.common.tile.botania.TileMechanicalTerraplate;
@@ -25,11 +25,11 @@ public class ContainerTeraplateMechanical extends ContainerMechanicalBotaniaTile
 
         for (int y = 0; y < 2; y++) {
             for (int x = 0; x < 7; x++) {
-                this.addSlotToContainer(new SlotFake(input, x + y * 7, 26 + 18 * x, 16 + 18 * y, true));
+                this.addSlotToContainer(new BotaniaSlotFake(input, x + y * 7, 26 + 18 * x, 16 + 18 * y, true));
             }
         }
 
-        this.addSlotToContainer(new SlotFake(marker, 0, 80, 52, true).setNotDraggable());
+        this.addSlotToContainer(new BotaniaSlotFake(marker, 0, 80, 52, true).setNotDraggable());
 
         this.addSlotToContainer(new SlotOutput(output, 0, 80, 86, null));
 
