@@ -16,11 +16,14 @@ import dev.beecube31.crazyae2.common.util.NBTUtils;
 import dev.beecube31.crazyae2.common.util.inv.CrazyAEInternalInv;
 import dev.beecube31.crazyae2.common.util.patterns.crafting.TeraplateCraftingPatternDetails;
 import dev.beecube31.crazyae2.core.CrazyAE;
+import appeng.util.inv.InvOperation;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -33,7 +36,7 @@ public class TileMechanicalTerraplate extends TileBotaniaMechanicalMachineBase {
     public TileMechanicalTerraplate() {
         super();
 
-        this.craftingInputInv = new CrazyAEInternalInv(this, 16, 64);
+        this.craftingInputInv = new CrazyAEInternalInv(this, 14, 64);
         (this.craftingOutputInv = new CrazyAEInternalInv(this, 1, 64)).setFilter(new DisabledFilter());
 
         this.actionSource = new MachineSource(this);
@@ -76,7 +79,7 @@ public class TileMechanicalTerraplate extends TileBotaniaMechanicalMachineBase {
 
         if (input != null) {
             final Optional<RecipeTerraplate> recipe = RecipeRepo.findMatchingRecipe(this.craftingInputInv);
-            if (recipe.isPresent()) {
+            if (recipe.isPresent() && this.hasValidPlateMarker(recipe.get())) {
                 this.isRecipeValidated = true;
                 this.currentRecipe = recipe.get();
                 this.craftingOutputInv.setStackInSlot(0, recipe.get().getOutput());
@@ -85,6 +88,33 @@ public class TileMechanicalTerraplate extends TileBotaniaMechanicalMachineBase {
         }
 
         return false;
+    }
+
+    private boolean hasValidPlateMarker(RecipeTerraplate recipe) {
+        final ItemStack marker = this.findSlot.getStackInSlot(0);
+        if (marker.isEmpty() || marker.getItem() == null) {
+            return false;
+        }
+
+        final ResourceLocation registryName = marker.getItem().getRegistryName();
+        if (registryName == null) {
+            return false;
+        }
+
+        return switch (recipe.getPlateType()) {
+            case TERRA_PLATE -> registryName.toString().equals("botania:terraplate");
+            case GAIA_PLATE -> registryName.toString().equals("botanicadds:gaia_plate");
+            case GOD_AGGLOMERATION_PLATE -> registryName.toString().equals("godagglomerationplate:godagglomerationplate");
+        };
+    }
+
+    @Override
+    public void onChangeInventory(final IItemHandler inv, final int slot, final InvOperation mc, final ItemStack removed, final ItemStack added) {
+        super.onChangeInventory(inv, slot, mc, removed, added);
+
+        if (inv == this.findSlot && (!removed.isEmpty() || !added.isEmpty())) {
+            this.validateRecipe();
+        }
     }
 
     @NotNull

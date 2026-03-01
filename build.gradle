@@ -1092,13 +1092,17 @@ boolean performBuildScriptUpdate() {
 boolean isNewBuildScriptVersionAvailable() {
     Map parameters = ["connectTimeout": 10000, "readTimeout": 10000]
 
-    String currentBuildScript = getFile("build.gradle").getText()
-    String currentBuildScriptHash = getVersionHash(currentBuildScript)
-    String availableBuildScript = availableBuildScriptUrl().newInputStream(parameters).getText()
-    String availableBuildScriptHash = getVersionHash(availableBuildScript)
+    try {
+        String currentBuildScript = getFile("build.gradle").getText()
+        String currentBuildScriptHash = getVersionHash(currentBuildScript)
+        String availableBuildScript = availableBuildScriptUrl().newInputStream(parameters).getText()
+        String availableBuildScriptHash = getVersionHash(availableBuildScript)
 
-    boolean isUpToDate = currentBuildScriptHash.empty || availableBuildScriptHash.empty || currentBuildScriptHash == availableBuildScriptHash
-    return !isUpToDate
+        boolean isUpToDate = currentBuildScriptHash.empty || availableBuildScriptHash.empty || currentBuildScriptHash == availableBuildScriptHash
+        return !isUpToDate
+    } catch (Exception ignored) {
+        return false
+    }
 }
 
 static String getVersionHash(String buildScriptContent) {

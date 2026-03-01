@@ -57,6 +57,7 @@ public class TileMechanicalElventrade extends TileBotaniaMechanicalMachineBase {
         for (int i = 0; i < this.craftingOutputInv.getSlots(); i++) {
             this.craftingOutputInv.setStackInSlot(i, ItemStack.EMPTY);
         }
+
         List<ItemStack> input = new ArrayList<>();
         for (ItemStack s : this.craftingInputInv) {
             if (!s.isEmpty()) {
@@ -114,15 +115,20 @@ public class TileMechanicalElventrade extends TileBotaniaMechanicalMachineBase {
 
     private static boolean compareRecipes(RecipeElvenTrade recipe, @Nonnull List<ItemStack> input, @Nonnull AppEngInternalInventory inv) {
         if (recipe.matches(input, false) && input.size() == recipe.getInputs().size()) {
-            for (int i = 0; i < inv.getSlots(); i++) {
-                if (i > recipe.getInputs().size() - 1) break;
+            int recipeInputIndex = 0;
+            for (int i = 0; i < inv.getSlots() && recipeInputIndex < recipe.getInputs().size(); i++) {
                 ItemStack invStack = inv.getStackInSlot(i);
+                if (invStack.isEmpty()) {
+                    continue;
+                }
 
-                if (!invStack.isEmpty() && recipe.getInputs().get(i) instanceof ItemStack ris) {
+                if (recipe.getInputs().get(recipeInputIndex) instanceof ItemStack ris) {
                     invStack.setCount(ris.getCount());
-                } else if (recipe.getInputs().get(i) instanceof String) {
+                } else if (recipe.getInputs().get(recipeInputIndex) instanceof String) {
                     invStack.setCount(1);
                 }
+
+                recipeInputIndex++;
             }
             return true;
         }

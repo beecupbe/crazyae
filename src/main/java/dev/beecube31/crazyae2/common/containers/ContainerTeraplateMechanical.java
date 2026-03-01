@@ -1,8 +1,8 @@
 package dev.beecube31.crazyae2.common.containers;
 
 import appeng.api.networking.IGridNode;
+import dev.beecube31.crazyae2.common.containers.base.slot.BotaniaSlotFake;
 import dev.beecube31.crazyae2.common.containers.base.slot.RestrictedSlot;
-import dev.beecube31.crazyae2.common.containers.base.slot.SlotFake;
 import dev.beecube31.crazyae2.common.containers.base.slot.SlotOutput;
 import dev.beecube31.crazyae2.common.enums.BotaniaMechanicalDeviceType;
 import dev.beecube31.crazyae2.common.tile.botania.TileMechanicalTerraplate;
@@ -21,12 +21,17 @@ public class ContainerTeraplateMechanical extends ContainerMechanicalBotaniaTile
         final IItemHandler upgrades = this.getUpgradeable().getInventoryByName("upgrades");
         final IItemHandler input = this.getUpgradeable().getInventoryByName("input");
         final IItemHandler output = this.getUpgradeable().getInventoryByName("output");
+        final IItemHandler marker = this.getUpgradeable().getInventoryByName("findSlot");
 
-        this.addSlotToContainer(new SlotFake(input, 0, 61, 30, true));
-        this.addSlotToContainer(new SlotFake(input, 1, 80, 30, true));
-        this.addSlotToContainer(new SlotFake(input, 2, 99, 30, true));
+        for (int y = 0; y < 2; y++) {
+            for (int x = 0; x < 7; x++) {
+                this.addSlotToContainer(new BotaniaSlotFake(input, x + y * 7, 26 + 18 * x, 16 + 18 * y, true));
+            }
+        }
 
-        this.addSlotToContainer(new SlotOutput(output, 0, 80, 68, null));
+        this.addSlotToContainer(new BotaniaSlotFake(marker, 0, 80, 52, true).setNotDraggable());
+
+        this.addSlotToContainer(new SlotOutput(output, 0, 80, 86, null));
 
         this.addSlotToContainer(new RestrictedSlot(
                 this.type == BotaniaMechanicalDeviceType.ELVENTRADE ? RestrictedSlot.PlaceableItemType.ELVENTRADE_BLANK_PATTERN
