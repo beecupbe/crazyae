@@ -4,7 +4,7 @@ import appeng.api.implementations.guiobjects.IGuiItemObject;
 import appeng.api.networking.IGridNode;
 import appeng.api.networking.IMachineSet;
 import appeng.api.networking.security.IActionHost;
-import appeng.container.implementations.ContainerPatternTerm;
+import appeng.container.implementations.ContainerPatternEncoder;
 import appeng.container.slot.SlotRestrictedInput;
 import appeng.core.sync.network.INetworkInfo;
 import appeng.me.GridAccessException;
@@ -85,7 +85,7 @@ public class PacketToggleGuiObject extends CrazyAEPacket {
                 }
 
                 case "CRAZYAE.GUI.patternTerm.clearnbt" -> {
-                    if (c instanceof ContainerPatternTerm t) {
+                    if (c instanceof ContainerPatternEncoder t) {
                         final NBTTagCompound encodedValue = new NBTTagCompound();
 
                         final NBTTagList tagIn = new NBTTagList();
@@ -113,7 +113,7 @@ public class PacketToggleGuiObject extends CrazyAEPacket {
                 }
 
                 case "CRAZYAE.GUI.patternTerm.fastPlace" -> {
-                    if (c instanceof ContainerPatternTerm t) {
+                    if (c instanceof ContainerPatternEncoder t) {
                         SlotRestrictedInput patternSlotOUT = ((AccessorContainerPatternEncoder) t).getPatternSlotOUT();
                         ItemStack patternStack = patternSlotOUT.getStack();
                         if (patternStack.isEmpty()) {
@@ -127,7 +127,11 @@ public class PacketToggleGuiObject extends CrazyAEPacket {
                             if (part != null) {
                                 availableTiles = part.getProxy().getGrid().getMachines(TileImprovedMAC.class);
                             } else if (itemObject instanceof IActionHost wirelessTerm) {
-                                availableTiles = wirelessTerm.getActionableNode().getGrid().getMachines(TileImprovedMAC.class);
+                                final IGridNode wirelessNode = wirelessTerm.getActionableNode();
+                                if (wirelessNode == null || wirelessNode.getGrid() == null) {
+                                    return;
+                                }
+                                availableTiles = wirelessNode.getGrid().getMachines(TileImprovedMAC.class);
                             } else {
                                 return;
                             }
@@ -146,7 +150,7 @@ public class PacketToggleGuiObject extends CrazyAEPacket {
                 }
 
                 case "CRAZYAE.GUI.patternTerm.fastPlaceQCpu" -> {
-                    if (c instanceof ContainerPatternTerm t) {
+                    if (c instanceof ContainerPatternEncoder t) {
                         SlotRestrictedInput patternSlotOUT = ((AccessorContainerPatternEncoder) t).getPatternSlotOUT();
                         ItemStack patternStack = patternSlotOUT.getStack();
                         if (patternStack.isEmpty()) {
@@ -160,7 +164,11 @@ public class PacketToggleGuiObject extends CrazyAEPacket {
                             if (part != null) {
                                 availableTiles = part.getProxy().getGrid().getMachines(TileQuantumCPU.class);
                             } else if (itemObject instanceof IActionHost wirelessTerm) {
-                                availableTiles = wirelessTerm.getActionableNode().getGrid().getMachines(TileQuantumCPU.class);
+                                final IGridNode wirelessNode = wirelessTerm.getActionableNode();
+                                if (wirelessNode == null || wirelessNode.getGrid() == null) {
+                                    return;
+                                }
+                                availableTiles = wirelessNode.getGrid().getMachines(TileQuantumCPU.class);
                             } else {
                                 return;
                             }
