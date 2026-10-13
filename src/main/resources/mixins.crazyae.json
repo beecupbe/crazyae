@@ -1,0 +1,20 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.beecube31.crazyae2.mixins",
+  "refmap": "crazyae.refmap.json",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "crafting.MixinCraftingBlockEntity",
+    "crafting.MixinCraftingCPUCalculator",
+    "crafting.MixinCraftingCPUCluster",
+    "crafting.MixinCraftingService",
+    "parts.MixinAEBasePart",
+    "parts.MixinTickManagerService"
+  ],
+  "client": [
+    "client.MixinIconButton",
+    "models.MixinBuiltInModelsHooks"
+  ],
+  "server": []
+}

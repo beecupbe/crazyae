@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "cbc",
+    "ccc",
+    "cbc"
+  ],
+  "key": {
+    "b": {
+      "item": "crazyae:16x_crafting_accelerator"
+    },
+    "c": {
+      "item": "minecraft:ender_pearl"
+    }
+  },
+  "result": {
+    "item": "crazyae:64x_crafting_accelerator"
+  }
+}

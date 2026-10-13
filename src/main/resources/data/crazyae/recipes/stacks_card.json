@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "gcg",
+    "asa",
+    "gag"
+  ],
+  "key": {
+    "a": {
+      "item": "crazyae:improved_speed_card"
+    },
+    "g": {
+      "item": "crazyae:fluixilized_block"
+    },
+    "c": {
+      "item": "crazyae:quantum_processor"
+    },
+    "s": {
+      "item": "ae2:singularity"
+    }
+  },
+  "result": {
+    "item": "crazyae:stacks_card"
+  }
+}

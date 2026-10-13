@@ -1,0 +1,32 @@
+modLoader="javafml"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
+[[mods]]
+modId="crazyae"
+issueTrackerURL="https://github.com/beecupbe/crazyae/issues"
+displayURL="https://www.curseforge.com/minecraft/mc-mods/crazyae"
+version="${mod_version}"
+displayName="${mod_name}"
+authors="${mod_authors}"
+credits="NekitFbetc :3"
+logoFile="logo.png"
+
+description='''${mod_description}'''
+[[dependencies.crazyae]]
+    modId="forge"
+    mandatory=true
+    versionRange="${forge_version_range}"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.crazyae]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.crazyae]]
+    modId="ae2"
+    mandatory=true
+    versionRange="${ae2_version_range}"
+    ordering="AFTER"
+    side="BOTH"

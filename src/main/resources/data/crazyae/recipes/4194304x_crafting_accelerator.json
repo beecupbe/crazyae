@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "cec",
+    "bdb",
+    "cec"
+  ],
+  "key": {
+    "b": {
+      "item": "crazyae:1048576x_crafting_accelerator"
+    },
+    "e": {
+      "item": "crazyae:262144x_crafting_accelerator"
+    },
+    "c": {
+      "item": "ae2:singularity"
+    },
+    "d": {
+      "item": "crazyae:quantum_processor"
+    }
+  },
+  "result": {
+    "item": "crazyae:4194304x_crafting_accelerator"
+  }
+}

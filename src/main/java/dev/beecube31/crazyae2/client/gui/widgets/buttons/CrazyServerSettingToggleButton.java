@@ -1,0 +1,86 @@
+package dev.beecube31.crazyae2.client.gui.widgets.buttons;
+
+import appeng.api.config.Setting;
+import appeng.client.gui.style.Blitter;
+import appeng.client.gui.widgets.SettingToggleButton;
+import com.mojang.blaze3d.systems.RenderSystem;
+import dev.beecube31.crazyae2.client.components.ColorContainer;
+import dev.beecube31.crazyae2.client.gui.sprite.StateSprite;
+import dev.beecube31.crazyae2.common.network.CrazyNetworkHandler;
+import dev.beecube31.crazyae2.common.network.packets.PacketConfigButton;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.world.item.ItemStack;
+
+public class CrazyServerSettingToggleButton<T extends Enum<T>> extends SettingToggleButton<T> {
+
+    private final ColorContainer hue;
+
+    public CrazyServerSettingToggleButton(Setting<T> setting, T val, ColorContainer hue) {
+        super(setting, val, CrazyServerSettingToggleButton::sendToServer);
+        this.hue = hue;
+    }
+
+    private static <T extends Enum<T>> void sendToServer(SettingToggleButton<T> button, boolean backwards) {
+        CrazyNetworkHandler.instance().sendToServer(new PacketConfigButton(button.getSetting(), backwards));
+    }
+
+    @Override
+    public void renderWidget(GuiGraphics guiGraphics, int mouseX, int mouseY, float partial) {
+
+        if (this.visible) {
+            var icon = this.getIcon();
+
+            Blitter blitter = icon.getBlitter();
+            if (!this.active) {
+                blitter.opacity(0.5f);
+            }
+
+            if (this.isHalfSize()) {
+                this.width = 8;
+                this.height = 8;
+            }
+
+            RenderSystem.disableDepthTest();
+            RenderSystem.enableBlend();
+
+            if (isFocused()) {
+                // Draw 1px border with 4 quads, don't rely on the background as it can be disabled.
+                // top
+                guiGraphics.fill(getX() - 1, getY() - 1, getX() + width + 1, getY(), 0xFFFFFFFF);
+                // left
+                guiGraphics.fill(getX() - 1, getY(), getX(), getY() + height, 0xFFFFFFFF);
+                // right
+                guiGraphics.fill(getX() + width, getY(), getX() + width + 1, getY() + height, 0xFFFFFFFF);
+                // bottom
+                guiGraphics.fill(getX() - 1, getY() + height, getX() + width + 1, getY() + height + 1, 0xFFFFFFFF);
+            }
+
+            if (this.isHalfSize()) {
+                var pose = guiGraphics.pose();
+                pose.pushPose();
+                pose.translate(getX(), getY(), 0.0F);
+                pose.scale(0.5f, 0.5f, 1.f);
+
+                if (!this.isDisableBackground()) {
+                    Blitter bg = StateSprite.IMAGE_BUTTON.getBlitter().color(this.hue.getRed(), this.hue.getGreen(), this.hue.getBlue(), this.hue.getAlpha());
+                    bg.dest(0, 0).blit(guiGraphics);
+                }
+                blitter.dest(0, 0).blit(guiGraphics);
+                pose.popPose();
+            } else {
+                if (!this.isDisableBackground()) {
+                    Blitter bg = StateSprite.IMAGE_BUTTON.getBlitter().color(this.hue.getRed(), this.hue.getGreen(), this.hue.getBlue(), this.hue.getAlpha());
+                    bg.dest(getX(), getY()).blit(guiGraphics);
+                }
+                icon.getBlitter().dest(getX(), getY()).blit(guiGraphics);
+            }
+            RenderSystem.enableDepthTest();
+
+            var item = this.getItemOverlay();
+            if (item != null) {
+                guiGraphics.renderItem(new ItemStack(item), getX(), getY());
+            }
+        }
+    }
+
+}

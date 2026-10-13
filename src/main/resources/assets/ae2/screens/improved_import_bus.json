@@ -1,0 +1,15 @@
+{
+  "$schema": "schema.json",
+  "includes": ["crazy_io_bus.json"],
+  "text": {
+    "dialog_title": {
+      "text": {
+        "translate": "item.crazyae.improved_import_bus"
+      },
+      "position": {
+        "left": 8,
+        "top": 6
+      }
+    }
+  }
+}

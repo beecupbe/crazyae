@@ -1,0 +1,26 @@
+{
+  "$schema": "schema.json",
+  "includes": [
+    "common/common.json",
+    "nameless_player_inventory.json"
+  ],
+  "background": {
+    "texture": "crazyae:textures/guis/crafting_units_combiner.png",
+    "srcRect": [
+      0,
+      0,
+      176,
+      197
+    ]
+  },
+  "slots": {
+    "CRAZYAE_COMBINER_ACCELERATORS": {
+      "left": 62,
+      "top": 12
+    },
+    "CRAZYAE_COMBINER_STORAGE": {
+      "left": 62,
+      "top": 68
+    }
+  }
+}

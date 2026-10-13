@@ -1,0 +1,33 @@
+{
+  "$schema": "schema.json",
+  "includes": ["common/common.json", "alt_nameless_player_inventory.json"],
+
+  "background": {
+    "texture": "crazyae:textures/guis/improved_mac.png",
+    "srcRect": [0, 0, 176, 199]
+  },
+
+  "slots": {
+    "ENCODED_PATTERN": {
+      "left": 8,
+      "top": 18,
+      "grid": "BREAK_AFTER_9COLS"
+    }
+  },
+
+  "text": {
+    "dialog_title": {
+      "text": {
+        "translate": "gui.crazyae.improved_mac"
+      },
+      "position": {
+        "left": 8,
+        "top": 6
+      }
+    }
+  },
+
+  "widgets": {
+
+  }
+}

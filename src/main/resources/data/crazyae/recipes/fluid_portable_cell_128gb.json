@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "ae2:chest"
+    },
+    {
+      "item": "ae2:dense_energy_cell"
+    },
+    {
+      "item": "crazyae:fluid_storage_cell_component_128gb"
+    },
+    {
+      "item": "ae2:fluid_cell_housing"
+    }
+  ],
+  "result": {
+    "item": "crazyae:fluid_portable_cell_128gb"
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "$schema": "schema.json",
+  "includes": [
+    "common/common.json",
+    "nameless_player_inventory.json"
+  ],
+  "background": {
+    "texture": "crazyae:textures/guis/improved_condenser.png",
+    "srcRect": [
+      0,
+      0,
+      176,
+      197
+    ]
+  },
+  "slots": {
+    "CRAZYAE_CONDENSER_INPUT_0": {
+      "left": 8,
+      "top": 13,
+      "grid": "HORIZONTAL"
+    },
+    "CRAZYAE_CONDENSER_INPUT_1": {
+      "left": 8,
+      "top": 31,
+      "grid": "HORIZONTAL"
+    },
+    "CRAZYAE_CONDENSER_INPUT_2": {
+      "left": 8,
+      "top": 49,
+      "grid": "HORIZONTAL"
+    },
+    "CRAZYAE_CONDENSER_INPUT_3": {
+      "left": 8,
+      "top": 67,
+      "grid": "HORIZONTAL"
+    },
+    "CRAZYAE_CONDENSER_INPUT_4": {
+      "left": 8,
+      "top": 85,
+      "grid": "HORIZONTAL"
+    },
+    "MACHINE_OUTPUT": {
+      "left": 134,
+      "top": 40,
+      "grid": "BREAK_AFTER_2COLS"
+    },
+    "STORAGE_CELL": {
+      "left": 134,
+      "top": 13
+    }
+  },
+  "images": {
+    "progressBar": {
+      "texture": "crazyae:textures/guis/improved_condenser.png",
+      "srcRect": [
+        178,
+        25,
+        6,
+        18
+      ]
+    }
+  },
+  "widgets": {
+    "mode": {
+      "left": 114,
+      "top": 13
+    },
+    "progressBar": {
+      "left": 153,
+      "top": 12
+    }
+  }
+}

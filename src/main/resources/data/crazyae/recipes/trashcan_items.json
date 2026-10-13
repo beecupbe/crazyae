@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " e ",
+    "eie",
+    " e "
+  ],
+  "key": {
+    "e": {
+      "item": "crazyae:improved_export_bus"
+    },
+    "i": {
+      "item": "ae2:interface"
+    }
+  },
+  "result": {
+    "item": "crazyae:trashcan_items"
+  }
+}

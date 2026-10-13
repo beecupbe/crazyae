@@ -1,0 +1,51 @@
+{
+  "$schema": "schema.json",
+  "includes": [
+    "common/common.json",
+    "nameless_player_inventory.json"
+  ],
+  "background": {
+    "texture": "crazyae:textures/guis/perfect_interface.png",
+    "srcRect": [
+      0,
+      0,
+      176,
+      256
+    ]
+  },
+  "slots": {
+    "CONFIG": {
+      "left": 8,
+      "top": 23,
+      "grid": "BREAK_AFTER_9COLS"
+    },
+    "STORAGE": {
+      "left": 8,
+      "top": 41,
+      "grid": "BREAK_AFTER_9COLS"
+    }
+  },
+  "text": {
+    "dialog_title": {
+      "text": {
+        "translate": "i18n.crazyae.perfect_interface"
+      },
+      "position": {
+        "left": 8,
+        "top": 6
+      }
+    }
+  },
+  "widgets": {
+    "openPriority": {
+      "left": 154,
+      "top": 0,
+      "width": 16,
+      "height": 16
+    },
+    "upgrades": {
+      "left": 202,
+      "top": 0
+    }
+  }
+}

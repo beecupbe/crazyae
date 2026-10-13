@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "ae2:conversion_monitor"
+    },
+    {
+      "item": "crazyae:quantum_processor"
+    }
+  ],
+  "result": {
+    "item": "crazyae:throughput_conversion_monitor"
+  }
+}

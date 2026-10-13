@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "cbc",
+    "cdc",
+    "cbc"
+  ],
+  "key": {
+    "b": {
+      "item": "crazyae:64x_crafting_accelerator"
+    },
+    "c": {
+      "item": "ae2:fluix_pearl"
+    },
+    "d": {
+      "item": "crazyae:quantum_processor"
+    }
+  },
+  "result": {
+    "item": "crazyae:256x_crafting_accelerator"
+  }
+}

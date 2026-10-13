@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "aba",
+    "dad",
+    "aba"
+  ],
+  "key": {
+    "b": {
+      "item": "ae2:crafting_accelerator"
+    },
+    "d": {
+      "item": "minecraft:ender_pearl"
+    },
+    "a": {
+      "item": "ae2:fluix_dust"
+    }
+  },
+  "result": {
+    "item": "crazyae:4x_crafting_accelerator"
+  }
+}

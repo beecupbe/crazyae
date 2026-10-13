@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "ae2:storage_monitor"
+    },
+    {
+      "item": "crazyae:quantum_processor"
+    }
+  ],
+  "result": {
+    "item": "crazyae:throughput_storage_monitor"
+  }
+}

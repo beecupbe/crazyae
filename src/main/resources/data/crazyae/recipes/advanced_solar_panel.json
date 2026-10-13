@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "aqa",
+    "blb",
+    "sbs"
+  ],
+  "key": {
+    "b": {
+      "item": "crazyae:fluixilized_block"
+    },
+    "a": {
+      "item": "minecraft:glass_pane"
+    },
+    "s": {
+      "item": "ae2:smooth_sky_stone_block"
+    },
+    "q": {
+      "item": "crazyae:quantum_processor"
+    },
+    "l": {
+      "item": "crazyae:improved_solar_panel"
+    }
+  },
+  "result": {
+    "item": "crazyae:advanced_solar_panel"
+  }
+}

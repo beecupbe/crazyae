@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "iqi",
+    "qfq"
+  ],
+  "key": {
+    "i": {
+      "item": "ae2:export_bus"
+    },
+    "q": {
+      "item": "crazyae:quantum_processor"
+    },
+    "f": {
+      "item": "crazyae:fluixilized_block"
+    }
+  },
+  "result": {
+    "item": "crazyae:improved_export_bus"
+  }
+}

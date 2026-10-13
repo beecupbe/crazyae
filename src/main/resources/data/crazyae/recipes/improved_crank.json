@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " b ",
+    "bab",
+    " b "
+  ],
+  "key": {
+    "b": {
+      "tag": "minecraft:logs"
+    },
+    "a": {
+      "item": "ae2:crank"
+    }
+  },
+  "result": {
+    "item": "crazyae:improved_crank"
+  }
+}

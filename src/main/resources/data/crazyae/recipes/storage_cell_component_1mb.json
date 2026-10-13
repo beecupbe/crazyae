@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "aba",
+    "cdc",
+    "aca"
+  ],
+  "key": {
+    "b": {
+      "item": "ae2:engineering_processor"
+    },
+    "c": {
+      "item": "ae2:cell_component_256k"
+    },
+    "d": {
+      "item": "ae2:quartz_glass"
+    },
+    "a": {
+      "item": "ae2:fluix_dust"
+    }
+  },
+  "result": {
+    "item": "crazyae:storage_cell_component_1mb"
+  }
+}
