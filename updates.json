@@ -1,0 +1,49 @@
+{
+  "26.1.2": {
+    "version": "1.0",
+    "download_url": "https://www.curseforge.com/minecraft/mc-mods/crazyae/files/all?page=1&pageSize=20&showAlphaFiles=show",
+    "changelog": {
+      "en_us": "Initial mod release for 26.1.2",
+      "ja_jp": "26.1.2向けの最初のMODリリース",
+      "ru_ru": "Первый релиз под 26.1.2",
+      "zh_cn": "26.1.2 初始版本发布"
+    }
+  },
+  "1.21.1": {
+    "version": "1.0",
+    "download_url": "https://www.curseforge.com/minecraft/mc-mods/crazyae/files/all?page=1&pageSize=20&showAlphaFiles=show",
+    "changelog": {
+      "en_us": "Initial mod release for 1.21.1",
+      "ja_jp": "1.21.1向けの最初のMODリリース",
+      "ru_ru": "Первый релиз под 1.21.1",
+      "zh_cn": "1.21.1 初始版本发布"
+    }
+  },
+  "1.20.1": {
+    "version": "1.0",
+    "download_url": "https://www.curseforge.com/minecraft/mc-mods/crazyae/files/all?page=1&pageSize=20&showAlphaFiles=show",
+    "changelog": {
+      "en_us": "Initial mod release for 1.20.1",
+      "ja_jp": "1.20.1向けの最初のMODリリース",
+      "ru_ru": "Первый релиз под 1.20.1",
+      "zh_cn": "1.20.1 初始版本发布"
+    }
+  },
+  "1.16.5": {
+    "version": "1.0",
+    "download_url": "https://www.curseforge.com/minecraft/mc-mods/crazyae/files/all?page=1&pageSize=20&showAlphaFiles=show",
+    "changelog": {
+      "en_us": "Initial mod release for 1.16.5",
+      "ja_jp": "1.16.5向けの最初のMODリリース",
+      "ru_ru": "Первый релиз под 1.16.5",
+      "zh_cn": "1.16.5 初始版本发布"
+    }
+  },
+  "1.12.2": {
+    "version": "1.0",
+    "download_url": "https://www.curseforge.com/minecraft/mc-mods/crazyae/files/all?page=1&pageSize=20&showAlphaFiles=show",
+    "changelog": {
+      "en_us": "Changelog will be added later"
+    }
+  }
+}
