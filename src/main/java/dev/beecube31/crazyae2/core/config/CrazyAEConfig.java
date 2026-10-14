@@ -47,6 +47,9 @@ public class CrazyAEConfig {
         public final ForgeConfigSpec.DoubleValue quantumEnergyCellCapacity;
         public final ForgeConfigSpec.IntValue trashcanBaseOperations;
 
+        public final ForgeConfigSpec.BooleanValue quantumCpuBatchToPatternProviders;
+        public final ForgeConfigSpec.IntValue quantumCpuMaxBatchPerProvider;
+
         public final ForgeConfigSpec.IntValue maxItemCellTypes;
         public final ForgeConfigSpec.IntValue maxFluidCellTypes;
 
@@ -135,6 +138,18 @@ public class CrazyAEConfig {
             trashcanBaseOperations = builder
                     .comment("Operations per tick without upgrades (1 op = 1 item or 1 bucket). Each stacks card multiplies it by 4.")
                     .defineInRange("trashcanBaseOperations", 32, 1, 1 << 20);
+            builder.pop();
+
+            builder.comment("Quantum CPU config").push("quantumCpu");
+            quantumCpuBatchToPatternProviders = builder
+                    .comment("Jobs running on a Quantum CPU send processing patterns to pattern providers in batches",
+                            "(several crafts per push, like the old Quantum Interface did).",
+                            "Only for providers without blocking mode and without crafting lock.",
+                            "Disable if some machine behind a pattern provider must receive exactly one craft per push.")
+                    .define("batchToPatternProviders", true);
+            quantumCpuMaxBatchPerProvider = builder
+                    .comment("Max crafts of one processing pattern pushed into one pattern provider at once (old maxDelegationSizePerInterface).")
+                    .defineInRange("maxBatchPerProvider", 65536, 1, Integer.MAX_VALUE);
             builder.pop();
         }
     }

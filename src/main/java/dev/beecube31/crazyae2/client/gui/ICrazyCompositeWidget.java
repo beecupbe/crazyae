@@ -17,9 +17,9 @@ public interface ICrazyCompositeWidget {
         return true;
     }
 
-    void setPosition(Point position);
+    ICrazyCompositeWidget setPosition(Point position);
 
-    void setSize(int width, int height);
+    ICrazyCompositeWidget setSize(int width, int height);
 
     /**
      * @return The area occupied by this widget relative to the dialogs origin.
@@ -166,6 +166,11 @@ public interface ICrazyCompositeWidget {
      */
     @Nullable
     default Tooltip getTooltip(int mouseX, int mouseY) {
+        return null;
+    }
+
+    @Nullable
+    default ICrazyCompositeWidget setTooltip(Tooltip tooltip) {
         return null;
     }
 

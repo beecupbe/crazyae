@@ -30,14 +30,22 @@ public abstract class MixinCraftingService {
 
     @Inject(method = "updateCPUClusters", at = @At("TAIL"), remap = false)
     private void crazyae$updateCPUCombiners(CallbackInfo ci) {
-        for (var blockEntity : this.grid.getMachines(TileCraftingUnitsCombiner.class)) {
-            final CraftingCPUCluster cluster = blockEntity.getCluster();
-            if (cluster != null) {
-                this.craftingCPUClusters.add(cluster);
+        for (var machineClass : this.grid.getMachineClasses()) {
+            if (!TileCraftingUnitsCombiner.class.isAssignableFrom(machineClass)) {
+                continue;
+            }
 
-                ICraftingLink maybeLink = cluster.craftingLogic.getLastLink();
-                if (maybeLink != null) {
-                    this.addLink((CraftingLink) maybeLink);
+            for (var machine : this.grid.getMachines(machineClass)) {
+                if (!(machine instanceof TileCraftingUnitsCombiner blockEntity)) continue;
+
+                final CraftingCPUCluster cluster = blockEntity.getCluster();
+                if (cluster != null && cluster.getAvailableStorage() > 0 && cluster.getCoProcessors() > 0) {
+                    this.craftingCPUClusters.add(cluster);
+
+                    ICraftingLink maybeLink = cluster.craftingLogic.getLastLink();
+                    if (maybeLink != null) {
+                        this.addLink((CraftingLink) maybeLink);
+                    }
                 }
             }
         }

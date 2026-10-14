@@ -8,6 +8,7 @@ import appeng.block.networking.EnergyCellBlockItem;
 import dev.beecube31.crazyae2.common.block.BlockFluixilized;
 import dev.beecube31.crazyae2.common.block.crafting.BlockCraftingUnitsCombiner;
 import dev.beecube31.crazyae2.common.block.crafting.BlockImprovedMAC;
+import dev.beecube31.crazyae2.common.block.crafting.BlockQuantumCPU;
 import dev.beecube31.crazyae2.common.block.energycells.CrazyEnergyCellBlock;
 import dev.beecube31.crazyae2.common.block.grindstone.ImprovedCrankBlock;
 import dev.beecube31.crazyae2.common.block.misc.BlockImprovedCondenser;
@@ -97,6 +98,9 @@ public final class CrazyBlocks {
     static {
         CRAFTING_UNITS.put(CrazyAECraftingUnitType.COMBINER, CRAFTING_UNITS_COMBINER);
     }
+
+    public static final RegistryObject<BlockQuantumCPU> QUANTUM_CPU =
+            registerBlock("quantum_cpu", BlockQuantumCPU::new);
 
     private static Supplier<ItemLike> disassemblyItem(CrazyAECraftingUnitType type) {
         if (type.isCreative()) {

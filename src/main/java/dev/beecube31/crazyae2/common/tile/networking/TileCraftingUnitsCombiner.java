@@ -15,7 +15,7 @@ import appeng.me.cluster.implementations.CraftingCPUCalculator;
 import appeng.util.inv.AppEngInternalInventory;
 import appeng.util.inv.InternalInventoryHost;
 import appeng.util.inv.filter.IAEItemFilter;
-import dev.beecube31.crazyae2.common.enums.crafting.CrazyAECraftingUnitType;
+import dev.beecube31.crazyae2.common.block.crafting.BlockCraftingUnitsCombiner;
 import dev.beecube31.crazyae2.common.util.inv.CrazyAEInternalInv;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -38,8 +38,9 @@ public class TileCraftingUnitsCombiner extends CraftingBlockEntity implements In
 
     private static final long MAX_THREADS = 1L << 30;
 
-    private final CrazyAEInternalInv accelerators = new CrazyAEInternalInv(this, SLOTS, 64);
-    private final CrazyAEInternalInv storage = new CrazyAEInternalInv(this, SLOTS, 64);
+    private final int unitSlots;
+    private final CrazyAEInternalInv accelerators;
+    private final CrazyAEInternalInv storage;
 
     private final CraftingCPUCalculator ownCalc = new CraftingCPUCalculator(this);
 
@@ -49,8 +50,15 @@ public class TileCraftingUnitsCombiner extends CraftingBlockEntity implements In
     private boolean recalculate = false;
 
     public TileCraftingUnitsCombiner(BlockEntityType<?> type, BlockPos pos, BlockState state) {
+        this(type, pos, state, SLOTS, 1024.0);
+    }
+
+    protected TileCraftingUnitsCombiner(BlockEntityType<?> type, BlockPos pos, BlockState state, int unitSlots, double idlePower) {
         super(type, pos, state);
-        this.getMainNode().setIdlePowerUsage(1024.0);
+        this.unitSlots = unitSlots;
+        this.accelerators = new CrazyAEInternalInv(this, unitSlots, 64);
+        this.storage = new CrazyAEInternalInv(this, unitSlots, 64);
+        this.getMainNode().setIdlePowerUsage(idlePower);
         this.getMainNode().setFlags(GridFlags.REQUIRE_CHANNEL);
         this.getMainNode().addService(IGridTickable.class, this);
         this.accelerators.setFilter(new UnitFilter(true));
@@ -60,13 +68,17 @@ public class TileCraftingUnitsCombiner extends CraftingBlockEntity implements In
     @Nullable
     public static ICraftingUnitType unitTypeOf(ItemStack stack) {
         if (stack.getItem() instanceof BlockItem bi && bi.getBlock() instanceof AbstractCraftingUnitBlock<?> unit
-                && unit.type != CrazyAECraftingUnitType.COMBINER) {
+                && !(unit instanceof BlockCraftingUnitsCombiner)) {
             return unit.type;
         }
         return null;
     }
 
-    private boolean isBusy() {
+    public int getUnitSlots() {
+        return unitSlots;
+    }
+
+    protected boolean isBusy() {
         var cluster = getCluster();
         return cluster != null && cluster.isBusy();
     }

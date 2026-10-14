@@ -35,13 +35,17 @@ public class VerticalButtonBar implements ICrazyCompositeWidget {
     }
 
     @Override
-    public void setPosition(Point position) {
+    public ICrazyCompositeWidget setPosition(Point position) {
         this.position = position;
+
+        return this;
     }
 
     @Override
-    public void setSize(int width, int height) {
+    public ICrazyCompositeWidget setSize(int width, int height) {
         // Setting the size for this control is not supported
+
+        return this;
     }
 
     @Override

@@ -13,6 +13,7 @@ import dev.beecube31.crazyae2.common.definitions.CrazyBlocks;
 import dev.beecube31.crazyae2.common.enums.TrashcanType;
 import dev.beecube31.crazyae2.common.enums.crafting.CrazyAECraftingUnitType;
 import dev.beecube31.crazyae2.common.tile.crafting.TileImprovedMAC;
+import dev.beecube31.crazyae2.common.tile.crafting.TileQuantumCPU;
 import dev.beecube31.crazyae2.common.tile.grindstone.ImprovedCrankBlockEntity;
 import dev.beecube31.crazyae2.common.tile.misc.TileImprovedCondenser;
 import dev.beecube31.crazyae2.common.tile.networking.*;
@@ -114,6 +115,9 @@ public final class CrazyTileEntities {
 
     public static final RegistryObject<BlockEntityType<CraftingBlockEntity>> CRAFTING_UNITS_COMBINER =
             create("crafting_units_combiner", CraftingBlockEntity.class, TileCraftingUnitsCombiner::new, CrazyBlocks.CRAFTING_UNITS_COMBINER);
+
+    public static final RegistryObject<BlockEntityType<CraftingBlockEntity>> QUANTUM_CPU =
+            create("quantum_cpu", CraftingBlockEntity.class, TileQuantumCPU::new, CrazyBlocks.QUANTUM_CPU);
 
     public static void init() {}
 }

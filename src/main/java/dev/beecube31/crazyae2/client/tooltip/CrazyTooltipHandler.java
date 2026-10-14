@@ -28,6 +28,7 @@ public final class CrazyTooltipHandler {
             map.put(CrazyBlocks.IMPROVED_MAC.get(), MachineAttributes.perTick(32, false));
             map.put(CrazyBlocks.IMPROVED_CRYSTAL_CHARGER.get(), MachineAttributes.perTick(16, true));
             map.put(CrazyBlocks.CRAFTING_UNITS_COMBINER.get(), MachineAttributes.perTick(1024, true));
+            map.put(CrazyBlocks.QUANTUM_CPU.get(), MachineAttributes.perTick(4096, true));
             map.put(CrazyBlocks.IMPROVED_IO_PORT.get(), MachineAttributes.perTick(64, true));
             map.put(CrazyBlocks.PERFECT_INTERFACE.get(), MachineAttributes.channel());
             map.put(CrazyBlocks.PATTERNS_INTERFACE.get(), MachineAttributes.channel());

@@ -15,4 +15,5 @@ public class CrazySemanticsContainer {
 
     public static final SlotSemantic COMBINER_ACCELERATORS = register("CRAZYAE_COMBINER_ACCELERATORS", false);
     public static final SlotSemantic COMBINER_STORAGE = register("CRAZYAE_COMBINER_STORAGE", false);
+    public static final SlotSemantic QUANTUM_CPU_PATTERNS = register("CRAZYAE_QUANTUM_CPU_PATTERNS", false);
 }

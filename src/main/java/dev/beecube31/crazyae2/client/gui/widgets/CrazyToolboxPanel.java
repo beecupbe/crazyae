@@ -33,13 +33,17 @@ public class CrazyToolboxPanel implements ICrazyCompositeWidget {
     }
 
     @Override
-    public void setPosition(Point position) {
+    public ICrazyCompositeWidget setPosition(Point position) {
         this.bounds = new Rect2i(position.getX(), position.getY(), bounds.getWidth(), bounds.getHeight());
+
+        return this;
     }
 
     @Override
-    public void setSize(int width, int height) {
+    public ICrazyCompositeWidget setSize(int width, int height) {
         this.bounds = new Rect2i(bounds.getX(), bounds.getY(), width, height);
+
+        return this;
     }
 
     @Override

@@ -18,14 +18,17 @@ public class BackgroundPanel implements ICrazyCompositeWidget {
     }
 
     @Override
-    public void setPosition(Point position) {
+    public ICrazyCompositeWidget setPosition(Point position) {
         x = position.getX();
         y = position.getY();
+
+        return this;
     }
 
     @Override
-    public void setSize(int width, int height) {
+    public ICrazyCompositeWidget setSize(int width, int height) {
         // Size of panels is implied by the background
+        return this;
     }
 
     @Override

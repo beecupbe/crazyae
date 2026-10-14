@@ -130,16 +130,20 @@ public class Scrollbar implements IScrollSource, ICrazyCompositeWidget {
     }
 
     @Override
-    public void setPosition(Point position) {
+    public ICrazyCompositeWidget setPosition(Point position) {
         this.displayX = position.getX();
         this.displayY = position.getY();
+
+        return this;
     }
 
     @Override
-    public void setSize(int width, int height) {
+    public ICrazyCompositeWidget setSize(int width, int height) {
         if (height != 0) {
             this.height = height;
         }
+
+        return this;
     }
 
     public void setRange(int min, int max, int pageSize) {

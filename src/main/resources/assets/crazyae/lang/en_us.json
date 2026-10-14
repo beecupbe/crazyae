@@ -54,7 +54,7 @@
   "gui.tooltip.crazyae.config_amount_middle_click": "Middle Click: enter exact amount",
   "gui.tooltip.crazyae.config_amount_scroll": "Shift + Mouse Wheel: change amount by 1",
   "gui.tooltip.crazyae.config_amount_scroll_double": "Ctrl + Shift + Mouse Wheel: double / halve amount",
-  "gui.tooltip.crazyae.cu_place_all_accelerators_here": "Slots for Accelerators",
+  "gui.tooltip.crazyae.cu_place_all_accelerators_here": "Slots for Co-Processing Units",
   "gui.tooltip.crazyae.cu_place_all_crafting_storages_here": "Slots for Crafting Storages",
   "gui.tooltip.crazyae.ef_energy": "EF Energy",
   "gui.tooltip.crazyae.energy_cell_formatting_hint": "To configure a cell in Cell Workbench, place any energy wire\nof the type you want to configure the cell with.",
@@ -291,5 +291,9 @@
   "tooltip.crazyae.use_net_tool_to_control_solars": "Use net tool to control solars",
   "tooltip.crazyae.wireless_connector_block_linked": "Wireless connector block linked",
   "tooltip.crazyae.wireless_connector_block_saved": "Wireless connector block saved",
-  "tooltip.crazyae.wireless_connector_clear": "Wireless connector clear"
+  "tooltip.crazyae.wireless_connector_clear": "Wireless connector clear",
+  "block.crazyae.quantum_cpu": "ME Quantum CPU",
+  "gui.crazyae.quantum_cpu.send_pattern": "Send pattern to Quantum CPU",
+  "gui.crazyae.quantum_cpu.no_free_cpu": "No Quantum CPU with a free slot in this network",
+  "gui.crazyae.quantum_cpu.wrong_pattern": "Only crafting, smithing and stonecutting patterns can be stored in a Quantum CPU"
 }

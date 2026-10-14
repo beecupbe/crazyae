@@ -126,6 +126,28 @@ public class RegisterFactoryClient {
                         }
                     }
             );
+            MenuScreens.<ContainerQuantumCPU, GuiQuantumCPU>register(
+                    CrazyContainers.QUANTUM_CPU.get(),
+                    (menu, playerInv, title) -> {
+                        try {
+                            var style = StyleManager.loadStyleDoc("/screens/crazyae_quantum_cpu.json");
+                            return new GuiQuantumCPU(menu, playerInv, title, style);
+                        } catch (Throwable t) {
+                            throw new RuntimeException("A critical exception was thrown during GUI initialization", t);
+                        }
+                    }
+            );
+            MenuScreens.<ContainerQuantumCPUCraftingBlocks, GuiQuantumCPUCraftingBlocks>register(
+                    CrazyContainers.QUANTUM_CPU_CRAFTING_BLOCKS.get(),
+                    (menu, playerInv, title) -> {
+                        try {
+                            var style = StyleManager.loadStyleDoc("/screens/crazyae_quantum_cpu_crafting_blocks.json");
+                            return new GuiQuantumCPUCraftingBlocks(menu, playerInv, title, style);
+                        } catch (Throwable t) {
+                            throw new RuntimeException("A critical exception was thrown during GUI initialization", t);
+                        }
+                    }
+            );
             MenuScreens.<ContainerCrazyPriority, GuiCrazyPriority>register(
                     CrazyContainers.PRIORITY.get(),
                     (menu, playerInv, title) -> {

@@ -8,6 +8,7 @@ import dev.beecube31.crazyae2.common.containers.implementations.*;
 import dev.beecube31.crazyae2.common.parts.PartImprovedExportBus;
 import dev.beecube31.crazyae2.common.parts.PartImprovedImportBus;
 import dev.beecube31.crazyae2.common.tile.crafting.TileImprovedMAC;
+import dev.beecube31.crazyae2.common.tile.crafting.TileQuantumCPU;
 import dev.beecube31.crazyae2.common.tile.misc.TileImprovedCondenser;
 import dev.beecube31.crazyae2.common.tile.networking.TileBigCrystalCharger;
 import dev.beecube31.crazyae2.common.tile.networking.TileCraftingUnitsCombiner;
@@ -46,6 +47,12 @@ public class CrazyContainers {
 
     public static final RegistryObject<MenuType<ContainerCraftingUnitsCombiner>> CRAFTING_UNITS_COMBINER = CrazyRegistries.MENU_TYPES.register(
             "crafting_units_combiner", () -> ContainerTypeBuilder.create(ContainerCraftingUnitsCombiner::new, TileCraftingUnitsCombiner.class).build("crafting_units_combiner"));
+
+    public static final RegistryObject<MenuType<ContainerQuantumCPU>> QUANTUM_CPU = CrazyRegistries.MENU_TYPES.register(
+            "quantum_cpu", () -> ContainerTypeBuilder.create(ContainerQuantumCPU::new, TileQuantumCPU.class).build("quantum_cpu"));
+
+    public static final RegistryObject<MenuType<ContainerQuantumCPUCraftingBlocks>> QUANTUM_CPU_CRAFTING_BLOCKS = CrazyRegistries.MENU_TYPES.register(
+            "quantum_cpu_crafting_blocks", () -> ContainerTypeBuilder.create(ContainerQuantumCPUCraftingBlocks::new, TileQuantumCPU.class).build("quantum_cpu_crafting_blocks"));
 
     public static final RegistryObject<MenuType<ContainerImprovedCondenser>> IMPROVED_CONDENSER = CrazyRegistries.MENU_TYPES.register(
             "improved_condenser", () -> ContainerTypeBuilder.create(ContainerImprovedCondenser::new, TileImprovedCondenser.class).build("improved_condenser"));

@@ -345,7 +345,7 @@ public abstract class CrazyAEBaseContainer extends AbstractContainerMenu {
 
             int bestSlotLoc = this.findBestSlotLocation(tis);
 
-            if (bestSlotLoc > -1) {
+            if (bestSlotLoc > -1 && idx != bestSlotLoc) {
                 selectedSlots.add(this.slots.get(bestSlotLoc));
             }
 

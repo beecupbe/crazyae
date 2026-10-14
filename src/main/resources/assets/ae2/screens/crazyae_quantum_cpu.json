@@ -1,0 +1,16 @@
+{
+  "$schema": "schema.json",
+  "includes": [
+    "common/common.json",
+    "nameless_player_inventory.json"
+  ],
+  "background": {
+    "texture": "crazyae:textures/guis/quantum_cpu.png",
+    "srcRect": [
+      0,
+      0,
+      176,
+      256
+    ]
+  }
+}

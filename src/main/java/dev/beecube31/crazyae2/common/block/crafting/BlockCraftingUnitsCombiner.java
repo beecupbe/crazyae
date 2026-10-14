@@ -1,6 +1,7 @@
 package dev.beecube31.crazyae2.common.block.crafting;
 
 import appeng.block.crafting.CraftingUnitBlock;
+import appeng.block.crafting.ICraftingUnitType;
 import appeng.menu.locator.MenuLocators;
 import dev.beecube31.crazyae2.common.enums.crafting.CrazyAECraftingUnitType;
 import dev.beecube31.crazyae2.common.tile.networking.TileCraftingUnitsCombiner;
@@ -21,7 +22,15 @@ import org.jetbrains.annotations.NotNull;
 @SuppressWarnings("deprecation")
 public class BlockCraftingUnitsCombiner extends CraftingUnitBlock {
     public BlockCraftingUnitsCombiner() {
-        super(CrazyAECraftingUnitType.COMBINER);
+        this(CrazyAECraftingUnitType.COMBINER);
+    }
+
+    protected BlockCraftingUnitsCombiner(ICraftingUnitType type) {
+        super(type);
+    }
+
+    protected void openMenu(Player player, TileCraftingUnitsCombiner be) {
+        ContainerOpener.open(CrazyContainers.CRAFTING_UNITS_COMBINER.get(), player, MenuLocators.forBlockEntity(be));
     }
 
     @Override
@@ -39,7 +48,7 @@ public class BlockCraftingUnitsCombiner extends CraftingUnitBlock {
                                           BlockHitResult hit) {
         if (!player.isShiftKeyDown() && level.getBlockEntity(pos) instanceof TileCraftingUnitsCombiner be) {
             if (!level.isClientSide()) {
-                ContainerOpener.open(CrazyContainers.CRAFTING_UNITS_COMBINER.get(), player, MenuLocators.forBlockEntity(be));
+                openMenu(player, be);
             }
             return InteractionResult.sidedSuccess(level.isClientSide());
         }

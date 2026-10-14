@@ -61,17 +61,21 @@ public final class CrazyUpgradesPanel implements ICrazyCompositeWidget {
     }
 
     @Override
-    public void setPosition(Point position) {
+    public ICrazyCompositeWidget setPosition(Point position) {
         x = position.getX();
         y = position.getY();
+
+        return this;
     }
 
     /**
      * Changes where the panel is positioned. Coordinates are relative to the current screen's origin.
      */
     @Override
-    public void setSize(int width, int height) {
+    public ICrazyCompositeWidget setSize(int width, int height) {
         // Size of upgrades panel cannot be set via JSON
+
+        return this;
     }
 
     /**
