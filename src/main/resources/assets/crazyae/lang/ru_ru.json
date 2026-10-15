@@ -293,7 +293,9 @@
   "tooltip.crazyae.wireless_connector_block_saved": "Wireless connector block saved",
   "tooltip.crazyae.wireless_connector_clear": "Wireless connector clear",
   "block.crazyae.quantum_cpu": "МЭ Квантовый процессор",
+  "gui.crazyae.improved_mac.send_pattern": "Отправить шаблон в улучшенный молекулярный сборщик",
   "gui.crazyae.quantum_cpu.send_pattern": "Отправить шаблон в квантовый процессор",
   "gui.crazyae.quantum_cpu.no_free_cpu": "В сети нет квантового процессора со свободным слотом",
-  "gui.crazyae.quantum_cpu.wrong_pattern": "В квантовый процессор можно положить только шаблоны верстака, кузнечного стола и камнереза"
+  "gui.crazyae.improved_mac.no_free_cpu": "В сети нет улучшенного молекулярного сборщика со свободным слотом",
+  "gui.crazyae.quantum_cpu.wrong_pattern": "Можно положить только шаблоны верстака, кузнечного стола и камнереза"
 }

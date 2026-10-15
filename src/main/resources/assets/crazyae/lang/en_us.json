@@ -293,7 +293,9 @@
   "tooltip.crazyae.wireless_connector_block_saved": "Wireless connector block saved",
   "tooltip.crazyae.wireless_connector_clear": "Wireless connector clear",
   "block.crazyae.quantum_cpu": "ME Quantum CPU",
+  "gui.crazyae.improved_mac.send_pattern": "Send pattern to Improved Molecular Assembler",
   "gui.crazyae.quantum_cpu.send_pattern": "Send pattern to Quantum CPU",
+  "gui.crazyae.improved_mac.no_free_cpu": "No Improved Molecular Assembler with a free slot in this network",
   "gui.crazyae.quantum_cpu.no_free_cpu": "No Quantum CPU with a free slot in this network",
-  "gui.crazyae.quantum_cpu.wrong_pattern": "Only crafting, smithing and stonecutting patterns can be stored in a Quantum CPU"
+  "gui.crazyae.quantum_cpu.wrong_pattern": "Only crafting, smithing and stonecutting patterns can be stored"
 }
