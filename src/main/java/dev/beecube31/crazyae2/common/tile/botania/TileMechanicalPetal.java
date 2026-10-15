@@ -20,6 +20,7 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.items.ItemStackHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import vazkii.botania.api.BotaniaAPI;
@@ -58,6 +59,7 @@ public class TileMechanicalPetal extends TileBotaniaMechanicalMachineBase {
         for (int i = 0; i < this.craftingOutputInv.getSlots(); i++) {
             this.craftingOutputInv.setStackInSlot(i, ItemStack.EMPTY);
         }
+
         ItemStack input = null;
         for (ItemStack s : this.craftingInputInv) {
             if (!s.isEmpty()) {
@@ -111,7 +113,20 @@ public class TileMechanicalPetal extends TileBotaniaMechanicalMachineBase {
     }
 
     private static boolean compareRecipes(RecipePetals recipe, @Nonnull AppEngInternalInventory inv) {
-        return recipe.matches(inv);
+        return recipe.matches(compactInventory(inv));
+    }
+
+    @Nonnull
+    private static ItemStackHandler compactInventory(@Nonnull AppEngInternalInventory inv) {
+        ItemStackHandler compacted = new ItemStackHandler(inv.getSlots());
+        int index = 0;
+        for (int i = 0; i < inv.getSlots(); i++) {
+            ItemStack stack = inv.getStackInSlot(i);
+            if (!stack.isEmpty()) {
+                compacted.setStackInSlot(index++, stack.copy());
+            }
+        }
+        return compacted;
     }
 
     @NotNull

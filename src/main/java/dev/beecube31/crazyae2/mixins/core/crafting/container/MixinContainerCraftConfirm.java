@@ -55,7 +55,7 @@ import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.Future;
 
-@Mixin(value = ContainerCraftConfirm.class, remap = false)
+@Mixin(value = ContainerCraftConfirm.class, remap = false, priority = 900)
 public abstract class MixinContainerCraftConfirm extends AEBaseContainer {
     public MixinContainerCraftConfirm(InventoryPlayer ip, TileEntity myTile, IPart myPart) {
         super(ip, myTile, myPart);

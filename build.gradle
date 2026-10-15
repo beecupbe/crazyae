@@ -24,7 +24,7 @@ plugins {
     id 'eclipse'
     id 'maven-publish'
     id 'org.jetbrains.gradle.plugin.idea-ext' version '1.1.7'
-    id 'com.gtnewhorizons.retrofuturagradle' version '1.3.25'
+    id 'com.gtnewhorizons.retrofuturagradle' version '1.4.3'
     id 'net.darkhax.curseforgegradle' version '1.1.17' apply false
     id 'com.modrinth.minotaur' version '2.8.6' apply false
     id 'com.diffplug.spotless' version '6.13.0' apply false
@@ -404,7 +404,8 @@ repositories {
                 //noinspection ForeignDelegate
                 maven {
                     name = 'Curse Maven'
-                    url = 'https://www.cursemaven.com'
+                    url = 'http://www.cursemaven.com'
+                    allowInsecureProtocol = true
                     // url = 'https://beta.cursemaven.com'
                 }
             }
@@ -434,8 +435,7 @@ repositories {
         }
         maven {
             name 'GTNH Maven'
-            url 'http://jenkins.usrv.eu:8081/nexus/content/groups/public'
-            allowInsecureProtocol = true
+            url 'https://nexus.gtnewhorizons.com/repository/public/'
         }
     }
     if (usesMixins.toBoolean() || forceEnableMixins.toBoolean()) {
@@ -513,7 +513,7 @@ dependencies {
 
     compileOnlyApi 'org.jetbrains:annotations:24.1.0'
     annotationProcessor 'org.jetbrains:annotations:24.1.0'
-    patchedMinecraft('net.minecraft:launchwrapper:1.17.2') {
+    patchedMinecraft('net.minecraft:launchwrapper:1.12') {
         transitive = false
     }
 
@@ -1092,13 +1092,17 @@ boolean performBuildScriptUpdate() {
 boolean isNewBuildScriptVersionAvailable() {
     Map parameters = ["connectTimeout": 10000, "readTimeout": 10000]
 
-    String currentBuildScript = getFile("build.gradle").getText()
-    String currentBuildScriptHash = getVersionHash(currentBuildScript)
-    String availableBuildScript = availableBuildScriptUrl().newInputStream(parameters).getText()
-    String availableBuildScriptHash = getVersionHash(availableBuildScript)
+    try {
+        String currentBuildScript = getFile("build.gradle").getText()
+        String currentBuildScriptHash = getVersionHash(currentBuildScript)
+        String availableBuildScript = availableBuildScriptUrl().newInputStream(parameters).getText()
+        String availableBuildScriptHash = getVersionHash(availableBuildScript)
 
-    boolean isUpToDate = currentBuildScriptHash.empty || availableBuildScriptHash.empty || currentBuildScriptHash == availableBuildScriptHash
-    return !isUpToDate
+        boolean isUpToDate = currentBuildScriptHash.empty || availableBuildScriptHash.empty || currentBuildScriptHash == availableBuildScriptHash
+        return !isUpToDate
+    } catch (Exception ignored) {
+        return false
+    }
 }
 
 static String getVersionHash(String buildScriptContent) {
