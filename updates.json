@@ -20,13 +20,13 @@
     }
   },
   "1.20.1": {
-    "version": "1.0",
+    "version": "1.0.1",
     "download_url": "https://www.curseforge.com/minecraft/mc-mods/crazyae/files/all?page=1&pageSize=20&showAlphaFiles=show",
     "changelog": {
-      "en_us": "Initial mod release for 1.20.1",
-      "ja_jp": "1.20.1向けの最初のMODリリース",
-      "ru_ru": "Первый релиз под 1.20.1",
-      "zh_cn": "1.20.1 初始版本发布"
+      "en_us": "The quantum processor was ported from 1.12.2",
+      "ja_jp": "この量子プロセッサは 1.12.2 から移植されました",
+      "ru_ru": "Портирован квантовый процессор из 1.12.2",
+      "zh_cn": "该量子处理器是从 1.12.2 版本移植过来的"
     }
   },
   "1.16.5": {
