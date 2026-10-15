@@ -132,7 +132,7 @@ public enum StateSprite implements ISpriteProvider {
     private final int sizeY;
     private final int fileIndex;
 
-    private final Blitter blitter;
+    private Blitter blitter;
 
     StateSprite(int index, int sizeX, int sizeY, int fileIdx) {
         if (fileIdx <= 0) {
@@ -147,8 +147,6 @@ public enum StateSprite implements ISpriteProvider {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
         this.fileIndex = fileIdx;
-
-        this.blitter = Blitter.texture(this.getTexture()).src(this.getTextureX(), this.getTextureY(), sizeX, sizeY);
     }
 
     public int getIndex() {
@@ -185,6 +183,9 @@ public enum StateSprite implements ISpriteProvider {
 
     @Override
     public Blitter getBlitter() {
+        if (this.blitter == null) {
+            this.blitter = Blitter.texture(this.getTexture()).src(this.getTextureX(), this.getTextureY(), this.sizeX, this.sizeY);
+        }
         return this.blitter;
     }
 }
