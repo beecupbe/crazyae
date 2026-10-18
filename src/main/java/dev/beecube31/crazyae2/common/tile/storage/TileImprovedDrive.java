@@ -28,6 +28,7 @@ import dev.beecube31.crazyae2.core.CrazyAE;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.items.IItemHandler;
 
 import java.io.IOException;
@@ -308,6 +309,11 @@ public class TileImprovedDrive extends AENetworkInvTile implements IChestOrDrive
 
     private static class CellValidInventoryFilter implements IAEItemFilter {
 
+        private static final Set<String> BLOCKED_MODIDS = new HashSet<>(Arrays.asList(
+                "eco_expand",
+                "ecoaeextension"
+        ));
+
         @Override
         public boolean allowExtract(IItemHandler inv, int slot, int amount) {
             return true;
@@ -315,7 +321,12 @@ public class TileImprovedDrive extends AENetworkInvTile implements IChestOrDrive
 
         @Override
         public boolean allowInsert(IItemHandler inv, int slot, ItemStack stack) {
-            return !stack.isEmpty() && AEApi.instance().registries().cell().isCellHandled(stack);
+            if (stack.isEmpty() || !AEApi.instance().registries().cell().isCellHandled(stack)) {
+                return false;
+            }
+
+            final ResourceLocation id = stack.getItem().getRegistryName();
+            return id == null || !BLOCKED_MODIDS.contains(id.getNamespace());
         }
     }
 
