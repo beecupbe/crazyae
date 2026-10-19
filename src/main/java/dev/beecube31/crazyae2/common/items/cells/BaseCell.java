@@ -17,6 +17,7 @@ import dev.beecube31.crazyae2.common.registration.definitions.Materials;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
@@ -88,14 +89,21 @@ public abstract class BaseCell<T extends IAEStack<T>> extends AEBaseItem impleme
 	public abstract IItemHandler getConfigInventory(ItemStack is);
 
 	public FuzzyMode getFuzzyMode(ItemStack is) {
+		if (!is.hasTagCompound()) {
+			return FuzzyMode.IGNORE_ALL;
+		}
 		try {
-			return FuzzyMode.valueOf(Platform.openNbtData(is).getString("FuzzyMode"));
+			final NBTTagCompound nbt = is.getTagCompound();
+			return nbt != null ? FuzzyMode.valueOf(nbt.getString("FuzzyMode")) : FuzzyMode.IGNORE_ALL;
 		} catch (Throwable var4) {
 			return FuzzyMode.IGNORE_ALL;
 		}
 	}
 
 	public void setFuzzyMode(ItemStack is, FuzzyMode fzMode) {
+		if (fzMode == FuzzyMode.IGNORE_ALL && !is.hasTagCompound()) {
+			return;
+		}
 		Platform.openNbtData(is).setString("FuzzyMode", fzMode.name());
 	}
 
