@@ -61,14 +61,6 @@ public class CrazyAEMixinsCore implements IFMLLoadingPlugin, ILateMixinLoader {
 			mixins.add(String.format(MIXIN_PATH, "thermal.dynamics.fix"));
 		}
 
-
-		if (ModsChecker.AE2FC_LOADED) {
-			try {
-				Class.forName("com.glodblock.github.FluidCraft");
-				mixins.add(String.format(MIXIN_PATH, "ae2fc.fix"));
-			} catch (ClassNotFoundException ignored) {}
-		}
-
         for (var feature : Features.values()) {
 			if (feature.name().equals("STUB")) continue;
 			if (!feature.isEnabled()) continue;

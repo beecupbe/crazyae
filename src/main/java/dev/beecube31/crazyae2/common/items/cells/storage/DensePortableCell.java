@@ -168,7 +168,11 @@ public class DensePortableCell extends AEBasePoweredItem implements IStorageCell
 
     @Override
     public FuzzyMode getFuzzyMode(final ItemStack is) {
-        final String fz = Platform.openNbtData(is).getString("FuzzyMode");
+        if (!is.hasTagCompound()) {
+            return FuzzyMode.IGNORE_ALL;
+        }
+        final NBTTagCompound nbt = is.getTagCompound();
+        final String fz = nbt != null ? nbt.getString("FuzzyMode") : "";
         try {
             return FuzzyMode.valueOf(fz);
         } catch (final Throwable t) {
@@ -178,6 +182,9 @@ public class DensePortableCell extends AEBasePoweredItem implements IStorageCell
 
     @Override
     public void setFuzzyMode(final ItemStack is, final FuzzyMode fzMode) {
+        if (fzMode == FuzzyMode.IGNORE_ALL && !is.hasTagCompound()) {
+            return;
+        }
         Platform.openNbtData(is).setString("FuzzyMode", fzMode.name());
     }
 

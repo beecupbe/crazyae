@@ -11,6 +11,7 @@ import appeng.fluids.util.AEFluidStack;
 import appeng.helpers.InventoryAction;
 import appeng.util.Platform;
 import appeng.util.item.AEItemStack;
+import dev.beecube31.crazyae2.client.gui.CrazyAESlot;
 import dev.beecube31.crazyae2.common.containers.base.CrazyAEBaseContainer;
 import dev.beecube31.crazyae2.common.containers.base.slot.SlotDisconnected;
 import dev.beecube31.crazyae2.common.containers.base.slot.SlotFake;
@@ -130,7 +131,7 @@ public class PacketInventoryAction extends CrazyAEPacket {
             if (this.action == InventoryAction.PLACE_JEI_GHOST_ITEM) {
                 if (this.slot < sender.openContainer.inventorySlots.size()) {
                     Slot senderSlot = sender.openContainer.inventorySlots.get(this.slot);
-                    if (senderSlot instanceof SlotFake) {
+                    if (senderSlot instanceof SlotFake && (!(senderSlot instanceof CrazyAESlot) || ((CrazyAESlot) senderSlot).isDraggable())) {
                         if (this.slotItem != null) {
                             senderSlot.putStack(this.slotItem.createItemStack());
                             if (senderSlot.getStack().isEmpty()) {

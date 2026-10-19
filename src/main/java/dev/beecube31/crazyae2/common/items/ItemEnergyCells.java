@@ -101,12 +101,28 @@ public class ItemEnergyCells extends AEBaseItemBlock implements IAEItemPowerStor
     }
 
     private double getInternal(final ItemStack is) {
-        final NBTTagCompound nbt = Platform.openNbtData(is);
-        return nbt.getDouble("internalCurrentPower");
+        if (!is.hasTagCompound()) {
+            return 0.0;
+        }
+        final NBTTagCompound nbt = is.getTagCompound();
+        return nbt != null ? nbt.getDouble("internalCurrentPower") : 0.0;
     }
 
     private void setInternal(final ItemStack is, final double amt) {
-        final NBTTagCompound nbt = Platform.openNbtData(is);
-        nbt.setDouble("internalCurrentPower", amt);
+        if (amt > 0.0001) {
+            final NBTTagCompound nbt = Platform.openNbtData(is);
+            nbt.setDouble("internalCurrentPower", amt);
+        } else {
+            if (is.hasTagCompound()) {
+                final NBTTagCompound nbt = is.getTagCompound();
+                if (nbt != null) {
+                    nbt.removeTag("internalCurrentPower");
+                    nbt.removeTag("internalMaxPower");
+                    if (nbt.isEmpty()) {
+                        is.setTagCompound(null);
+                    }
+                }
+            }
+        }
     }
 }

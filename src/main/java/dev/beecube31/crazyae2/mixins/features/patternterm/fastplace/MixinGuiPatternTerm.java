@@ -13,7 +13,6 @@ import dev.beecube31.crazyae2.core.CrazyAE;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.spongepowered.asm.mixin.Final;
@@ -47,11 +46,8 @@ public abstract class MixinGuiPatternTerm extends GuiMEMonitorable implements IJ
     private void crazyae$patchActionPerformed(final GuiButton btn, CallbackInfo ci) {
         try {
             if (this.crazyae$fastPlaceBtn == btn && this.container.isCraftingMode()) {
-                TileEntity te = this.container.getPart().getHost().getTile();
-                NetworkHandler.instance().sendToServer(new PacketToggleGuiObject(
-                        "CRAZYAE.GUI.patternTerm.fastPlace",
-                        te.getPos().getX() + ";" + te.getPos().getY() + ";" + te.getPos().getZ())
-                );
+                NetworkHandler.instance().sendToServer(
+                        new PacketToggleGuiObject("CRAZYAE.GUI.patternTerm.fastPlace"));
             }
         } catch (IOException e) {
             CrazyAE.logger().error(e);

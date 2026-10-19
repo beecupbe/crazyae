@@ -21,6 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.ItemStackHandler;
 import org.apache.commons.lang3.ArrayUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -145,7 +146,20 @@ public class TileMechanicalBrewery extends TileBotaniaMechanicalMachineBase {
     }
 
     private static boolean compareRecipes(RecipeBrew recipe, @Nonnull CrazyAEInternalInv inv) {
-        return recipe.matches(inv);
+        return recipe.matches(compactInventory(inv));
+    }
+
+    @Nonnull
+    private static ItemStackHandler compactInventory(@Nonnull CrazyAEInternalInv inv) {
+        ItemStackHandler compacted = new ItemStackHandler(inv.getSlots());
+        int index = 0;
+        for (int i = 0; i < inv.getSlots(); i++) {
+            ItemStack stack = inv.getStackInSlot(i);
+            if (!stack.isEmpty()) {
+                compacted.setStackInSlot(index++, stack.copy());
+            }
+        }
+        return compacted;
     }
 
     @NotNull

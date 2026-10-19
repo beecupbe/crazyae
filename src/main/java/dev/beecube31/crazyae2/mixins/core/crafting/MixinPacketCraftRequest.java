@@ -25,7 +25,7 @@ import org.spongepowered.asm.mixin.Shadow;
 
 import java.util.concurrent.Future;
 
-@Mixin(value = PacketCraftRequest.class, remap = false)
+@Mixin(value = PacketCraftRequest.class, remap = false, priority = 900)
 public abstract class MixinPacketCraftRequest extends AppEngPacket {
 
     @Shadow @Final private long amount;

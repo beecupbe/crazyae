@@ -69,9 +69,7 @@ public class Registration {
 		if (Loader.isModLoaded("botania")) {
 			ManaPoolRecipesMaker.init();
 
-			if (Loader.isModLoaded("botania_tweaks")) {
-				RecipeRepo.copyFromBotaniaTweaks();
-			} else {
+			if (!RecipeRepo.isBotaniaTweaksLoaded()) {
 				RecipeRepo.addDefaultTerrasteelRecipe();
 			}
 		}

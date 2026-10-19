@@ -430,7 +430,7 @@ public class GuiCrazyAEUpgradeable extends CrazyAEBaseGui implements IJEIGhostIn
         List<IJEITargetSlot> slots = new ArrayList<>();
         if (!this.inventorySlots.inventorySlots.isEmpty()) {
             for (Slot slot : this.inventorySlots.inventorySlots) {
-                if (slot instanceof SlotFake && !itemStack.isEmpty()) {
+                if (slot instanceof SlotFake fakeSlot && fakeSlot.isDraggable() && !itemStack.isEmpty()) {
                     slots.add((IJEITargetSlot) slot);
                 }
             }

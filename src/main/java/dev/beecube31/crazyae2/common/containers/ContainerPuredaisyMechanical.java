@@ -2,8 +2,8 @@ package dev.beecube31.crazyae2.common.containers;
 
 import appeng.api.networking.IGridNode;
 import dev.beecube31.crazyae2.client.gui.sprites.StateSprite;
+import dev.beecube31.crazyae2.common.containers.base.slot.BotaniaSlotFake;
 import dev.beecube31.crazyae2.common.containers.base.slot.RestrictedSlot;
-import dev.beecube31.crazyae2.common.containers.base.slot.SlotFake;
 import dev.beecube31.crazyae2.common.containers.base.slot.SlotOutput;
 import dev.beecube31.crazyae2.common.enums.BotaniaMechanicalDeviceType;
 import dev.beecube31.crazyae2.common.tile.botania.TileMechanicalPuredaisy;
@@ -23,7 +23,7 @@ public class ContainerPuredaisyMechanical extends ContainerMechanicalBotaniaTile
         final IItemHandler input = this.getUpgradeable().getInventoryByName("input");
         final IItemHandler output = this.getUpgradeable().getInventoryByName("output");
 
-        this.addSlotToContainer(new SlotFake(input, 0, 80, 30, true));
+        this.addSlotToContainer(new BotaniaSlotFake(input, 0, 80, 30, true));
 
         this.addSlotToContainer(new SlotOutput(output, 0, 80, 68, null));
 

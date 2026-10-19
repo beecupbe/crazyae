@@ -83,10 +83,14 @@ public class TileBigEnergyCells extends AENetworkTile implements IAEPowerStorage
 
     public NBTTagCompound downloadSettings(SettingsFrom from) {
         if (from == SettingsFrom.DISMANTLE_ITEM) {
-            NBTTagCompound tag = new NBTTagCompound();
-            tag.setDouble("internalCurrentPower", this.internalCurrentPower);
-            tag.setDouble("internalMaxPower", this.getInternalMaxPower());
-            return tag;
+            if (this.internalCurrentPower > 0.001) {
+                NBTTagCompound tag = new NBTTagCompound();
+                tag.setDouble("internalCurrentPower", this.internalCurrentPower);
+                tag.setDouble("internalMaxPower", this.getInternalMaxPower());
+                return tag;
+            } else {
+                return null;
+            }
         } else {
             return null;
         }
