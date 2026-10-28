@@ -30,3 +30,9 @@ description='''${mod_description}'''
     versionRange="${ae2_version_range}"
     ordering="AFTER"
     side="BOTH"
+[[dependencies.crazyae]]
+    modId="simple_updates_checker"
+    mandatory=true
+    versionRange="[1.0,)"
+    ordering="AFTER"
+    side="CLIENT"
