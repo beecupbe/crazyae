@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "a a",
+    "csc",
+    "sbs"
+  ],
+  "key": {
+    "c": {
+      "item": "ae2:engineering_processor"
+    },
+    "b": {
+      "item": "ae2:fluix_dust"
+    },
+    "a": {
+      "item": "minecraft:glass_pane"
+    },
+    "s": {
+      "item": "ae2:sky_stone_block"
+    }
+  },
+  "result": {
+    "id": "crazyae:basic_solar_panel"
+  }
+}

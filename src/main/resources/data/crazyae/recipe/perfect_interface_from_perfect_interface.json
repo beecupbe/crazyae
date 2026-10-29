@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "dbd",
+    "bab",
+    "dbd"
+  ],
+  "key": {
+    "b": {
+      "item": "crazyae:16x_crafting_accelerator"
+    },
+    "d": {
+      "item": "ae2:interface"
+    },
+    "a": {
+      "item": "crazyae:stacks_card"
+    }
+  },
+  "result": {
+    "id": "crazyae:perfect_interface"
+  }
+}

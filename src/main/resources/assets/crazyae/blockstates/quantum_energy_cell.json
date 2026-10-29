@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "fullness=0": {
+      "model": "crazyae:block/quantum_energy_cell_0"
+    },
+    "fullness=1": {
+      "model": "crazyae:block/quantum_energy_cell_1"
+    },
+    "fullness=2": {
+      "model": "crazyae:block/quantum_energy_cell_2"
+    },
+    "fullness=3": {
+      "model": "crazyae:block/quantum_energy_cell_3"
+    },
+    "fullness=4": {
+      "model": "crazyae:block/quantum_energy_cell_4"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ccc",
+    "ccc",
+    "ccc"
+  ],
+  "key": {
+    "c": {
+      "item": "crazyae:fluixilized_crystal"
+    }
+  },
+  "result": {
+    "id": "crazyae:fluixilized_block"
+  }
+}

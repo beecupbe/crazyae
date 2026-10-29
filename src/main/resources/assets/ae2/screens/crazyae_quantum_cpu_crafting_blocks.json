@@ -1,0 +1,26 @@
+{
+  "$schema": "schema.json",
+  "includes": [
+    "common/crazyae_common.json",
+    "qcpu/qcpu_player_slots.json"
+  ],
+  "background": {
+    "texture": "crazyae:textures/guis/crafting_blocks_list.png",
+    "srcRect": [
+      0,
+      0,
+      230,
+      197
+    ]
+  },
+  "slots": {
+    "CRAZYAE_COMBINER_ACCELERATORS": {
+      "left": 62,
+      "top": 12
+    },
+    "CRAZYAE_COMBINER_STORAGE": {
+      "left": 62,
+      "top": 68
+    }
+  }
+}

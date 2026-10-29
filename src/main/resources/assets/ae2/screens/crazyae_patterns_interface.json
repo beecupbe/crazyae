@@ -1,0 +1,51 @@
+{
+  "$schema": "schema.json",
+  "includes": [
+    "common/crazyae_common.json",
+    "nameless_player_inventory.json"
+  ],
+  "background": {
+    "texture": "crazyae:textures/guis/patterns_interface.png",
+    "srcRect": [
+      0,
+      0,
+      247,
+      256
+    ]
+  },
+  "slots": {
+    "ENCODED_PATTERN": {
+      "left": 8,
+      "top": 25,
+      "grid": "BREAK_AFTER_9COLS"
+    },
+    "STORAGE": {
+      "left": 187,
+      "top": 99,
+      "grid": "BREAK_AFTER_3COLS"
+    }
+  },
+  "text": {
+    "dialog_title": {
+      "text": {
+        "translate": "i18n.crazyae.pattern_interface"
+      },
+      "position": {
+        "left": 8,
+        "top": 6
+      }
+    }
+  },
+  "widgets": {
+    "openPriority": {
+      "left": 154,
+      "top": 0,
+      "width": 16,
+      "height": 16
+    },
+    "lockReason": {
+      "left": 5,
+      "top": 14
+    }
+  }
+}

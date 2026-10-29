@@ -1,0 +1,46 @@
+{
+  "$schema": "schema.json",
+  "includes": ["common/crazyae_common.json", "alt_nameless_player_inventory.json"],
+
+  "background": {
+    "texture": "crazyae:textures/guis/driveimp.png",
+    "srcRect": [0, 0, 176, 199]
+  },
+
+  "slots": {
+    "IMPROVED_DRIVE_GRID_0": {
+      "left": 26,
+      "top": 18,
+      "grid": "BREAK_AFTER_3COLS"
+    },
+    "IMPROVED_DRIVE_GRID_1": {
+      "left": 80,
+      "top": 18,
+      "grid": "BREAK_AFTER_2COLS"
+    },
+    "IMPROVED_DRIVE_GRID_2": {
+      "left": 116,
+      "top": 18,
+      "grid": "BREAK_AFTER_2COLS"
+    }
+  },
+
+  "text": {
+    "dialog_title": {
+      "text": {
+        "translate": "gui.crazyae.improved_drive"
+      },
+      "position": {
+        "left": 8,
+        "top": 6
+      }
+    }
+  },
+
+  "widgets": {
+    "openPriority": {
+      "left": 154,
+      "top": 0
+    }
+  }
+}

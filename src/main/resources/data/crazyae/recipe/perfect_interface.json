@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "a"
+  ],
+  "key": {
+    "a": {
+      "item": "crazyae:cable_perfect_interface"
+    }
+  },
+  "result": {
+    "id": "crazyae:perfect_interface"
+  }
+}

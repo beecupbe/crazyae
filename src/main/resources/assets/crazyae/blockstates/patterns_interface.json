@@ -1,0 +1,33 @@
+{
+  "variants": {
+    "push_direction=all": {
+      "model": "crazyae:block/patterns_interface"
+    },
+    "push_direction=down": {
+      "model": "crazyae:block/patterns_interface_oriented",
+      "x": 180
+    },
+    "push_direction=east": {
+      "model": "crazyae:block/patterns_interface_oriented",
+      "x": 90,
+      "y": 90
+    },
+    "push_direction=north": {
+      "model": "crazyae:block/patterns_interface_oriented",
+      "x": 90
+    },
+    "push_direction=south": {
+      "model": "crazyae:block/patterns_interface_oriented",
+      "x": 90,
+      "y": 180
+    },
+    "push_direction=up": {
+      "model": "crazyae:block/patterns_interface_oriented"
+    },
+    "push_direction=west": {
+      "model": "crazyae:block/patterns_interface_oriented",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

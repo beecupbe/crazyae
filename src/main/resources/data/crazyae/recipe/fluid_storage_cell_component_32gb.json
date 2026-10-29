@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "aba",
+    "cdc",
+    "aca"
+  ],
+  "key": {
+    "b": {
+      "item": "crazyae:quantum_processor"
+    },
+    "c": {
+      "item": "crazyae:fluid_storage_cell_component_8gb"
+    },
+    "d": {
+      "item": "ae2:quartz_glass"
+    },
+    "a": {
+      "item": "ae2:fluix_dust"
+    }
+  },
+  "result": {
+    "id": "crazyae:fluid_storage_cell_component_32gb"
+  }
+}

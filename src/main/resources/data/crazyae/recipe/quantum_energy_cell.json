@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "aba",
+    "aba",
+    "aba"
+  ],
+  "key": {
+    "a": {
+      "item": "crazyae:perfect_energy_cell"
+    },
+    "b": {
+      "item": "crazyae:quantum_processor"
+    }
+  },
+  "result": {
+    "id": "crazyae:quantum_energy_cell"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "dbd",
+    "bab",
+    "dbd"
+  ],
+  "key": {
+    "b": {
+      "item": "crazyae:4x_crafting_accelerator"
+    },
+    "d": {
+      "item": "ae2:interface"
+    },
+    "a": {
+      "item": "crazyae:improved_speed_card"
+    }
+  },
+  "result": {
+    "id": "crazyae:patterns_interface"
+  }
+}

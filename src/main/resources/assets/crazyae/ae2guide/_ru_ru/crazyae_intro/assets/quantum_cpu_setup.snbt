@@ -1,0 +1,22 @@
+{
+    DataVersion: 3955,
+    size: [5, 2, 1],
+    data: [
+        {pos: [0, 0, 0], state: "ae2:controller{state:online,type:block}", nbt: {id: "ae2:controller"}},
+        {pos: [2, 0, 0], state: "crazyae:quantum_cpu{formed:true,powered:true}", nbt: {id: "crazyae:quantum_cpu"}},
+        {pos: [1, 1, 0], state: "crazyae:improved_drive{facing:north,spin:0}", nbt: {id: "crazyae:improved_drive"}},
+        {pos: [4, 0, 0], state: "ae2:pattern_provider{push_direction:up}", nbt: {id: "ae2:pattern_provider"}},
+        {pos: [4, 1, 0], state: "minecraft:furnace{facing:north,lit:true}"},
+        {pos: [1, 0, 0], state: "ae2:cable_bus{light_level:0,waterlogged:false}", nbt: {id: "ae2:cable_bus", cable: {gn: {k: -1L, p: 0}, id: "ae2:fluix_smart_cable", visual: {missingChannel: 0b, powered: 1b, channelsEast: 1b, channelsWest: 1b, channelsUp: 1b, connections: ["east", "west", "up"]}}, hasRedstone: 2, visual: {}}},
+        {pos: [3, 0, 0], state: "ae2:cable_bus{light_level:0,waterlogged:false}", nbt: {id: "ae2:cable_bus", cable: {gn: {k: -1L, p: 0}, id: "ae2:fluix_smart_cable", visual: {missingChannel: 0b, powered: 1b, channelsEast: 1b, channelsWest: 1b, connections: ["east", "west"]}}, hasRedstone: 2, visual: {}, north: {gn: {k: -1L, p: 0}, id: "ae2:pattern_encoding_terminal", visual: {missingChannel: 0b, powered: 1b}}}}
+    ],
+    entities: [],
+    palette: [
+        "ae2:controller{state:online,type:block}",
+        "crazyae:quantum_cpu{formed:true,powered:true}",
+        "crazyae:improved_drive{facing:north,spin:0}",
+        "ae2:pattern_provider{push_direction:up}",
+        "minecraft:furnace{facing:north,lit:true}",
+        "ae2:cable_bus{light_level:0,waterlogged:false}"
+    ]
+}

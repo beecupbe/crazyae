@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "c"
+  ],
+  "key": {
+    "c": {
+      "item": "crazyae:fluixilized_block"
+    }
+  },
+  "result": {
+    "count": 9,
+    "id": "crazyae:fluixilized_crystal"
+  }
+}

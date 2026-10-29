@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "dbd",
+    "bab",
+    "dbd"
+  ],
+  "key": {
+    "b": {
+      "item": "ae2:certus_quartz_dust"
+    },
+    "d": {
+      "item": "ae2:fluix_pearl"
+    },
+    "a": {
+      "item": "ae2:fluix_block"
+    }
+  },
+  "result": {
+    "id": "crazyae:fluixilized_block"
+  }
+}

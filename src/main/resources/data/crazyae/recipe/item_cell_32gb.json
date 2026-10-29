@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "ae2:item_cell_housing"
+    },
+    {
+      "item": "crazyae:storage_cell_component_32gb"
+    }
+  ],
+  "result": {
+    "id": "crazyae:item_cell_32gb"
+  }
+}

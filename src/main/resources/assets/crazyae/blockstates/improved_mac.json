@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "crazyae:block/improved_mac"
+    },
+    "powered=true": {
+      "model": "crazyae:block/improved_mac"
+    }
+  }
+}

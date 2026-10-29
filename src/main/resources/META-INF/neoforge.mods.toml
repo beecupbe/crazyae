@@ -1,0 +1,41 @@
+modLoader="javafml"
+loaderVersion="${loader_version_range}"
+license="${mod_license}"
+issueTrackerURL="https://github.com/beecupbe/crazyae/issues"
+[[mods]]
+modId="crazyae"
+displayURL="https://www.curseforge.com/minecraft/mc-mods/crazyae"
+version="${mod_version}"
+displayName="${mod_name}"
+authors="${mod_authors}"
+credits="NekitFbetc :3"
+logoFile="logo.png"
+description='''${mod_description}'''
+[[mixins]]
+config="mixins.crazyae.json"
+[[accessTransformers]]
+file="META-INF/accesstransformer.cfg"
+[[dependencies.crazyae]]
+    modId="neoforge"
+    type="required"
+    versionRange="${neo_version_range}"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.crazyae]]
+    modId="minecraft"
+    type="required"
+    versionRange="${minecraft_version_range}"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.crazyae]]
+    modId="ae2"
+    type="required"
+    versionRange="${ae2_version_range}"
+    ordering="AFTER"
+    side="BOTH"
+[[dependencies.crazyae]]
+    modId="simple_updates_checker"
+    type="required"
+    versionRange="[1.0,)"
+    ordering="AFTER"
+    side="CLIENT"
