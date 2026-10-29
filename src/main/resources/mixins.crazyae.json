@@ -1,0 +1,21 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.beecube31.crazyae2.mixins",
+  "compatibilityLevel": "JAVA_25",
+  "mixins": [
+    "crafting.MixinCraftingCPUCluster",
+    "crafting.MixinCraftingBlockEntity",
+    "crafting.MixinCraftingCPUCalculator",
+    "crafting.MixinCraftingService",
+    "parts.MixinAEBasePart",
+    "crafting.MixinCraftingCpuLogic",
+    "crafting.AccessorExecutingCraftingJob",
+    "crafting.AccessorTaskProgress",
+    "crafting.AccessorElapsedTimeTracker"
+  ],
+  "client": [
+    "client.MixinIconButton"
+  ],
+  "server": []
+}

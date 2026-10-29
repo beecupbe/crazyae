@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "apa",
+    "qlq",
+    "sbs"
+  ],
+  "key": {
+    "b": "ae2:white_lumen_paint_ball",
+    "a": "minecraft:glass_pane",
+    "s": "ae2:sky_stone_block",
+    "p": "ae2:fluix_pearl",
+    "l": "crazyae:basic_solar_panel",
+    "q": "crazyae:quantum_processor"
+  },
+  "result": {
+    "id": "crazyae:improved_solar_panel"
+  }
+}

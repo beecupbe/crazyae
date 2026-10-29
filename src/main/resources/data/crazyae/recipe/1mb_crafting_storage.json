@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "ae2:crafting_unit",
+    "crazyae:storage_cell_component_1mb"
+  ],
+  "result": {
+    "id": "crazyae:1mb_crafting_storage"
+  }
+}

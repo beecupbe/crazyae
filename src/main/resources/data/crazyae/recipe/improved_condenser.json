@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "aba",
+    "bab",
+    "aba"
+  ],
+  "key": {
+    "b": "crazyae:quantum_processor",
+    "a": "ae2:condenser"
+  },
+  "result": {
+    "id": "crazyae:improved_condenser"
+  }
+}

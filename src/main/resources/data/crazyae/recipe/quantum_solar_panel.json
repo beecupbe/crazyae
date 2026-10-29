@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "apa",
+    "qlq",
+    "sps"
+  ],
+  "key": {
+    "a": "minecraft:glass_pane",
+    "p": "ae2:quantum_entangled_singularity",
+    "q": "crazyae:quantum_processor",
+    "l": "crazyae:perfect_solar_panel",
+    "s": "ae2:smooth_sky_stone_block"
+  },
+  "result": {
+    "id": "crazyae:quantum_solar_panel"
+  }
+}

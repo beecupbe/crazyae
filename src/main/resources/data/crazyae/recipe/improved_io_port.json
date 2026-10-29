@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "aaa",
+    "bbb",
+    "ded"
+  ],
+  "key": {
+    "a": "minecraft:glass_pane",
+    "d": "crazyae:fluixilized_block",
+    "b": "ae2:io_port",
+    "e": "crazyae:quantum_processor"
+  },
+  "result": {
+    "id": "crazyae:improved_io_port"
+  }
+}

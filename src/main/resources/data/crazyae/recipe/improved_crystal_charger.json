@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "dbd",
+    "bab",
+    "dbd"
+  ],
+  "key": {
+    "b": "crazyae:4x_crafting_accelerator",
+    "d": "crazyae:improved_speed_card",
+    "a": "ae2:charger"
+  },
+  "result": {
+    "id": "crazyae:improved_crystal_charger"
+  }
+}

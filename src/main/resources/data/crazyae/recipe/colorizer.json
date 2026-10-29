@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " a ",
+    "aba",
+    " a "
+  ],
+  "key": {
+    "a": "crazyae:fluixilized_crystal",
+    "b": "crazyae:quantum_processor"
+  },
+  "result": {
+    "id": "crazyae:colorizer"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "schema.json",
+  "includes": [
+    "common/crazyae_common.json"
+  ],
+  "background": {
+    "texture": "crazyae:textures/guis/colorizer.png",
+    "srcRect": [
+      0,
+      0,
+      202,
+      128
+    ]
+  },
+
+  "text": {
+    "dialog_title": {
+      "text": {
+        "translate": "i18n.crazyae.gui_colorizer"
+      },
+      "position": {
+        "left": 8,
+        "top": 6
+      }
+    }
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "variants": {
+    "facing=down,spin=0": {
+      "model": "crazyae:block/improved_crystal_charger",
+      "x": 90,
+      "type": "ae2:spinnable_variant"
+    },
+    "facing=down,spin=1": {
+      "model": "crazyae:block/improved_crystal_charger",
+      "x": 90,
+      "type": "ae2:spinnable_variant",
+      "z": 270
+    },
+    "facing=down,spin=2": {
+      "model": "crazyae:block/improved_crystal_charger",
+      "x": 90,
+      "type": "ae2:spinnable_variant",
+      "z": 180
+    },
+    "facing=down,spin=3": {
+      "model": "crazyae:block/improved_crystal_charger",
+      "x": 90,
+      "type": "ae2:spinnable_variant",
+      "z": 90
+    },
+    "facing=east,spin=0": {
+      "model": "crazyae:block/improved_crystal_charger",
+      "y": 90,
+      "type": "ae2:spinnable_variant"
+    },
+    "facing=east,spin=1": {
+      "model": "crazyae:block/improved_crystal_charger",
+      "y": 90,
+      "type": "ae2:spinnable_variant",
+      "z": 270
+    },
+    "facing=east,spin=2": {
+      "model": "crazyae:block/improved_crystal_charger",
+      "y": 90,
+      "type": "ae2:spinnable_variant",
+      "z": 180
+    },
+    "facing=east,spin=3": {
+      "model": "crazyae:block/improved_crystal_charger",
+      "y": 90,
+      "type": "ae2:spinnable_variant",
+      "z": 90
+    },
+    "facing=north,spin=0": {
+      "model": "crazyae:block/improved_crystal_charger",
+      "type": "ae2:spinnable_variant"
+    },
+    "facing=north,spin=1": {
+      "model": "crazyae:block/improved_crystal_charger",
+      "type": "ae2:spinnable_variant",
+      "z": 270
+    },
+    "facing=north,spin=2": {
+      "model": "crazyae:block/improved_crystal_charger",
+      "type": "ae2:spinnable_variant",
+      "z": 180
+    },
+    "facing=north,spin=3": {
+      "model": "crazyae:block/improved_crystal_charger",
+      "type": "ae2:spinnable_variant",
+      "z": 90
+    },
+    "facing=south,spin=0": {
+      "model": "crazyae:block/improved_crystal_charger",
+      "y": 180,
+      "type": "ae2:spinnable_variant"
+    },
+    "facing=south,spin=1": {
+      "model": "crazyae:block/improved_crystal_charger",
+      "y": 180,
+      "type": "ae2:spinnable_variant",
+      "z": 90
+    },
+    "facing=south,spin=2": {
+      "model": "crazyae:block/improved_crystal_charger",
+      "y": 180,
+      "type": "ae2:spinnable_variant",
+      "z": 180
+    },
+    "facing=south,spin=3": {
+      "model": "crazyae:block/improved_crystal_charger",
+      "y": 180,
+      "type": "ae2:spinnable_variant",
+      "z": 270
+    },
+    "facing=up,spin=0": {
+      "model": "crazyae:block/improved_crystal_charger",
+      "x": 270,
+      "type": "ae2:spinnable_variant",
+      "z": 180
+    },
+    "facing=up,spin=1": {
+      "model": "crazyae:block/improved_crystal_charger",
+      "x": 270,
+      "type": "ae2:spinnable_variant",
+      "z": 90
+    },
+    "facing=up,spin=2": {
+      "model": "crazyae:block/improved_crystal_charger",
+      "x": 270,
+      "type": "ae2:spinnable_variant"
+    },
+    "facing=up,spin=3": {
+      "model": "crazyae:block/improved_crystal_charger",
+      "x": 270,
+      "type": "ae2:spinnable_variant",
+      "z": 270
+    },
+    "facing=west,spin=0": {
+      "model": "crazyae:block/improved_crystal_charger",
+      "y": 270,
+      "type": "ae2:spinnable_variant"
+    },
+    "facing=west,spin=1": {
+      "model": "crazyae:block/improved_crystal_charger",
+      "y": 270,
+      "type": "ae2:spinnable_variant",
+      "z": 270
+    },
+    "facing=west,spin=2": {
+      "model": "crazyae:block/improved_crystal_charger",
+      "y": 270,
+      "type": "ae2:spinnable_variant",
+      "z": 180
+    },
+    "facing=west,spin=3": {
+      "model": "crazyae:block/improved_crystal_charger",
+      "y": 270,
+      "type": "ae2:spinnable_variant",
+      "z": 90
+    }
+  }
+}

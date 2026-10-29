@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "aba",
+    "c c",
+    "aba"
+  ],
+  "key": {
+    "b": "crazyae:quantum_processor",
+    "a": "crazyae:fluixilized_block",
+    "c": "ae2:drive"
+  },
+  "result": {
+    "id": "crazyae:improved_drive"
+  }
+}

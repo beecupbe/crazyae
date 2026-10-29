@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "cbc",
+    "bab",
+    "cbc"
+  ],
+  "key": {
+    "b": "crazyae:16mb_crafting_storage",
+    "c": "crazyae:1024x_crafting_accelerator",
+    "a": "crazyae:improved_mac"
+  },
+  "result": {
+    "id": "crazyae:quantum_cpu"
+  }
+}

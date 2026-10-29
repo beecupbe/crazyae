@@ -1,0 +1,12 @@
+{
+  "type": "ae2:inscriber",
+  "mode": "press",
+  "ingredients": {
+    "top": "ae2:logic_processor",
+    "middle": "ae2:matter_ball",
+    "bottom": "ae2:engineering_processor"
+  },
+  "result": {
+    "id": "crazyae:quantum_processor"
+  }
+}

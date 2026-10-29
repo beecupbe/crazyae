@@ -1,0 +1,15 @@
+{
+    DataVersion: 3955,
+    size: [3, 1, 1],
+    data: [
+        {pos: [0, 0, 0], state: "ae2:controller{state:online,type:block}", nbt: {id: "ae2:controller"}},
+        {pos: [2, 0, 0], state: "crazyae:crafting_units_combiner{formed:true,powered:true}", nbt: {id: "crazyae:crafting_units_combiner"}},
+        {pos: [1, 0, 0], state: "ae2:cable_bus{light_level:0,waterlogged:false}", nbt: {id: "ae2:cable_bus", cable: {gn: {k: -1L, p: 0}, id: "ae2:fluix_smart_cable", visual: {missingChannel: 0b, powered: 1b, channelsEast: 1b, channelsWest: 1b, connections: ["east", "west"]}}, hasRedstone: 2, visual: {}, north: {gn: {k: -1L, p: 0}, id: "ae2:crafting_terminal", visual: {missingChannel: 0b, powered: 1b}}}}
+    ],
+    entities: [],
+    palette: [
+        "ae2:controller{state:online,type:block}",
+        "crazyae:crafting_units_combiner{formed:true,powered:true}",
+        "ae2:cable_bus{light_level:0,waterlogged:false}"
+    ]
+}

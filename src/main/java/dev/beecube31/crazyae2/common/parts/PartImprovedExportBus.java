@@ -1,0 +1,40 @@
+package dev.beecube31.crazyae2.common.parts;
+
+import appeng.api.parts.IPartItem;
+import appeng.menu.locator.MenuLocators;
+import appeng.parts.automation.ExportBusPart;
+import dev.beecube31.crazyae2.common.interfaces.parts.ICrazyPart;
+import dev.beecube31.crazyae2.common.util.ContainerOpener;
+import dev.beecube31.crazyae2.core.CrazyAE;
+import dev.beecube31.crazyae2.core.registries.server.CrazyContainers;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.MenuType;
+import net.minecraft.world.phys.Vec3;
+
+public class PartImprovedExportBus extends ExportBusPart implements ICrazyPart {
+
+    public PartImprovedExportBus(IPartItem<?> partItem) {
+        super(partItem);
+    }
+
+    @Override
+    protected int getOperationsPerTick() {
+        return CrazyBusSpeed.operations(getUpgrades());
+    }
+
+    @Override
+    public boolean onCrazyPartActivate(Player player, InteractionHand hand, Vec3 pos) {
+        if (!isClientSide()) {
+            ContainerOpener.open(getMenuType(), player, MenuLocators.forPart(this));
+        }
+        return true;
+    }
+
+    @Override
+    protected MenuType<?> getMenuType() {
+        return CrazyContainers.IMPROVED_EXPORT_BUS.get();
+    }
+
+}

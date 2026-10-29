@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "crazyae:block/crafting/crafting_storage_128gb"
+  }
+}

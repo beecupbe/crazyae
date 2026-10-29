@@ -1,0 +1,11 @@
+{
+  "variants": {
+    "formed=false": {
+      "model": "crazyae:block/crafting/4mb_crafting_storage"
+    },
+    "formed=true": {
+      "type": "crazyae:crafting_cube",
+      "unit_type": "4mb_crafting_storage"
+    }
+  }
+}

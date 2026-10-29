@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "a"
+  ],
+  "key": {
+    "a": "crazyae:cable_patterns_interface"
+  },
+  "result": {
+    "id": "crazyae:patterns_interface"
+  }
+}

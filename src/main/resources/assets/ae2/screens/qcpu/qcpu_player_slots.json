@@ -1,0 +1,15 @@
+{
+  "$schema": "schema.json",
+  "slots": {
+    "PLAYER_INVENTORY": {
+      "left": 35,
+      "bottom": 82,
+      "grid": "BREAK_AFTER_9COLS"
+    },
+    "PLAYER_HOTBAR": {
+      "left": 35,
+      "bottom": 24,
+      "grid": "HORIZONTAL"
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "gag",
+    "aca",
+    "gag"
+  ],
+  "key": {
+    "a": "ae2:speed_card",
+    "g": "crazyae:quantum_processor",
+    "c": "crazyae:quantum_processor"
+  },
+  "result": {
+    "id": "crazyae:improved_speed_card"
+  }
+}

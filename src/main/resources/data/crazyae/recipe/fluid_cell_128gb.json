@@ -1,0 +1,10 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    "ae2:fluid_cell_housing",
+    "crazyae:fluid_storage_cell_component_128gb"
+  ],
+  "result": {
+    "id": "crazyae:fluid_cell_128gb"
+  }
+}

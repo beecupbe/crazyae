@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "crazyae:block/basic_solar_panel"
+    }
+  }
+}

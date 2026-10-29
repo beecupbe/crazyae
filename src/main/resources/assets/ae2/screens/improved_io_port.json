@@ -1,0 +1,29 @@
+{
+  "$schema": "schema.json",
+  "includes": ["common/crazyae_common.json", "common/player_inventory.json", "common/crazyae_toolbox.json"],
+
+  "background": {
+    "texture": "crazyae:textures/guis/improved_io_port.png",
+    "srcRect": [0, 0, 176, 175]
+  },
+
+  "slots": {
+    "MACHINE_INPUT": {
+      "left": 8,
+      "top": 7,
+      "grid": "BREAK_AFTER_3COLS"
+    },
+    "MACHINE_OUTPUT": {
+      "left": 116,
+      "top": 7,
+      "grid": "BREAK_AFTER_3COLS"
+    }
+  },
+
+  "widgets": {
+    "operationMode": {
+      "left": 80,
+      "top": 17
+    }
+  }
+}

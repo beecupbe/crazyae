@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "crazyae:item/cell/portable_fluid_cell_64mb"
+  }
+}

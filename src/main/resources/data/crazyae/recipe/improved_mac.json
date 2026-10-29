@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "cbc",
+    "bab",
+    "cbc"
+  ],
+  "key": {
+    "b": "ae2:256k_crafting_storage",
+    "c": "crazyae:improved_speed_card",
+    "a": "ae2:molecular_assembler"
+  },
+  "result": {
+    "id": "crazyae:improved_mac"
+  }
+}

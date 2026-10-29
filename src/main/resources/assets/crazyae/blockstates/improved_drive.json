@@ -1,0 +1,138 @@
+{
+  "variants": {
+    "facing=down,spin=0": {
+      "model": "crazyae:block/improved_drive_base",
+      "x": 90,
+      "type": "crazyae:improved_drive"
+    },
+    "facing=down,spin=1": {
+      "model": "crazyae:block/improved_drive_base",
+      "x": 90,
+      "type": "crazyae:improved_drive",
+      "z": 270
+    },
+    "facing=down,spin=2": {
+      "model": "crazyae:block/improved_drive_base",
+      "x": 90,
+      "type": "crazyae:improved_drive",
+      "z": 180
+    },
+    "facing=down,spin=3": {
+      "model": "crazyae:block/improved_drive_base",
+      "x": 90,
+      "type": "crazyae:improved_drive",
+      "z": 90
+    },
+    "facing=east,spin=0": {
+      "model": "crazyae:block/improved_drive_base",
+      "y": 90,
+      "type": "crazyae:improved_drive"
+    },
+    "facing=east,spin=1": {
+      "model": "crazyae:block/improved_drive_base",
+      "y": 90,
+      "type": "crazyae:improved_drive",
+      "z": 270
+    },
+    "facing=east,spin=2": {
+      "model": "crazyae:block/improved_drive_base",
+      "y": 90,
+      "type": "crazyae:improved_drive",
+      "z": 180
+    },
+    "facing=east,spin=3": {
+      "model": "crazyae:block/improved_drive_base",
+      "y": 90,
+      "type": "crazyae:improved_drive",
+      "z": 90
+    },
+    "facing=north,spin=0": {
+      "model": "crazyae:block/improved_drive_base",
+      "type": "crazyae:improved_drive"
+    },
+    "facing=north,spin=1": {
+      "model": "crazyae:block/improved_drive_base",
+      "type": "crazyae:improved_drive",
+      "z": 270
+    },
+    "facing=north,spin=2": {
+      "model": "crazyae:block/improved_drive_base",
+      "type": "crazyae:improved_drive",
+      "z": 180
+    },
+    "facing=north,spin=3": {
+      "model": "crazyae:block/improved_drive_base",
+      "type": "crazyae:improved_drive",
+      "z": 90
+    },
+    "facing=south,spin=0": {
+      "model": "crazyae:block/improved_drive_base",
+      "y": 180,
+      "type": "crazyae:improved_drive"
+    },
+    "facing=south,spin=1": {
+      "model": "crazyae:block/improved_drive_base",
+      "y": 180,
+      "type": "crazyae:improved_drive",
+      "z": 90
+    },
+    "facing=south,spin=2": {
+      "model": "crazyae:block/improved_drive_base",
+      "y": 180,
+      "type": "crazyae:improved_drive",
+      "z": 180
+    },
+    "facing=south,spin=3": {
+      "model": "crazyae:block/improved_drive_base",
+      "y": 180,
+      "type": "crazyae:improved_drive",
+      "z": 270
+    },
+    "facing=up,spin=0": {
+      "model": "crazyae:block/improved_drive_base",
+      "x": 270,
+      "type": "crazyae:improved_drive",
+      "z": 180
+    },
+    "facing=up,spin=1": {
+      "model": "crazyae:block/improved_drive_base",
+      "x": 270,
+      "type": "crazyae:improved_drive",
+      "z": 90
+    },
+    "facing=up,spin=2": {
+      "model": "crazyae:block/improved_drive_base",
+      "x": 270,
+      "type": "crazyae:improved_drive"
+    },
+    "facing=up,spin=3": {
+      "model": "crazyae:block/improved_drive_base",
+      "x": 270,
+      "type": "crazyae:improved_drive",
+      "z": 270
+    },
+    "facing=west,spin=0": {
+      "model": "crazyae:block/improved_drive_base",
+      "y": 270,
+      "type": "crazyae:improved_drive"
+    },
+    "facing=west,spin=1": {
+      "model": "crazyae:block/improved_drive_base",
+      "y": 270,
+      "type": "crazyae:improved_drive",
+      "z": 270
+    },
+    "facing=west,spin=2": {
+      "model": "crazyae:block/improved_drive_base",
+      "y": 270,
+      "type": "crazyae:improved_drive",
+      "z": 180
+    },
+    "facing=west,spin=3": {
+      "model": "crazyae:block/improved_drive_base",
+      "y": 270,
+      "type": "crazyae:improved_drive",
+      "z": 90
+    }
+  }
+}

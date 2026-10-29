@@ -1,0 +1,272 @@
+{
+  "variants": {
+    "facing=down,powered=false,spin=0": {
+      "model": "crazyae:block/improved_io_port",
+      "x": 90,
+      "type": "ae2:spinnable_variant"
+    },
+    "facing=down,powered=false,spin=1": {
+      "model": "crazyae:block/improved_io_port",
+      "x": 90,
+      "type": "ae2:spinnable_variant",
+      "z": 270
+    },
+    "facing=down,powered=false,spin=2": {
+      "model": "crazyae:block/improved_io_port",
+      "x": 90,
+      "type": "ae2:spinnable_variant",
+      "z": 180
+    },
+    "facing=down,powered=false,spin=3": {
+      "model": "crazyae:block/improved_io_port",
+      "x": 90,
+      "type": "ae2:spinnable_variant",
+      "z": 90
+    },
+    "facing=down,powered=true,spin=0": {
+      "model": "crazyae:block/improved_io_port_on",
+      "x": 90,
+      "type": "ae2:spinnable_variant"
+    },
+    "facing=down,powered=true,spin=1": {
+      "model": "crazyae:block/improved_io_port_on",
+      "x": 90,
+      "type": "ae2:spinnable_variant",
+      "z": 270
+    },
+    "facing=down,powered=true,spin=2": {
+      "model": "crazyae:block/improved_io_port_on",
+      "x": 90,
+      "type": "ae2:spinnable_variant",
+      "z": 180
+    },
+    "facing=down,powered=true,spin=3": {
+      "model": "crazyae:block/improved_io_port_on",
+      "x": 90,
+      "type": "ae2:spinnable_variant",
+      "z": 90
+    },
+    "facing=east,powered=false,spin=0": {
+      "model": "crazyae:block/improved_io_port",
+      "y": 90,
+      "type": "ae2:spinnable_variant"
+    },
+    "facing=east,powered=false,spin=1": {
+      "model": "crazyae:block/improved_io_port",
+      "y": 90,
+      "type": "ae2:spinnable_variant",
+      "z": 270
+    },
+    "facing=east,powered=false,spin=2": {
+      "model": "crazyae:block/improved_io_port",
+      "y": 90,
+      "type": "ae2:spinnable_variant",
+      "z": 180
+    },
+    "facing=east,powered=false,spin=3": {
+      "model": "crazyae:block/improved_io_port",
+      "y": 90,
+      "type": "ae2:spinnable_variant",
+      "z": 90
+    },
+    "facing=east,powered=true,spin=0": {
+      "model": "crazyae:block/improved_io_port_on",
+      "y": 90,
+      "type": "ae2:spinnable_variant"
+    },
+    "facing=east,powered=true,spin=1": {
+      "model": "crazyae:block/improved_io_port_on",
+      "y": 90,
+      "type": "ae2:spinnable_variant",
+      "z": 270
+    },
+    "facing=east,powered=true,spin=2": {
+      "model": "crazyae:block/improved_io_port_on",
+      "y": 90,
+      "type": "ae2:spinnable_variant",
+      "z": 180
+    },
+    "facing=east,powered=true,spin=3": {
+      "model": "crazyae:block/improved_io_port_on",
+      "y": 90,
+      "type": "ae2:spinnable_variant",
+      "z": 90
+    },
+    "facing=north,powered=false,spin=0": {
+      "model": "crazyae:block/improved_io_port",
+      "type": "ae2:spinnable_variant"
+    },
+    "facing=north,powered=false,spin=1": {
+      "model": "crazyae:block/improved_io_port",
+      "type": "ae2:spinnable_variant",
+      "z": 270
+    },
+    "facing=north,powered=false,spin=2": {
+      "model": "crazyae:block/improved_io_port",
+      "type": "ae2:spinnable_variant",
+      "z": 180
+    },
+    "facing=north,powered=false,spin=3": {
+      "model": "crazyae:block/improved_io_port",
+      "type": "ae2:spinnable_variant",
+      "z": 90
+    },
+    "facing=north,powered=true,spin=0": {
+      "model": "crazyae:block/improved_io_port_on",
+      "type": "ae2:spinnable_variant"
+    },
+    "facing=north,powered=true,spin=1": {
+      "model": "crazyae:block/improved_io_port_on",
+      "type": "ae2:spinnable_variant",
+      "z": 270
+    },
+    "facing=north,powered=true,spin=2": {
+      "model": "crazyae:block/improved_io_port_on",
+      "type": "ae2:spinnable_variant",
+      "z": 180
+    },
+    "facing=north,powered=true,spin=3": {
+      "model": "crazyae:block/improved_io_port_on",
+      "type": "ae2:spinnable_variant",
+      "z": 90
+    },
+    "facing=south,powered=false,spin=0": {
+      "model": "crazyae:block/improved_io_port",
+      "y": 180,
+      "type": "ae2:spinnable_variant"
+    },
+    "facing=south,powered=false,spin=1": {
+      "model": "crazyae:block/improved_io_port",
+      "y": 180,
+      "type": "ae2:spinnable_variant",
+      "z": 90
+    },
+    "facing=south,powered=false,spin=2": {
+      "model": "crazyae:block/improved_io_port",
+      "y": 180,
+      "type": "ae2:spinnable_variant",
+      "z": 180
+    },
+    "facing=south,powered=false,spin=3": {
+      "model": "crazyae:block/improved_io_port",
+      "y": 180,
+      "type": "ae2:spinnable_variant",
+      "z": 270
+    },
+    "facing=south,powered=true,spin=0": {
+      "model": "crazyae:block/improved_io_port_on",
+      "y": 180,
+      "type": "ae2:spinnable_variant"
+    },
+    "facing=south,powered=true,spin=1": {
+      "model": "crazyae:block/improved_io_port_on",
+      "y": 180,
+      "type": "ae2:spinnable_variant",
+      "z": 90
+    },
+    "facing=south,powered=true,spin=2": {
+      "model": "crazyae:block/improved_io_port_on",
+      "y": 180,
+      "type": "ae2:spinnable_variant",
+      "z": 180
+    },
+    "facing=south,powered=true,spin=3": {
+      "model": "crazyae:block/improved_io_port_on",
+      "y": 180,
+      "type": "ae2:spinnable_variant",
+      "z": 270
+    },
+    "facing=up,powered=false,spin=0": {
+      "model": "crazyae:block/improved_io_port",
+      "x": 270,
+      "type": "ae2:spinnable_variant",
+      "z": 180
+    },
+    "facing=up,powered=false,spin=1": {
+      "model": "crazyae:block/improved_io_port",
+      "x": 270,
+      "type": "ae2:spinnable_variant",
+      "z": 90
+    },
+    "facing=up,powered=false,spin=2": {
+      "model": "crazyae:block/improved_io_port",
+      "x": 270,
+      "type": "ae2:spinnable_variant"
+    },
+    "facing=up,powered=false,spin=3": {
+      "model": "crazyae:block/improved_io_port",
+      "x": 270,
+      "type": "ae2:spinnable_variant",
+      "z": 270
+    },
+    "facing=up,powered=true,spin=0": {
+      "model": "crazyae:block/improved_io_port_on",
+      "x": 270,
+      "type": "ae2:spinnable_variant",
+      "z": 180
+    },
+    "facing=up,powered=true,spin=1": {
+      "model": "crazyae:block/improved_io_port_on",
+      "x": 270,
+      "type": "ae2:spinnable_variant",
+      "z": 90
+    },
+    "facing=up,powered=true,spin=2": {
+      "model": "crazyae:block/improved_io_port_on",
+      "x": 270,
+      "type": "ae2:spinnable_variant"
+    },
+    "facing=up,powered=true,spin=3": {
+      "model": "crazyae:block/improved_io_port_on",
+      "x": 270,
+      "type": "ae2:spinnable_variant",
+      "z": 270
+    },
+    "facing=west,powered=false,spin=0": {
+      "model": "crazyae:block/improved_io_port",
+      "y": 270,
+      "type": "ae2:spinnable_variant"
+    },
+    "facing=west,powered=false,spin=1": {
+      "model": "crazyae:block/improved_io_port",
+      "y": 270,
+      "type": "ae2:spinnable_variant",
+      "z": 270
+    },
+    "facing=west,powered=false,spin=2": {
+      "model": "crazyae:block/improved_io_port",
+      "y": 270,
+      "type": "ae2:spinnable_variant",
+      "z": 180
+    },
+    "facing=west,powered=false,spin=3": {
+      "model": "crazyae:block/improved_io_port",
+      "y": 270,
+      "type": "ae2:spinnable_variant",
+      "z": 90
+    },
+    "facing=west,powered=true,spin=0": {
+      "model": "crazyae:block/improved_io_port_on",
+      "y": 270,
+      "type": "ae2:spinnable_variant"
+    },
+    "facing=west,powered=true,spin=1": {
+      "model": "crazyae:block/improved_io_port_on",
+      "y": 270,
+      "type": "ae2:spinnable_variant",
+      "z": 270
+    },
+    "facing=west,powered=true,spin=2": {
+      "model": "crazyae:block/improved_io_port_on",
+      "y": 270,
+      "type": "ae2:spinnable_variant",
+      "z": 180
+    },
+    "facing=west,powered=true,spin=3": {
+      "model": "crazyae:block/improved_io_port_on",
+      "y": 270,
+      "type": "ae2:spinnable_variant",
+      "z": 90
+    }
+  }
+}

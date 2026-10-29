@@ -1,0 +1,15 @@
+{
+  "$schema": "schema.json",
+  "includes": ["common/crazyae_common.json", "common/player_inventory.json", "common/crazyae_toolbox.json"],
+  "background": {
+    "texture": "crazyae:textures/guis/bus.png",
+    "srcRect": [0, 0, 176, 251]
+  },
+  "slots": {
+    "CONFIG": {
+      "left": 8,
+      "top": 29,
+      "grid": "BREAK_AFTER_9COLS"
+    }
+  }
+}

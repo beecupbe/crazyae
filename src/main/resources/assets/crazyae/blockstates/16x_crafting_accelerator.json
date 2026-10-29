@@ -1,0 +1,11 @@
+{
+  "variants": {
+    "formed=false": {
+      "model": "crazyae:block/crafting/16x_crafting_accelerator"
+    },
+    "formed=true": {
+      "type": "crazyae:crafting_cube",
+      "unit_type": "16x_crafting_accelerator"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+package dev.beecube31.crazyae2.core;
+
+public class ModVersion {
+
+    public static String get() {
+        return "1.0";
+    }
+}
