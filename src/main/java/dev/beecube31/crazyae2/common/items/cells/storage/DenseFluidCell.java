@@ -10,16 +10,16 @@ import org.jetbrains.annotations.NotNull;
 
 public class DenseFluidCell extends DenseCell<IAEFluidStack> {
 
-	public DenseFluidCell(Materials.MaterialType whichCell, int bytes) {
-		super(whichCell, bytes);
+	public DenseFluidCell(Materials.MaterialType whichCell, int bytes, int type) {
+		super(whichCell, bytes, type);
 	}
 
-	public DenseFluidCell(Materials.MaterialType whichCell, int bytes, int bytesPerType) {
-		super(whichCell, bytes, bytesPerType, 16);
+	public DenseFluidCell(Materials.MaterialType whichCell, int bytes, int bytesPerType, int type) {
+		super(whichCell, bytes, bytesPerType, 16, type);
 	}
 
-	public DenseFluidCell(Materials.MaterialType whichCell, int bytes, double idleDrain) {
-		super(whichCell, bytes, 1, idleDrain);
+	public DenseFluidCell(Materials.MaterialType whichCell, int bytes, double idleDrain, int type) {
+		super(whichCell, bytes, 1, idleDrain, type);
 	}
 
 	@NotNull
@@ -30,6 +30,6 @@ public class DenseFluidCell extends DenseCell<IAEFluidStack> {
 
 	@Override
 	public int getTotalTypes(@NotNull ItemStack cellItem) {
-		return CrazyAEConfig.cellFluidTypesAmt;
+		return this.type;
 	}
 }

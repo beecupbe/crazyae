@@ -1,6 +1,8 @@
 package dev.beecube31.crazyae2.core.config;
 
 import dev.beecube31.crazyae2.Tags;
+import dev.beecube31.crazyae2.common.features.Features;
+import dev.beecube31.crazyae2.common.registration.definitions.Materials;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.common.config.Configuration;
@@ -34,15 +36,87 @@ public final class CrazyAEConfig extends Configuration {
     @Config.RangeInt(min = 1)
     public static int QCMBoostAmt = 8;
 
-    @Config.Comment("Amount of types for Items Cells")
-    @Config.Name("cellItemsTypesAmt")
+    @Config.Comment("Amount of types for 256k Items Cells")
+    @Config.Name("storageCell256kTypeAmt")
     @Config.RangeInt(min = 1)
-    public static int cellItemsTypesAmt = 63;
+    public static int storageCell256kTypeAmt = 63;
 
-    @Config.Comment("Amount of types for Fluid Cells")
-    @Config.Name("cellFluidTypesAmt")
+    @Config.Comment("Amount of types for 1m Items Cells")
+    @Config.Name("storageCell1mbTypeAmt")
     @Config.RangeInt(min = 1)
-    public static int cellFluidTypesAmt = 15;
+    public static int storageCell1mbTypeAmt = 63;
+
+    @Config.Comment("Amount of types for 4m Items Cells")
+    @Config.Name("storageCell4mbTypeAmt")
+    @Config.RangeInt(min = 1)
+    public static int storageCell4mbTypeAmt = 63;
+
+    @Config.Comment("Amount of types for 16m Items Cells")
+    @Config.Name("storageCell16mbTypeAmt")
+    @Config.RangeInt(min = 1)
+    public static int storageCell16mbTypeAmt = 63;
+
+    @Config.Comment("Amount of types for 64m Items Cells")
+    @Config.Name("storageCell64mbTypeAmt")
+    @Config.RangeInt(min = 1)
+    public static int storageCell64mbTypeAmt = 63;
+
+    @Config.Comment("Amount of types for 256m Items Cells")
+    @Config.Name("storageCell256mbTypeAmt")
+    @Config.RangeInt(min = 1)
+    public static int storageCell256mbTypeAmt = 63;
+
+    @Config.Comment("Amount of types for 1g Items Cells")
+    @Config.Name("storageCell1gbTypeAmt")
+    @Config.RangeInt(min = 1)
+    public static int storageCell1gbTypeAmt = 63;
+
+    @Config.Comment("Amount of types for 2g Items Cells")
+    @Config.Name("storageCell2gbTypeAmt")
+    @Config.RangeInt(min = 1)
+    public static int storageCell2gbTypeAmt = 63;
+
+
+
+    @Config.Comment("Amount of types for 256k Fluid Cells")
+    @Config.Name("fluidCell256kTypeAmt")
+    @Config.RangeInt(min = 1)
+    public static int fluidCell256kTypeAmt = 15;
+
+    @Config.Comment("Amount of types for 1m Fluid Cells")
+    @Config.Name("fluidCell1mbTypeAmt")
+    @Config.RangeInt(min = 1)
+    public static int fluidCell1mbTypeAmt = 15;
+
+    @Config.Comment("Amount of types for 4m Fluid Cells")
+    @Config.Name("fluidCell4mbTypeAmt")
+    @Config.RangeInt(min = 1)
+    public static int fluidCell4mbTypeAmt = 15;
+
+    @Config.Comment("Amount of types for 16m Fluid Cells")
+    @Config.Name("fluidCell16mbTypeAmt")
+    @Config.RangeInt(min = 1)
+    public static int fluidCell16mbTypeAmt = 15;
+
+    @Config.Comment("Amount of types for 64m Fluid Cells")
+    @Config.Name("fluidCell64mbTypeAmt")
+    @Config.RangeInt(min = 1)
+    public static int fluidCell64mbTypeAmt = 15;
+
+    @Config.Comment("Amount of types for 256m Fluid Cells")
+    @Config.Name("fluidCell256mbTypeAmt")
+    @Config.RangeInt(min = 1)
+    public static int fluidCell256mbTypeAmt = 15;
+
+    @Config.Comment("Amount of types for 1g Fluid Cells")
+    @Config.Name("fluidCell1gbTypeAmt")
+    @Config.RangeInt(min = 1)
+    public static int fluidCell1gbTypeAmt = 15;
+
+    @Config.Comment("Amount of types for 2g Fluid Cells")
+    @Config.Name("fluidCell2gbTypeAmt")
+    @Config.RangeInt(min = 1)
+    public static int fluidCell2gbTypeAmt = 15;
 
 
     //SolarPanels
